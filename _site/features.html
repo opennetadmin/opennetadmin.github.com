@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="AUTHOR" content="matt@opennetadmin.com">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="KEYWORDS" content="ona opennetadmin ipam dhcp dns puppet mcollective cisco rancid rack">
+    <meta name="description" content="A list of current and future features of the OpenNetAdmin project">
+
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Features</title>
+  </head>
+
+  <body>
+    <a id="forkme_banner" href="https://github.com/opennetadmin"></a>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <h1 id="project_title">OpenNetAdmin</h1>
+          <h2 id="project_tagline">Track. Automate. Configure.</h2>
+          <center>
+            <a class="header_link" href="/">Home</a>
+            <a class="header_link" href="/features.html">Features</a>
+            <a class="header_link" href="/community.html">Community</a>
+            <a class="header_link" href="/develop.html">Develop</a>
+          </center>
+          <section id="downloads">
+            <a class="tar_download_link" href="https://github.com/opennetadmin/ona/tarball/master">Download this project as a tar.g
+z file</a>
+          </section>
+        </header>
+    </div>
+
+       <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+<table id="noborder" border="0">
+<tr>
+<td id="noborder">
+            <h1>Features</h1>
+            
+            <ul>
+                <li class="featureitem">      Storage of network attributes such as (subnets, IP address, Mac address, DNS names etc)</li>
+                <li class="featureitem">     It's not a spreadsheet</li>
+                <li class="featureitem"> <a href="http://opennetadmin.com/docs/plugins">Plugin framework</a> that allows new functionality to be added by 3rd party plugins.</li>
+                <li class="featureitem"> Plugin framework for various authentication backends. Currently available auth backends are LDAP and local.</li>
+                <li class="featureitem">    DNS record support (A, CNAME, PTR, NS, MX, TXT, SRV, More to come)</li>
+                <li class="featureitem"> DNS view support. Allows you to track overlapping namespaces for situations such as publicand private DNS services</li>
+                <li class="featureitem"> Multiple contexts. Simply allows one OpenNetAdmin installation utilize two seperate sets of database backends that can easily be switched between.  This can be used to track MPLS networks that would otherwise have overlapping information in them.</li>
+                <li class="featureitem">      AJAX enabled web frontend, provides a responsive desktop-like experience</li>
+                <li class="featureitem">     ADODB Database abstraction layer. Allows you to use many database backends for data. (only tested with MySQL)</li>
+                <li class="featureitem">     Full <a href="http://opennetadmin.com/docs/utils/dcm.pl">command line interface</a> for scripting and batch maintenance. Local or remote capabilities.</li>
+                <li class="featureitem">     Templated configuration generation from data stored in the database. Utilizes the template_merge process.</li>
+                <li class="featureitem">     Ohh, and it's not a spreadsheet</li>
+                <li class="featureitem">     Generation of DNS and DHCP server configuration, can manage distributed servers.</li>
+                <li class="featureitem">     Scalability: we have run this system with the following data on a 400mhz PPC server with 2 gigs of memory</li>
+                <table border="1" style="border:1px solid; border-collapse: collapse;">
+                <tbody><tr><td>Subnets</td><td>40,000+</td></tr>
+                <tr><td>Hosts</td><td>670,000+</td></tr>
+                <tr><td>IP Interfaces</td><td>721,000+</td></tr>
+                <tr><td>DNS zones</td><td>2700+</td></tr>
+                <tr><td>Historical Cisco configuration archives</td><td>13,000+ devices</td></tr>
+                </tbody></table>
+
+     <li class="featureitem"> Track CIDR blocks as well as arbitrary IP address ranges for categorizing sections of your network.</
+li>
+     <li class="featureitem"> Track VLAN Campuses (VTP/VMPS domains) and VLAN assignments per subnet.</li>
+     <li class="featureitem"> Manage your own custom list of device manufacturers and models that relate to your environment. Or use pre-defined lists of common devices (more device "packs" to come).</li>
+     <li class="featureitem"> Track a "role" for your devices. I.E. a cisco 6500 could have a role of "switch", "router", "router/switch", "corporate core" or any other role you decide to allocate.</li>
+     <li class="featureitem"> Track DHCP pool failover groups. You can assign servers to any number of failover group pairings, then assign the appropriate subnets to those failover groups.</li>
+     <li class="featureitem"> Track per device configuration archives with the ability to store many entries and compare them usinga syntax highlighting "diff" comparison. I.E. archive the contents of a "show run" or "show version" command for each router to keep configuration history. Similar to Rancid. Click <a rel="nofollow" title="http://demo.opennetadmin.com/?work_space=display_config_text&amp;host_id=25" href="http://demo.opennetadmin.com/?work_space=display_config_text&amp;host_id=25">here for an example</a></li>
+     <li class="featureitem"> Locally stored user and group authentication and authorization. You can define your own groups with pre-determined access rights for common tasks such as adding or deleting hosts.</li>
+     <li class="featureitem"> Track "Shared IPs" such as those in use by HSRP, VRRP, CARP and other virtual interfaces that could be associated with multiple hosts at the same time.</li>
+     <li class="featureitem"> Support for quickly moving an IP address from one host to another, no need to delete then re-add.</li>
+      <li class="featureitem">Subnets display a quick usage bar indicating a percentage and count of the utilization of that subnetbased on hosts and pool allocations.</li>
+     <li class="featureitem"> Subnet maps for highlevel block allocation views. Also allows you to drag the view window (think google maps) to see what is allocated.</li>
+     <li class="featureitem"> Manage multiple DHCP pools per subnet.</li>
+     <li class="featureitem"> Per device or subnet messages to track events. For instance, you can tie an alerting system or any other type of notification to a host to create a message that would be visible if someone selects that device.</li>
+     <li class="featureitem"> System wide messages to alert all users in the system of important information. All messages include a timestamp, username and severity as well as an expiration date.</li>
+     <li class="featureitem"> Create your own "host actions". Host actions are user defined URL links to other applications with primary host name or IP address as part of the URL. Allows you to directly link a host lookup within Splunk, Nagios, Cacti, Base, etc.</li>
+     <li class="featureitem"> External linking is available to link from external apps directly into a specific record. For example
+ <a rel="nofollow" title="http://localhost/ona/?search=host1.example.com" href="http://localhost/ona/?search=host1.example.com">http://localhost/ona/?search=host1.example.com</a> will pull up the display for host1.example.com.</li>
+     <li class="featureitem"> Per record DNS TTLs or let it default to the domains default TTL.</li>
+     <li class="featureitem"> Quick filter any of the list dialogs. For example, if you have done a search on the subnet name "LAN-%" you can then filter that resulting list further by entering .desktop. in the filter box. As you type the list will automaticallyfilter via the AJAX backend system.</li>
+     <li class="featureitem"> All MAC address maintenance will take any MAC format such as "12:34:56:AB:CD:EF", "1234.56AB.CDEF", "12-34-56-AB-CD-EF", or "123456ABCDEF". No more re-formating the text in the edit form, simply cut and paste and it will be converted to a consistent format automatically.</li>
+      <li class="featureitem">Reference subnet masks in either the full octet based format or their CIDR representation.</li>
+      <li class="featureitem">Manage your own DHCP Option types or use one of the built in standard options.</li>
+     <li class="featureitem"> Most tasks are one or two clicks away. No need to navigate all through the interface to do one simpletask. Many tasks can be done without even leaving the current screen or display.</li>
+     <li class="featureitem"> NAT translation tracking</li>
+     <li class="featureitem"> Custom attribute tracking</li>
+     <li class="featureitem"> Simple location tracking per device. Location name, street address, etc</li>
+     <li class="featureitem"> Rack management plugin. Track your servers location within your datacenter racks.</li>
+     <li class="featureitem"> A user definable reporting engine to display various sets of information defined for your needs. Currently SQL queries can be written and stored with a simple interface for creating and displaying the results. More work to be done on this item however.</li>
+
+            </ul>
+<h1>Features in progress</h1>
+<ul>
+     <li class="featureitem">IPv6 subnets and interfaces are currently working.  Adding DNS and blocks with block maps are also working.  There is still more testing to be done before full release.  If you are interested in testing IPv6 you can check out our IPv6 development branch.</li>
+     <li class="featureitem">Integration with <a rel="nofollow" href="http://reductivelabs.com/products/puppet/">Puppet</a> and MCollective</li>
+     <li class="featureitem">Continuing work on DNS and DHCP configuration management</li>
+     <li class="featureitem"> Continuing work on text configuration archive and diff comparison. Works with any text configuration.
+</li>
+      <li class="featureitem">Virtual host tracking. I.E. one physical device (chassis) can be defined that has multiple hosts associated with it. This allows you to track the relationship of a single server (possibly named vm-server.example.com) that houses several other virtual hosts on it.</li>
+     <li class="featureitem"> Display DHCP pool allocation information inline using DHCPLEASEQUERY. You will see IP address, MAC address, and DNS name (via reverse lookup of dynamically registered entry if it exists.)</li>
+     <li class="featureitem"> Auto discovery tools to help populate your database. Currently have parsers for tinydns config files,dhcpd.conf, "show route" commands, nmap scans etc.</li>
+     <li class="featureitem">Physical device tracking information such as serial number and asset tag info.</li>
+</ul>
+<h1>Future Goals</h1>
+<ul>
+      <li class="featureitem">Add support and backend integration for <a rel="nofollow" title="http://en.wikipedia.org/wiki/Netconf" href="http://en.wikipedia.org/wiki/Netconf">NETCONF</a></li>
+      <li class="featureitem">Add a network diagram generator that would output int dot format to generate images using <a rel="nofollow" title="http://www.graphviz.org/" href="http://www.graphviz.org/">Graphviz</a></li>
+      <li class="featureitem">Add modules that allow you to track physical port connections. I.E. PC-A port eth0 is connected to port fast1/20 on switch-B</li>
+     <li class="featureitem"> Add modules that allow tracking of other types of connections such as frame-relay circuits with PVCs,and ATM VPI/VCI connections. Map out and track your WAN network, not just the subnets and IPs that are in use.</li>
+     <li class="featureitem"> Internationalization. English only at the moment but I hope to build the framework for other languages.</li>
+</ul>
+
+</td>
+<td id="noborder" style="vertical-align: top;padding: 10px;">
+
+<center>
+<b>Screenshots</b><br>
+<a class="ona" href="/images/desktop.png"><img src="images/desktop.png" style="max-width:150px;width:150px;"></a><br>
+Desktop (dashboard)<br><br>
+
+<a class="ona" href="/images/display_host.png"><img src="images/display_host.png" width="150"></a><br>
+Display host<br><br>
+
+<a class="ona" href="/images/display_subnet.png"><img src="images/display_subnet.png" width="150"></a><br>
+Display subnet<br><br>
+
+<a class="ona" href="/images/conf-archive-diff.png"><img src="images/conf-archive-diff.png" width="150"></a><br>
+Config archive<br><br>
+
+<a class="ona" href="/images/dhcp_server.png"><img src="images/dhcp_server.png" width="150"></a><br>
+DHCP server<br><br>
+
+<a class="ona" href="/images/dns_zone.png"><img src="images/dns_zone.png" width="150"></a><br>
+Display DNS zone<br><br>
+
+<a class="ona" href="/images/nmap_scan.png"><img src="images/nmap_scan.png" width="150"></a><br>
+Network scan report<br><br>
+</center>
+
+</td>
+</tr>
+</table>
+      </section>
+      </div>
+
+
+
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2598149030041038";
+//728x90_bugsfooter
+google_ad_slot = "1568593938";
+google_ad_width = 728;
+google_ad_height = 90;
+//--></script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Rack maint maintained by <a href="https://github.com/opennetadmin">opennetadmin</a></p>
+        <p class="copyright"><a href="https://github.com/opennetadmin">Home</a></p>
+        <p class="copyright"><a href="https://github.com/opennetadmin">Community</a></p>
+        <p class="copyright"><a href="https://github.com/opennetadmin">Develop</a></p>
+        <p class="copyright"><a href="https://github.com/opennetadmin">Forum</a></p>
+      </footer>
+    </div>
+
+          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script
+%3E"));
+          </script>
+
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-361894-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
+
+

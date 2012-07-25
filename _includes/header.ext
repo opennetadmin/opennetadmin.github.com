@@ -1,0 +1,18 @@
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <h1 id="project_title">OpenNetAdmin</h1>
+          <h2 id="project_tagline">Track. Automate. Configure.</h2>
+          <center>
+            <a class="header_link" href="/rack/">Home</a>
+            <a class="header_link" href="/rack/features">Features</a>
+            <a class="header_link" href="/rack/community">Community</a>
+            <a class="header_link" href="/rack/develop">Develop</a>
+          </center>
+          <section id="downloads">
+            <a class="tar_download_link" href="https://github.com/opennetadmin/ona/tarball/master">Download this project as a tar.g
+z file</a>
+          </section>
+        </header>
+    </div>
+

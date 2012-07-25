@@ -1,0 +1,23 @@
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Rack maint maintained by <a href="https://github.com/opennetadmin">opennetadmin</a></p>
+        <p class="copyright"><a href="https://github.com/opennetadmin">Home</a></p>
+        <p class="copyright"><a href="https://github.com/opennetadmin">Community</a></p>
+        <p class="copyright"><a href="https://github.com/opennetadmin">Develop</a></p>
+        <p class="copyright"><a href="https://github.com/opennetadmin">Forum</a></p>
+      </footer>
+    </div>
+
+          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-361894-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
