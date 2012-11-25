@@ -1,0 +1,84 @@
+---
+layout: oldforum_layout
+title: host_actions.config.php - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page host_actions.config.php OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>host_actions.config.php</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">druwoldt</p>
+		<p class="dt">16-08-2011 23:12:49</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Dear Mat,<br />
+<br />
+In the host_actions.config.php I can set<br />
+$conf[$modulename]['Nagios']['url'] = &quot;https://localhost/nagios/cgi-bin/status.cgi?host=%fqdn&amp;style=detail&quot;;<br />
+<br />
+Which then gives a link for host serverX.edu.au as<br />
+<!-- m --><a class="postlink" href="https://localhost/nagios/cgi-bin/status.cgi?host=serverX.edu.au&amp;style=detail">https://localhost/nagios/cgi-bin/status ... yle=detail</a><!-- m -->&quot;<br />
+<br />
+What I need to do is be able to just insert the hostname. So something like<br />
+<!-- m --><a class="postlink" href="https://localhost/nagios/cgi-bin/status.cgi?host=">https://localhost/nagios/cgi-bin/status.cgi?host=</a><!-- m -->%hostname&amp;style=detail&quot;<br />
+<br />
+to give<br />
+<br />
+<!-- m --><a class="postlink" href="https://localhost/nagios/cgi-bin/status.cgi?host=serverX&amp;style=detail">https://localhost/nagios/cgi-bin/status ... yle=detail</a><!-- m -->&quot;<br />
+<br />
+Is this possible?<br />
+<br />
+Yours sincerely<br />
+<br />
+David Ruwoldt	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">24-08-2011 11:38:39</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	There is not currently a way to do this.  Its a great idea so here is how you can enable it. Add the following to line 40 in /opt/ona/www/workspace_plugins/builtin/host_actions/main.inc.php<br />
+<br />
+<br />
+    $nameparts = explode('.',$record['fqdn'],2);<br />
+    $hval['url'] = str_replace('%hostname', $nameparts[0], $hval['url']);<br />
+    $hval['url'] = str_replace('%onahostname', $record['name'], $hval['url']);<br />
+    $hval['url'] = str_replace('%domain', $nameparts[1], $hval['url']);<br />
+    $hval['url'] = str_replace('%onadomain', $record['domain_fqdn'], $hval['url']);<br />
+<br />
+I've also added an onahostname and onadomain.. this relates to the possibility of having a host in ONA that is split on a different octet boundary such as server1.loc example.com vs. server1 loc.example.com.  It all depends on how you are storing the data in ONA.<br />
+<br />
+I'll add this into the main code.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">druwoldt</p>
+		<p class="dt">07-09-2011 18:07:49</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Dear Mat,<br />
+<br />
+That worked a treat. Thankyou.<br />
+<br />
+Yours sincerely<br />
+<br />
+David Ruwoldt	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

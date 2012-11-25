@@ -1,0 +1,62 @@
+---
+layout: oldforum_layout
+title: nmap plugin - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page nmap plugin OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>nmap plugin</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">caleb99</p>
+		<p class="dt">09-11-2010 09:26:58</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I have a new install of ONA on a Ubuntu 10.04 server.  I have everything up and running but the nmap cron job.  I can manually submit the command and specify a subnet to scan with the -n parm, but I can not run the command any other way.  If I do the -l parm I get an &quot;ERROR =&gt; The requested module is not valid!&quot; message.  It seems like it will not look at the ONA database to get the list of subnets to scan.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">09-11-2010 11:58:06</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Its possible your environment does not have all it needs when running from cron.  If you are able to use dcm.pl with no issues from your normal login then I think you'll need to check into crons environment.  It needs to be able to find its config file etc<br />
+<br />
+my /etc/cron.d/ona file looks like this:<br />
+<code><br />
+# Please store only OpenNetAdmin related cron entries here&#46;<br />
+#ONABASE=`cat /etc/onabase`<br />
+PATH=/usr/local/sbin&#58;/usr/local/bin&#58;/usr/sbin&#58;/usr/bin&#58;/sbin&#58;/bin/&#58;/opt/ona/bin<br />
+<br />
+# Perform a daily nmap ping scan and update last_response<br />
+# Found it is best to ping during the day to pick up laptops that might be gone at night<br />
+0 11 * * * root nmap_scan_cron -u -a &gt; /dev/null 2&gt;&amp;1<br />
+</code><br />
+<br />
+The PATH statement at the top ensures it can find stuff in the ONA bin directory.  <br />
+<br />
+One other thing to make sure of is that the command &quot;dcm.pl --list&quot; returns a list of modules.  specifically look for &quot;ona_sql&quot;.. <br />
+<br />
+then try this command to see if it works correctly for you <br />
+<code><br />
+dcm&#46;pl -l admin  -r ona_sql header=no sql=nmap_subnets_only_yes&#46;sql<br />
+</code><br />
+<br />
+This is what nmap_scan_cron does to get the list of subnets from the database.  You must set the -a option for nmap_scan_cron to get all subnets or you must set the custom attribute &quot;nmap_scan&quot; to Y for the subnets you want to scan.<br />
+<br />
+hope that helps.  Thanks</code></code>	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

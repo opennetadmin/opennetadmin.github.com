@@ -1,0 +1,80 @@
+---
+layout: oldforum_layout
+title: Per vlan / subnet permissions - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Per vlan / subnet permissions OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Per vlan / subnet permissions</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmh9</p>
+		<p class="dt">20-06-2011 08:16:51</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Is there a way for a group to have read only access to every subnet / vlan, and Read/Write access to specific subnets / vlans?  An example of why this would be useful is our network infrastructure group should be able to see all records for troubleshooting problems, but they also need read/write permissions to our management network for installing new switches.  Our current home grown solution can do this, but we don't have any IPv6 support and we're reluctant to re-invent the wheel.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">20-06-2011 22:19:43</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	There are some initial beginnings of doing that level of granularity.  Currently however it does not exist enough to control things this way.  Its certainly something I'd like to do but have not spent any time implementing.  I'd certainly love to discuss some ideas on the subject.<br />
+<br />
+right now we of course can do task level permissions, subnet add/delete/modify, host add/delete/modify etc.  There are several possible ways to control the specific access to the data.. One way would be based on subnet masks and ranges.. this would then apply to the subnet and all hosts/interfaces there in.  Another way could be name based for subnets/hosts/dns etc.. <br />
+<br />
+What do people think about this one?  what would be the best approach.. what are some ways you've seen/or done this before?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">druwoldt</p>
+		<p class="dt">16-08-2011 23:09:23</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Dear Mat,<br />
+<br />
+A few things.<br />
+<br />
+1) Control access to manage subnet/vlan/block/campus<br />
+X should be able to be assigned <br />
+SchoolX 10.0.0.0 - 10.2.0.0<br />
+SchoolX - servers 10.0.2.0/23<br />
+etc<br />
+<br />
+2) Control access to manage namesapce <br />
+So schoolX.edu.au can be managed by X,Y,Z but not by J who manages schoolY.edu.au<br />
+Also A should be able to manage edu.au and everything underneath it.<br />
+So if you can manage a level then you also get the namespace underneath that.<br />
+<br />
+This would mean X could be given<br />
+schoolX.edu.au<br />
+10.0.0.0/21<br />
+<br />
+Of course what would be nice is to be able to select VLAN/Subnet with check boxes based on current listings in ONA so no mistakes can be made.<br />
+So you should be able to assign a person to Subnet, VLAN or Block, VLAN Campus etc<br />
+<br />
+Same for namepsace. Although you may not have a namespace for the subset you want to assign a person so may be a bit trickier.<br />
+<br />
+Just some thoughts.<br />
+<br />
+Yours sincerely<br />
+<br />
+David Ruwoldt	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

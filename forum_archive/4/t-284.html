@@ -1,0 +1,104 @@
+---
+layout: oldforum_layout
+title: IP Ranges -&gt; Blocks - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page IP Ranges -&gt; Blocks OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>IP Ranges -&gt; Blocks</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">Ximil</p>
+		<p class="dt">04-04-2012 06:37:02</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hey everybody,<br />
+<br />
+can someone explain the 'blocks'-function? I don't know about the Usage.<br />
+<br />
+Thanks, Ximil	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">04-04-2012 09:05:17</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Blocks allow you to keep track of CIDR ranges as well as arbitrary ranges of IP address space.  <br />
+<br />
+Lets say you have route summarization that says 10.1.0.0/16 is dedicated to your New York office.  You can define a block to help describe that.  Then within that CIDR range you may have several actual subnets defined.  It can help you even audit/manage your route tables if you wanted to get crazy with it.<br />
+<br />
+On the other side you could define a block that said 10.1.1.100-10.1.1.110 was allocated for test database servers in the lab.  <br />
+<br />
+This is simply just a method to track non subnet related usages for IP space for reference.  There is no configuration that is driven from this information (at this time). <br />
+<br />
+When you are on a subnet, you will see block related information just below the subnet map so that you can have the quick reference to how this subnet relates to defined blocks.<br />
+<br />
+Hope that helps.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Ximil</p>
+		<p class="dt">10-04-2012 02:42:21</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Okay, thanks. <br />
+<br />
+If I understand you correctly, then it is a way to split IP addresses logically?<br />
+<br />
+I am looking for a way to reserve IP addresses only for a certain subdomain that they can be awarded only in this subdomain.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">10-04-2012 20:39:53</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yep you are correct.  It is a way to track logical ranges of address space.  <br />
+<br />
+At the moment there is not a feature to associate address space with a domain or a security role.   There are features in planning around that but they do not yet exist.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Ximil</p>
+		<p class="dt">11-04-2012 05:33:52</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	And actually it's the same with the VLANs?<br />
+<br />
+BTW: THANK YOU so much for your help!!! It's just for my understanding. <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">12-04-2012 08:53:30</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Well no, VLANS are for a different purpose.  Vlans in ONA should represent your vlans that actually exist in your environment.  Typically a switch gets assigned several vlans with vlan numbers.  Then one or more subnets are placed on each vlan.  Sometimes if you are using VTP or other tech you would have what is called a campus or vlan domain.  This is a grouping of vlans.<br />
+<br />
+So ONA allows you to keep track of those vlans.   There are currently only a few things within ONA that use the VLAN information directly outside of the informational tracking purposes.  When you are using DHCP and have multiple subnets on a single vlan with a helper address you must define them as a &quot;shared&quot; network in the DHCP server config.  You do this by defining the VLAN information in ONA.  Secondly you can use this vlan information to help build VTP configuration for things like VMPS if you use that.<br />
+<br />
+Hope that helps clear it up further.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

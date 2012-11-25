@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="AUTHOR" content="matt@opennetadmin.com">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="KEYWORDS" content="ona opennetadmin forum archive">
+    <meta name="description" content="Old OpenNetAdmin forum archive topic page problem with opensuse and opennetadmin OpenNetAdmin Forum Archive">
+
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>problem with opensuse and opennetadmin - OpenNetAdmin Forum Archive</title>
+<script type="text/javascript" src="../jquery.js"></script> <script type="text/javascript" src="../jquery.tablesorter.js"></script> <script type="text/javascript" src="../forum.js"></script>
+  </head>
+
+  <body onload="load('forum')">
+    <a id="forkme_banner" href="https://github.com/opennetadmin"></a>
+    <a id="fishes" href="http://www.christiananswers.net/gospel/home.html"><img style="opacity: 0.3;border: 0 none;" src="/images/fish.gif" height="15"></a>
+<form id="donatebutton" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <h1 id="project_title">OpenNetAdmin</h1>
+          <h2 id="project_tagline">Track. Automate. Configure.</h2>
+          <center>
+            <a class="header_link" href="/">Home</a>
+            <a class="header_link" href="/features.html">Features</a>
+            <a class="header_link" href="/community.html">Community</a>
+            <a class="header_link" href="/develop.html">Develop</a>
+          </center>
+          <section id="downloads">
+            <a class="tar_download_link" href="https://github.com/opennetadmin/ona/tarball/current">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+       <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>problem with opensuse and opennetadmin</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">figurello</p>
+		<p class="dt">23-12-2011 20:29:49</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	hello guys,<br />
+i need help for setup opennetadmin.<br />
+<br />
+ I'm having trouble installing the &quot;opennetadmin&quot; no &quot;suse 11.2&quot; which is giving syntax error in the database. When installing a previous version is ok, but when I try to login as admin, he returns to the User &quot;guest&quot; thus permission denied when add host for example.<br />
+<br />
+version php 5.3.8<br />
+apache 2.x <br />
+mysql Ver 5.5.16<br />
+Suse 12.1<br />
+<br />
+Thank you.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">24-12-2011 22:20:55</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I believe your issue is that your mysql version is 5.5.<br />
+<br />
+The problem is that they finally removed the TYPE keyword in the create table syntax and my code still uses it.  The next release will fix the installer so it should work with mysql 4.0 and newer (according to the docs I saw, thats when they added the ENGINE syntax)<br />
+<br />
+you can do the following to fix the installer for now:  cd /opt/ona/install; mv ona-table_schema.xml ona-table_schema.xml.bak; sed -s &quot;s/TYPE=INNODB/ENGINE=INNODB/&quot; ona-table_schema.xml.bak &gt; ona-table_schema.xml	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">figurello</p>
+		<p class="dt">25-12-2011 05:35:52</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	ok ok<br />
+and problem with autentication, when don't access account admin ?<br />
+<br />
+thak you.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">25-12-2011 21:01:16</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I'll need to have more information to help solve this issue.<br />
+<br />
+show the output of /var/log/ona.log when you are logging in as admin.  Is there any other errors or messages that you see in the GUI other than it just not logging in?  Also to get some detail on the current user and permissions, click the little man icon just to the right of the login button at the top right of the screen.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">figurello</p>
+		<p class="dt">26-12-2011 16:48:10</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	hi matt, <br />
+<br />
+simply changes a username in console when authentic.<br />
+<br />
+follows the log: <br />
+<br />
+Dec 26 23:43:12 UNKNOWN_SVR_NAME admin@::1: INFO =&gt; Authorization successful for admin<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: INFO =&gt; Authorization successful for guest<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the subnet_add permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the host_modify permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the host_modify permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the dns_record_del permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the vlan_add permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the vlan_add permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the subnet_add permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the location_add permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the host_del permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the dns_record_add permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the dns_record_add permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the advanced permission<br />
+Dec 26 23:43:45 UNKNOWN_SVR_NAME guest@::1: INFO =&gt; Authorization successful for guest<br />
+Dec 26 23:43:49 UNKNOWN_SVR_NAME guest@::1: INFO =&gt; Authorization successful for guest<br />
+Dec 26 23:43:49 UNKNOWN_SVR_NAME guest@::1: INFO =&gt; Authorization successful for guest<br />
+<br />
+<br />
+thank you	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">26-12-2011 20:52:43</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	hmm well I was hoping for more info than that <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+you can bump up the debug level to hopefully give us more to go off of.  I've not seen this issue before and I dont have an easy/quick way to set up a similar environment to test with.<br />
+<br />
+One way to bump the debug level will be to use the dcm.pl tool.  Once you install that (if you have not already) you can run the following command:<br />
+<br />
+/opt/ona/bin/dcm.pl -r ona_sql sql=&quot;update sys_config set value=6 where name like 'debug'&quot; commit<br />
+<br />
+you could also use some other tool to issue the SQL as well.  Hopefully by bumping up the debug level we can see more detail on what is up.  dont forget to set the debug level back down to 0 when done.<br />
+<br />
+Thanks	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+
+
+
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2598149030041038";
+//728x90_bugsfooter
+google_ad_slot = "1568593938";
+google_ad_width = 728;
+google_ad_height = 90;
+//--></script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+    <!-- FOOTER  -->
+    <div class="outer">
+      <footer class="inner">
+          <center>
+ 
+
+
+          </center>
+      </footer>
+    </div>
+
+          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script
+%3E"));
+          </script>
+
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-361894-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
+
+

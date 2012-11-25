@@ -1,0 +1,55 @@
+---
+layout: oldforum_layout
+title: Add NAT IP - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Add NAT IP OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Add NAT IP</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">barney34</p>
+		<p class="dt">11-09-2009 09:59:44</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	When I click the green dot to Add NAT IP and I input the NAT'ed IP I get this error.<br />
+<br />
+&quot;Save failed. ERROR =&gt; Insufficient parameters&quot;<br />
+<br />
+<br />
+anything I can check I have done this many times before.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">11-09-2009 10:21:47</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	hmm, interesting.    <br />
+<br />
+Well I'd say the best way is to have the debug level set to 5 or so then watch your ona.log file when you hit the save button.  It should show you something like:<br />
+<br />
+<code>INFO =&gt; Running module&#58; nat_add options&#58; id=tt_quick_interface_nat_295&amp;nataction=add&amp;ip=295&amp;natip=67&#46;67&#46;67&#46;7&amp;cancel=Cancel&amp;save=Save</code><br />
+<br />
+you should then be able to look down a bit further and see it run the interface_add module..  You will also see the ERROR entry about insufficient parameters as well.  Usually its going to be the section of debug just before that error to examine.<br />
+<br />
+Kinda strange thats not working.. my guess is maybe there is a space before or after the IP address?? I probably need to clean that up.  <br />
+<br />
+Hope that helps.. if you can, post the debug output and we can have a look see.<br />
+<br />
+Thanks</code>	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

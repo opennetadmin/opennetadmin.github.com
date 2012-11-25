@@ -1,0 +1,135 @@
+---
+layout: oldforum_layout
+title: Problem selecting host - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Problem selecting host OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Problem selecting host</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">sdaa</p>
+		<p class="dt">23-03-2009 07:46:44</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I imported hosts to one subnet, but after that I cannot select a single host in any subnet. The workspace just waits and waits....<br />
+<br />
+How do I troubleshoot this?<br />
+<br />
+Regards<br />
+Stig	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">23-03-2009 08:50:25</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	First off, I'm curious if you can view and select subnets correctly?  Is it just hosts that do not show their workspace info?<br />
+<br />
+The best way to do debugging at this point is to bump up the debug log level for ONA.  It should be logging data to /var/log/ona.log by default.  I dont have a nice GUI to bump this up yet so you will need to make the adjustment via SQL.  The easiest way to do that is to use a tool like phpmyadmin, but in lieu of that, here is the direct query to run.<br />
+<br />
+<code>update sys_config set value = 6 where name like 'debug';</code><br />
+<br />
+This would be ran after logging into mysql of course.. that might look something like this:<br />
+<br />
+<code>mysql -u ona_sys -p ona</code><br />
+<br />
+Now you should start to see a TON of stuff logging in /var/log/ona.log.  I usually do a tail -f on that file and watch it as I do various tasks in the browser.</code></code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">sdaa</p>
+		<p class="dt">23-03-2009 09:51:07</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I can select the subnet and see all the hosts, ie I select the campus, the the vlan and then click on the subnet. So I can see all the hosts.  But when I click a host in the subnet,  then everything times out.<br />
+<br />
+It's however possible to use the command line to find out info:<br />
+(have cut out some details.<br />
+<br />
+<code> host_display host=172&#46;22&#46;32&#46;16<br />
+HOST RECORD (rvbyvbr01&#46;xxxxx)<br />
+  id                          30<br />
+  primary_dns_id              78<br />
+  device_id                   22<br />
+  name                        rvbyvbr01<br />
+--<br />
+ASSOCIATED INTERFACE RECORD (1 of 1)<br />
+  id                          36<br />
+  subnet_id                   22                  (xxxx)<br />
+  host_id                     30                  (rvbyvbr01&#46;xxx)<br />
+  ip_addr                     172&#46;22&#46;32&#46;16<br />
+  ip_addr_text                172&#46;22&#46;32&#46;16<br />
+<br />
+ASSOCIATED DEVICE RECORD<br />
+  id                          22<br />
+  device_type_id              6<br />
+<br />
+dns_record_display name=78<br />
+DNS A RECORD (rvbyvbr01&#46;xxxx)<br />
+  id                          78<br />
+  domain_id                   31                  (xxx)<br />
+  interface_id                36                  (172&#46;22&#46;32&#46;16)<br />
+  type                        A<br />
+  name                        rvbyvbr01<br />
+  ebegin                      2009-03-20 15&#58;58&#58;58<br />
+<br />
+ASSOCIATED PTR RECORD (1 of 1)<br />
+  id                          79<br />
+  domain_id                   12                  (22&#46;172&#46;in-addr&#46;arpa)<br />
+  interface_id                36                  (172&#46;22&#46;32&#46;16)<br />
+  dns_id                      78<br />
+  type                        PTR<br />
+  ebegin                      2009-03-20 15&#58;58&#58;58<br />
+</code><br />
+Regards<br />
+Stig</code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">sdaa</p>
+		<p class="dt">23-03-2009 09:55:58</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	And I have enabled logging to ona.log, but I can't see anything useful int that log......<br />
+<br />
+Stig	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">sdaa</p>
+		<p class="dt">23-03-2009 12:15:15</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Mea culpa, I messed up things myself.<br />
+<br />
+By changing the file <br />
+<code>/opt/ona/www/workspace_plugins/builtin/host_actions/config&#46;inc&#46;php</code><br />
+ to something faulty, things stopped working. By removing this file everything is fine again.<br />
+<br />
+Don't now right now what was wrong with the file, but now it's easier to debug things.<br />
+<br />
+Regards<br />
+Stig</code>	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

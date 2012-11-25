@@ -1,0 +1,77 @@
+---
+layout: oldforum_layout
+title: move installation from one server to another. - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page move installation from one server to another. OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>move installation from one server to another.</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">apa123</p>
+		<p class="dt">31-03-2011 02:35:30</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	What is the smoothest way?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">01-04-2011 10:17:39</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	1. Do a backup of your mysql database using mysqldump as described in the backup post earlier.<br />
+2. Restore that into your new mysql system<br />
+3. Copy /opt/ona to your new system<br />
+4. Set up apache the same as you did before on your new box.<br />
+<br />
+Should be that simple.  Really the hardest part is doing the mysql backup/restore.. there are plenty of documents/guides on the internet describing that task in much more detail.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">apa123</p>
+		<p class="dt">02-04-2011 09:18:10</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Tried to install a new, then import the old database, but i couldnt log in. I get this error &quot;Error: the xml response that was returned from the server is invalid. Recived:&quot;<br />
+<br />
+/var/log/httpd/error.log looks like this:<br />
+<br />
+<a>http&#58;//pastebin&#46;com/E9m6q47J</a></a>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">12-04-2011 16:11:53</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	your log output shows that you need to touch /var/log/ona.log and make sure it has permissions that allow your web server to write to it.  This is covered in the install documentation so that should cover that part.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">apa123</p>
+		<p class="dt">13-04-2011 13:20:59</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	the problem was acctuly that i missed some ldap rpms (found it after turned mysql debug on)	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

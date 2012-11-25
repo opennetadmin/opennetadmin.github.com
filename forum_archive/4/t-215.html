@@ -1,0 +1,149 @@
+---
+layout: oldforum_layout
+title: build_bind and trailing dot in FQDN - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page build_bind and trailing dot in FQDN OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>build_bind and trailing dot in FQDN</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">blakkheim.gw</p>
+		<p class="dt">20-06-2011 08:47:14</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hello,<br />
+<br />
+I'm trying to use the build_bind module. When launching the script from command line, I get an error :<br />
+<br />
+<code><br />
+ERROR =&gt; Unable to determine domain list for server named server&#46;mydomain&#46;fr&#46;<br />
+</code><br />
+<br />
+In this script, this is the following command which produces the error :<br />
+<br />
+<code><br />
+$DCM_PATH -r build_bind_server_domain_list server=$SRV_FQDN<br />
+</code><br />
+<br />
+The $SRV_FQDN variable is the result of the `hostname -f` command. If I launch it on my server I get &quot;server.mydomain.fr&quot;, without the trailing dot. I tried to force the value of $SRV_FQDN in the build_bind script but I got the same result.<br />
+<br />
+I also tried to launch the command above manually and I get my domains correctly :<br />
+<br />
+<code><br />
+&#46;/dcm&#46;pl -r build_bind_server_domain_list server=`hostname -f`<br />
+</code><br />
+<br />
+Any explaination why the build_bind script modify the hostname ? And how can I bypass this ?<br />
+<br />
+Thanks for your answer.</code></code></code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">20-06-2011 22:26:49</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	So there are some pre-requisite bits of information that need to be stored in ONA for the build script to work.<br />
+<br />
+First off the build script expects a host to be defined in ONA.  The default behavior is to use the output of 'hostname -f' to then look for a host defined in ONA with that exact name.  It should be the &quot;primary dns name&quot; of the host.   Once you have added this host/server to ONA you must then associate the DNS domains that this DNS server should serve DNS for.  This is done by clicking on the DNS line under the &quot;Managed services on this host&quot; box in the host detail for that server.  You can then associate existing DNS domains to the sever and select if they are master/slave/forwarder etc.<br />
+<br />
+Once you have done that, you should then start to see example configuration files when you view the domain server pages or the domain pages..<br />
+<br />
+I believe this is what you would need to do.  Another thing to try is to manually run the dcm.pl command to see if you get proper output from it.  It would look something like this:<br />
+<br />
+<code><br />
+/opt/ona/bin/dcm&#46;pl -r build_bind_server_domain_list server=mydnsserver&#46;example&#46;com<br />
+</code></code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">blakkheim.gw</p>
+		<p class="dt">21-06-2011 00:45:40</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	My host is defined correctly in ONA. As I said in my last post, if I launch manually dcm.pl with the hostname of my server, it's ok. But If I launch the build_bind script, I obtain the error message.<br />
+<br />
+The server is defined as a DNS server and is a master for a domain. Here is the &quot;conf&quot; showed in the GUI on the server details page :<br />
+<br />
+<code><br />
+# Named&#46;conf file for server&#46;sub&#46;mydomain&#46;fr built on Jun 21st, 8&#58;35am<br />
+# TOTAL DOMAINS (count=2)<br />
+<br />
+zone &quot;172&#46;in-addr&#46;arpa&quot; in {<br />
+  type master;<br />
+  file &quot;/GUI-only-path/named-172&#46;in-addr&#46;arpa&quot;;<br />
+};<br />
+<br />
+zone &quot;sub&#46;mydomain&#46;fr&quot; in {<br />
+  type master;<br />
+  file &quot;/GUI-only-path/named-sub&#46;mydomain&#46;fr&quot;;<br />
+};<br />
+</code><br />
+<br />
+The question is : why the build_bind script adds a trailing dot to the server hostname causing the dcm.pl script not finding correspondance in its database ?</code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">blakkheim.gw</p>
+		<p class="dt">21-06-2011 00:55:56</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Update : the trailing dot is not the problem.. I didn't see it was added by the echo message.. I was misled by the trailing dot DNS notion..<br />
+<br />
+<code><br />
+DOMAIN_LIST=`$DCM_PATH -r build_bind_server_domain_list server=$SRV_FQDN` || abend &quot;Unable to determine domain list for server named $SRV_FQDN&#46;&quot;<br />
+</code><br />
+<br />
+So, I really don't know why the dcm.pl script works fine when launching by hand with the server name, and why it doesn't when called by the build_bind with the same server name..</code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">21-06-2011 10:51:38</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	well I just plain missed that you did do what I suggested already.. sorry bout that <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+yep this is a strange one.. if you can run the dcm.pl command directly then it should all work.  It sounds more like it could be an issue of the shell and its environment possibly?<br />
+<br />
+One other thing to suggest is to put ONA into debug mode.. go to admin-&gt;system config and set debug to something like 5.. that should then dump a bunch more into /var/log/ona.log.   I'd compare how it looks when you manually run it vs when you run via the script..<br />
+<br />
+You might also just paste &quot;$DCM_PATH -r build_bind_server_domain_list server=$SRV_FQDN&quot; just prior to the DOMAIN_LIST=...... line and it may echo some more error messages to the screen that could help.<br />
+<br />
+another random thought is you might change the first line to be /bin/bash instead of /bin/sh.. though that really shouldnt matter too much.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">blakkheim.gw</p>
+		<p class="dt">22-06-2011 02:46:04</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	You got it !<br />
+<br />
+Placing the command before the $DOMAIN_LIST variable attribution gave me some useful informations : the problem was simply because the sys_build user has a password set whereas the build_bind script try to connect without pass...<br />
+<br />
+Thanks for your help, I can now testing further.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

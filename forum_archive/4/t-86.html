@@ -1,0 +1,77 @@
+---
+layout: oldforum_layout
+title: changing domainname - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page changing domainname OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>changing domainname</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">yshollander</p>
+		<p class="dt">01-10-2009 09:43:20</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I need to change the domain on all my servers from olddomain.com to newdomain.com.<br />
+<br />
+My tentative plan is:<br />
+<br />
+1) use sed -i -e 's/olddomain/newdomain/g' *.db to create a second set of zone files.  Configure DNS servers to serve both olddomain.com and newdomain.com<br />
+<br />
+2) Update DNS domainname of all computers to newdomainname.com<br />
+<br />
+3) Change ONA to generate .db files for newdomain.com instead of olddomain.com<br />
+<br />
+Is (3) doable via the DNS domain administration dialog?  Is it sufficient to just change the domainname to newdomain.com, as well as the fqdn of the primary master for all domains (including the reverse lookup domains)?<br />
+<br />
+Am I forgetting anything obvious?<br />
+<br />
+Thanks<br />
+<br />
+Isaac	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">01-10-2009 19:23:16</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	One way to convert is as follows.<br />
+<br />
+1) make a backup of your zone files and named.conf file.<br />
+2) edit the domain in ONA and change it to newdomainname.com.  All existing entries etc will now reference as the new name.<br />
+3) Let ONA generate new .db files for the new domain. It will not delete the old domain .db files<br />
+4) manually define a reference to olddomain.com in your named.conf file.  This would be done in the trailer file etc.  forgive me as I dont recall exactly how the build script is set up (and I'm a bit busy to take the few seconds and look at the script again).  It also depends on how you set it up but if you do an include in your named.conf or if the build script reads its own header/footer file you can use those methods.  Either way it has do be done so that the new named.conf file updates from ONA dont override your manual reference to olddomain.com<br />
+<br />
+This method is a quick, cut and dry method  to convert from one domain to the other but still retain the snapshot  of olddomain.com prior to convirsion.  you can keep the .db file for olddomain.com around as long as you need and delete whenever.   All the data in ONA will be the newdomain.com and you will continue forward only with that name.<br />
+<br />
+Now if you need to maintain differences or additions to olddomain.com then you may want to create that in ONA but of course that is a bit more involved. <br />
+<br />
+Bottom line is it IS sufficient to just change the domain to newdomain.com and all the DNS entries that reference it will be updated by that one change.  You will need to update the reference to the primary master in the various domains as it is just a text only field not related to other database entries.  I would however not do the sed thing just because you already have a good .db file and once you make the change in ONA it will automatically build a new copy for you (hope that makes sense).	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">yshollander</p>
+		<p class="dt">02-10-2009 07:44:41</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thanks.  For the transition period I need to support both domains in my named.conf, so I'll continue to have ONA generating db.olddomain.com, and use sed to create db.newdomain.com alongside.<br />
+<br />
+Once all hosts on the network have their domain updated to newdomain.com, I'll change the domainname and the primary masters in ONA, and simplify the zone file generation by eliminating the sed step.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

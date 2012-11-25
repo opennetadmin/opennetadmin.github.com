@@ -1,0 +1,72 @@
+---
+layout: oldforum_layout
+title: Plugins and Addons/Utils - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Plugins and Addons/Utils OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Plugins and Addons/Utils</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">imu</p>
+		<p class="dt">19-10-2011 07:41:08</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	a bunch of newbie  <!-- s:D --><img src="{SMILIES_PATH}/icon_e_biggrin.gif" alt=":D" title=":-D" /><!-- s:D -->  questions:<br />
+<br />
+what is the difference between Plugins (<!-- m --><a class="postlink" href="http://opennetadmin.com/docs/plugins"><a href="http://opennetadmin.com/docs/plugins&lt;/a&gt;&lt;!--">http://opennetadmin.com/docs/plugins</a><!--</a> m -->) and AddOns (<!-- m --><a class="postlink" href="http://opennetadmin.com/docs/utils"><a href="http://opennetadmin.com/docs/utils&lt;/a&gt;&lt;!--">http://opennetadmin.com/docs/utils</a><!--</a> m -->)?<br />
+<br />
+Are Plugins always something living in www/ona/... ?<br />
+And Addons/Utils are something like &quot;remote tools&quot; living outside ONA ...?<br />
+<br />
+So if I need to extend functionality of ONA, I would write my own plugin? Or can I write a script living in www/modules/ona?<br />
+How can I write my own plugins? Is there a description of the plugin framework or at least a simple example to start from?<br />
+<br />
+If I need for example a way to extract statistic information from ONA or input data for another system, should I write a plugin or should I write a Tool based on dcm.pl?<br />
+<br />
+Why are most links broken on <!-- m --><a class="postlink" href="http://opennetadmin.com/docs/plugins"><a href="http://opennetadmin.com/docs/plugins&lt;/a&gt;&lt;!--">http://opennetadmin.com/docs/plugins</a><!--</a> m -->?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">19-10-2011 10:14:59</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	These are all great newbie questions!  Here we go.....<br />
+<br />
+First off, these terms have all evolved along the way and could probably stand some standardization and rework but I think we can describe them in a meaningful way.<br />
+<br />
+I would say yes addons are things that could live standalone without ONA (to a certain extent) and could live outside of ONA though I typically install mine in /opt/ona/bin.<br />
+<br />
+Plugins are something that came along later and are intended to extend functionality of ONA itself.  They are typically installed in www/local/plugins but I do have a location that I install default plugins that come with ONA (www/plugins).  The goal of www/local is that it would contain user level changes that dont get touched when upgrades happen.  This would be the dir you want to make sure you back up so that you can restore if needed.<br />
+<br />
+You will also see the www/modules.. this was the really old original place for functions within ONA and is mainly where dcm.pl modules live.  This is currently more core functionality and should not be a location to put your updates/additions to ONA.  All of the things that could be done here are now done via plugins, including creating modules that are exposed via dcm.pl.<br />
+<br />
+So If you want to extend ONA, yes you should write your own plugin and it would live in www/local/plugins and could then be shared with others.<br />
+<br />
+As far as documentation, boy that would be great.. I've not done any but the more you bug me the more motivated I'll be to fix that problem.  Plus if you want to help I'll gladly give you access to the wiki to help flesh that out.  I'll do my best to help you along the way with understanding it all.   There is a framework to work in, and I'll be the first to admit it probably isn't the best way to do it all but at least it works for now.<br />
+<br />
+I'd say your statistic functionality could be done either way.. I'd like to see things done as plugins so they can be shared more easily but it all depends on what you are trying to go for.  I do have a &quot;reporting&quot; system as well that sounds like it could help out.<br />
+<br />
+The reason most links are broken on the plugins page is this.  I listed out the plugins that I have created for myself to try and create some interest in it all.  I have not however officially released them yet so thats why the pages are just broken.  They need a little cleanup in a few cases to make them more workable for the masses.  I'll gladly send you any of them if you are interested though.<br />
+<br />
+If you wish to get deeper into this you might want to join us on IRC in #ona (freenode.net).<br />
+<br />
+I'd also suggest looking at other plugins to get an idea of how they work and what can be done.  I'm attaching my &quot;example&quot; plugin so you can see the basic framework there.  A good one to look at is the www/plugins/ona_nmap_scans as it has reports, sql, installer, dcm modules etc.<br />
+<br />
+Hope that helps, and thanks for your intrest!	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

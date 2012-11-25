@@ -1,0 +1,77 @@
+---
+layout: oldforum_layout
+title: DNS Bind Build Tool - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page DNS Bind Build Tool OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>DNS Bind Build Tool</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">druwoldt</p>
+		<p class="dt">16-03-2010 23:54:19</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Dear All,<br />
+<br />
+We are using the bind DNS build tool which is working for the domain but not the reverse. After a minor bit of coding I found<br />
+<br />
+subnet record<br />
+id:domain_id:interface_id:dns_id:type:ttl:name:ebegin:notes:mx_preference:txt:srv_pri:srv_weight:srv_port<br />
+690:5:336:688:PTR:0::2010-02-08 10:42:27::0::0:0:0<br />
+<br />
+The 336 interface_id does not exist in the interfaces table. I checked for this record and this is where the reverse is failing. How do I track what record this belongs to so I can fix it up.<br />
+<br />
+Yours sincerely<br />
+<br />
+David Ruwoldt	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">druwoldt</p>
+		<p class="dt">17-03-2010 17:34:13</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Dear All,<br />
+<br />
+Was able to solve this.<br />
+<br />
+Found the entry test. The bad record was 690 in table dns<br />
+<br />
+The A record (688) points at the interface table correctly to 335<br />
+The PTR record points wrongly to 336 which does not exist in the interface table.<br />
+<br />
+From DNS table<br />
+id:domain_id:interface_id:dns_id:type:ttl:name:ebegin:notes:mx_preference:txt:srv_pri:srv_weight:srv_port<br />
+688:6:335:0:A:0:test:2010-02-08 10:37:38::0::0:0:0<br />
+690:5:336:688:PTR:0::2010-02-08 10:42:27::0::0:0:0<br />
+<br />
+I deleted the PTR record and re-created it so the links were set correctly.<br />
+From DNS table<br />
+id:domain_id:interface_id:dns_id:type:ttl:name:ebegin:notes:mx_preference:txt:srv_pri:srv_weight:srv_port<br />
+688:6:335:0:A:0:test:2010-02-08 10:37:38::0::0:0:0<br />
+755:5:335:688:PTR:0::2010-03-16 18:02:40::0::0:0:0<br />
+<br />
+I then had to delete the bad record from the database using mysql<br />
+DELETE FROM dns WHERE id=690;<br />
+<br />
+The build now works <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->.<br />
+<br />
+Yours sincerely<br />
+<br />
+David Ruwoldt	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

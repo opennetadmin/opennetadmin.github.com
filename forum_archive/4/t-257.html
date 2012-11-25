@@ -1,0 +1,132 @@
+---
+layout: oldforum_layout
+title: problem with opensuse and opennetadmin - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page problem with opensuse and opennetadmin OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>problem with opensuse and opennetadmin</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">figurello</p>
+		<p class="dt">23-12-2011 20:29:49</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	hello guys,<br />
+i need help for setup opennetadmin.<br />
+<br />
+ I'm having trouble installing the &quot;opennetadmin&quot; no &quot;suse 11.2&quot; which is giving syntax error in the database. When installing a previous version is ok, but when I try to login as admin, he returns to the User &quot;guest&quot; thus permission denied when add host for example.<br />
+<br />
+version php 5.3.8<br />
+apache 2.x <br />
+mysql Ver 5.5.16<br />
+Suse 12.1<br />
+<br />
+Thank you.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">24-12-2011 22:20:55</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I believe your issue is that your mysql version is 5.5.<br />
+<br />
+The problem is that they finally removed the TYPE keyword in the create table syntax and my code still uses it.  The next release will fix the installer so it should work with mysql 4.0 and newer (according to the docs I saw, thats when they added the ENGINE syntax)<br />
+<br />
+you can do the following to fix the installer for now:  cd /opt/ona/install; mv ona-table_schema.xml ona-table_schema.xml.bak; sed -s &quot;s/TYPE=INNODB/ENGINE=INNODB/&quot; ona-table_schema.xml.bak &gt; ona-table_schema.xml	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">figurello</p>
+		<p class="dt">25-12-2011 05:35:52</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	ok ok<br />
+and problem with autentication, when don't access account admin ?<br />
+<br />
+thak you.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">25-12-2011 21:01:16</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I'll need to have more information to help solve this issue.<br />
+<br />
+show the output of /var/log/ona.log when you are logging in as admin.  Is there any other errors or messages that you see in the GUI other than it just not logging in?  Also to get some detail on the current user and permissions, click the little man icon just to the right of the login button at the top right of the screen.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">figurello</p>
+		<p class="dt">26-12-2011 16:48:10</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	hi matt, <br />
+<br />
+simply changes a username in console when authentic.<br />
+<br />
+follows the log: <br />
+<br />
+Dec 26 23:43:12 UNKNOWN_SVR_NAME admin@::1: INFO =&gt; Authorization successful for admin<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: INFO =&gt; Authorization successful for guest<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the subnet_add permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the host_modify permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the host_modify permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the dns_record_del permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the vlan_add permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the vlan_add permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the subnet_add permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the location_add permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the host_del permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the dns_record_add permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the dns_record_add permission<br />
+Dec 26 23:43:23 UNKNOWN_SVR_NAME guest@::1: DEBUG =&gt; auth() User[guest] does not have the advanced permission<br />
+Dec 26 23:43:45 UNKNOWN_SVR_NAME guest@::1: INFO =&gt; Authorization successful for guest<br />
+Dec 26 23:43:49 UNKNOWN_SVR_NAME guest@::1: INFO =&gt; Authorization successful for guest<br />
+Dec 26 23:43:49 UNKNOWN_SVR_NAME guest@::1: INFO =&gt; Authorization successful for guest<br />
+<br />
+<br />
+thank you	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">26-12-2011 20:52:43</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	hmm well I was hoping for more info than that <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+you can bump up the debug level to hopefully give us more to go off of.  I've not seen this issue before and I dont have an easy/quick way to set up a similar environment to test with.<br />
+<br />
+One way to bump the debug level will be to use the dcm.pl tool.  Once you install that (if you have not already) you can run the following command:<br />
+<br />
+/opt/ona/bin/dcm.pl -r ona_sql sql=&quot;update sys_config set value=6 where name like 'debug'&quot; commit<br />
+<br />
+you could also use some other tool to issue the SQL as well.  Hopefully by bumping up the debug level we can see more detail on what is up.  dont forget to set the debug level back down to 0 when done.<br />
+<br />
+Thanks	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

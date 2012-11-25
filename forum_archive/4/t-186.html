@@ -1,0 +1,59 @@
+---
+layout: oldforum_layout
+title: Some bash_completion for dcm.pl - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Some bash_completion for dcm.pl OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Some bash_completion for dcm.pl</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">14-04-2011 10:34:50</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Here is a bash_completion script for dcm.pl if you are interested.  It will help to TAB out the modules available<br />
+<br />
+Just drop it in to a file called /etc/bash_completion.d/dcm.pl<br />
+<br />
+<code><br />
+_dcm&#46;pl()<br />
+{<br />
+  local binary current previous modules<br />
+  <br />
+  binary=$(which dcm&#46;pl)<br />
+<br />
+  if &#91;&#91; -x &quot;${binary}&quot; &#93;&#93; ; then<br />
+    COMPREPLY=()<br />
+<br />
+    current=${COMP_WORDS&#91;COMP_CWORD&#93;}<br />
+    previous=${COMP_WORDS&#91;COMP_CWORD - 1&#93;}<br />
+<br />
+    if &#91;&#91; &quot;$previous&quot; == &quot;-r&quot; &#93;&#93;; then<br />
+      modules=$( &quot;${binary}&quot; --list | awk '{print $1}'|tail -n +3 )<br />
+      COMPREPLY=( $(compgen -W &quot;${modules}&quot; -- ${current}) )<br />
+    else<br />
+      COMPREPLY=( $( compgen -W '-r -c -u -l -p -v --list --symlink \<br />
+                     --syslog --logfile -nostdout' -- ${current}) )<br />
+    fi<br />
+<br />
+  fi<br />
+  <br />
+  return 0<br />
+}<br />
+<br />
+complete -F _dcm&#46;pl dcm&#46;pl<br />
+</code></code>	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

@@ -1,0 +1,205 @@
+---
+layout: oldforum_layout
+title: DNS Views and Context(s) - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page DNS Views and Context(s) OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>DNS Views and Context(s)</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">Frank</p>
+		<p class="dt">23-10-2009 14:19:52</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Desperately searching for an IPAM tool supporting DNS Views it seems I have to do some patching regardless of the tool. Perhaps someone can shed some light on this issue regarding ONA. I understand that the new Context Feature is partially addressing this, but I'd prefer another approach.<br />
+<br />
+If it was possible for me to bypass the checks before a new DNS record is added (especially allowing multiple CNAME RRs for the same owner) I could use the notes field in the dns table to store the assigned view. Since I already have a View-aware Perl Script to generate the zonefiles I could easily adapt this to get the required data from the ONA tables.<br />
+<br />
+I think there is some sort of 'force' option to allow duplicate Mac-Addresses and the like. Perhaps this could be extended to the other checks, so I don't have to patch the sourcecode?<br />
+<br />
+BTW, just disvovered a 'contexts' table that seems not to be used in the moment. (Version 09.90.15) Perhaps usable for DNS Views?<br />
+<br />
+Best regards,<br />
+Frank	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">24-10-2009 12:34:13</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yep DNS views are a tedious thing to implement which is why I suspect many have not done so.  The method I chose to implement as Contexts is the most feasible way at this time for me to add support that would address some of the issues related to DNS views.  While it is probably not the best way to do it, it does help and also fixes some other things like MPLS etc.<br />
+<br />
+With ONA you can add just about any type of DNS record that would normally be allowed.  There should be no restriction on adding multiple CNAMEs to a single host.  Its basically enforcing the standard DNS rules within the confines of a single context/view.  As far as bypassing the checks for adding duplicate data, It could be done in some parts of the system but it would cause some grief with other periphery parts.  There are also database integrity issues that could get in the way.  I dont expect that I will implement a feature like this.<br />
+<br />
+I had thought of using the notes field (or more specifically the 'custom attributes' field) to store the name of the DNS view associated with a host but it is not flexible enough to handle all the situations.  Hosts with many DNS records in many different views are too complex for simple tags like this.  If your situation is simple enough you could possibly get away with it but it was not flexible enough for me to make as a permanent solution.<br />
+<br />
+The 'contexts' table is actually going to be removed shortly as I implemented the contexts at an entire database level, not a table level.<br />
+<br />
+I will try and put some more brain cycles into the idea of a true views method.. no guarantee that there are any brain cycles to be had for much of anything but I'll give it a shot.  <br />
+<br />
+Thanks	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Frank</p>
+		<p class="dt">24-10-2009 16:54:23</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	speaking of brain cycles...<br />
+<br />
+the whole DNS view thing is a nightmare, in terms of maintenance. But it's VERY handy for our Applicationdesigners. (Quote: &quot;Why should I bother choosing the right server, let the network handle that!&quot;)<br />
+<br />
+As I understand your concept of switching contexts, the GUI will represent only one context at a time, right? If so, the whole search stuff will be limited to this context, won't it?<br />
+<br />
+I'm dealing with this DNS view issue for months now, using a (heavily) patched version of ipplan. Your impressive work on ONA makes me wonder, if it's time to switch horses.<br />
+<br />
+So, here some output of my own 'brain cycles':<br />
+<br />
+At first, my approach to DNS views was to split the whole thing in two pieces:<br />
+<br />
+One: How to create the Bind configs including WHO will see WHAT view, what zones in what view, etc. This whole thing is done by a perl scipt with some XML Config.<br />
+Two: Enrich every DNS Resource Record defined in some neat IPAM with Information in which view it should reside.<br />
+<br />
+Let's assume for a moment this neat IPAM is ONA, what do I need?<br />
+- a field to carry the view information at the dns record level: <strong>checksi</b>, can use Field 'notes' in dns table (NOT hosts table)<br />
+- support for non-singleton Resource Records allowed by DNS specs: <strong>checksi</b>, see other Thread<br />
+- support for having multiple 'singleton' Resource Records, esp. CNAME: <strong>nope</b>, checks in dns_record.inc.php prohibit that<br />
+<br />
+Ok, 2 checksi, 1 to go, let's see:<br />
+- I disabled the CNAME checks (there are 2) in dns_record.inc.php and: <strong>checksi</b>, it works.<br />
+<br />
+As I see it, there are no Database integrity issues here, a config option to bypass the test should suffice. And since multiple CNAMEs are allowed in BIND 8, you could call the whole thing an enhancement to make ONA more compatible to BIND 8  <!-- s:P --><img src="{SMILIES_PATH}/icon_razz.gif" alt=":P" title=":-P" /><!-- s:P --><br />
+<br />
+Didn't mean to bother you, keep on the good work.<br />
+<br />
+Kudos!<br />
+<br />
+Frank</strong></strong></strong></strong>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">24-10-2009 17:55:32</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	<q cite="&amp;quot;Frank&amp;quot;:346k88n1">speaking of brain cycles...<br />
+<br />
+the whole DNS view thing is a nightmare, in terms of maintenance. But it's VERY handy for our Applicationdesigners. (Quote: &quot;Why should I bother choosing the right server, let the network handle that!&quot;)<br />
+<br />
+As I understand your concept of switching contexts, the GUI will represent only one context at a time, right? If so, the whole search stuff will be limited to this context, won't it?</q><br />
+<br />
+That is correct. One at a time.<br />
+<br />
+<q cite="&amp;quot;Frank&amp;quot;:346k88n1"><br />
+I'm dealing with this DNS view issue for months now, using a (heavily) patched version of ipplan. Your impressive work on ONA makes me wonder, if it's time to switch horses.</q><br />
+<br />
+Hey, sounds good to me!  <!-- s:D --><img src="{SMILIES_PATH}/icon_e_biggrin.gif" alt=":D" title=":-D" /><!-- s:D --> <br />
+<br />
+<q cite="&amp;quot;Frank&amp;quot;:346k88n1"><br />
+So, here some output of my own 'brain cycles':<br />
+<br />
+At first, my approach to DNS views was to split the whole thing in two pieces:<br />
+<br />
+One: How to create the Bind configs including WHO will see WHAT view, what zones in what view, etc. This whole thing is done by a perl scipt with some XML Config.<br />
+Two: Enrich every DNS Resource Record defined in some neat IPAM with Information in which view it should reside.<br />
+<br />
+Let's assume for a moment this neat IPAM is ONA, what do I need?<br />
+- a field to carry the view information at the dns record level: <strong>checksi</b>, can use Field 'notes' in dns table (NOT hosts table)<br />
+- support for non-singleton Resource Records allowed by DNS specs: <strong>checksi</b>, see other Thread<br />
+- support for having multiple 'singleton' Resource Records, esp. CNAME: <strong>nope</b>, checks in dns_record.inc.php prohibit that<br />
+<br />
+Ok, 2 checksi, 1 to go, let's see:<br />
+- I disabled the CNAME checks (there are 2) in dns_record.inc.php and: <strong>checksi</b>, it works.<br />
+<br />
+</q><br />
+<br />
+Ok, this is why I like people to post in the forum and other wise ask me questions or give their thoughts.  It gets my brain moving and you've gotten mine going.<br />
+<br />
+Here is the thoughts I have along the lines of what you mentioned here.<br />
+<br />
+* create a &quot;dns_views&quot; table.  It would have a name and description field (at least maybe more).  It would have a &quot;default&quot; view for everyone to use.<br />
+* The dns table would have a dns_view_id column that would point back to the views.  It would of course use the default one if not specified.<br />
+* Now I simply update the dns_record.inc.php to do the checks in reference to the view they belong to.  So within one view you cant have two duplicate PTR records for instance, but you can have the same PTR in two different views. <br />
+* update appropriate display screens and searches to now have a dns view selector.  So for instance if you are displaying a host, the associated dns records can be filtered down to just a single view.<br />
+* build scripts and cli needs to also be made &quot;view&quot; aware.<br />
+<br />
+I need to put some more thought into it but I think it might work out fine.  It might be a little complex from a user interface perspective but that will have to be seen I guess.<br />
+<br />
+<q cite="&amp;quot;Frank&amp;quot;:346k88n1"><br />
+As I see it, there are no Database integrity issues here, a config option to bypass the test should suffice. And since multiple CNAMEs are allowed in BIND 8, you could call the whole thing an enhancement to make ONA more compatible to BIND 8  <!-- s:P --><img src="{SMILIES_PATH}/icon_razz.gif" alt=":P" title=":-P" /><!-- s:P --><br />
+<br />
+Didn't mean to bother you, keep on the good work.<br />
+<br />
+Kudos!<br />
+<br />
+Frank</q><br />
+<br />
+Not a bother.. as I said, discussion gets my brain going and that is mostly a good thing! <!-- s;) --><img src="{SMILIES_PATH}/icon_e_wink.gif" alt=";)" title=";-)" /><!-- s;) --><br />
+<br />
+Now since I'm right in the middle of a bunch of &quot;context&quot; related work I need to try and get that code finished so I dont create a bunch of nasty issues implementing it.  I have a &quot;views&quot; type issue I'm dealing with at work so I have incentive to work on this as well.. Now I just need to work it into the schedule!.  Keep on me so I dont let it slide through the cracks.</q></strong></strong></strong></strong></q></q></q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Frank</p>
+		<p class="dt">25-10-2009 01:20:06</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hey Matt,<br />
+<br />
+your idea sounds great and i'd really appreciate having this function in ONA. It's seems to be addressing all thougths on &quot;Piece Two&quot;, so who could ask for more?<br />
+<br />
+Well, I can, of course  <!-- s;) --><img src="{SMILIES_PATH}/icon_e_wink.gif" alt=";)" title=";-)" /><!-- s;) -->  Actually just another idea my colleagues came up with: Metaviews (Big word, little in it).<br />
+<br />
+Last months in my office made clear, there are certain common tasks when dealing with views. One thing is, often we have to introduce a new DNS record to all but the external (internet access) view. So we either start hacking the DNS record into all our 4 (sigh!) internal views or make it belong to a metaview, say &quot;m-all-internal&quot;. And &quot;m-all-internal&quot; of course pointing to the actually wanted 4 (again, sigh!) internal views.<br />
+<br />
+For the time being I coded this function into my &quot;Piece One&quot; script, so it works right now for us, as the IPAM needs not to be Metaview-aware. But perhaps it would  be neat having the IPAM &quot;expand&quot; the metaview at least for searching purposes and such.<br />
+<br />
+But this is <strong>far</b> from mission-critical, more &quot;nice-to-have&quot;.<br />
+<br />
+Please feel yourself encouraged to stay on track with the DNS view issue, for me and my company it would definitely be a true benefit!<br />
+<br />
+As for benefits...<br />
+<br />
+perhaps you could send me a copy of build_bind to f[dot]peters[at]gmx[dot]org ? Perhaps my own Perl bind-builder and yours could be introduced? They maybe like eachother, who knows?<br />
+<br />
+<br />
+Keep truckin'<br />
+<br />
+Frank</strong>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">26-10-2009 19:49:16</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Well I was able to spend a bit of time on this today and I have what seems to be a workable codeset.  Still needs a bunch of testing and I suspect it will have some impact on users when they upgrade.  I'm still working all that out but I'll try and get you a DIFF set that you can apply to your code and do some testing with.<br />
+<br />
+I also sent the build_bind code to you.. hopefully that is useful for you.  It will need to be updated for the new view stuff of course.<br />
+<br />
+As for the metaview stuff.  That one is a bit tricky.  I suspect it wont be part of the main code.  It might be something that could be created as a plugin or managed via dcm.pl as an operational script.  That kind of thing is very specific data entry sort of stuff for individual organizations.  It might be hard to generalize an interface to manage that stuff.  More thoughts to be had on that one I guess.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

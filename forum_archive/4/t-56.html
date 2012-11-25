@@ -1,0 +1,95 @@
+---
+layout: oldforum_layout
+title: adding dns record for pooled IP address - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page adding dns record for pooled IP address OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>adding dns record for pooled IP address</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">yshollander</p>
+		<p class="dt">15-07-2009 15:31:19</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I've got a chicken-and-egg problem.<br />
+<br />
+I want to add DNS record for all the IP addresses in my DHCP pool, so I do the following:<br />
+<br />
+# /opt/ona/bin/dcm.pl -l admin -p admin -r dns_record_add ip=192.168.1.220 name=jc1-dhcp21.mydomain.com type=A addptr<br />
+ERROR =&gt; dns_record_add() Unable to find IP interface: 192.168.1.220<br />
+A records must point to existing IP addresses.<br />
+Please add an interface with this IP address first. <br />
+<br />
+But if I try to add an interface,<br />
+<br />
+# /opt/ona/bin/dcm.pl -l admin -p admin -r interface_add ip=192.168.1.220 host=jc1-dhcp21.mydomain.com<br />
+ERROR =&gt; The host specified, jc1-dhcp21.mydomain.com, does not exist!<br />
+<br />
+But adding host records for DHCP'ed IP addresses is not allowed either:<br />
+<br />
+# /opt/ona/bin/dcm.pl -l admin -p admin -r host_add ip=192.168.1.220 host=jc1-dhcp21.mydomain.com type=6<br />
+ERROR =&gt; IP conflict: That IP address (192.168.1.220) falls within a DHCP address pool!<br />
+INFO =&gt; Conflicting DHCP pool record ID: 3<br />
+<br />
+Any help would be appreciated...<br />
+<br />
+Thanks<br />
+<br />
+Isaac	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">15-07-2009 16:20:48</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	This may be something that you will not be able to do for now.<br />
+<br />
+So, today things are done as follows.  If you have defined a pool range, you are effectively giving control of those IP addresses to the DHCP server and therefore ONA does not allow you to allocate things within pool ranges.  Basically, its way to annoying to try and keep various DHCP servers lease information synchronized with the ONA database... Yes there are DHCP servers out there that tie to databases etc.  At this point I dont plan on doing that.<br />
+<br />
+What I do plan on doing is using DHCPLEASEQUERY (supported in newer versions of ISC_DHCP) to provide a way for ONA to ask the DHCP server about its leases within pools.  This way you can view a subnet and at least see whats allocated instead of just a big pool block.<br />
+<br />
+Now, with that said, none of this allows you to provide DNS names for IP addresses within a pool.<br />
+<br />
+There are a few ways one COULD do this, none of which I've used, nor tested.  <br />
+<br />
+1. use a zone trailer file to append a list of manually created names for the pool range to the zone file created by ONA.  <br />
+2. Configure DHCP to do a DNS update when it gives out a lease (not really supported via ONAs DHCP build system)<br />
+3. Possibly have an option within ONA that says, create DNS records for pool ranges.<br />
+4. ... OTHERS.....<br />
+<br />
+At any rate, there are a few ways one could deal with this.  I've not yet determined the way(s) I want to support it within ONA.  I have honestly always questioned the need to have DNS for pooled addresses anyway.  Having a name to talk TO a host implies that that host is providing some sort of service.  In my mind it should not be pooled but should be using mac based DHCP so it always gets the same IP (and thus DNS name) and is better tracked.  In the case of windows boxes, they can register their name in AD and all is well for them.<br />
+<br />
+I'm not sure what your motivations are for it but for now, you cant add DNS names to things that are in a pool range.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">yshollander</p>
+		<p class="dt">15-07-2009 16:35:54</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	More for convenience than anything else.  It's not an absolute requirement.  And your'e right that MAC-based authorization is the way to go from a security perspective.<br />
+<br />
+DHCPLEASEQUERY is probably the best option IMHO, though I haven't implemented it here.<br />
+<br />
+For now I could do another include file as you suggested.<br />
+<br />
+Isaac	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

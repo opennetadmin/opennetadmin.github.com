@@ -1,0 +1,99 @@
+---
+layout: oldforum_layout
+title: firefox javascript errors - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page firefox javascript errors OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>firefox javascript errors</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">yshollander</p>
+		<p class="dt">11-06-2010 10:47:25</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	The latest ONA is not properly displaying in Firefox 3.6.3 running under Fedora Core 13.  When I mouse over 'Menu', the submenu does not appear immediately below.  FWIW, ONA works nicely in Google Chrome.<br />
+<br />
+This is the error in the JavaScript console:<br />
+<br />
+Error: ona_menu_closedown is not defined<br />
+Source File: <!-- m --><a class="postlink" href="http://athos/ona/">http://athos/ona/</a><!-- m --><br />
+Line: 1<br />
+<br />
+There are lots of warnings as well; please let me know if you'd like to see them too...<br />
+<br />
+Thanks<br />
+<br />
+Isaac	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">14-06-2010 10:41:53</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	And of course I didnt test that one!<br />
+<br />
+I believe I've fixed it.. will be in the next release.. <br />
+<br />
+I have not seen any of the error warnings at the JS level.. you might send them over just so I can make sure I am not missing something.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">yshollander</p>
+		<p class="dt">14-06-2010 11:39:40</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hmm.  Under Chrome there are no warnings, so I'll wait to report more FF warnings once I can pull down the fix (can you tell me which fixed file to pull down from source control and I'll try it out?)<br />
+<br />
+However, there are javascript errors in the stylesheet you use on the website.  Image attached...	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">14-06-2010 13:55:15</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	It should just be:<br />
+<br />
+www/include/html_style_sheet.inc.php<br />
+www/include/html_desktop.inc.php<br />
+<br />
+it was a z-index problem if I remember right.  <br />
+<br />
+<br />
+<br />
+The errors look like they are just messages from the CSS processor not liking various CSS properties.  I dont think this is a problem.  ?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">yshollander</p>
+		<p class="dt">15-06-2010 09:06:49</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Indeed the problem is fixed, and FF reports no other JS errors or warnings.<br />
+<br />
+Thanks for the quick turnaround!<br />
+<br />
+Isaac	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

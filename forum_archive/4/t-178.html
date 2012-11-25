@@ -1,0 +1,84 @@
+---
+layout: oldforum_layout
+title: Install ona-v11.02.10.tar.gz Error - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Install ona-v11.02.10.tar.gz Error OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Install ona-v11.02.10.tar.gz Error</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">themons</p>
+		<p class="dt">03-03-2011 01:12:09</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi all<br />
+<br />
+I try to install ONA 11.02.10<br />
+<br />
+The database is created in the server. but I have this error in the logs.<br />
+<br />
+<code>ERROR =&gt; There was an error processing tables&#58; You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for <br />
+the right syntax to use near 'TYPE=INNODB DEFAULT CHARSET=utf8 DEFAULT COLLATE=utf8_general_ci' at line 8</code><br />
+<br />
+<code>Prerequisite checks<br />
+PHP version &gt; 5&#46;0&#58;	Yes<br />
+PHP mysql support&#58;	Yes<br />
+Has GMP support&#58;	Yes<br />
+Has mbstring support&#58;	Yes<br />
+/img/mti/ONA/www/local/config dir writable by ''&#58;	Yes</code><br />
+<br />
+Is there a way to manual create database and configuration file.<br />
+<br />
+Thanks for your help</code></code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">07-03-2011 11:40:20</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Themons,<br />
+<br />
+Sorry I've not replied sooner.  busy busy busy.. <br />
+<br />
+I'm not too sure why it is you are getting this error in the first place.  it might be worth digging into that a bit more.<br />
+<br />
+As far as having a way to manually create the database and initial data load.  This is something that I've overlooked thus far when I switched to the .xml based files.  My plan is to start including updated .sql files so that people can manually load the tables and initial data if they need to.  This is not something that is currently set up at this time.<br />
+<br />
+However, you could try to do the following:<br />
+<br />
+in /opt/ona/install you can load ona-tables.sql then load ona-data.sql.<br />
+<br />
+once that is loaded to your database, try and run the installer to see if it picks up and does a proper upgrade.  its a 50/50 shot but something to try at least.  <br />
+<br />
+I will be working on getting updated .sql files that will work better.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">07-09-2011 11:01:31</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	So It would seem that there is an issue with mysql 5.5 that they changed how the define the database type.  Key word is no longer &quot;TYPE=innodb&quot; it is now &quot;ENGINE=innodb&quot;.<br />
+<br />
+So until I get this fixed up permanently, you can either downgrade your mysql or edit the /opt/ona/install/ona-table_schema.xml file and change from TYPE to ENGINE.<br />
+<br />
+I hope to have this fixed soon.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

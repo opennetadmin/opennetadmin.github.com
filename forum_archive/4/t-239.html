@@ -1,0 +1,115 @@
+---
+layout: oldforum_layout
+title: Creating subnet within subnet - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Creating subnet within subnet OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Creating subnet within subnet</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">majaatanasovska</p>
+		<p class="dt">21-10-2011 06:23:24</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I am trying to create a new subnet 10.10.10.0/24  into already created subnet 10.10.10.0/16. I get error<strong> subnet address conflict! New subnet starts inside an existing subnet!<br />
+</b><br />
+<br />
+Is there a way to create a multiple subnets within an existing larger subnet?<br />
+<br />
+Thanks a lot <br />
+Maja</strong>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">23-10-2011 20:52:59</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	ONA is intended to represent real routeable address space.  You can not have a subnet within a subnet like this.  <br />
+<br />
+I would suggest you create your 10.10.10.0/24 network but not the /16.  What I believe you may want to do is create a block for your /16.<br />
+<br />
+Blocks are ways to track route summarization or other logical groupings of IP addresses that are not always CIDR.  This allows you  say that your /16 is described as your main office and it may have several /24 subnets within it.  <br />
+<br />
+Or you could have a /24 subnet and define blocks that describe the .10-.50 ip addresses as development IPS and .51-.99 as operations IPs for example.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">netko</p>
+		<p class="dt">25-10-2011 05:10:52</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	What about if you want to use same subnet more then once? <br />
+In MPLS network this is possible it is as you say real routeable address space.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">26-10-2011 15:24:40</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	The way the system is currently structured it is really only keeping track of one VRF or routed domain.  So within that you can not use the same subnet more than once (you can share IP addresses for things like HSRP,VRRP,CARP).<br />
+<br />
+This is currently a limitation I'm aware of and have plans on fixing.  It is not currently possible.<br />
+<br />
+I do have another concept of contexts.  This was a cheesy hack to allow you to do some simple subnet duplication.  It is simply one software codebase talking to full copies of the database structure on the back end.  So if you have only a few VRFs or maybe a desire to do internal/external contexts you can.  It does not scale well and really isnt the correct implementation of MPLS management.<br />
+<br />
+I hope to do it eventually however!	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">netko</p>
+		<p class="dt">28-10-2011 06:23:02</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	OK, thank you for a quick response.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">lanks</p>
+		<p class="dt">08-03-2012 08:57:20</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Any update on this?  I don't really want a subnet within a subnet, but I would like the ability to add the same subnet more than once.  At some sites, we have non routed VLANs for things such as clusters or SANs where they may use the same network as at a different site.  Being that it isn't routed, it's not a big deal to the rest of the network.  I'm not sure how your DB and app is setup or whatever, but maybe you could allow a subnet to be added more than once if it's tied to a VLAN, although I know that wouldn't help in the case of MPLS.  Anyway, would definitely love that feature  <!-- s:D --><img src="{SMILIES_PATH}/icon_e_biggrin.gif" alt=":D" title=":-D" /><!-- s:D -->   Loving the app so far as well, keep up the good work.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">22-03-2012 09:54:14</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Lanks,<br />
+<br />
+Sorry to say that there has been no progress on the ability to support MPLS.. <br />
+<br />
+I have the same situation with my Oracle private interconnect subnets.  They are the same subnet at each location and its a subnet that is not routed anywhere.  The database is currently structured such that it would be a royal pain to implement this duplicate.. We'd all be better off if that time was spent working on the MPLS fix..  For now I just add the subnet and describe it generically.  Then make note that multiple sites use that same subnet.  Non optimal I know.<br />
+<br />
+Glad the app is working for you so far.  I do hope to fix this issue at some point.  <br />
+<br />
+Thanks	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

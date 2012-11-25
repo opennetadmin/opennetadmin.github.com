@@ -1,0 +1,121 @@
+---
+layout: oldforum_layout
+title: Manually adding PTR records? - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Manually adding PTR records? OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Manually adding PTR records?</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">anton</p>
+		<p class="dt">30-04-2009 15:51:37</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi - I have the following situation:<br />
+<br />
+The firewall, having multiple IP aliases on its external interface, has multiple interfaces defined (though this may technically not be correct, but the closest thing I could see to an alias is another interface with the same MAC).<br />
+<br />
+When adding these additional (alias) interfaces, no PTR records are created for them. And when I went to add them by hand, I'm finding there is no way to add PTR records? Am I missing something?<br />
+<br />
+Thanks,<br />
+<br />
+Anton	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">01-05-2009 07:47:56</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yeah, you can add multiple &quot;interfaces&quot; per host - but you'll only get one PTR record generated.  I do not see a way to generate additional PTR records.<br />
+<br />
+General best practices state one PTR record.  However the official rules state there can be many.<br />
+<br />
+I'm guessing Matt just took the best practices and went that route.<br />
+<br />
+&quot;While most rDNS entries only have one PTR record, the rules allow many different PTR records.[1] However, having multiple PTR records for the same IP address is generally not recommended unless there is a specific need. For example, if a webserver supports many virtual hosts, there can be one PTR record for each host and some versions of name server software will automatically add a PTR record for each host. Multiple PTR records can cause a couple of problems, including triggering bugs in programs that only expect there to ever be a single PTR record and, in the case of a large webserver, having hundreds of PTR records can cause the DNS packets to be much larger than normal.&quot;	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">anton</p>
+		<p class="dt">01-05-2009 08:16:53</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yes, I understand not having more than 1 PTR record <strong>per IP</b> normally, but each alias (defined as interface in ONA) is a separate, unique IP.<br />
+<br />
+When manually adding DNS records, the following record types are available in the drop down box: A, CNAME, MX, NS, SRV, TXT.  This is the same for both forward and reverse zones, which doesn't quite make sense - PTR records are needed for the reverse zones obviously. Without that, it isn't possible to manually add any reverse DNS records.<br />
+<br />
+Perhaps I should file this as a bug..?<br />
+<br />
+Anton</strong>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">01-05-2009 08:51:34</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yes the ability to add manual PTR records is something that I need to fix.  Opening a ticket on it would be good just to get it on the list to help me remember.<br />
+<br />
+Basically 99% of the hosts in the database are simple cases where you will have an A record and a single PTR record that points back to it.  By default, A records will automatically have a PTR record set up for them.  This of course can be disabled so only the A record is created.  <br />
+<br />
+The most common case however for multiple PTR records is for things such as routers.  I may have the standard A/PTR pair like this:<br />
+<br />
+router.example.com -&gt; 10.1.1.1<br />
+1.1.1.10.in-addr.arpa -&gt; router.example.com<br />
+<br />
+But the other 10 IP interfaces on that router really should have PTR records so that if you want to use DNS to quickly tell you that IP address 10.7.7.1 is also associated with rotuer.example.com, you can.  This scenario is not yet possible in the interface as Anton found out.  <br />
+<br />
+It is something however that I plan to do.<br />
+<br />
+also, just a quick note on some of the terms used here.  The database references the IPs as &quot;interfaces&quot;.  This is not really the best term to use but its been around a long time and will take some serious effort to change <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->.. each host in the database can have multiple IP addresses added to it (interfaces).. their is an interface name field that is used for things like  &quot;eth0, eth0:1, FastEthernet0/1.3&quot; etc.  so you can define multiple IP addresses per physical interface/sub interface this way.  its just a bit confusing as the word interface is misleading.  Hope that clarifies it a bit.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">anton</p>
+		<p class="dt">01-05-2009 09:34:39</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thanks for the response, I have added this to the bug tracker. Sounds like I'm not telling you anything  you don't already know, the router example is pretty much what I ran into.<br />
+<br />
+As for the term &quot;interfaces&quot;, it is probably not 100% accurate, but it wasn't hard to figure out that that was the way to deal with additional IPs so it's not that big a deal.<br />
+<br />
+Anton	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">01-05-2009 11:58:25</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	<q cite="&amp;quot;anton&amp;quot;:ok71a2ut">Thanks for the response, I have added this to the bug tracker. Sounds like I'm not telling you anything  you don't already know, the router example is pretty much what I ran into.<br />
+<br />
+As for the term &quot;interfaces&quot;, it is probably not 100% accurate, but it wasn't hard to figure out that that was the way to deal with additional IPs so it's not that big a deal.<br />
+<br />
+Anton</q><br />
+<br />
+you'll find that matt knows about most issues you'll come across <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->  he's just entirely too busy - someone needs to pay him to do this <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->  (not me tho!)</q>	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

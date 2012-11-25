@@ -1,0 +1,75 @@
+---
+layout: oldforum_layout
+title: DNS Build Tool - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page DNS Build Tool OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>DNS Build Tool</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">druwoldt</p>
+		<p class="dt">11-05-2010 18:11:03</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Dear Matt,<br />
+<br />
+Been using the DNS build which is good. We have a domain test.com.au which we have setup with blocks, subnets host entries etc. The thing I want to achieve is<br />
+<br />
+nslookup test.com.au localhost<br />
+<br />
+Server:         localhost<br />
+Address:        127.0.0.1#53<br />
+<br />
+Name:   test.com.au<br />
+Address: 192.168.0.1<br />
+<br />
+Instead I get <br />
+<br />
+*** Can't find test.com.au: No answer<br />
+<br />
+So I added in com.au and gave it a subnet and created a primary master ns for it which I added into the record.<br />
+I then set the com.au as master to test.com.au<br />
+I then added a record<br />
+test.com.au IN CNAME ns.test.com.au<br />
+Ran the build. This did not show up.<br />
+Deleted the CNAME and added an A record<br />
+test.com.au IN A &lt;ns.test.com.au IP address&gt;<br />
+Ran the build. This did not show up<br />
+<br />
+I am at a loss as to how to achieve this<br />
+<br />
+What I was able to do is setup an MX record<br />
+test.com.au IN MX 10 ns.test.com.au<br />
+Ran the build. This showed up which was good.<br />
+<br />
+Any help would be greatly appreciated.<br />
+<br />
+Yours sincerely<br />
+<br />
+David Ruwoldt	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">11-05-2010 19:42:36</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	If you can, will you post the zone data that it does create for you?  I'm not sure I fully understand what you have/dont have  set up.  It sounds like you are close to what you should have though.  Having the output will help me to see what more needs to be added etc.<br />
+<br />
+Thanks.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

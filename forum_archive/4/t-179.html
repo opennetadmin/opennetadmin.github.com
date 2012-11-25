@@ -1,0 +1,56 @@
+---
+layout: oldforum_layout
+title: dcm.pl Permission Denied! - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page dcm.pl Permission Denied! OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>dcm.pl Permission Denied!</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">babylon78</p>
+		<p class="dt">03-03-2011 21:03:18</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hello, <br />
+First off, great job on ONA! It's beautiful!  <br />
+I do have a question regarding dcm.pl however. after poking around in the GUI, I realized that the only way I'm going to import my thousands of IPs is through scripting the imports through dcm.pl <br />
+<br />
+I have installed it fine, and am able to read configs from the DB without a problem. However, when I attempt to write anything to the DB, I always get a &quot;Permission Denied!&quot; error. <br />
+Any ideas as to what may be happening?<br />
+<br />
+I was doing something very simple just to test it out. i.e<br />
+<code>dcm&#46;pl -r location_add reference=102 name=DLHS</code><br />
+<br />
+the dcm config file is in /etc, and is own , readable and writable by dcm.pl. The http auth, is currently just the admin user, though I will change it later when I implement an SSL connection. <br />
+<br />
+Any ideas? things to check?</code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">04-03-2011 09:21:36</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	dcm.pl will by default try and connect to ONA as the user &quot;dcm.pl&quot;.  This user does not exist until you create it and grant it permissions.  This is to help try and keep things somewhat secure.<br />
+<br />
+Instead of that you must then provide the -l option to dcm.pl to specify a username and then use -p for a password.  Then you can log in as &quot;admin&quot; or whatever other user you have set up.  <br />
+<br />
+Also you could consider using a .htaccess configuration to help further restrict how dcm.pl functions.  I have an example one included with ONA that shows a few situations like limiting to only dcm.pl requests from certain hosts.  it is located at /opt/ona/www/.htaccess.example.  Just drop the .example from its name to activate it.  and of course adjust its contents for your situation.<br />
+<br />
+I hope this helps clarify a bit.. the whole thing needs a bit of cleanup and normalization as I've been messing with it a bit recently when I added the LDAP auth modules.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

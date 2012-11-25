@@ -1,0 +1,96 @@
+---
+layout: oldforum_layout
+title: ONA and what I'm using it for - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page ONA and what I'm using it for OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>ONA and what I'm using it for</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">16-04-2009 08:00:20</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	So I figure I'll post here what I'm using ONA for and whats parts of ONA im using.  This will follow much of what I've stated in my thread in development.<br />
+<br />
+So my main expectation of ONA is a clean and easy to use interface for some simple IPAM (ip address management).<br />
+<br />
+Currently we use IPPlan and it does everything we need, but its horribly ugly, and a pain in the ass to navigate.<br />
+<br />
+<strong>From ONA I need :</b><br />
+<ol><li><br />
+ - ease of use / navigation<br />
+ - some prettiness (i could care less but i'm not the only one using it and some people like the shinies)<br />
+ - ability to add supernets and subnets<br />
+ - being able to sort via VLAN<br />
+ - optionally track via AS# for organizations with more than 1<br />
+ - optionally tie to devices<br />
+ - optional config backup / compare<br />
+[/list:u:2re0l3t7]<br />
+<strong>some features that are mentioned that i like or would use </b><br />
+<ol><li> - Full command line interface for scripting and batch maintenance. Local or remote capabilities.<br />
+ - Manage your own custom list of device manufacturers and models that relate to your environment. Or use pre-defined lists of common devices (more device “packs” to come).<br />
+ - Track per device configuration archives with the ability to store many entries and compare them using a syntax highlighting “diff” comparison. I.E. archive the contents of a “show run” or “show version” command for each router to keep configuration history. Similar to Rancid.<br />
+ - Track “Shared IPs” such as those in use by HSRP, VRRP, CARP and other virtual interfaces that could be associated with multiple hosts at the same time.[/list:u:2re0l3t7]<br />
+<strong>features i dont need or wont use in the near future</b><br />
+<ol><li><br />
+ - DNS in most cases isn't a need for me.  We have a separate group who tracks it.  I will have my hosts named for clarity in the DB however<br />
+ - DHCP not so much - we don't utilize DHCP so it's not a need for me<br />
+ - VLAN campuses<br />
+[/list:u:2re0l3t7]<br />
+<br />
+so lets hear it - what do you use ONA for.  And matt - do you actively use ONA at your day job?</li></ol></strong></li></ol></strong></li></ol></strong>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">16-04-2009 21:00:08</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	This is a good topic, I hope to get more dialog from people on how they use ONA (and other tools) so we can improve our daily jobs!<br />
+<br />
+I too am more of a command line guy and I dont care so much about flashy things.  However, a nice simple/useable GUI was something that others needed.  And I dont mind using it either.<br />
+<br />
+<strong>A few things currently in the pipe:</b><br />
+* more work on config archive maint<br />
+* I'm dabbling in an interface to manage &quot;racks&quot; and where devices are mounted in those racks.  It tracks rack units etc.. more to come on this one in another post.<br />
+* auditing tools based on nmap scans and Cisco IOS config processing.  Run an nmap to match the network to the database, then using a router archive, you can ensure networks and interfaces are in the database, then those two can push nessus/nikto etc scans.  All the reports are available via ONA.  <br />
+* bug fixes/cleanup<br />
+<br />
+As far as me and my daily job.  Well, I used to use it every day in my previous job.  Well more accurately an earlier iteration of what ONA is based on.  While there it was managing a very large network.  To give an example, on the small end of things we had 30,000~ cisco IOS devices with managed config archives.  It also ran the entire enterprise DNS and DHCP.   You can fill in the gaps there. <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->  The current ONA is installed at my place of employment but is still in transition to being used in its full potential.  Its mostly just IPAM for now, with managed DNS/DHCP hopefully soon.  I'm also working its config archive process into things as well.  Bottom line is that I use it as much as I can in my daily job.<br />
+<br />
+I'm a strong believer in using DNS and DHCP to keep the environment managed well and clean.  ONA helps to give structure to the environment and with a little extra work will keep DNS and DHCP managed based on the way I say the environment should be, and I dont have to do much more than I would have already done just keeping track of IPs.  Its also really nice when auditors/managers come by and ask what something is or how much of XYZ do we have.  All right there and easy to pull up.<br />
+<br />
+There are a ton of other little things that I do with ONA that I could fill up pages and pages on.. this will do for now.. the wife is wondering where I am and why I'm not spending time with her right now. <!-- s;) --><img src="{SMILIES_PATH}/icon_e_wink.gif" alt=";)" title=";-)" /><!-- s;) --><br />
+<br />
+Keep up the dialog guys! This keeps me motivated!<br />
+<br />
+Thanks</strong>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">17-04-2009 07:59:59</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Good to hear its something you still use often - it means you have more motivation to work on our bugs and feature requests!<br />
+<br />
+I definitely hope to hear from some of the others!	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

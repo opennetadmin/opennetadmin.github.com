@@ -1,0 +1,130 @@
+---
+layout: oldforum_layout
+title: Every block I want to create already exists!! - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Every block I want to create already exists!! OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Every block I want to create already exists!!</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">quijada</p>
+		<p class="dt">12-05-2009 04:58:43</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi, I have the same problem every time I want to create a block, it already exist!! However there are no blocks created yet. Somebody knows why? (of course, I am logged-in as admin). The exact message is:<br />
+<br />
+&quot;Save failed. ERROR =&gt; The block TESTBLOCK already exists!&quot; (And the same with every name I make up...)<br />
+<br />
+On the other hand, I have no problems creating hosts, subnets, vlans, vlan campuses, locations, ... Moreover, I have created blocks without problems with the demo version (<!-- m --><a class="postlink" href="http://opennetadmin.com/demo"><a href="http://opennetadmin.com/demo&lt;/a&gt;&lt;!--">http://opennetadmin.com/demo</a><!--</a> m -->). Then, I don't understand what happens <!-- s:-( --><img src="{SMILIES_PATH}/icon_e_sad.gif" alt=":-(" title=":-(" /><!-- s:-( --><br />
+<br />
+Is there some MySQL table related to blocks, because I have been looking for that without success.<br />
+<br />
+I am using the last version of ONA: v09.05.02<br />
+<br />
+Thank you for your attention.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">12-05-2009 08:57:43</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Well it looks like I screwed something up there.. I too get the block exists error.. I'll have a look and fix it up for the next release.<br />
+<br />
+As far as a blocks table, yes it is called simply &quot;blocks&quot;..	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">quijada</p>
+		<p class="dt">12-05-2009 11:16:02</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Exactly. I am pleased to know that was not a problem in my system.<br />
+<br />
+I have ask you about the table for blocks because it doesn't exist (at moment), however I have been watching some modules about it and I found some references to 'block' as a table although I wasn't sure.<br />
+<br />
+Thank you Matt.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">12-05-2009 11:37:08</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hmm ok so I wasnt paying attention on my side.. I'm not getting the &quot;already exists&quot; error.. (when I acutaly use something that doesnt exist!)<br />
+<br />
+If you truly don't have a blocks table in your database then I would suspect that is the problem here.  you should have 39 tables in your ONA database.  The file /opt/ona/install/ona-tables.sql contains all the info on creating those tables.  If they are not there then it may have been an error during install?<br />
+<br />
+I'd check that you have all the right tables and or re-install.<br />
+<br />
+I checked through the code on the blocks thing and it &quot;looks&quot; ok at this point to me.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">quijada</p>
+		<p class="dt">12-05-2009 12:16:05</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi again Matt,<br />
+<br />
+Augh! I have only 38 tables. I think we are near the problem. I have just sighted the file ona-tables.sql and has copy and paste de code of creating the table 'blocks&quot; and it generates a syntax error. Here is the code:<br />
+<br />
+DROP TABLE IF EXISTS `blocks`;<br />
+CREATE TABLE `blocks` (<br />
+  `id` int(10) unsigned NOT NULL,<br />
+  `ip_addr_start` int(10) unsigned NOT NULL,<br />
+  `ip_addr_end` int(10) unsigned NOT NULL,<br />
+  `name` varchar(63) NOT NULL,<br />
+  `notes` varchar(255) text NOT NULL, &lt;--------------------------------- This and the following line generate the error.<br />
+  PRIMARY KEY  (`id`)<br />
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='User Defined IP Address Ranges';<br />
+<br />
+Could be the problem the word 'text' in the definition of the atribute 'notes'??<br />
+<br />
+See you	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">12-05-2009 19:24:20</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	That is exactly the problem.  the word &quot;text&quot; should be removed from that statement.<br />
+<br />
+I'll fix it up in my files.. you'll have to manually make the changes of course, or wait for the next revision.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">quijada</p>
+		<p class="dt">13-05-2009 00:27:08</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yeah, I have just tried deleting the word 'text' of that line and now all is perfect. Maybe you must know that in the installation process (that I did two times before posting this thread) I never watch any error message about a problem creating the database.<br />
+<br />
+Matt, thank you very much for your help.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

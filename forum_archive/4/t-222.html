@@ -1,0 +1,77 @@
+---
+layout: oldforum_layout
+title: rack_maint - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page rack_maint OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>rack_maint</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">druwoldt</p>
+		<p class="dt">17-08-2011 00:57:50</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Dear Mat,<br />
+<br />
+Just installed this. Looks good. How would I put in a Blade Chassis. We have HP Blade Chassis which are 10 RU. They can hold 16 1/2 height Blades or 8 full height blades.<br />
+<br />
+So<br />
+<br />
+|B01|B02|B03|B04|B05|B06|B07|B08|<br />
+|B09|B10|B11|B12|B13|B14|B15|B16|<br />
+<br />
+Not sure how this can be shown.<br />
+<br />
+Yours sincerely<br />
+<br />
+David Ruwoldt	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">24-08-2011 12:06:52</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	well at this point it is not capable of tracking blades in a bladeserver.  At best you can track chassis in a rack but not blades in the chassis.  Typically I would see that as more of a task for something like insight manager etc.. <br />
+<br />
+I personally am using Cisco UCS and since it uses service profiles, the blades can change around at any time (potentially) so the rack maint plugin would never know this.  I have a plugin in ONA that shows me what is allocated in my UCS environment at each blade.<br />
+<br />
+I would think the IBM and HP blade environments should work in a similar way.  rack_maint will only track the physical (a big fat chassis in unit 6-12) and how you deploy whats in that chassis is another thing.  Almost like I wouldnt say that the vmware server in rack unit 3 contains 20 other servers. <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+sooo.. I do understand the idea but I'm not sure that rack_maint is the best way to track it.  maybe adding notes/descriptions to the rack units would allow you to manually type in that detail?  hmmmm...	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">druwoldt</p>
+		<p class="dt">07-09-2011 18:17:37</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Dar Mat,<br />
+<br />
+From my perspective we use profiles too but we lock the profile to the slot with boot from SAN. If a blade dies we just insert another blade and the server comes back. As long as the hardware is similar enough that drivers do not need to be changed. We can use profile migration but have not looked at implementing that at this point in time.<br />
+<br />
+Also we use blades for VM Hosts. I do not shift these blades around they are static. Certainly the VMs move around and I would not want to track them as part of rack maint. <br />
+<br />
+From an asset and &quot;this balde needs to be repalced&quot; view I need to know where things are. Knowing that I pull a blade and it has this serial number is important if I want to swap it out due to failure. Handing a wrong balde back to a Vendor would make them grumpy and rightly suspicious about what you are doing. So for me tracking blades is important.<br />
+<br />
+Yours sincerely<br />
+<br />
+David Ruwoldt	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

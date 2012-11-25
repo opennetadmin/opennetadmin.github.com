@@ -1,0 +1,126 @@
+---
+layout: oldforum_layout
+title: &quot;Regular Expressions&quot; in search fields - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page &quot;Regular Expressions&quot; in search fields OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>&quot;Regular Expressions&quot; in search fields</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">Frank</p>
+		<p class="dt">27-01-2011 01:09:38</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Matt,<br />
+<br />
+finally we got ONA productive for approx. 30,000 DNS Records. The whole thing (including the view feature) is working flawless so far.<br />
+<br />
+Frequently there is one request from my colleagues, though.<br />
+<br />
+It would be nice to add some &quot;Regular Expression&quot; functionality to the search. It seems that as for now the search string entered by the user (hostname, for example) is surrounded by &quot;%&quot; and the where clause is build with &quot;like&quot;. Therefor a search for 'www' is returning all hostnames containing this string no matter where 'www' is located inside the hostname. We would be glad to have the opportunity to search for an exact phrase.<br />
+<br />
+Perhaps it is possible to use SQL WHERE clause syntax in the search, triggerd by some special character or a checkbox?<br />
+<br />
+<br />
+Best Regards<br />
+Frank	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">28-01-2011 10:42:35</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Frank,<br />
+<br />
+That is excellent that you have gotten this far.  I'm glad its working for you.<br />
+<br />
+As far as doing direct regular expressions, that probably wont happen due to the underlying SQL.  I do think however that your thought of having a checkbox to control things would be good.  Here is what I'm thinking at this point.  I'll have a checkbox on the search form that will disable the % wildcarding that is done on all searches.  Then your searches for www will find exactly &quot;www&quot;.  You would then be responsible yourself for putting in the % and _ SQL characters where appropriate.  That way I think you could build slightly more flexible queries.<br />
+<br />
+There is also the notion of reporting.  There is now the beginnings of a reporting system that would allow you to build specific reports that display data for a specific need.  Thus far the ONA web interface was more about getting specific hosts/subnets etc and managing the data.. not about larger lists of random data.  I think there is potential using the reporting system for better data sets.  If this looks like it fits with what you need I can give you more information on how to set up reports. <br />
+<br />
+I'm also interested to hear from you about how the view feature is working for you?  Is the selection of records in each view, or the searches and interface interactions working properly?  I didnt get much time to test it.  Also do you do much scripting with the dcm.pl command line tool?  If so, how does it play with the view feature.  I'm just curious to get perspective from someone outside of myself who uses it.<br />
+<br />
+Thanks!	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Frank</p>
+		<p class="dt">29-01-2011 00:30:45</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Agreed, mapping regular expressions to SQL syntax would be a beast. A checkbox with the ability to use WHERE clause syntax would be perfectly fine for us.<br />
+<br />
+Regarding the reporting feature some information indeed would come in handy. As of now for the BIND zonefiles, we are using direct sql to export all required sql records out of ONA. This is because the 'dcm.pl' option is (naturally) pretty slow for this bulk processing. Doing a report like<br />
+<q>give me all A records of zone 'somezone.de' inside view 'someview'</q> perhaps is better than direct sql<br />
+<br />
+And now on to the view feature:<br />
+<br />
+In short: There are no problems.<br />
+<br />
+Currently we are managing all Datacenter related A,PTR,CNAME,MX,TXT and SRV DNS Records in ONA. ( FYI, all 'Enduser' related DNS records are fed into the appropriate zones directly from our config-db. Perhaps we change this in the future to have all records in ONA) All this data is mapped into 4 views.<br />
+<br />
+I played around with the view feature during migration for quite some time now and did not find any bug. This is true for the interface AND dcm.pl. The latter I used a lot to migrate the production data into ONA.<br />
+<br />
+As stated above, we are not managing the SOA and NS records via ONA. For the time being, these are managed by templates outside ONA. It would be nice to have these in ONA too, but the SOA definition in ONA seems not to be view aware. And THIS is the only 'bug' I came across so far. (as for the view feature  <!-- s;) --><img src="{SMILIES_PATH}/icon_e_wink.gif" alt=";)" title=";-)" /><!-- s;) -->  )</q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">01-02-2011 17:47:29</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I'm working on a simple solution for now that will be in the upcoming release.  It adds a &quot;disable wildcards&quot; checkbox on the search form.  This means that it will explicitly search for exactly what you put in the search form.  This puts the burdon on you to provide % or _ where needed in the query.  so if you search for a host name of &quot;www&quot; then thats all you get.  If you do &quot;www%&quot; you would get all that begin with www and so on.  <br />
+<br />
+The reporting feature allows you to create a canned report that performs a specific SQL query or queries to gather data.. then you can format the data as needed and present it in a table or csv (or any other output type you wish to create).. Then the report is available in the report list.  You select the report from the list.. it will prompt you for any data input that it requires and then generates the report.  It also has a dcm interface that allows you to dump the data out that way.   I currently have some reports in the nmap scan tool that show last response from hosts, or compare the nmap results to ona data.  These are two examples of what could be done.. I'm not sure if you've enabled the nmap scan audit plugin?<br />
+<br />
+So reports would need to be developed but then they could be shared with everyone in the community as desired.  <br />
+<br />
+If you are using this to build zonefiles then I would like to find out more as to why the build_bind scripts do not perform for you.  They &quot;should&quot; be usable in most cases.  ultimately they all use some level of SQL to extract and reformat the data into zonfile syntax.  If it is a speed issue then I think more should be done to make the build process faster so it would work in more situations.  Though it sounds like you may have a unique situation to deal with?<br />
+<br />
+I'll have to look into the SOA functionality related to views.  more detail on the issue there would help as I've not looked at that code in awhile.  Sounds like a few fixes are in order to get full functionality for you..  like I said, I'm surprised it even worked this much since I put so little testing into it <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Frank</p>
+		<p class="dt">02-02-2011 10:26:02</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Matt,<br />
+<br />
+as for the search feature the 'simple solution' is just fine. We're looking forward to it. Perhaps if there's something checked in on svn please let me know.<br />
+<br />
+Regarding the reporting feature and build_bind perhaps there's a misunderstanding here. We're not using either one at the moment.<br />
+build_bind is out of the question for now as we do not have all relevant dns records in ona. (qualifies for 'unique situation')<br />
+The report feature is new to me and I just wondered if it could replace the direct SQLs to ona-db I'm making today. I'll take a look at the examples you mentioned.<br />
+<br />
+<br />
+...speaking 'bout SOA records ...<br />
+<br />
+to me SOA records are in no way different to any other records. Like having different A records in different views I'd also like different SOA records in different views. Just imagine wanting different serial numbers for a zone in different views.<br />
+<br />
+...speaking 'bout code ...<br />
+<br />
+just imagine you code just works. You did a good job. Period.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="AUTHOR" content="matt@opennetadmin.com">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="KEYWORDS" content="ona opennetadmin forum archive">
+    <meta name="description" content="Old OpenNetAdmin forum archive topic page Managing DNS to a split domain architecture OpenNetAdmin Forum Archive">
+
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>Managing DNS to a split domain architecture - OpenNetAdmin Forum Archive</title>
+<script type="text/javascript" src="../jquery.js"></script> <script type="text/javascript" src="../jquery.tablesorter.js"></script> <script type="text/javascript" src="../forum.js"></script>
+  </head>
+
+  <body onload="load('forum')">
+    <a id="forkme_banner" href="https://github.com/opennetadmin"></a>
+    <a id="fishes" href="http://www.christiananswers.net/gospel/home.html"><img style="opacity: 0.3;border: 0 none;" src="/images/fish.gif" height="15"></a>
+<form id="donatebutton" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <h1 id="project_title">OpenNetAdmin</h1>
+          <h2 id="project_tagline">Track. Automate. Configure.</h2>
+          <center>
+            <a class="header_link" href="/">Home</a>
+            <a class="header_link" href="/features.html">Features</a>
+            <a class="header_link" href="/community.html">Community</a>
+            <a class="header_link" href="/develop.html">Develop</a>
+          </center>
+          <section id="downloads">
+            <a class="tar_download_link" href="https://github.com/opennetadmin/ona/tarball/current">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+       <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Managing DNS to a split domain architecture</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">Colarn</p>
+		<p class="dt">26-10-2010 20:33:42</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hello,<br />
+<br />
+I have been asked to look at the possibility of using ONA to manage two separate named instances. Server names will be listed in both DNS systems, one external and one internal so depending on your location (inside or outside) you will get a different look up IP.<br />
+<br />
+Is this possible from the one ONA management console? From reading so far I noted a suggestion of a 2nd database. If its not possible does anyone have a recommendation? Two separate ONA instances with separate databases or is it possible to do all in the one ONA instance/database?<br />
+<br />
+Thanks in advance for any replies.<br />
+<br />
+Regards,<br />
+<br />
+Colarn	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">26-10-2010 22:54:04</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	This is a very similar situation that I face in my environment as well as I'm sure it is for many.<br />
+<br />
+There are two very experimental features I'm working on that are in various states of completeness.<br />
+<br />
+1. CONTEXTS:  This is basically two instances of ONA database tables that are accessible via one code base.  It allows you to switch your web interface (or command line interface) to one set of data or the other.  For instance you can have an Internal context and an external context.    This way your name space can have overlapping names but reflect the inside/outside IP addressing.  There are goods and bads with this method but it is currently the most complete solution.  Creating a context is not automated and will need to be done manually.  DNS builds are exclusive to each context and the data in its table set.  For those of you interested in creating a context, just let me know.  If I find that many of you are interested I'll work up some procedures on creating contexts.  (i.e.  I dont have docs for creating it yet, if someone wants to know I'll turn that explanation into said documentation! :  )<br />
+<br />
+2. DNS VIEWS:  This is also known as split horizon.  This is a slightly more complex implementation and is not very complete yet.  This allows you to add DNS records to the system but an additional field is required.  This defines what view the DNS entry is part of.  This option allows a single database/ona install to track multiple overlapping names based on which dns view they belong to.  All of the tools and DNS build scripts need to be updated to allow for the added view selection.  This work is started but not fully complete or tested for completeness.  You should be able to enable this (AT YOUR OWN RISK!!!!) by setting the system configuration value 'dns_views' to 1.  Again I'll say, its totally experimental and I've not worked on that section of code in a while so I'm sure you'll find issues with it at some level.<br />
+<br />
+Hope those help.  These two have gone on my back burner for awhile.. I'm hoping to dust them off on the next few months.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Colarn</p>
+		<p class="dt">02-11-2010 17:29:17</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	We are looking to use the build bind script plugins. After some testing and working through different configurations I tried a few things. I tried using name based apache virtual hosts for two seperate ONA directory structures. This worked as far as setting up two different ONA web trees and databases. I did however have the issue that even though I was using two different mysql databases the ona_sys user password was re-set for both databases upon creation of the second database. I could not however get the build bind scripts to work as the external dns we were trying to build was for servers in a different area with different domain/IP records ie DMZ. I then tried IP based virtual apache hosts, worked a little better but still no build bind for the external range.<br />
+<br />
+So to move forward I am going to put the ONA for the DMZ onto one of the machines in that area and leave the internal one where it is and have two completely different ONA installations, one for inernal one for external. Any thoughts on this set up?<br />
+<br />
+Regards,<br />
+<br />
+Colarn.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">09-11-2010 11:19:08</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I believe the password was updated because if you use the same ona_sys user on both instances of ONA, the installer is setting up global level user information on the mysql server.  You can make them unique on the mysql server by using two different user names. .. so basically when you install the second instance, just user a different username for that instance.  maybe ona_sys_ext?<br />
+<br />
+As far as accessing them separately.  You must first have the build_bind modules installed on both instances of your ONA install (I sent you the file again so you should be able to install that on your new instance).  Then you need to make sure that your dcm.pl script has two configuration files (or you specify a new server url using the -u option) to access the appropriate vhost path.<br />
+<br />
+Separating them entirely as you are suggesting would also work of course.<br />
+<br />
+Hope that helps, sorry for the delay in my response.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+
+
+
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2598149030041038";
+//728x90_bugsfooter
+google_ad_slot = "1568593938";
+google_ad_width = 728;
+google_ad_height = 90;
+//--></script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+    <!-- FOOTER  -->
+    <div class="outer">
+      <footer class="inner">
+          <center>
+ 
+
+
+          </center>
+      </footer>
+    </div>
+
+          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script
+%3E"));
+          </script>
+
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-361894-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
+
+

@@ -1,0 +1,111 @@
+---
+layout: oldforum_layout
+title: Error when trying to install 11-02-10 version - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Error when trying to install 11-02-10 version OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Error when trying to install 11-02-10 version</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">cmuench87</p>
+		<p class="dt">16-02-2011 10:17:03</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I'm getting the following error when trying to install the latest version into a new directory.<br />
+<br />
+[attachment=0:21errf3j]<!-- ia0 -->Screen shot 2011-02-16 at 10.09.12 AM.png<!-- ia0 -->[/attachment:21errf3j]	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">16-02-2011 14:37:37</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	This looks like you may be missing a symlink of the adodb directory in www/include.  <br />
+<br />
+the www/include directory actually has an adodb5 directory in it.  There should be a symlink of adodb to adodb5.  <br />
+<br />
+You should also check that one exists for www/include/xajax that points to xajax_0.2.4<br />
+<br />
+It is either that or there are issues with the fact its not living in /opt/ona... This really shouldn't be a problem as you can install it in other locations.. There are just certain things you might have to consider when putting it in a new directory.  <br />
+<br />
+Lets start with the symlink thing.. if thats not it, we can dig into why its not working based on how your directory structure is and how your apache is configured.<br />
+<br />
+Thanks.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">cmuench87</p>
+		<p class="dt">18-02-2011 20:50:27</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	thanks for symlink info. I'm able to get past that now.<br />
+however I'm on a shared host and I had to create the database first.<br />
+However your install script won't go past this.<br />
+Is there a way I can insert the install sql stuff directly into the database and write the config file myself?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">18-02-2011 22:20:28</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	may I ask which shared host system you are using?  maybe I can test out some things on it?<br />
+<br />
+as long as you have a database login that can create databases you should be able to use the installer to install to your hosted system.  <br />
+<br />
+The installer uses an xml based SQL script to create and load the data.  This makes it so you wouldn't be able to just load them in yourself.  I've not considered this scenario so maybe I need to start shipping the xml and the sql versions of these scripts.  However the installer simply creates SQL and runs it against the database using a user/password that has access to create databases.  I would think that this should work on most hosting systems.<br />
+<br />
+You might be able to create the database first.. then add a user to the database that can create tables.  Then provide that username/password for all of the fields in the form.  Probably wont work but its worth a try.  Otherwise use your hosting account user/password as the admin user as I assume it has rights to create databases.  These are just suggestions based on me guessing.  <br />
+<br />
+One other thing to make sure of is that your www/local/config directory is writeable by the web server user.. I'm not sure what this user would be on your system but the installer should detect it for you and show it to you in the prerequisite checks list. <br />
+<br />
+I think it should be possible to install on a hosted system, I just don't have any specifics for you.  Hopefully these suggestions can help.  I might be able to do my own testing if I can get access to a hosted that is the same or similar to yours.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">cmuench87</p>
+		<p class="dt">19-02-2011 00:40:28</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	hmm couple of things.<br />
+1. its just a generic cpanel shared hosting account.<br />
+2. cpanel locks down the server so much that you can only create databases/users through the web interface.<br />
+3. A single .sql file to install would be great.<br />
+4. a yes/no on the install page to bypass the create database part and just supply database would be great<br />
+5. I'm getting a ftopen(/var/log/ona.log) error cause my account can't open that log file.<br />
+<br />
+fyi I use your script to track ips at my work on a dedicated server but this is just for my church so that is why its on a dedicated host.<br />
+Feel free to PM me and I can definitely be your Guinea pig for the above fixes.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">cmuench87</p>
+		<p class="dt">05-04-2011 22:46:36</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	any luck on developing just a plain .sql install script?	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

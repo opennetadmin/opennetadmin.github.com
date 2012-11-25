@@ -1,0 +1,246 @@
+---
+layout: oldforum_layout
+title: Trouble shooting Orphaned Record - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Trouble shooting Orphaned Record OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Trouble shooting Orphaned Record</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">druwoldt</p>
+		<p class="dt">24-05-2010 17:27:32</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Dear All,<br />
+<br />
+Had a problem where a domain would not build recently. This is how I worked through it.<br />
+<br />
+Note ONA is installed in /opt/ona on Red Hat server.<br />
+<br />
+First I created a test_build script and placed this /opt/ona/bin<br />
+<br />
+#!/bin/sh<br />
+#<br />
+# test_build<br />
+# Script to list domains, build a selected domain.<br />
+#<br />
+<br />
+ONABASE=`cat /etc/onabase`<br />
+ONA_PATH=&quot;/var/named/chroot/var/named&quot;<br />
+DCM_PATH=&quot;${ONABASE}/bin/dcm.pl -l sys_build&quot;<br />
+SRV_FQDN=`/bin/hostname -f`<br />
+<br />
+case &quot;$1&quot; in<br />
+   list)<br />
+      DOMAIN_LIST=`$DCM_PATH -r build_bind_server_domain_list server=$SRV_FQDN`<br />
+      for DOMAIN in `echo $DOMAIN_LIST`<br />
+      do<br />
+         echo $DOMAIN<br />
+      done<br />
+      ;;<br />
+   build)<br />
+      echo &quot;Building $2&quot;<br />
+      $DCM_PATH -r build_bind_domain domain=$2<br />
+      ;;<br />
+   *)<br />
+      echo $&quot;Usage: $0 {list|build &lt;domain name&gt;}&quot;<br />
+      exit 1<br />
+esac<br />
+<br />
+exit 0<br />
+<br />
+So <br />
+cd /opt/ona/bin/<br />
+Run test_build list which returned<br />
+&lt;domain1&gt;<br />
+&lt;domain2&gt;<br />
+<br />
+I then ran test_build build &lt;domain2&gt; which returned the following error<br />
+ERROR =&gt; Unable to find interface record 490 with name  and notes !<br />
+<br />
+Next I got a list of the ONA tables<br />
+<br />
+./dcm.pl -r ona_sql sql=&quot;show tables;&quot;<br />
+<br />
+Tables_in_ona<br />
+blocks<br />
+configuration_types<br />
+configurations<br />
+contexts<br />
+custom_attribute_types<br />
+custom_attributes<br />
+dcm_module_list<br />
+defaults<br />
+device_types<br />
+devices<br />
+dhcp_failover_groups<br />
+dhcp_option_entries<br />
+dhcp_options<br />
+dhcp_pools<br />
+dhcp_server_subnets<br />
+dns<br />
+dns_server_domains<br />
+domains<br />
+group_assignments<br />
+groups<br />
+host_roles<br />
+hosts<br />
+interface_clusters<br />
+interfaces<br />
+locations<br />
+manufacturers<br />
+messages<br />
+models<br />
+permission_assignments<br />
+permissions<br />
+roles<br />
+sequences<br />
+sessions<br />
+subnet_types<br />
+subnets<br />
+sys_config<br />
+users<br />
+vlan_campuses<br />
+vlans<br />
+<br />
+As the error mention an interface record. We first find out about this table.<br />
+./dcm.pl -r ona_sql sql=&quot;desc interfaces;&quot;<br />
+Field:Type:Null:Key:Default:Extra<br />
+id:int(10) unsigned:NO:PRI::<br />
+subnet_id:int(10) unsigned:NO:::<br />
+host_id:int(10) unsigned:NO:::<br />
+nat_interface_id:int(10) unsigned:NO::0:<br />
+ip_addr:int(10) unsigned:NO:::<br />
+mac_addr:varchar(12):NO:::<br />
+name:varchar(255):NO:::<br />
+description:varchar(255):YES:::<br />
+last_response:timestamp:YES:::<br />
+<br />
+Now we search based on the id field for 490<br />
+./dcm.pl -r ona_sql sql=&quot;select * from interfaces where id=490;&quot;<br />
+NOTICE =&gt; SQL executed successfully - no records returned<br />
+<br />
+So no record exists. This is where the problem is but what DNS record references this. Next look at the dns table structure.<br />
+./dcm.pl -r ona_sql sql=&quot;desc dns;&quot;<br />
+Field:Type:Null:Key:Default:Extra<br />
+id:int(10) unsigned:NO:PRI::<br />
+domain_id:int(10) unsigned:NO:::<br />
+interface_id:int(10) unsigned:NO:::<br />
+dns_id:int(10) unsigned:NO::0:<br />
+type:varchar(15):NO:::<br />
+ttl:int(10) unsigned:NO:::<br />
+name:varchar(255):NO:::<br />
+ebegin:timestamp:NO::CURRENT_TIMESTAMP:<br />
+notes:varchar(128):NO:::<br />
+mx_preference:tinyint(5) unsigned:NO:::<br />
+txt:varchar(255):NO:::<br />
+srv_pri:smallint(5) unsigned:NO:::<br />
+srv_weight:smallint(5) unsigned:NO:::<br />
+srv_port:smallint(5) unsigned:NO:::<br />
+<br />
+From this we can see that the dns table references interfaces using interface_id. So we look for interface_id = 490 on the dns table.<br />
+./dcm.pl -r ona_sql sql=&quot;select * from dns where interface_id=490;”<br />
+id:domain_id:interface_id:dns_id:type:ttl:name:ebegin:notes:mx_preference:txt:srv_pri:srv_weight:srv_port<br />
+1016:5:490:998:PTR:0::2010-05-18 10:32:20::0::0:0:0<br />
+<br />
+So 1016 points to interface 490 which does not exist.<br />
+<br />
+But what does 1016 belong to.<br />
+Under dns_id we can see another dns_id. If we look up this one<br />
+./dcm.pl -r ona_sql sql=&quot;select * from dns where id=998;”<br />
+id:domain_id:interface_id:dns_id:type:ttl:name:ebegin:notes:mx_preference:txt:srv_pri:srv_weight:srv_port<br />
+998:1:481:0:A:0:server1:2010-05-18 10:31:01::0::0:0:0<br />
+<br />
+So we can see that the PTR records belong to server1. As can been seen the dns_id=0 means there are no further links.<br />
+<br />
+So now we search to see if there are any other records for 998<br />
+./dcm.pl -r ona_sql sql=&quot;select * from dns where dns_id=998;”<br />
+id:domain_id:interface_id:dns_id:type:ttl:name:ebegin:notes:mx_preference:txt:srv_pri:srv_weight:srv_port<br />
+999:5:481:998:PTR:0::2010-05-18 09:43:00::0::0:0:0<br />
+1016:5:490:998:PTR:0::2010-05-18 10:32:20::0::0:0:0<br />
+1017:5:491:998:PTR:0::2010-05-18 10:32:28::0::0:0:0<br />
+1024:5:497:998:PTR:0::2010-05-24 14:17:57::0::0:0:0<br />
+<br />
+So we can see there are 4 records that hold pointers for 998. If we do checks on the interfaces table we find that 481 exists, 490, 491 and 497 do not exist. This means 1016,1017 and 1024 need to be removed from the dns table. As you can not use dcm.pl to remove records you will need to use mysql client to connect directly to the database.<br />
+<br />
+mysql –u root –p<br />
+&lt;enter password&gt;<br />
+connect ona<br />
+DELETE FROM dns WHERE id=1016;<br />
+DELETE FROM dns WHERE id=1017;<br />
+DELETE FROM dns WHERE id=1024;<br />
+COMMIT;<br />
+Exit;<br />
+<br />
+Now try a test_build again. If you get the build data returned, ie a long list of <br />
+1.1.2.10.in-addr.arpa.                                    IN  PTR      server-44.dummy.com.<br />
+2.1.2.10.in-addr.arpa.                                    IN  PTR      server-45.dummy.com.<br />
+<br />
+Then the build is successful.<br />
+<br />
+Hope this is helpful.<br />
+<br />
+Yours sincerely<br />
+<br />
+David Ruwoldt	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">24-05-2010 19:27:08</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	druwoldt,<br />
+<br />
+Excellent troubleshooting information.. Thanks for posting it.   Now all I need to do is find out why ONA allowed the orphan records and hopefully people wont have to run into what you did. <br />
+<br />
+This is great info for people to understand a bit more about how to use the dcm.pl tool as well as basic structure of the tables.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">druwoldt</p>
+		<p class="dt">24-05-2010 19:36:21</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Dear Matt,<br />
+<br />
+Hit orphaned record again. What happened<br />
+1) Create interface that also creates PTR<br />
+2) Delete interface but PTR remains (or maybe I do not wait for GUI to update)<br />
+3) Select delete on PTR record<br />
+<br />
+This is the second time this has happened to me. So not sure if deleting interface that has associated PTR causes it or my impatience <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->.<br />
+<br />
+Yours sincerely<br />
+<br />
+David Ruwoldt	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">24-05-2010 21:58:19</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Great catch.. I have found the bug in the code itself.. now I gotta fix it up.  I can't believe I've not run into this one before!.. <br />
+<br />
+I'll try and fix it up shortly.. Thanks for the info.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

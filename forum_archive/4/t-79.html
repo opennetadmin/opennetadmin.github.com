@@ -1,0 +1,44 @@
+---
+layout: oldforum_layout
+title: Random facts and comments about unix hostname - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Random facts and comments about unix hostname OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Random facts and comments about unix hostname</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">16-09-2009 17:22:32</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Below are some statements (fact or commentary) about *nix hostnames.  I have ran into various situations where these things get very confusing and I wanted to write down some of these things for later reference.  Hopefully they will be useful to others in some way.<br />
+<br />
+* 'uname -n' is derived when setting the hostname using hostname command.<br />
+* programs using uname to get name could have problems.  Depending on if you set your hostname as just the host or the FQDN causes this to be very inconsistent.<br />
+* programs should use either hostname -f or hostname -s to get short or long names<br />
+* for those commands to work you must be able to resolve your name, usually it will check /etc/hosts first then dns (can be changed using /etc/host.conf or /etc/nsswitch.conf etc)<br />
+* /etc/hostname is only used by /etc/init.d/hostname.sh (or similar bootup hostname scripts) to set the hostname on bootup.<br />
+* it seems for hostname -f/-s to work, it uses what is returned for hostname/uname -n to match the /etc/hosts or dns entry?<br />
+* /etc/hosts is formated as &lt;IP&gt; &lt;FQDN&gt; &lt;Aliases/shortname&gt;<br />
+* hostname -a only works with /etc/hostname.  at least I'm not sure how it would find an alias in DNS? maybe a cname but it cant reverse that from the fqdn<br />
+* should hostname/uname -n return FQDN or host only?  It really shouldnt matter either way, it would be your preference.  I'd recommend FQDN as it is more descriptive all around. use hostname -f/-s to give detail as needed. <br />
+<br />
+* a host name should not have dots in it.  a domain name probably will.  an fqdn will have dots in it and is the host name and the domain name together<br />
+* a host name is the first component of an FQDN up to the first dot reading from the left to the right.  a domain is the remainder of the FQDN.<br />
+* in some configurations (say, dns configuration files) you might have a need to have &quot;dotted host names&quot;.  this does not change the meaning of what a host name is, just breaks down the FQDN a bit differently due to configuration formatting.  ONA allows dotted hostnames, however I would recommend not using them if possible to keep the notion of host/domain consistent.<br />
+<br />
+* many system installers such as the debian-installer(netcfg) will configure /etc/hosts, /etc/resolv.conf, /etc/hostname and possibly others for you.  It can have an effect on how all of the above works depending on how it is implemented.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

@@ -1,0 +1,58 @@
+---
+layout: oldforum_layout
+title: build_bind and build_dhcpd - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page build_bind and build_dhcpd OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">Development</a></p>
+</div>
+
+<h1>build_bind and build_dhcpd</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">tin</p>
+		<p class="dt">26-08-2009 19:10:18</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I'm trying to get ONA set up to manage our DNS and DHCP stuff... So far it looks like the best option, and I did have a test version running before. I nuked it and started installing fresh with the latest version, but I'm completely unable to get the build_bind and build_dhcpd stuff working.<br />
+<br />
+It was working fine on the older version, but now I get &quot;ERROR =&gt; SQL query and bind variable count did not match&quot; when I run make install_modules. I can't find this error (though I only briefly looked). Is it due to the build modules no longer being compatible?<br />
+<br />
+Is there any plans to make this whole thing a bit more pleasant? Having the modules available only by email and with little info on versions, etc is a bit annoying.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">27-08-2009 09:13:38</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	The error you are getting is a known issue and that is fixed now.  It is going to be in the next release (hopefully out in the next week or so).  In the mean time you should be able to fix that error by updating the /opt/ona/www/modules/sql.inc.php file.  You can get this from the subversion repository if you wish: <a>http&#58;//opennetadmin&#46;com/repos/ONA/trunk/www/modules/sql&#46;inc&#46;php</a><br />
+<br />
+There are lots of plans on making things more pleasant.  It just takes time as I'm pretty much the only one working on the code right now.  The next release has much more work in place for the plugin system.  I am going to re-tool these config build tools at some point hopefully to be installed via the plugin install method.  It will show you versions etc for the plugins.<br />
+<br />
+As far as being available only by email, I know thats annoying and I'm still trying to work out how I want to deal with these.  Dont forget you got it free when you asked for it. <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --></a>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tin</p>
+		<p class="dt">28-08-2009 02:42:03</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Can't argue with free, hey  <!-- s:P --><img src="{SMILIES_PATH}/icon_razz.gif" alt=":P" title=":-P" /><!-- s:P --><br />
+<br />
+I'll try that out next time I'm out at the place it's for. Unfortunately I don't have any remote access to that server.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

@@ -1,0 +1,86 @@
+---
+layout: oldforum_layout
+title: New Install - Creates DB, then fails on login page. - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page New Install - Creates DB, then fails on login page. OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>New Install - Creates DB, then fails on login page.</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">ccie4526</p>
+		<p class="dt">02-07-2012 16:22:35</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Created a brand new OpenBSD 5.1 VM with Apache, MySQL 5.1.60, php 5.3.10. Then installed v11.02.10 downloaded from the site here.<br />
+Completed the initial installation successfully, then when I go to the &quot;CLICK HERE TO START&quot; page, I get the following error:<br />
+<q>Syntax error in your DB config file: /ona/www/local/config/database_settings.inc.php<br />
+Please check that it contains a valid PHP formatted array, or check that you have the php cli tools installed.<br />
+You can perform this check maually using the command 'php -l /ona/www/local/config/database_settings.inc.php'.</q><br />
+<br />
+Just to make sure I'm not smoking a green leafy substance, I review that config file... looks like it's supposed to (php header removed):<br />
+<code><br />
+$ona_contexts=array (<br />
+  'DEFAULT' =&gt;<br />
+  array (<br />
+    'databases' =&gt;<br />
+    array (<br />
+      0 =&gt;<br />
+      array (<br />
+        'db_type' =&gt; 'mysqlt',<br />
+        'db_host' =&gt; '127&#46;0&#46;0&#46;1',<br />
+        'db_login' =&gt; 'ona_sys',<br />
+        'db_passwd' =&gt; '&lt;removed&gt;',<br />
+        'db_database' =&gt; 'ona_default',<br />
+        'db_debug' =&gt; false,<br />
+      ),<br />
+    ),<br />
+    'description' =&gt; 'Default data context',<br />
+    'context_color' =&gt; '#D3DBFF',<br />
+  ),<br />
+);<br />
+</code><br />
+<br />
+So then I run the error checker as recommended:<br />
+<code>&#91;1720&#93;&#91;root@ipam&#58;/var/www/ona/www/local/config&#93;$ php -l &#46;/database_settings&#46;inc&#46;php<br />
+No syntax errors detected in &#46;/database_settings&#46;inc&#46;php<br />
+</code><br />
+<br />
+So. WTF?</code></code></q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">ccie4526</p>
+		<p class="dt">02-07-2012 16:31:02</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Interesting discovery. By default, for security, OpenBSD runs the httpd daemon in a chroot jail. When I run httpd non-chroot, then ONA works.<br />
+<br />
+Ideas on what it will take to make this work chrooted?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">02-07-2012 21:21:50</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Well this is quite interesting.  I'm not sure what the chroot jail would be doing that it would care.  Obviously the webserver user had the ability to write to the directory to create the database settings file.  That is usually the issue people have.  Beyond this its simply php code.  The php-mysql module would need to operate to talk to the database.  Its possible the error response is interpreted as a syntax error when its really just not able to contact the database.  I wonder how the jail is effecting phps ability to talk to mysql?<br />
+<br />
+hmmm.. more digging to be done.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

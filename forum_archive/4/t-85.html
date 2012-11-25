@@ -1,0 +1,213 @@
+---
+layout: oldforum_layout
+title: connect to remote database - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page connect to remote database OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>connect to remote database</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">dahlinger</p>
+		<p class="dt">30-09-2009 05:30:58</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi,<br />
+I want to install the php stuff on another server than the database.<br />
+<br />
+Is there any documentation on how to change the connect string to teh database? Is this an configuration item (including password) or do I have to change the php code?<br />
+<br />
+I am new here!<br />
+<br />
+Michael	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">30-09-2009 14:05:16</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Well the documentation on this is slim but it is an easy process.<br />
+<br />
+Simply edit the file <em>/opt/ona/www/local/config/database_settings.inc.php</em><br />
+<br />
+You can change the host, password, database name etc etc.  You can even set up a secondary database server for redundancy if you have your mysql set up to synchronize on the back end (ONS wont keep them synced).  If you only use one database server, either make both entries point to the same server or comment out the secondary section.<br />
+<br />
+The file format should be pretty self explanatory.<br />
+<br />
+When doing the initial install you should also be able to provide the same information to point it to remote database servers.  I understand that in your case however you probably started local and are now needing to move the data to another location.<br />
+<br />
+Hope that helps.  And for reference, here is what the database_settings file looks like:<br />
+<br />
+<code><br />
+&lt;?php<br />
+// Define database context names<br />
+//   The concept here is that we need multiple copies of the entire IP<br />
+//   database to support different &quot;contexts&quot;&#46;  For example - the current<br />
+//   database scheme doesn't allow a single server to have both an<br />
+//   internal and external DNS name &#46;&#46; or an IP address in two different<br />
+//   MPLS networks&#46;  By having multiple IP Database instances we can leave<br />
+//   all the code the same and simply switch the &quot;context&quot;, or database,<br />
+//   we are using&#46;<br />
+//<br />
+//   I use this array as a place to store the MySQL database info as well,<br />
+//   to keep all database connection info in one place&#46;<br />
+//<br />
+//   Note&#58; after adding a new context here you also need to add the details<br />
+//         for that new context in functions_db&#46;php as well&#46;<br />
+//   Note&#58; the context used is determined by the value of $conf&#91;'mysql_context'&#93;<br />
+//         at the time functions_db&#46;php is included&#46;<br />
+//   Note&#58; Available ADODB types&#58;<br />
+//         mysql, mysqlt, oracle, oci8, mssql, postgres, sybase, vfp, access, ibase and many others&#46;<br />
+$db_context = array (<br />
+<br />
+<br />
+    // Type&#58; -- The type should be a transactional database to support proper data rollbacks&#46;<br />
+    'mysqlt' =&gt; array(<br />
+        // Name&#58;<br />
+        'default' =&gt; array(<br />
+            'description' =&gt; 'Website metadata',<br />
+            'primary' =&gt; array(<br />
+                'db_type'     =&gt; 'mysqlt',  // using mysqlt for transaction support<br />
+                'db_host'     =&gt; 'localhost',<br />
+                'db_login'    =&gt; 'ona_sys',<br />
+                'db_passwd'   =&gt; '',<br />
+                'db_database' =&gt; 'ona',<br />
+                'db_debug'    =&gt; false,<br />
+            ),<br />
+            // You can use this to connect to a secondary server that is<br />
+            // syncronized on the back end&#46;<br />
+            'secondary' =&gt; array(<br />
+                'db_type'     =&gt; 'mysqlt',<br />
+                'db_host'     =&gt; 'localhost',<br />
+                'db_login'    =&gt; 'ona_sys',<br />
+                'db_passwd'   =&gt; '',<br />
+                'db_database' =&gt; 'ona',<br />
+                'db_debug'    =&gt; false,<br />
+            ),<br />
+        ),<br />
+    ),<br />
+);<br />
+?&gt;<br />
+</code></code></em>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">dahlinger</p>
+		<p class="dt">01-10-2009 05:23:08</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thank you very much. Now I understand.<br />
+<br />
+The problem was that I did not find the $db_context definition, because the file config/database_settings.inc.php was not yet created (did not run the run_installer, because the database was already created).<br />
+<br />
+Now I can play with the connect string. <br />
+<br />
+Do you see any problems running ona on an Oracle databse?<br />
+<br />
+I have already migrated the database to oracle. Now there are a lot of smaller errors, but apart from the check on a mysql library in the very beginning, do you completely base your application on the AdoDB model? Or are there some dirty tricks which use some mysql features directly?<br />
+<br />
+I will keep you up to date on the Oracle migration.<br />
+<br />
+Michael	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">01-10-2009 14:41:15</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	ahh yes.. the installer creates that file during install.  Glad you got that going.<br />
+<br />
+As far as running ONA with an oracle backend.  I would expect it to work.  The old original version used to run on oracle.  Since I re-wrote things I focused only on mysql since I do not have access to oracle anymore and am too lazy to set up a box for it.  ONA is using AdoDB completely (ok, mostly) so it should have no trouble with oracle.  I do expect that there will be a few issues as I may have done things that are not fully SQL generic for adodb to pass to oracle correctly?  I think those can be fixed pretty easily.  In general the core of ONA should be perfectly compatible with any database that adodb supports.  It does however require a database with transactions to function reliably. <br />
+<br />
+The installer scripts are strictly setup for mysql and would not function with other databases.  but it sounds like you manually did most of what it does anyway.<br />
+<br />
+Yes, please let me know how it goes with Oracle.  I expect it to work fine but as I said, there may be a few things to tweak.  I will help in any way I can and maybe we can get the Oracle support more directly built in.<br />
+<br />
+Thanks!	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">dahlinger</p>
+		<p class="dt">02-10-2009 01:00:50</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi,<br />
+I succeeded to connect to the Oracle database from the php Web-Interface.<br />
+<br />
+I see a lot of small issues I will try to tackle in the next days.<br />
+<br />
+Maybe you can rewrite some stuff that it will be more generic, I will send to you my corrected version if it is running.<br />
+<br />
+Michael	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">02-10-2009 07:52:17</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Good news.<br />
+<br />
+Don't hesitate to post error messages etc so I can help work through them.  As you find things I will definitely incorporate them back into the main code.  Also, I assume you used one of the mysql to oracle sql converters?  I'm just curious so that sql can be made available and maintained as part of this.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">dahlinger</p>
+		<p class="dt">06-10-2009 10:42:48</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi Matt,<br />
+I have a lot of trouble with the adodb implementation for Oracle.<br />
+<br />
+a) nrows = 1 does not work with SelectLimit. I fixed the driver<br />
+b) oci8 and ocipo driver completeley behave differently, e.g. the ADODB_ASSOC_CASE feature (switching field names to lower case) si not implemneted in oci8, whereas in ocipo the function SelectLimit does not return any data,.... I try to fix this as well.<br />
+c) I used Oracle SQLDEveloper tool (free java tool) for conversion. This worked fine and created a nice Oracle database except for columns with the following name: level, number and file are not allowed as Oracle column names.  I changed to number_, level_ and file_ and change the code.<br />
+<br />
+I still try to get the adodb stuff running, but it is a little bit painful.<br />
+<br />
+Just an intermediate status report! Michael	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">07-10-2009 08:58:34</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	hmm interesting.. I used to use the oci8 driver and didnt have problems.. that was with oracle 9i and early 10g stuff.<br />
+<br />
+One thing we might try is to upgrade adodb.. I'm currently packaging v4.96a.. they are up to 5.06 or so.  That might have some bug fixes in it that will help?<br />
+<br />
+Also the oci8po driver might be the one to use and hopefully the other things you found can be worked around.<br />
+<br />
+As far as the reserved column names, I'll see about fixing that.. it would make sense to have those be something else so it wont conflict.  <br />
+<br />
+Anyway.. just some thoughts.. I may need to get my own oracle instance to test with so I can try and help..	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

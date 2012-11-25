@@ -1,0 +1,42 @@
+---
+layout: oldforum_layout
+title: using the 'effective' (ebegin) column - possible bug? - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page using the 'effective' (ebegin) column - possible bug? OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>using the 'effective' (ebegin) column - possible bug?</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">Frank</p>
+		<p class="dt">02-02-2011 19:11:27</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I played around with the &quot;Begin&quot; feature you can use while editing DNS records. While the setting of a concrete date works as expected, the &quot;disable&quot; Button does not. The 'Effective' column is not giving any hint that a particular DNS record ist disabled. (The ebegin timestamp in the database is set to all zero though) Also, if you edit a 'disabled' record again, the disable button is not checked. So doing a save in that condition 'reenables' the record by updating ebegin to the actual timestamp.<br />
+<br />
+Am I missing something here or is this a bug? ONA Version is 10.05.27	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">02-02-2011 21:12:37</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	When digging into the situation you described, I found a few other incorrect behaviors related to ebegin... I think I have them fixed now and have checked in my changes.  More testing is in order but I was able to disable a record, future date it and change IPs around and all the values remained as I expected them to be.  You are correct that the disable button should remain  checked and not reenable the record when you edit it.<br />
+<br />
+It will be in the next release	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

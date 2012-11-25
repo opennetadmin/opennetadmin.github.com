@@ -1,0 +1,200 @@
+---
+layout: oldforum_layout
+title: problem diff'ing configs - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page problem diff'ing configs OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>problem diff'ing configs</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">17-04-2009 11:12:47</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	i've uploaded configs to a single host (3 configs to be exact)<br />
+<br />
+the upload seems to go fine<br />
+i see three configs under said host in the GUI<br />
+<br />
+i attempt to view a config or diff the configs and i get nothing.  by nothing i mean the GUI exists - theres an obvious place where the config should be shown but it is not.<br />
+<br />
+i have debug cranked up to 6 and am watching it as i make the request - but there are no errors or failures that i'm seeing.  any thoughts would be nice.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">17-04-2009 12:41:20</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hmm.. quite interesting.<br />
+<br />
+First off, I would try to do a &quot;dcm.pl -r config_display&quot; to see if the config will show up there with what you expect.<br />
+<br />
+When you have it in the GUI and you click the magnifying glass it should display the config file itself.  It should have a blue box that gives info on that configuration.  Do you see that blue box and no config? or no blue box at all either?<br />
+<br />
+Since there is no GUI (as you found based on the bug you opened) to maintain the config types, you would only have &quot;IOS_CONFIG&quot; and &quot;IOS_VERSION&quot; as an option unless you manually created your own.  Its possible when you added the configuration that there was a problem with the config type??<br />
+<br />
+I also assume that you DO see the configuration entries in the list but just nothing when you try to view/diff it?<br />
+<br />
+Nothing really solid yet to suggest other than the CLI display method.  Keep feeding me other details that you notice..	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">17-04-2009 13:33:50</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	<q cite="&amp;quot;Matt&amp;quot;:nq4wode4">Hmm.. quite interesting.<br />
+<br />
+First off, I would try to do a &quot;dcm.pl -r config_display&quot; to see if the config will show up there with what you expect.<br />
+</q><br />
+<br />
+yep sure does, here's an example :<br />
+<br />
+[tyoung@host dcm-v1.17]$ dcm.pl -r config_display config=1<br />
+Use of uninitialized value in numeric eq (==) at /usr/lib/perl5/vendor_perl/5.8.8/IO/Socket/SSL.pm line 1185.<br />
+CONFIG TEXT RECORD (1 of 1)<br />
+  id                          1<br />
+  configuration_type_id       1<br />
+  host_id                     26                  (atl.7606.1.globalinx.com)<br />
+  md5_checksum                6dbb622cdd73e9992156b04468c518de<br />
+  config_body<br />
+!<br />
+! Last configuration change at 08:41:25 EDT Thu Mar 26 2009 by tmyoungjr<br />
+! NVRAM config last updated at 08:41:27 EDT Thu Mar 26 2009 by tmyoungjr<br />
+<br />
+....cut most of config<br />
+<br />
+end<br />
+  ctime                       2009-04-17 16:36:20<br />
+  etime                       0000-00-00 00:00:00<br />
+  config_type_name            IOS_CONFIG<br />
+<br />
+<br />
+<q>When you have it in the GUI and you click the magnifying glass it should display the config file itself.  It should have a blue box that gives info on that configuration.  Do you see that blue box and no config? or no blue box at all either?<br />
+</q><br />
+<br />
+when i click that magnifying glass i get a workspace with a loading type image - that never goes away.<br />
+<br />
+<q>Since there is no GUI (as you found based on the bug you opened) to maintain the config types, you would only have &quot;IOS_CONFIG&quot; and &quot;IOS_VERSION&quot; as an option unless you manually created your own.  Its possible when you added the configuration that there was a problem with the config type??</q><br />
+<br />
+as you see above its IOS_CONFIG and in the gui list it shows the same.<br />
+<br />
+<q>I also assume that you DO see the configuration entries in the list but just nothing when you try to view/diff it?</q><br />
+<br />
+correct<br />
+<br />
+<q>Nothing really solid yet to suggest other than the CLI display method.  Keep feeding me other details that you notice..</q></q></q></q></q></q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">21-04-2009 14:00:17</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	any thoughts here matt?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">21-04-2009 14:14:40</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Not a dang clue.. been pre-occupied with some things so I've honestly not put all 5 of my brain cells on the task.<br />
+<br />
+I've been unable to recreate the same issue.  It is possible I have fixed this since my last release.  Since it has been WAY to long since I've put out a release, I plan on doing one this weekend.  Hopefully that will fix your problem.<br />
+<br />
+In the mean time, when I run into issues where there is no obvious error message on screen or in logs I will do the following.<br />
+<br />
+From a cli try to execute the code and see if there are some sort of php errors being logged.  (if you dont already have a php error log generated, it might be good to have one on but thats usually best for development work.)  In this case I would try this command:<br />
+<br />
+<code>php /opt/ona/www/winc/display_config_text&#46;inc&#46;php</code><br />
+<br />
+If it goes to a prompt then thats not the problem.. If it spits out an error, it should say the line number that has the issue.<br />
+<br />
+Lets see where that gets us.....................</code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">21-04-2009 14:20:06</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	<code>&#91;tyoung@ipplan ~&#93;$     php /opt/ona/www/winc/display_config_text&#46;inc&#46;php<br />
+PHP Notice&#58;  Undefined variable&#58; window_name in /opt/ona/www/winc/display_config_text&#46;inc&#46;php on line 6<br />
+PHP Notice&#58;  Undefined variable&#58; window_name in /opt/ona/www/winc/display_config_text&#46;inc&#46;php on line 7<br />
+PHP Notice&#58;  Undefined index&#58;  host_id in /opt/ona/www/winc/display_config_text&#46;inc&#46;php on line 7<br />
+&#91;tyoung@ipplan ~&#93;$</code><br />
+<br />
+<br />
+buncha notices.  usually not problematic - depending on when those get defined its not a big deal (usually happens after a submit button or the like).  but again it really depends on the process flow</code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">21-04-2009 14:24:31</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	hmm, no errors there.. those notices are normal.<br />
+<br />
+Not sure what the heck it is.. I'd say lets try the new release that I'm building and see if that fixes it.  If not, I'll dig in deeper.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">22-04-2009 06:24:35</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	So the updated file didn't cut it either.  I'll look forward to the next release and in the meantime keep working on a way to backup my routers automagically <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->   (at least until you release some of the fun utilities mentioned in the docs!)	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">28-04-2009 07:26:30</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	so - using the most current release from Matt,<br />
+<br />
+I can now view and diff my configs without problem.  it is possible that there were escape characters killing the config view in the current stable release version - i cannot test that at the moment.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">28-04-2009 08:42:58</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Well I have confirmed the problem is real CTRL-C characters.  Now I just need to get a workable solution.  I think I have a plan on it, just need to test.  <br />
+<br />
+Basically I'm going to store the file as is in the database.  My configs already have CTRL-M on each line so that is not an issue.  I'll just clean out the CTRL-C stuff before I try to print it via the browser.  Should fix the issue.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

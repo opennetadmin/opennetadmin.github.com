@@ -1,0 +1,224 @@
+---
+layout: oldforum_layout
+title: dcm.pl bug and possible fix. &quot; ERROR =&gt; Invalid connector UR - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page dcm.pl bug and possible fix. &quot; ERROR =&gt; Invalid connector UR OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>dcm.pl bug and possible fix. &quot; ERROR =&gt; Invalid connector UR</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">jtan163</p>
+		<p class="dt">21-06-2012 22:42:55</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi folks,<br />
+I'm new to the forums, so I hope I am not raising an issue that is well known and I hope that this is an appropriate place to report a bug - as far as I can see the general public can't raise bugs here: <!-- m --><a class="postlink" href="https://github.com/opennetadmin/ona/issues?page=1&amp;sort=updated&amp;state=open"><a href="https://github.com/opennetadmin/ona/iss">https://github.com/opennetadmin/ona/iss</a> ... state=open</a><!-- m --><br />
+<br />
+I think I have found a bug in dcm.pl and a partial/possible fix.<br />
+The bug is whenever I try and run dcm.pl  I always get: <code>ERROR =&gt; Invalid connector URL&#58; https&#58;//cesa-internal-ona&#46;icesa&#46;catholic&#46;edu&#46;au/dcm&#46;php</code>.<br />
+<br />
+<br />
+I am running OSX 10.6.8 on a MacBook<br />
+Darwin ceo09320.cenet.edu 10.8.0 Darwin Kernel Version 10.8.0: Tue Jun  7 16:33:36 PDT 2011; root:xnu-1504.15.3~1/RELEASE_I386 i386<br />
+perl -v output available at the bottom of my post.<br />
+However I do not believe the problem is unique to mac as I also get the same problem when I run the dcm.pl on the same server ONA is insalled on, which is a linux VM.<br />
+<br />
+<strong><span style="font-size:150:i5pxo4b5pt">How to Reproduce:[/size:i5pxo4b5]</b><br />
+I want to run dcm.pl on my MacBook against an install of ONA on a linux server.<br />
+First off I've downloaded<br />
+<!-- m --><a class="postlink" href="http://opennetadmin.com/docs/_media/downloads/dcm_1.19.tar.gz,to"><a href="http://opennetadmin.com/docs/_media/dow">http://opennetadmin.com/docs/_media/dow</a> ... .tar.gz,to</a><!-- m --> my MacBook  untarrted it, created /opt/ona/bin and copied dcm.pl into that dir.<br />
+<br />
+<br />
+When I run dcm.pl I always get an error like this.<br />
+<code>ceo09320&#58;&#46;dcm a1155344$ /opt/ona/bin/dcm&#46;pl -c dcm&#46;conf -r subnet_display subnet=10&#46;2&#46;25&#46;0<br />
+cat&#58; /etc/onabase&#58; No such file or directory<br />
+Jun 22 13&#58;28&#58;35 ceo09320 dcm&#46;pl&#91;6059&#93;&#58; ERROR =&gt; Invalid connector URL&#58; https&#58;//cesa-internal-ona&#46;icesa&#46;catholic&#46;edu&#46;au/dcm&#46;php<br />
+</code><br />
+<br />
+<br />
+To test the possible fix:<br />
+Copy the orignal dcm.pl aside to dcm-bad.pl and edit dcm.pl.<br />
+<code>ceo09320&#58;bin root# cp dcm&#46;pl dcm-bad&#46;pl<br />
+ceo09320&#58;bin root# vi dcm&#46;pl <br />
+</code><br />
+The edit I make to dcm.pl is to change line 1374 from this:<br />
+<code><br />
+if ($networking{'url'} !~ /(\w+)&#58;\/\/(&#91;\w&#46;&#93;+)(&#58;\d+)?(\/&#46;*$)/) {<br />
+</code><br />
+to this:<br />
+<code><br />
+if ($networking{'url'} !~ /(\w+)&#58;\/\/(\w&#46;+)(&#58;\d+)?(\/&#46;*$)/) {<br />
+</code><br />
+I.e. remove the square brackets &quot;[&quot; and &quot;]&quot;.<br />
+<br />
+Do now dcm.pl has no square brackets in line 1374 and dcm-bad.pl does have the original square brackets on line 1374.<br />
+<br />
+diff dcm.pl, which should be fixed and dcm-bad.pl which is the original version from <!-- m --><a class="postlink" href="http://opennetadmin.com/docs/_media/downloads/dcm_1.19.tar.gz"><a href="http://opennetadmin.com/docs/_media/dow">http://opennetadmin.com/docs/_media/dow</a> ... .19.tar.gz</a><!-- m -->.<br />
+<code><br />
+ceo09320&#58;bin root# diff dcm&#46;pl dcm-bad&#46;pl <br />
+1374c1374<br />
+&lt; if ($networking{'url'} !~ /(\w+)&#58;\/\/(\w&#46;+)(&#58;\d+)?(\/&#46;*$)/) {<br />
+---<br />
+&gt; if ($networking{'url'} !~ /(\w+)&#58;\/\/(&#91;\w&#46;&#93;+)(&#58;\d+)?(\/&#46;*$)/) {<br />
+ceo09320&#58;bin root#</code><br />
+<br />
+Re-run with square brackets removed and the command works.<br />
+<code>ceo09320&#58;&#46;dcm a1155344$ /opt/ona/bin/dcm&#46;pl -c dcm&#46;conf -r subnet_display subnet=10&#46;2&#46;25&#46;0<br />
+Use of uninitialized value in numeric eq (==) at /System/Library/Perl/Extras/5&#46;10&#46;0/IO/Socket/SSL&#46;pm line 1186&#46;<br />
+SUBNET RECORD<br />
+  id                          26<br />
+  subnet_type_id              7<br />
+  vlan_id                     6<br />
+  ip_addr                     10&#46;2&#46;25&#46;0<br />
+  ip_mask                     255&#46;255&#46;255&#46;0  (/24)<br />
+  name                        SERVICES<br />
+<br />
+ASSOCIATED VLAN RECORD<br />
+  id                          6<br />
+  vlan_campus_id              5<br />
+  name                        SERVICES<br />
+  number                      1025<br />
+  vlan_campus_name            EFTS<br />
+ceo09320&#58;&#46;dcm a1155344$ </code><br />
+<br />
+Conclusion the regex on line 1374 of dcm.pl is not quite right.<br />
+The square brackets around the hostname portion of the URL match regex should not be there.<br />
+<br />
+However now that dcm.pl executes, we see another bug related to SSL, which maybe is in the SSL.pm module - I have not investigated that.<br />
+<br />
+<br />
+Another test to verify the regex is broken is to take the regex and test it with a perl one liner:<br />
+<br />
+Run without the square brackets and the regex matches and we get output.<br />
+<code><br />
+ceo09320&#58;&#46;dcm a1155344$ perl -e 'if( &quot;https&#58;//cesa-dnsmgr&#46;icesa&#46;catholic&#46;edu&#46;au&#58;80/dcm&#46;php&quot; =~ m/(\w+)&#58;\/\/(\w&#46;+)(&#58;\d+)?(\/&#46;*$)/){ print &quot;1&#58; $1 2&#58; $2 3&#58;$3 4&#58; $4\n&quot;;}'<br />
+1&#58; https 2&#58; cesa-dnsmgr&#46;icesa&#46;catholic&#46;edu&#46;au&#58;80 3&#58; 4&#58; /dcm&#46;php<br />
+</code><br />
+<br />
+Run with the square brackets and the regex matches and we get no output.<br />
+<code><br />
+ceo09320&#58;&#46;dcm a1155344$ perl -e 'if( &quot;https&#58;//cesa-dnsmgr&#46;icesa&#46;catholic&#46;edu&#46;au&#58;80/dcm&#46;php&quot; =~ m/(\w+)&#58;\/\/(&#91;\w&#46;&#93;+)(&#58;\d+)?(\/&#46;*$)/){ print &quot;1&#58; $1 2&#58; $2 3&#58;$3 4&#58; $4\n&quot;;}'<br />
+</code><br />
+<br />
+Same tests again with an optional port number in the URL.<br />
+No square brackets, it runs OK:<br />
+<code><br />
+ceo09320&#58;&#46;dcm a1155344$ perl -e 'if( &quot;https&#58;//cesa-dnsmgr&#46;icesa&#46;catholic&#46;edu&#46;au/dcm&#46;php&quot; =~ m/(\w+)&#58;\/\/(\w&#46;+)(&#58;\d+)?(\/&#46;*$)/){ print &quot;1&#58; $1 2&#58; $2 3&#58;$3 4&#58; $4\n&quot;;}'<br />
+1&#58; https 2&#58; cesa-dnsmgr&#46;icesa&#46;catholic&#46;edu&#46;au 3&#58; 4&#58; /dcm&#46;php<br />
+</code><br />
+<br />
+With square brackets it fails.<br />
+<code><br />
+ceo09320&#58;&#46;dcm a1155344$ perl -e 'if( &quot;https&#58;//cesa-dnsmgr&#46;icesa&#46;catholic&#46;edu&#46;au/dcm&#46;php&quot; =~ m/(\w+)&#58;\/\/(&#91;\w&#93;&#46;+)(&#58;\d+)?(\/&#46;*$)/){ print &quot;1&#58; $1 2&#58; $2 3&#58;$3 4&#58; $4\n&quot;;}'<br />
+1&#58; https 2&#58; cesa-dnsmgr&#46;icesa&#46;catholic&#46;edu&#46;au 3&#58; 4&#58; /dcm&#46;php<br />
+ceo09320&#58;&#46;dcm a1155344$ <br />
+</code><br />
+<br />
+<br />
+<br />
+Perl info from my MacBook<br />
+<code><br />
+ceo09320&#58;bin root# perl -v;perl -V<br />
+<br />
+This is perl, v5&#46;10&#46;0 built for darwin-thread-multi-2level<br />
+(with 2 registered patches, see perl -V for more detail)<br />
+<br />
+Copyright 1987-2007, Larry Wall<br />
+<br />
+Perl may be copied only under the terms of either the Artistic License or the<br />
+GNU General Public License, which may be found in the Perl 5 source kit&#46;<br />
+<br />
+Complete documentation for Perl, including FAQ lists, should be found on<br />
+this system using &quot;man perl&quot; or &quot;perldoc perl&quot;&#46;  If you have access to the<br />
+Internet, point your browser at http&#58;//www&#46;perl&#46;org/, the Perl Home Page&#46;<br />
+<br />
+Summary of my perl5 (revision 5 version 10 subversion 0) configuration&#58;<br />
+  Platform&#58;<br />
+    osname=darwin, osvers=10&#46;0, archname=darwin-thread-multi-2level<br />
+    uname='darwin neige&#46;apple&#46;com 10&#46;0 darwin kernel version 10&#46;0&#46;0d8&#58; tue may 5 19&#58;29&#58;59 pdt 2009; root&#58;xnu-1437&#46;2~2release_i386 i386 '<br />
+    config_args='-ds -e -Dprefix=/usr -Dccflags=-g  -pipe  -Dldflags= -Dman3ext=3pm -Duseithreads -Duseshrplib -Dinc_version_list=none -Dcc=gcc-4&#46;2'<br />
+    hint=recommended, useposix=true, d_sigaction=define<br />
+    useithreads=define, usemultiplicity=define<br />
+    useperlio=define, d_sfio=undef, uselargefiles=define, usesocks=undef<br />
+    use64bitint=define, use64bitall=define, uselongdouble=undef<br />
+    usemymalloc=n, bincompat5005=undef<br />
+  Compiler&#58;<br />
+    cc='gcc-4&#46;2', ccflags ='-arch x86_64 -arch i386 -arch ppc -g -pipe -fno-common -DPERL_DARWIN -fno-strict-aliasing -I/usr/local/include',<br />
+    optimize='-Os',<br />
+    cppflags='-g -pipe -fno-common -DPERL_DARWIN -fno-strict-aliasing -I/usr/local/include'<br />
+    ccversion='', gccversion='4&#46;2&#46;1 (Apple Inc&#46; build 5646)', gccosandvers=''<br />
+    intsize=4, longsize=8, ptrsize=8, doublesize=8, byteorder=12345678<br />
+    d_longlong=define, longlongsize=8, d_longdbl=define, longdblsize=16<br />
+    ivtype='long', ivsize=8, nvtype='double', nvsize=8, Off_t='off_t', lseeksize=8<br />
+    alignbytes=8, prototype=define<br />
+  Linker and Libraries&#58;<br />
+    ld='gcc-4&#46;2 -mmacosx-version-min=10&#46;6', ldflags ='-arch x86_64 -arch i386 -arch ppc -L/usr/local/lib'<br />
+    libpth=/usr/local/lib /usr/lib<br />
+    libs=-ldbm -ldl -lm -lutil -lc<br />
+    perllibs=-ldl -lm -lutil -lc<br />
+    libc=/usr/lib/libc&#46;dylib, so=dylib, useshrplib=true, libperl=libperl&#46;dylib<br />
+    gnulibc_version=''<br />
+  Dynamic Linking&#58;<br />
+    dlsrc=dl_dlopen&#46;xs, dlext=bundle, d_dlsymun=undef, ccdlflags=' '<br />
+    cccdlflags=' ', lddlflags='-arch x86_64 -arch i386 -arch ppc -bundle -undefined dynamic_lookup -L/usr/local/lib'<br />
+<br />
+<br />
+Characteristics of this binary (from libperl)&#58; <br />
+  Compile-time options&#58; MULTIPLICITY PERL_DONT_CREATE_GVSV<br />
+                        PERL_IMPLICIT_CONTEXT PERL_MALLOC_WRAP USE_64_BIT_ALL<br />
+                        USE_64_BIT_INT USE_ITHREADS USE_LARGE_FILES<br />
+                        USE_PERLIO USE_REENTRANT_API<br />
+  Locally applied patches&#58;<br />
+	/Library/Perl/Updates/&lt;version&gt; comes before system perl directories<br />
+	installprivlib and installarchlib points to the Updates directory<br />
+  Built under darwin<br />
+  Compiled at Jun 24 2009 00&#58;35&#58;27<br />
+  @INC&#58;<br />
+    /Library/Perl/Updates/5&#46;10&#46;0<br />
+    /System/Library/Perl/5&#46;10&#46;0/darwin-thread-multi-2level<br />
+    /System/Library/Perl/5&#46;10&#46;0<br />
+    /Library/Perl/5&#46;10&#46;0/darwin-thread-multi-2level<br />
+    /Library/Perl/5&#46;10&#46;0<br />
+    /Network/Library/Perl/5&#46;10&#46;0/darwin-thread-multi-2level<br />
+    /Network/Library/Perl/5&#46;10&#46;0<br />
+    /Network/Library/Perl<br />
+    /System/Library/Perl/Extras/5&#46;10&#46;0/darwin-thread-multi-2level<br />
+    /System/Library/Perl/Extras/5&#46;10&#46;0<br />
+    &#46;<br />
+ceo09320&#58;bin root# <br />
+<br />
+</code></code></code></code></code></code></code></code></code></code></code></code></span></strong></code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">22-06-2012 14:10:16</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	First off, thank you very much for the extremely detailed description of the problem!  Makes my life much easier! <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+So far this has not been a reported issue, and I'm surprised it has not caused more people issues (including myself).  Yes, github does require an account for posting issues but thats a good thing because then you can help out with the many other projects hosted on github so I would encourage you to go ahead and set up an account there.  Anyway..........<br />
+<br />
+The issue with the regular expression syntax for testing and breaking down the URL is certainly one that needed fixing.  I found another issue with it related to defining a port number.  <br />
+<br />
+I ended up finding a much better regex definition so I have updated the code to reflect those changes.  Here is the DIFF: <!-- m --><a class="postlink" href="https://github.com/opennetadmin/dcm/commit/f994dc8512a7d5bd87305fa7ba673edbd2ecd60f#dcm.pl"><a href="https://github.com/opennetadmin/dcm/com">https://github.com/opennetadmin/dcm/com</a> ... 60f#dcm.pl</a><!-- m --><br />
+<br />
+You can download the zip/tarball from github or just use the diff to patch your own.  It should fix the issues.<br />
+<br />
+The SSL thing does seem to be specific to something on the MAC.. I get the same message.  I don't see any obvious fix for it at the moment, but I've not dug very deep on that one.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

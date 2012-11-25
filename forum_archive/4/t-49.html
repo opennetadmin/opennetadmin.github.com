@@ -1,0 +1,77 @@
+---
+layout: oldforum_layout
+title: 192.0.0.0 is a class A? - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page 192.0.0.0 is a class A? OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>192.0.0.0 is a class A?</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">yshollander</p>
+		<p class="dt">26-06-2009 07:34:34</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I'm just getting started with ONA.  Tried adding my 192.168.1.0 subnet, <br />
+<br />
+Name: 192.168.1.0<br />
+IP: 192.168.1.0<br />
+Subnet Type: LAN<br />
+Netmask: 255.255.255.0<br />
+<br />
+I'm getting the following error:<br />
+<br />
+Error =&gt; This subnet is the first in the 192.0.0.0 class A <br />
+range.  You must first create at least the following DNS <br />
+domain: 192.in-addr.arpa<br />
+<br />
+This error still occurs even after I add the DNS domain 192.168.1.in-addr.arpa.<br />
+<br />
+As I understand it, 192.168 is divided into class C networks.<br />
+<br />
+Am I missing something?  Any help would be appreciated...<br />
+<br />
+Thanks<br />
+<br />
+Isaac	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">26-06-2009 07:57:33</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	The goal of this message is to prompt the user to create a DNS PTR zone that will cover the address space that was just added.  The suggestion is that you need to add a pointer zone that is AT LEAST a class A level PTR zone.  That is the simplest way to cover the newly added subnet space as well as potentially others in the same class C.  Also it is not required to have class C or B level PTR zones that match each subnet.  It is usually easiest to just have the one zone.<br />
+<br />
+if you added the class C level PTR zone of 1.168.192.in-addr.arpa then you have completed the task for that subnet.  However since your next subnet (say 192.168.2.0/24 does not have a PTR zone that would cover it, it will prompt with the same message.  For simplicity, I'd add just 192.in-addr.arpa then that one domain will cover any subnet you add in the 198.x.x.x address space.<br />
+<br />
+This whole dialog and process is one of the less intuitive things in ONA.  The next release will change this proceedure just a bit.  It will no longer ask during the creation of a subnet, it will ask if and when a DNS PTR record is created that does not have a domain to land in.  This way those that dont care so much about DNS can avoid even creating it.<br />
+<br />
+Hope that helps.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">yshollander</p>
+		<p class="dt">26-06-2009 08:09:19</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thanks.  That worked fine.  I've got a slightly complex, though small network.  I'm looking forward to ONA simplifying my life...<br />
+<br />
+Isaac	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

@@ -1,0 +1,108 @@
+---
+layout: oldforum_layout
+title: dcm.pl host_add - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page dcm.pl host_add OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>dcm.pl host_add</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">emccormick</p>
+		<p class="dt">20-05-2009 12:51:15</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Right now I am trying things out on a test VirtualBox, but to go live I would need to be able to add several hosts.  I am trying the dcm.pl host_add, and having no luck.<br />
+<br />
+I know dcm.pl is working because I used commands like this one to add several reverse zones:<br />
+<br />
+<code>&#46;/dcm&#46;pl -l admin -p admin -r domain_add name=84&#46;10&#46;10&#46;in-addr&#46;arpa</code><br />
+<br />
+But when I try this command, I get the help info:<br />
+<br />
+<code>debian&#58;/opt/ona/bin# &#46;/dcm&#46;pl -l admin -p admin -r host_add name=10&#46;10&#46;84&#46;194&#46;example&#46;com ip=10&#46;10&#46;84&#46;194 type=12</code><br />
+<br />
+I have even added  -v -v -v to see if I could get something out of verbose responses, but it does not show me why it fails.  I have tied it with and without the domain name, assorted things in and out of quotes, with and without the optional notes and location, long version of the type, and type ID as it shows with a mouse rollover through the user interface.  Nothing made a difference.<br />
+<br />
+Because it does not actually say what part it does not like, I am not sure where to check next.  Hints, anyone?<br />
+<br />
+--Eric</code></code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">20-05-2009 13:18:39</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I believe this is a bug in some new logic I added for the GUI side of things.  I didnt do great testing on the CLI side of this and it bit me.<br />
+<br />
+I'll see what I can find on this bug.  I'm pretty sure I have an idea of what I changed that broke it.  <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+The -vvv stuff of dcm.pl is good to see how dcm.pl is working under the covers but it might be better to bump up the debug level in the system configuration settings and then watch the /var/log/ona.log file.<br />
+<br />
+I'm off to do just that................ <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">20-05-2009 13:36:01</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I did however just notice in your example that you used &quot;name=10.10.84.194.example.com&quot;.. it should be host=<br />
+<br />
+The bug I thought it might be was related to something someone else pointed out to me, but that I can not re-create.  <br />
+<br />
+Try it with host= instead of name= and we'll see if it goes.. if not.. more bug hunting.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">emccormick</p>
+		<p class="dt">20-05-2009 14:25:55</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Ah ha!  The simple solution.  Yes, after doing domain_add and vlan_campus_add I had coppied and pasted the name= key, and changing to host= fixes that.<br />
+<br />
+Too bad it does not give an error result for host missing, because that would have told me what to fix.  A host without a domain does not do the default domain, and it did warn about that after I changed name= to host=.  But a completely missing host= key is error free.<br />
+<br />
+--Eric	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">22-05-2009 17:51:34</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	FYI -- If you get the usage screen that implies you have not supplied all the required options (at least thats whats supposed to happen I may have missed this one).. I dont have the code get to the nitty gritty on telling you what specific option may be missing, it should just throw the usage messages..  I believe the exit status is non 0 on that as well.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">26-05-2009 07:21:06</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	yeah i notice that re: the usage info showin on an error.<br />
+<br />
+once i realized thats what it meant - i generally learned to look a little close for something missing <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

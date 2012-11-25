@@ -1,0 +1,56 @@
+---
+layout: oldforum_layout
+title: Error Add new host - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Error Add new host OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Error: Add new host</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">danholdridge</p>
+		<p class="dt">12-09-2011 08:08:29</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hello. I'm new to this, so I apologize if this seems trivial.<br />
+<br />
+So the problem I'm having is after adding a new host to a subnet, I can't see the new host in the list on the display page for the subnet. It looks like its trying to load, then I get a pop-up saying the server returned a 500 status.  So I checked the apache logs, and I see this error multiple times:<br />
+<br />
+PHP Warning:  fopen(/var/log/ona.log): failed to open stream: Permission denied in /var/www/ona/www/include/functions_general.inc.php on line 12<br />
+<br />
+I've checked that the log file has proper permissions to allow it to be written to. I'm not sure what is wrong.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">12-09-2011 09:01:28</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	The /var/log/ona.log file must be writable by your web server.  if a 'chmod 666 /var/log/ona.log' does not fix the problem then you may have something else in place like apparmor or some other system level restriction not allowing the file to be written to.<br />
+<br />
+You could also try changing the log path to somewhere else if you can access the system config settings in ONA.  If not it would require a SQL update directly to the sys_config table in your database.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">danholdridge</p>
+		<p class="dt">12-09-2011 09:16:53</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Looks like it's an selinux problem; I'll have to get a policy written for it.  Thanks for the help.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

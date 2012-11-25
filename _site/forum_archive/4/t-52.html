@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="AUTHOR" content="matt@opennetadmin.com">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="KEYWORDS" content="ona opennetadmin forum archive">
+    <meta name="description" content="Old OpenNetAdmin forum archive topic page ERROR -&gt; Only PTR records should use in-addr domains! Why??? OpenNetAdmin Forum Archive">
+
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>ERROR -&gt; Only PTR records should use in-addr domains! Why??? - OpenNetAdmin Forum Archive</title>
+<script type="text/javascript" src="../jquery.js"></script> <script type="text/javascript" src="../jquery.tablesorter.js"></script> <script type="text/javascript" src="../forum.js"></script>
+  </head>
+
+  <body onload="load('forum')">
+    <a id="forkme_banner" href="https://github.com/opennetadmin"></a>
+    <a id="fishes" href="http://www.christiananswers.net/gospel/home.html"><img style="opacity: 0.3;border: 0 none;" src="/images/fish.gif" height="15"></a>
+<form id="donatebutton" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <h1 id="project_title">OpenNetAdmin</h1>
+          <h2 id="project_tagline">Track. Automate. Configure.</h2>
+          <center>
+            <a class="header_link" href="/">Home</a>
+            <a class="header_link" href="/features.html">Features</a>
+            <a class="header_link" href="/community.html">Community</a>
+            <a class="header_link" href="/develop.html">Develop</a>
+          </center>
+          <section id="downloads">
+            <a class="tar_download_link" href="https://github.com/opennetadmin/ona/tarball/current">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+       <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>ERROR -&gt; Only PTR records should use in-addr domains! Why???</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">quijada</p>
+		<p class="dt">15-07-2009 04:15:04</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi, I need to add NS records to the reverse zones, in the DNS Server of my organization is done like that.<br />
+<br />
+An example can be:<br />
+<br />
+19.172.in-addr.arpa. NS unimur.um.es<br />
+<br />
+However, everytime I want to add it, ONA says that Only PTR records should use in-addr domains<br />
+<br />
+How can I solve this?<br />
+<br />
+I have just migrated all my old database (for several weeks) to ONA and I think I cannot continue with this trouble <!-- s:-( --><img src="{SMILIES_PATH}/icon_e_sad.gif" alt=":-(" title=":-(" /><!-- s:-( --><br />
+<br />
+Thank you.<br />
+<br />
+P.D.: I have tried this with dcm.pl but I get the same result.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">15-07-2009 07:42:06</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yes an NS record is required for pretty much every zone that is created.  It is not exactly obvious within ONA that the NS records are handled automatically by assigning a DNS server host to a domain.<br />
+<br />
+There are three ways to do this.  Navigate to your unimur.um.es host in ONA and then click on the DNS line of &quot;managed services on this host&quot;.  On the next screen you will assign all of the domains that this server is either a master or secondary for.  When you do this, an NS record will automatically be created for the domain.<br />
+<br />
+The second way is to navigate to the 19.172.in-addr.arpa domain and then click the &quot;assign to server&quot; button in the DNS servers box.<br />
+<br />
+The last way is via DCM using the &quot;domain_server_XXX&quot; commands.<br />
+<br />
+<br />
+Hope that helps.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">quijada</p>
+		<p class="dt">16-07-2009 05:00:39</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi Matt, if you remember, we was talking about this last night. Now, I am at work and I have just tried all ways you told me (even adding an NS server for a reverse zone in-addr... with dcm.pl) but I get the same result, only PTR records bla bla bla...<br />
+<br />
+As I told you last conversation, I have been looking for some IF condition about this issue, founding it easily. This is the change I have made in the file '/opt/ona/www/modules/ona/dns_record.inc.php', at line 173:<br />
+<br />
+if (strpos($domain['fqdn'], &quot;in-addr.arpa&quot;) and $options['type'] != 'PTR' <strong>and $options['type'] != 'NS'</b>) {<br />
+   printmsg(&quot;ERROR =&gt; Only PTR records should use in-addr.arpa domains!&quot;, 3);<br />
+   ...<br />
+   ...<br />
+}<br />
+<br />
+Of course, the new code is the bold portion.<br />
+<br />
+At the moment, this is the solution for me. I think (as you told me) that the next release will patch this.<br />
+<br />
+I hope this helps somebody too.<br />
+<br />
+Thank you for your help, Matt.</strong>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">16-07-2009 07:45:48</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yep, that is pretty much the fix that needed to happen.. I released the new version last night however so you might want to  go ahead and upgrade to it as well since it fixes that and many other things..   Thanks.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+
+
+
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2598149030041038";
+//728x90_bugsfooter
+google_ad_slot = "1568593938";
+google_ad_width = 728;
+google_ad_height = 90;
+//--></script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+    <!-- FOOTER  -->
+    <div class="outer">
+      <footer class="inner">
+          <center>
+ 
+
+
+          </center>
+      </footer>
+    </div>
+
+          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script
+%3E"));
+          </script>
+
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-361894-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
+
+

@@ -1,0 +1,80 @@
+---
+layout: oldforum_layout
+title: Database is created, but table creation fails - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Database is created, but table creation fails OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Database is created, but table creation fails</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">justinrpurdy</p>
+		<p class="dt">18-07-2012 17:26:33</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I get to this point in the installation:<br />
+<br />
+<q><ol><li>Connected to 'localhost' as 'root'.<br />
+ Dropped existing instance of 'ona_default'.<br />
+ Created new database 'ona_default'.<br />
+ Selected existing DB: 'ona_default'.<br />
+ There was an error processing tables.<br />
+You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'TYPE=INNODB DEFAULT CHARSET=utf8 DEFAULT COLLATE=utf8_general_ci' at line 8<br />
+ There was a fatal error. Install may be incomplete. Fix the issue and try again.[/list:u:tw0j5pkv]</q><br />
+<br />
+Nothing in the mysqld.log since the service started.<br />
+<br />
+Here's what I'm seeing in my Apache error_log:<br />
+<code><br />
+PHP Notice&#58;  Undefined index&#58; APACHE_RUN_USER in /opt/ona/install/install&#46;php on line 48, referer&#58; http&#58;//10&#46;10&#46;0&#46;180/ona/<br />
+PHP Notice&#58;  Undefined index&#58; APACHE_RUN_USER in /opt/ona/install/install&#46;php on line 48, referer&#58; http&#58;//10&#46;10&#46;0&#46;180/ona/<br />
+PHP Notice&#58;  Undefined variable&#58; ona_contexts in /opt/ona/install/install&#46;php on line 61, referer&#58; http&#58;//10&#46;10&#46;0&#46;180/ona/<br />
+PHP Notice&#58;  Undefined variable&#58; db_context in /opt/ona/install/install&#46;php on line 61, referer&#58; http&#58;//10&#46;10&#46;0&#46;180/ona/<br />
+PHP Notice&#58;  Undefined variable&#58; mainstyle in /opt/ona/install/install&#46;php on line 157, referer&#58; http&#58;//10&#46;10&#46;0&#46;180/ona/<br />
+PHP Notice&#58;  Undefined variable&#58; upgrade in /opt/ona/install/install&#46;php on line 214, referer&#58; http&#58;//10&#46;10&#46;0&#46;180/ona/<br />
+PHP Notice&#58;  Undefined index&#58; context_name in /opt/ona/www/include/functions_general&#46;inc&#46;php on line 146, referer&#58; http&#58;//10&#46;10&#46;0&#46;180/ona/<br />
+PHP Notice&#58;  Undefined index&#58; log_to_db in /opt/ona/www/include/functions_general&#46;inc&#46;php on line 62, referer&#58; http&#58;//10&#46;10&#46;0&#46;180/ona/<br />
+PHP Notice&#58;  Undefined index&#58; context_name in /opt/ona/www/include/functions_general&#46;inc&#46;php on line 146, referer&#58; http&#58;//10&#46;10&#46;0&#46;180/ona/<br />
+PHP Notice&#58;  Undefined index&#58; log_to_db in /opt/ona/www/include/functions_general&#46;inc&#46;php on line 62, referer&#58; http&#58;//10&#46;10&#46;0&#46;180/ona/<br />
+PHP Notice&#58;  Undefined index&#58; context_name in /opt/ona/www/include/functions_general&#46;inc&#46;php on line 146, referer&#58; http&#58;//10&#46;10&#46;0&#46;180/ona/<br />
+PHP Notice&#58;  Undefined index&#58; log_to_db in /opt/ona/www/include/functions_general&#46;inc&#46;php on line 62, referer&#58; http&#58;//10&#46;10&#46;0&#46;180/ona/<br />
+</code><br />
+<br />
+From what I can see in phpMyAdmin, the database has been created, but there are no tables.<br />
+<br />
+Prerequisite checks are all passed. <br />
+<br />
+OpenSUSE 12.1, MySQL 5.5.16-log, latest version of ONA (11.02.10) downloaded from the site today.</code></li></ol></q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">27-07-2012 12:13:33</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I think the issue are running into is the TYPE vs ENGINE syntax.  There is a note on the install page (<!-- m --><a class="postlink" href="http://opennetadmin.com/docs/installation"><a href="http://opennetadmin.com/docs/installation&lt;/a&gt;&lt;!--">http://opennetadmin.com/docs/installation</a><!--</a> m -->) that gives some instructions on how to fix that file and run the install.  The new code is fixed for this but I dont yet have a tarball release.  You can however get the latest code from the github.com/opennetadmin/ona repository which should work fine for you.  I hope to release a new tarball soon.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">justinrpurdy</p>
+		<p class="dt">31-07-2012 17:44:00</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Beautiful, that fixed it. Don't know how I didn't see that. Thanks!	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

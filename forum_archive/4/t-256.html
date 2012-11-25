@@ -1,0 +1,129 @@
+---
+layout: oldforum_layout
+title: dcm.pl and contexts - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page dcm.pl and contexts OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>dcm.pl and contexts</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">bluetesteur</p>
+		<p class="dt">20-12-2011 10:54:42</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi every body,<br />
+<br />
+first of all, thanks Matt for your very good job, ONA is so close to what we are looking to <!-- s;-) --><img src="{SMILIES_PATH}/icon_e_wink.gif" alt=";-)" title=";-)" /><!-- s;-) --><br />
+<br />
+Can any one explain how to change/switch contexts using dcm.pl tool, i think that it should be possible  because a dcm release was done for this :<br />
+##      11/17/2005 - v1.12 - Brandon Zehm<br />
+##          - Add option for displaying &amp; switching ipdb contexts<br />
+<br />
+but I don't found where and how do this switch ...<br />
+<br />
+thanks for your help.<br />
+<br />
+Sam	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">21-12-2011 23:41:47</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Glad you like it so far!<br />
+<br />
+Contexts are more of an experiment at this point (and thus, may never see light of day).  The comment you see in dcm.pl is actually very old and not quite related to the current implementation of a context.  Contexts are a method of using one ONA code base install against multiple backend database instances.  They are whole separate copies of each other at the data level.  You could use them to track overlapping sets of data or maybe something like internal/external sets of data.  There is currently no method to enable it other than manually editing the /opt/ona/www/local/config/database_settings.inc.php file to reflect the contexts.<br />
+<br />
+Also, in addition, I still have to make a few changes to dcm.pl to actually allow you to specify which context to use.  So the note you saw actually does not currently apply to things.<br />
+<br />
+SOOOOO.. long answer short, its kinda sorta there and is not a mainline feature.  so I would suggest avoiding it unless you have a serious need for it <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->..<br />
+<br />
+Here is an example database_settings file that would turn on contexts (BEWARE ALL WHO ENTER HERE!!!!):<br />
+<br />
+<code><br />
+$ona_contexts=array (<br />
+  'DEFAULT' =&gt;<br />
+  array (<br />
+    'databases' =&gt;<br />
+    array (<br />
+      0 =&gt;<br />
+      array (<br />
+        'db_type' =&gt; 'mysqlt',<br />
+        'db_host' =&gt; 'localhost',<br />
+        'db_login' =&gt; 'ona_sys',<br />
+        'db_passwd' =&gt; '',<br />
+        'db_database' =&gt; 'ona_default',<br />
+        'db_debug' =&gt; false,<br />
+      ),<br />
+    ),<br />
+    'description' =&gt; 'Default data context',<br />
+    'context_color' =&gt; '#D3DBFF',<br />
+  ),<br />
+  'EXTERNAL' =&gt;<br />
+  array (<br />
+    'databases' =&gt;<br />
+    array (<br />
+      0 =&gt;<br />
+      array (<br />
+        'db_type' =&gt; 'mysqlt',<br />
+        'db_host' =&gt; 'localhost',<br />
+        'db_login' =&gt; 'ona_sys',<br />
+        'db_passwd' =&gt; '',<br />
+        'db_database' =&gt; 'ona_external',<br />
+        'db_debug' =&gt; false,<br />
+      ),<br />
+    ),<br />
+    'description' =&gt; 'External data context',<br />
+    'context_color' =&gt; '#D3DBAA',<br />
+  ),<br />
+);<br />
+<br />
+</code></code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">bluetesteur</p>
+		<p class="dt">02-01-2012 09:56:52</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thanks Matt, for your answers.<br />
+<br />
+Contexts are really useful for me, I need to manage several customers Ip datas with overlapping.<br />
+I would use dcm.pl tool to import datas into each context, but it seems that I have to do this in one shoot by changing database_settings.inc.php for each import on each context (Am i right ?)<br />
+<br />
+Sam	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">02-01-2012 10:44:07</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yep the contexts should help you with the overlapping customer data.<br />
+<br />
+You are correct that at the current time since dcm.pl is not currently capable of switching the contexts on its own, you would have to manually do it via database_settings.inc.php.  The GUI should be updated and should allow you to switch between contexts via a dropdown in the center of the screen just below the top menu bar.<br />
+<br />
+As I said, I'm not sure how much attention over time this feature will get.  My real intention is to update the system so you can do multiple VRFs and thus track overlapping data within one database instance.  That too is one that will take a bit of time to complete.<br />
+<br />
+I'll try and get dcm.pl updated at some point tho to at least switch contexts.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

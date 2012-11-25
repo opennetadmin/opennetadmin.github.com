@@ -1,0 +1,137 @@
+---
+layout: oldforum_layout
+title: Inventory/Asset tracking (was Rack maint) - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Inventory/Asset tracking (was Rack maint) OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">Development</a></p>
+</div>
+
+<h1>Inventory/Asset tracking (was Rack maint)</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">emccormick</p>
+		<p class="dt">20-05-2009 11:12:47</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I think that inventory management is a very important part of the whole IP and device management.  Rack inventory obviously falls in that category, but why stop there?<br />
+<br />
+I recently tried out <a href="http&amp;#58;//racktables&amp;#46;org:74wli42t">Racktables</a> and I have to admit that it was very fully featured, if a bit too rack centric.  One of the issues I see with specific rack tracking is that it does not account for other locations.  Sometimes being able to specify arbitrary, non-rack areas is important.<br />
+<br />
+In my case, those arbitrary areas are towers of 30 to 200 feet in height.  They do have IP based equipment on them, and many have a rack or similar enclosure in a building at the base tied to those other devices.<br />
+<br />
+There is also the question of how it will integrate with the rest of ONA.<br />
+<br />
+One thing I do see in ONA that might cause an issue with larger installs is the device type listing.  As you begin to add more specific items to be added to racks and/or other locations, the singular list of device type will become a very, very long pull down menu.  If it were split into a first pull down for the device rolls, and a second that would then only show types that match that roll I think it would help.<br />
+<br />
+This would allow for the present database format to be expanded with all sorts of things, like cover plates, non-managed power switches, non-managed ether switches, etc. that might be found on a rack, but not in the overall IP assignment system.  Because you could create a roll of &quot;rack equipment&quot; for all your random items, they would not show up in the types list when adding a host as long as you never selected that roll.  At the same time, it would mean that if you add a computer, you would not have to see the list of your routers, switches, access points, and so on.  So the limiting selections by a role first would clean up both the adding of items to racks, and the adding of items with the add hosts system.<br />
+<br />
+--Eric</a>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">20-05-2009 13:53:48</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I do agree that inventory management is a very important thing, and that it goes hand in hand with IPAM related management.  However I do think they are very distinct things.<br />
+<br />
+With that said, I would like to see ONA grow over time to include many inventory/asset management features.  It is however not my primary goal.  The rack management thing was &quot;low hanging fruit&quot; and a module that could fairly easily be added in.   The rack management was also a very specific function to implement and it may not quite fit into your tower/non-rack situation.<br />
+<br />
+In the case of your towers, an idea for the current functionality of ONA is to use the location feature.  you could have locations defined that relate to say &quot;tower-123&quot; or &quot;tower-2z3b&quot; or whatever you want to call them.  the street address stuff may not mean as much as a true location however.  With this, hosts could be assigned to each tower and then easily be referenced later that way.  not the best thing going but it might work?<br />
+<br />
+I do agree on the device types thing.. it will most likely turn into a search as you type dropdown similar to other fields or it would have the binoculars like the subnet or location search popup.  It certainly does not scale for large organizations.<br />
+<br />
+As far as more arbitrary device types like cover plates etc.  That could prove tough.  There are some fundamental table designs that limit this type of thing as there are some requirements to have hosts/names and ips.  I think there will need to be a clear deliniation between a network device and a non network attached device (asset).  Those are the types of things I see being built as modules later on.  That way you could add them if you wanted that feature.<br />
+<br />
+This one is certainly a large topic that needs some serious scoping and planning! <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">emccormick</p>
+		<p class="dt">20-05-2009 14:38:13</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	<q cite="&amp;quot;Matt&amp;quot;:2m0q5xjq">I do agree that inventory management is a very important thing, and that it goes hand in hand with IPAM related management. However I do think they are very distinct things.</q><br />
+The issue is that they overlap a lot, just like a physical and logical network layout overlap a lot.<br />
+<br />
+<q cite="&amp;quot;Matt&amp;quot;:2m0q5xjq">In the case of your towers, an idea for the current functionality of ONA is to use the location feature. you could have locations defined that relate to say &quot;tower-123&quot; or &quot;tower-2z3b&quot; or whatever you want to call them. the street address stuff may not mean as much as a true location however. With this, hosts could be assigned to each tower and then easily be referenced later that way. not the best thing going but it might work?</q><br />
+Yes, I already had plans for something like that.  In the present solution we use we have named things, and we will use the same names.  We also have the lat. and lon. of them, and that worked with your mapping.<br />
+<br />
+<q cite="&amp;quot;Matt&amp;quot;:2m0q5xjq">I do agree on the device types thing.. it will most likely turn into a search as you type dropdown similar to other fields or it would have the binoculars like the subnet or location search popup. It certainly does not scale for large organizations.</q><br />
+Even if you are small and just have a lot of different devices it has some scale issues, but separating by roles certainly would help there.<br />
+<br />
+<q cite="&amp;quot;Matt&amp;quot;:2m0q5xjq">As far as more arbitrary device types like cover plates etc. That could prove tough. There are some fundamental table designs that limit this type of thing as there are some requirements to have hosts/names and ips. I think there will need to be a clear deliniation between a network device and a non network attached device (asset). Those are the types of things I see being built as modules later on. That way you could add them if you wanted that feature.</q><br />
+Ah, then even an un-managed switch becomes an issue.  Herm.<br />
+<br />
+Can you put the broadcast for a network on a host?  If so, you could use the broadcast for the attached network, with IP overlapping, for any switches, bridges or other ipless devices.  Then some rack specific table could be used for non-network inventory that would populate spaces on a rack.<br />
+<br />
+--Eric</q></q></q></q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">20-05-2009 21:38:51</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	<q>Ah, then even an un-managed switch becomes an issue. Herm.<br />
+<br />
+Can you put the broadcast for a network on a host? If so, you could use the broadcast for the attached network, with IP overlapping, for any switches, bridges or other ipless devices. Then some rack specific table could be used for non-network inventory that would populate spaces on a rack.<br />
+</q><br />
+<br />
+The broadcasts are not available to allocate.  when it comes down to it, any non-network asset should be managed in its own table with other attributes that are generic.  The other issue is that there are infinite numbers of attributes that could be tracked for various types of product.  A scalable way of doing this needs to be developed.  I've seen some commercial products that attempt it but end up getting very unwieldy and are hard to keep accurate since they can not be polled or audited automatically.<br />
+<br />
+Also the current rack maint stuff I have will allow you to track the existence of non network devices.  It is just done by typing in a name of the device in that position.  it is also only in the rack table and would not (yet) tie to any asset tracking tables that might come later.<br />
+<br />
+Basically asset management is something I think should be done as an adjunct to ONA, either by integration of another product or buy building specific modules that extend ONA.  The asset tracking functions are currently not on my priority list so maybe someone could take on that task that is interested?</q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">emccormick</p>
+		<p class="dt">22-05-2009 03:24:39</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	That makes sense for the rack stuff, essentally just having it be a set of text entry fields and letting the users put in what they want.  Just a quick and easy fix.<br />
+<br />
+As for the non-managed yet still network stuff, the lack of an IP still seems a bit of an issue.  Essentially this comes down to switches.  There, the important information is what is connected where.  But that can be taken care of in notes.<br />
+<br />
+As for programming, the last time I did any there was not a second + after the C. . . and if you don't see why that comment is funny, don't worry about it.<br />
+<br />
+Perhaps this sort of addition is best left to a plugin potential.  To be honest, the same may be true of the rack maintenance.  In fact, something like that could be the model plugin, as in the one where you develop how a plugin gets added in to the menu system, and so on.  That way you open the door a little wider for more people to contribute.<br />
+<br />
+--Me	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">22-05-2009 17:37:39</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	yes I would like to have a system for showing where things physically plug in.  for example, from ethernet port 1 on a host to patch panel A port 5 which exits patch panel B port 5 and then finally connects to switch on port 7.   I actually have some designs on how to do this that should work well.  It will however take a bit of time to code that one.  While I'm confident in the design on this one, it will be VERY time consuming to track these things as it is a lot of detail.  I guess whoever wants to do it can.<br />
+<br />
+I've been around long enough to know about languages with out all the ++++++ after them.. <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+You must be reading my mind.  That is actually one of the main motivations as to why I took the ideas I had in my head for the rack management stuff and worked on them.  It was just the right amount of complexity/simplicity to use as a first module to build out how they would work.   I've got plugins/modules kinda functioning as it sits now.  I need to polish that more and also figure out a nice way to install them with versioning etc.  <br />
+<br />
+This is where I should polish my PHP Class skills (which are pretty minimal at this point).	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

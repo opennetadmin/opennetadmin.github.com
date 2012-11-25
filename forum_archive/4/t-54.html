@@ -1,0 +1,70 @@
+---
+layout: oldforum_layout
+title: dns_record_add error msg fix - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page dns_record_add error msg fix OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>dns_record_add error msg fix</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">yshollander</p>
+		<p class="dt">15-07-2009 15:16:33</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Fix the incorrect literal backslash and add a \n at the end for cleanliness.<br />
+<br />
+--- dns_record.inc.php.orig     2009-07-15 17:15:14.000000000 -0400<br />
++++ dns_record.inc.php  2009-07-15 17:15:17.000000000 -0400<br />
+@@ -182,7 +182,7 @@<br />
+         list($status, $rows, $interface) = ona_find_interface($options['ip']);<br />
+         if (!$rows) {<br />
+             printmsg(&quot;ERROR =&gt; dns_record_add() Unable to find existing IP interface: {$options['ip']}&quot;,3);<br />
+-            $self['error'] = &quot;ERROR =&gt; dns_record_add() Unable to find IP interface: {$options['ip']}\\nA records must point to existing IP addresses.\\nPlease add an interface with this IP address first.&quot;;<br />
++            $self['error'] = &quot;ERROR =&gt; dns_record_add() Unable to find IP interface: {$options['ip']}\nA records must point to existing IP addresses.\\nPlease add an interface with this IP address first.\n&quot;;<br />
+             return(array(4, $self['error']));<br />
+         }	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">yshollander</p>
+		<p class="dt">15-07-2009 15:32:06</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Corrected patch.  Missed one more literal backslash.<br />
+<br />
+--- dns_record.inc.php.orig     2009-07-15 17:15:14.000000000 -0400<br />
++++ dns_record.inc.php  2009-07-15 17:30:48.000000000 -0400<br />
+@@ -182,7 +182,7 @@<br />
+         list($status, $rows, $interface) = ona_find_interface($options['ip']);<br />
+         if (!$rows) {<br />
+             printmsg(&quot;ERROR =&gt; dns_record_add() Unable to find existing IP interface: {$options['ip']}&quot;,3);<br />
+-            $self['error'] = &quot;ERROR =&gt; dns_record_add() Unable to find IP interface: {$options['ip']}\\nA records must point to existing IP addresses.\\nPlease add an interface with this IP address first.&quot;;<br />
++            $self['error'] = &quot;ERROR =&gt; dns_record_add() Unable to find IP interface: {$options['ip']}\nA records must point to existing IP addresses.\nPlease add an interface with this IP address first.\n&quot;;<br />
+             return(array(4, $self['error']));<br />
+         }	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">15-07-2009 15:35:15</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I found a few as well.. these should now be addressed.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

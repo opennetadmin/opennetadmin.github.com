@@ -1,0 +1,51 @@
+---
+layout: oldforum_layout
+title: Nagios config generation? - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Nagios config generation? OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Nagios config generation?</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">yshollander</p>
+		<p class="dt">11-06-2010 10:49:51</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Has anyone generated basic Nagios configs from the host info in the ONA DB?<br />
+<br />
+Thanks<br />
+<br />
+Isaac	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">14-06-2010 14:03:35</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I would love to have a plugin for doing this at some point.  I've not yet gotten around to building anything as it is a pretty complex set of things to enable (or at least it CAN be).<br />
+<br />
+Any ideas here would be great.<br />
+<br />
+As it stands I've got a few thoughts:<br />
+* In my environment, I use Puppet.. it has nagios config generation modules and I have the puppet external node plugin so puppet will get its info from ONA.  This needs much more work I'm sure.<br />
+* Utilize <a>http&#58;//opennetadmin&#46;com/docs/utils/template_merge</a>.  This is a tool that you could use to template your basic host/services info for a nagios config.  Then names,IP addresses etc could be pulled from ONA.  This one would not be as generic for everyone to use but I think could be made to work fairly easily.<br />
+* create tables for storing  nagios data in ONA.. this is not great as it takes time and probably wouldn't be flexible enough.<br />
+<br />
+Anyway.. I have a few ideas on it obviously but nothing remotely useable.  It certainly can be done and I hope will be done at some point.  I use Nagios regularly and would love for it to be tied to ONA!</a>	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

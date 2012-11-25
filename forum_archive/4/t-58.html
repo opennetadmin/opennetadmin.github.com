@@ -1,0 +1,62 @@
+---
+layout: oldforum_layout
+title: Excluding a host from generated DHCP config - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Excluding a host from generated DHCP config OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Excluding a host from generated DHCP config</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">yshollander</p>
+		<p class="dt">20-07-2009 15:07:20</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Is it possible to exclude individual hosts from the generated DHCP config?  Right now ONA appears to generate host sections for every device on the subnet.<br />
+<br />
+Thanks<br />
+<br />
+Isaac	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">20-07-2009 16:12:56</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	The current method it uses to select hosts for inclusion in the DHCP configuration is based on if it has a MAC address or not.  Obviously a MAC address is required for static DHCP reservations to function.<br />
+<br />
+I could look at including a &quot;exclude from DHCP&quot; type toggle but that has its drawbacks.<br />
+<br />
+I would be curious to know why you would have a host with a mac address in ONA that you would not want to serve DHCP to?  In general I make the assumption that having the info in ONA and thus DHCP would be fine, even if you dont actually configure the host to use DHCP.  It wont hurt things if it is in the config file but never used.  That way you can still track the info in ONA but you could still hard code the IP (ick!) if you wanted to.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">yshollander</p>
+		<p class="dt">20-07-2009 16:50:30</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I've got vendor black boxes, switches, routers, etc on my network, none of which depend on DHCP.  We only use DHCP for desktops/laptops/printers on the office network, and for PXE-booting servers.<br />
+<br />
+Now you could argue that the network design should segregate servers and desktops, but you've still got the other server-class devices polluting the DHCP configs.<br />
+<br />
+I realize that having the host entry in the DHCP config file is harmless, but I'm trying to prevent any sort of confusion...<br />
+<br />
+Isaac	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

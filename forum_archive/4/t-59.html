@@ -1,0 +1,92 @@
+---
+layout: oldforum_layout
+title: How to configure Host Actions URL? - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page How to configure Host Actions URL? OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>How to configure Host Actions URL?</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">krashduke</p>
+		<p class="dt">22-07-2009 04:14:38</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi,<br />
+<br />
+Does anyone know how to configure the &quot;Host Actions&quot; URLs to Cacti, Wiki, Splunk etc. for each host?<br />
+Thanks.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">22-07-2009 09:05:52</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I still have the edit configuration button in the title bar but that obviously does not do anything.  It was a good idea that will probably never happen.<br />
+<br />
+You can manually configure it via one of the two files that control its configuration:<br />
+<br />
+/opt/ona/www/workspace_plugins/builtin/host_actions/config.inc.php<br />
+and<br />
+/opt/ona/www/local/config/host_actions.config.php<br />
+<br />
+The first config file contains the default items that come with the system.  The second is the user config file that you should make changes to.  You can remove/disable a default item by re defining  it in the local config with a blank url value.<br />
+<br />
+I'll include a config file here just so everyone can see some examples of what you can do with it.<br />
+<br />
+<code><br />
+&lt;?php<br />
+// NOTE&#58; This file will be overwritten when you upgrade!!!<br />
+// You should copy this file to www/local/config/host_actions&#46;config&#46;php and make changes there<br />
+//<br />
+// This section defines host actions&#46; If you leave the url blank it will not show the option in the list<br />
+// You can use %fqdn, %ip and %loc as substitutions in the url for the host being displayed<br />
+// You can specify a tooltip title for the option, otherwise it defaults to the hostaction name &quot;Telnet&quot; &quot;Splunk&quot; etc<br />
+// These will be listed in the order specified here&#46;<br />
+// %loc = the &quot;reference&quot; value from the hosts location<br />
+// %fqdn = the fully qualified primary name of this host<br />
+// %ip = the IP address of the primary interface for this host<br />
+<br />
+<br />
+//EXAMPLE&#58;$conf&#91;$modulename&#93;&#91;'LINK_TITLE'&#93;&#91;'url'&#93; = &quot;http&#58;//something&quot;;<br />
+$conf&#91;$modulename&#93;&#91;'Splunk'&#93;&#91;'url'&#93; = &quot;https&#58;//splunk&#46;example&#46;com&#58;8001/?events/?eventspage=1&amp;num=10&amp;q=%fqdn&quot;;<br />
+$conf&#91;$modulename&#93;&#91;'Cacti Graph'&#93;&#91;'url'&#93; = &quot;https&#58;//cacti&#46;%loc&#46;example&#46;com/cacti/graph_view&#46;php?action=tree&amp;name=%fqdn&quot;; // requires patch to cacti<br />
+$conf&#91;$modulename&#93;&#91;'Wiki Page'&#93;&#91;'url'&#93; = &quot;https&#58;//wiki&#46;example&#46;com/dokuwiki/network/servers/%fqdn&quot;;<br />
+<br />
+<br />
+$conf&#91;$modulename&#93;&#91;'Splunk'&#93;&#91;'url'&#93; = &quot;&quot;;  // This line disables the first definition above<br />
+$conf&#91;$modulename&#93;&#91;'SSH'&#93;&#91;'url'&#93; = &quot;ssh&#58;//%fqdn&quot;;<br />
+$conf&#91;$modulename&#93;&#91;'Nagios'&#93;&#91;'url'&#93; = &quot;https&#58;//nagios&#46;%loc&#46;example&#46;com/nagios/cgi-bin/status&#46;cgi?host=%fqdn&amp;style=detail&quot;;<br />
+<br />
+?&gt;<br />
+<br />
+</code><br />
+<br />
+<br />
+Now that I'm getting the new plugin framework in place, I expect this will no longer come default with the system the way it does now.  It will be a plugin in the future and will not have the same configuration file location.  It will however continue to work similarly.</code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">krashduke</p>
+		<p class="dt">23-07-2009 04:12:13</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I see, thanks very much for the info.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

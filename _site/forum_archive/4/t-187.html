@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="AUTHOR" content="matt@opennetadmin.com">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="KEYWORDS" content="ona opennetadmin forum archive">
+    <meta name="description" content="Old OpenNetAdmin forum archive topic page /opt/ona/www/local/config dir writable by ''	No OpenNetAdmin Forum Archive">
+
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>/opt/ona/www/local/config dir writable by ''	No - OpenNetAdmin Forum Archive</title>
+<script type="text/javascript" src="../jquery.js"></script> <script type="text/javascript" src="../jquery.tablesorter.js"></script> <script type="text/javascript" src="../forum.js"></script>
+  </head>
+
+  <body onload="load('forum')">
+    <a id="forkme_banner" href="https://github.com/opennetadmin"></a>
+    <a id="fishes" href="http://www.christiananswers.net/gospel/home.html"><img style="opacity: 0.3;border: 0 none;" src="/images/fish.gif" height="15"></a>
+<form id="donatebutton" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <h1 id="project_title">OpenNetAdmin</h1>
+          <h2 id="project_tagline">Track. Automate. Configure.</h2>
+          <center>
+            <a class="header_link" href="/">Home</a>
+            <a class="header_link" href="/features.html">Features</a>
+            <a class="header_link" href="/community.html">Community</a>
+            <a class="header_link" href="/develop.html">Develop</a>
+          </center>
+          <section id="downloads">
+            <a class="tar_download_link" href="https://github.com/opennetadmin/ona/tarball/current">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+       <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>/opt/ona/www/local/config dir writable by '':	No</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">jnightingale</p>
+		<p class="dt">09-05-2011 12:21:17</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hello all. I am new and fairly a noob with CentOS and Linux. I am tasked with installing this OpenNetAdmin software. I have Apache running as httpd and mysql running as mysqld. When I get to the install, everything looks good on the main page exept for this: <br />
+<br />
+/opt/ona/www/local/config dir writable by '':	No<br />
+<br />
+the web user name and group is apache:apache. I have done a chown -r for this user on /opt/ona/www/local/config but still have the same issue.<br />
+<br />
+I try and keep going by entering in the mysql information then click &quot;Create My Database&quot;. When I do this, all I have is a blank screen.<br />
+<br />
+Can anyone give me a hand or some insight as to why this is happening? Much thanks.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">09-05-2011 16:47:28</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	well for some reason it would seem that your php/apache install is unable to determine the value of {$_ENV['APACHE_RUN_USER']} as it is blank in the output you showed here.<br />
+<br />
+It sounds like you have executed the proper commands but for completeness I'd say run this:<br />
+<br />
+<code><br />
+chown apache&#58;apache /opt/ona/www/local/config<br />
+</code><br />
+<br />
+if that still does not work, you could also do the following, although it is not as secure as it gives everyone full access to that directory:<br />
+<code><br />
+chmod 777 /opt/ona/www/local/config<br />
+</code><br />
+<br />
+<br />
+Basically you want your system to look something like:<br />
+<code><br />
+drwxr-xr-x  2 apache root 4096 2011-05-02 16&#58;00 config/<br />
+</code><br />
+<br />
+This all assumes &quot;apache&quot; is truly the user your web server is running as.  You could run the following to look at what user it is running as<br />
+<code><br />
+ps aux|grep http<br />
+or<br />
+ps aux|grep apache<br />
+or<br />
+ps aux|grep www<br />
+</code><br />
+<br />
+The first column should be the username that the process is running as.<br />
+<br />
+Hope that helps</code></code></code></code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">jnightingale</p>
+		<p class="dt">10-05-2011 06:59:06</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thanks for your help, I appreciate it. This is what I see and what I did. See below:<br />
+<br />
+<code><br />
+# ps aux |grep http<br />
+root      1652  0&#46;0  0&#46;4  22724  9424 ?        Ss   May09   0&#58;01 /usr/sbin/httpd<br />
+apache    1654  0&#46;0  0&#46;4  25284  8848 ?        S    May09   0&#58;00 /usr/sbin/httpd<br />
+apache    1655  0&#46;0  0&#46;4  24848  8368 ?        S    May09   0&#58;00 /usr/sbin/httpd<br />
+apache    1656  0&#46;0  0&#46;4  25284  8824 ?        S    May09   0&#58;00 /usr/sbin/httpd<br />
+apache    1657  0&#46;0  0&#46;2  22724  5468 ?        S    May09   0&#58;00 /usr/sbin/httpd<br />
+apache    1658  0&#46;0  0&#46;4  25284  8872 ?        S    May09   0&#58;00 /usr/sbin/httpd<br />
+apache    1659  0&#46;0  0&#46;2  22724  5492 ?        S    May09   0&#58;00 /usr/sbin/httpd<br />
+apache    1660  0&#46;0  0&#46;2  22724  5492 ?        S    May09   0&#58;00 /usr/sbin/httpd<br />
+apache    1661  0&#46;0  0&#46;2  22724  4824 ?        S    May09   0&#58;00 /usr/sbin/httpd<br />
+root     19977  0&#46;0  0&#46;0   4020   696 pts/1    S+   07&#58;50   0&#58;00 grep http<br />
+# ps aux |grep www<br />
+root     19997  0&#46;0  0&#46;0   4016   680 pts/1    S+   07&#58;50   0&#58;00 grep www<br />
+# ps aux |grep apache<br />
+apache    1654  0&#46;0  0&#46;4  25284  8848 ?        S    May09   0&#58;00 /usr/sbin/httpd<br />
+apache    1655  0&#46;0  0&#46;4  24848  8368 ?        S    May09   0&#58;00 /usr/sbin/httpd<br />
+apache    1656  0&#46;0  0&#46;4  25284  8824 ?        S    May09   0&#58;00 /usr/sbin/httpd<br />
+apache    1657  0&#46;0  0&#46;2  22724  5468 ?        S    May09   0&#58;00 /usr/sbin/httpd<br />
+apache    1658  0&#46;0  0&#46;4  25284  8872 ?        S    May09   0&#58;00 /usr/sbin/httpd<br />
+apache    1659  0&#46;0  0&#46;2  22724  5492 ?        S    May09   0&#58;00 /usr/sbin/httpd<br />
+apache    1660  0&#46;0  0&#46;2  22724  5492 ?        S    May09   0&#58;00 /usr/sbin/httpd<br />
+apache    1661  0&#46;0  0&#46;2  22724  4824 ?        S    May09   0&#58;00 /usr/sbin/httpd<br />
+root     20020  0&#46;0  0&#46;0   4020   696 pts/1    S+   07&#58;51   0&#58;00 grep apache<br />
+# chown apache&#58;apache /opt/ona/www/local/config<br />
+# chmod 777 /opt/ona/www/local/config<br />
+# cd /opt/ona/www/local<br />
+# ls -all<br />
+total 40<br />
+drwxrwxr-x  5 apache apache 4096 Feb 10 08&#58;38 &#46;<br />
+drwxrwxr-x 10 apache apache 4096 Feb 10 08&#58;38 &#46;&#46;<br />
+drwxrwxrwx  2 apache apache 4096 Feb 10 08&#58;38 config<br />
+drwxrwxr-x  2 apache apache 4096 Feb 10 08&#58;38 plugins<br />
+drwxrwxr-x  2 apache apache 4096 Feb 10 08&#58;38 winc<br />
+</code><br />
+<br />
+Still no change though. Any suggestions?</code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">11-05-2011 15:20:10</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	hmm.. the file permissions you have seem to be perfectly fine.<br />
+<br />
+I'm wondering if it has something to do with how your apache is configured.  Its possible its not allowing it to write to that location.  There are a few things this could be but I dont have any great suggestions there.  There is also the possibility of some php related configuration.<br />
+<br />
+The fact it is unable to do the php command &quot;is_writable('/opt/ona/www/local/config/')&quot; or find a valid answer for $_ENV['APACHE_RUN_USER'] is the underlying problem.  We might do some google searches to see if we can find why either of those two things are not working.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Treb</p>
+		<p class="dt">20-07-2011 02:22:39</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I had the exact same issue with my new install the other day on fresh x86_64 CentOS 6. All file permissions seemed OK but the installer script couldn't write to the mentioned directory.<br />
+<br />
+You need to disable the SELinux:<br />
+<br />
+Edit your <br />
+  /etc/sysconfig/selinux <br />
+<br />
+and change<br />
+  SELINUX=enforced (or whatever) into<br />
+  SELINUX=disabled<br />
+<br />
+After reboot everything works fine for me. <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+
+
+
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2598149030041038";
+//728x90_bugsfooter
+google_ad_slot = "1568593938";
+google_ad_width = 728;
+google_ad_height = 90;
+//--></script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+    <!-- FOOTER  -->
+    <div class="outer">
+      <footer class="inner">
+          <center>
+ 
+
+
+          </center>
+      </footer>
+    </div>
+
+          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script
+%3E"));
+          </script>
+
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-361894-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
+
+

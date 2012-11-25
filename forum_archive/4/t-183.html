@@ -1,0 +1,84 @@
+---
+layout: oldforum_layout
+title: force_https=1 - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page force_https=1 OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>force_https=1</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">libergr</p>
+		<p class="dt">28-03-2011 15:28:59</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hello :<br />
+<br />
+I have added the option force_https=1 from  Menu?Admin?Manage system config dialogue. Now  I can't enter the ONA because the redirection is not working. here is the error:<br />
+<br />
+This webpage is not available.<br />
+<br />
+The webpage at <!-- m --><a class="postlink" href="https://rhserver.corp.cubacel.com/ona"><a href="https://rhserver.corp.cubacel.com/ona&lt;/a&gt;&lt;!--">https://rhserver.corp.cubacel.com/ona</a><!--</a> m --> might be temporarily down or it may have moved permanently to a new web address.<br />
+<br />
+How can i fix this ?<br />
+<br />
+TIA<br />
+<br />
+Líber	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">29-03-2011 09:20:12</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Without any other changes you would have to use a SQL query to update the value to 0 for the foce_https option in the sys_config table.<br />
+<br />
+I suspect however that you do not have an HTTPS version of your site configured in apache.  Depending on how you have your system set up you would require something similar to the following.  It defines a virtual host that listens on port 443 with appropriate SSL configurations to a certificate.  Then you would include definitions that point it to the /opt/ona/www directory as its root.<br />
+<br />
+The force_https option simply just does a redirect when ONA detects someone using a non https page.  This can all be done at the apache level as well but requires that you have set up apache to serve out https pages.  You should be able to test all that out prior to using the force_https option.<br />
+<br />
+&lt;VirtualHost 10.1.1.1:443&gt;<br />
+<br />
+  # names by which this server may be known<br />
+  ServerName server.example.net<br />
+<br />
+  # enable ssl processing<br />
+  SSLEngine On<br />
+  SSLProtocol ALL<br />
+  SSLCipherSuite ALL:+TLSv1:+SSLv3:+SSLv2:+EXP<br />
+  #SSLCipherSuite ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP:+eNULL<br />
+  SSLCertificateFile    /etc/apache2/ssl/example.net.crt<br />
+  SSLCertificateKeyFile /etc/apache2/ssl/example.net.key<br />
+<br />
+  # StdEnvVars makes apache pass SSL_SESION_ID (among other things) to php<br />
+  SSLOptions +StdEnvVars<br />
+....<br />
+....<br />
+&lt;/virtualhost&gt;	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">libergr</p>
+		<p class="dt">30-03-2011 12:06:43</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thanks a lot Matt.<br />
+Liber	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

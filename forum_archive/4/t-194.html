@@ -1,0 +1,58 @@
+---
+layout: oldforum_layout
+title: BIND zone options - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page BIND zone options OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>BIND zone options</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">blakkheim.gw</p>
+		<p class="dt">09-06-2011 08:45:53</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hello,<br />
+<br />
+I'm new to ONA and I'm doing some tests to see if it fits our needs.<br />
+<br />
+I'm trying right now the <em>build_dhcpd</em> command. Is it possible ?<br />
+<br />
+Thanks for your answer.</em></em></em>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">09-06-2011 22:50:02</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	There is currently not a provision for any other zone level options like those.  <br />
+<br />
+Adding this information shouldn't be too terrible of a task however.  My thinking is to just add a new column to the domains table called zone_options.. it would just be a text box in the GUI that you would type in the direct zone file syntax that you desire for that zone.  then it simply just gets dumped in to the build_zone output when the config file builds.  It of course would require the end user to get the syntax correct but that would all get checked during the rebuild process anyway.<br />
+<br />
+So, yes it can be done but it is not implemented as of yet.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">blakkheim.gw</p>
+		<p class="dt">10-06-2011 02:29:04</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Okay, thanks for your answer.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

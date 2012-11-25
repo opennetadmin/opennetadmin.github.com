@@ -1,0 +1,74 @@
+---
+layout: oldforum_layout
+title: Authentication Plugins -- LDAP - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Authentication Plugins -- LDAP OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Authentication Plugins -- LDAP</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">26-10-2010 23:03:42</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	FYI for all.  I'm working on an authentication plugin system.  I've currently got a (mostly) working LDAP authentication plugin.  I just need to clean up the extremely messy code that it is right now but I hope to have it available in the next release.  I've been able to do testing against a Novell Edirectory and an Active directory backend.  I figure if it works with those it ought to work for most.<br />
+<br />
+The plugin system should allow for many other authentication backends to be developed as well.<br />
+<br />
+Thanks!	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">druwoldt</p>
+		<p class="dt">16-03-2011 23:20:11</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Dear Mat,<br />
+<br />
+Does it do SSL and well as plain. So 389 and 636. Also can you select the attribute you want to use for the user name within the LDAP search?<br />
+<br />
+For instance select the CN instead of the uid as the authentication name.<br />
+<br />
+Yours sincerely<br />
+<br />
+David Ruwoldt	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">17-03-2011 10:54:58</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yes, it does SSL and plain with starttls as well.  You can do ldap filters to gather user/group information and map the attributes into the proper fields as needed.  Since I dont have much in the way of documentation for it, I would refer you to the following page: <!-- m --><a class="postlink" href="http://www.dokuwiki.org/auth:ldap"><a href="http://www.dokuwiki.org/auth:ldap&lt;/a&gt;&lt;!--">http://www.dokuwiki.org/auth:ldap</a><!--</a> m -->.<br />
+<br />
+I based my code on the dokuwiki code so it works the same way.<br />
+<br />
+have a look at /opt/ona/www/config/auth_ldap.config.php for a bit more information and some examples.  Then as it says, make your changes to /opt/ona/www/local/config/auth_ldap.config.php to set up your environment.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">17-03-2011 10:58:42</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	ohh and I forgot to say that you need to change the &quot;authtype&quot; to &quot;ldap&quot; in the system configuration dialog.  This is what tells the system that it should use this ldap configuration.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

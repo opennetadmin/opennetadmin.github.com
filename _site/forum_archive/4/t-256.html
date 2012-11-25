@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="AUTHOR" content="matt@opennetadmin.com">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="KEYWORDS" content="ona opennetadmin forum archive">
+    <meta name="description" content="Old OpenNetAdmin forum archive topic page dcm.pl and contexts OpenNetAdmin Forum Archive">
+
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>dcm.pl and contexts - OpenNetAdmin Forum Archive</title>
+<script type="text/javascript" src="../jquery.js"></script> <script type="text/javascript" src="../jquery.tablesorter.js"></script> <script type="text/javascript" src="../forum.js"></script>
+  </head>
+
+  <body onload="load('forum')">
+    <a id="forkme_banner" href="https://github.com/opennetadmin"></a>
+    <a id="fishes" href="http://www.christiananswers.net/gospel/home.html"><img style="opacity: 0.3;border: 0 none;" src="/images/fish.gif" height="15"></a>
+<form id="donatebutton" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <h1 id="project_title">OpenNetAdmin</h1>
+          <h2 id="project_tagline">Track. Automate. Configure.</h2>
+          <center>
+            <a class="header_link" href="/">Home</a>
+            <a class="header_link" href="/features.html">Features</a>
+            <a class="header_link" href="/community.html">Community</a>
+            <a class="header_link" href="/develop.html">Develop</a>
+          </center>
+          <section id="downloads">
+            <a class="tar_download_link" href="https://github.com/opennetadmin/ona/tarball/current">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+       <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>dcm.pl and contexts</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">bluetesteur</p>
+		<p class="dt">20-12-2011 10:54:42</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi every body,<br />
+<br />
+first of all, thanks Matt for your very good job, ONA is so close to what we are looking to <!-- s;-) --><img src="{SMILIES_PATH}/icon_e_wink.gif" alt=";-)" title=";-)" /><!-- s;-) --><br />
+<br />
+Can any one explain how to change/switch contexts using dcm.pl tool, i think that it should be possible  because a dcm release was done for this :<br />
+##      11/17/2005 - v1.12 - Brandon Zehm<br />
+##          - Add option for displaying &amp; switching ipdb contexts<br />
+<br />
+but I don't found where and how do this switch ...<br />
+<br />
+thanks for your help.<br />
+<br />
+Sam	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">21-12-2011 23:41:47</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Glad you like it so far!<br />
+<br />
+Contexts are more of an experiment at this point (and thus, may never see light of day).  The comment you see in dcm.pl is actually very old and not quite related to the current implementation of a context.  Contexts are a method of using one ONA code base install against multiple backend database instances.  They are whole separate copies of each other at the data level.  You could use them to track overlapping sets of data or maybe something like internal/external sets of data.  There is currently no method to enable it other than manually editing the /opt/ona/www/local/config/database_settings.inc.php file to reflect the contexts.<br />
+<br />
+Also, in addition, I still have to make a few changes to dcm.pl to actually allow you to specify which context to use.  So the note you saw actually does not currently apply to things.<br />
+<br />
+SOOOOO.. long answer short, its kinda sorta there and is not a mainline feature.  so I would suggest avoiding it unless you have a serious need for it <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->..<br />
+<br />
+Here is an example database_settings file that would turn on contexts (BEWARE ALL WHO ENTER HERE!!!!):<br />
+<br />
+<code><br />
+$ona_contexts=array (<br />
+  'DEFAULT' =&gt;<br />
+  array (<br />
+    'databases' =&gt;<br />
+    array (<br />
+      0 =&gt;<br />
+      array (<br />
+        'db_type' =&gt; 'mysqlt',<br />
+        'db_host' =&gt; 'localhost',<br />
+        'db_login' =&gt; 'ona_sys',<br />
+        'db_passwd' =&gt; '',<br />
+        'db_database' =&gt; 'ona_default',<br />
+        'db_debug' =&gt; false,<br />
+      ),<br />
+    ),<br />
+    'description' =&gt; 'Default data context',<br />
+    'context_color' =&gt; '#D3DBFF',<br />
+  ),<br />
+  'EXTERNAL' =&gt;<br />
+  array (<br />
+    'databases' =&gt;<br />
+    array (<br />
+      0 =&gt;<br />
+      array (<br />
+        'db_type' =&gt; 'mysqlt',<br />
+        'db_host' =&gt; 'localhost',<br />
+        'db_login' =&gt; 'ona_sys',<br />
+        'db_passwd' =&gt; '',<br />
+        'db_database' =&gt; 'ona_external',<br />
+        'db_debug' =&gt; false,<br />
+      ),<br />
+    ),<br />
+    'description' =&gt; 'External data context',<br />
+    'context_color' =&gt; '#D3DBAA',<br />
+  ),<br />
+);<br />
+<br />
+</code></code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">bluetesteur</p>
+		<p class="dt">02-01-2012 09:56:52</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thanks Matt, for your answers.<br />
+<br />
+Contexts are really useful for me, I need to manage several customers Ip datas with overlapping.<br />
+I would use dcm.pl tool to import datas into each context, but it seems that I have to do this in one shoot by changing database_settings.inc.php for each import on each context (Am i right ?)<br />
+<br />
+Sam	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">02-01-2012 10:44:07</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yep the contexts should help you with the overlapping customer data.<br />
+<br />
+You are correct that at the current time since dcm.pl is not currently capable of switching the contexts on its own, you would have to manually do it via database_settings.inc.php.  The GUI should be updated and should allow you to switch between contexts via a dropdown in the center of the screen just below the top menu bar.<br />
+<br />
+As I said, I'm not sure how much attention over time this feature will get.  My real intention is to update the system so you can do multiple VRFs and thus track overlapping data within one database instance.  That too is one that will take a bit of time to complete.<br />
+<br />
+I'll try and get dcm.pl updated at some point tho to at least switch contexts.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+
+
+
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2598149030041038";
+//728x90_bugsfooter
+google_ad_slot = "1568593938";
+google_ad_width = 728;
+google_ad_height = 90;
+//--></script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+    <!-- FOOTER  -->
+    <div class="outer">
+      <footer class="inner">
+          <center>
+ 
+
+
+          </center>
+      </footer>
+    </div>
+
+          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script
+%3E"));
+          </script>
+
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-361894-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
+
+

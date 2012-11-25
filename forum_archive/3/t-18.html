@@ -1,0 +1,287 @@
+---
+layout: oldforum_layout
+title: Config management/archives? - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Config management/archives? OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">Development</a></p>
+</div>
+
+<h1>Config management/archives?</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">anton</p>
+		<p class="dt">30-04-2009 15:11:18</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi,<br />
+<br />
+First off, ONA is a great tool, and I can't wait to see further development. Kudos on the interface, it is functional, responsive and slick (though I too am a CLI kind of guy - function over form any day).<br />
+<br />
+I'm seeing the config management functionality in the feature list and the online demo, and posts in the forum about it (tmyoungjr mostly : ), but I don't see it available for download anywhere, either as add-on modules or in a development version? Forgive me if I'm totally missing something.. I'm itching to play with this goodness.<br />
+<br />
+So if it is available, a pointer in the right direction would be great.<br />
+<br />
+Thanks,<br />
+<br />
+Anton	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">01-05-2009 07:44:09</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	What I'm doing is :<br />
+<br />
+- obtaining my router configs manually myself.<br />
+- using dcm.pl (<!-- m --><a class="postlink" href="http://caspian.dotconf.net/menu/Software/DCM/"><a href="http://caspian.dotconf.net/menu/Software/DCM/&lt;/a&gt;&lt;!--">http://caspian.dotconf.net/menu/Software/DCM/</a><!--</a> m -->) i uploaded the files into ONA<br />
+- you'll see the configs automatically when logged in as admin (or a user with admin privileges)<br />
+<br />
+the tools that Matt has for automatically obtaining / uploading your configs aren't available yet.<br />
+<br />
+if you need assistance automating your config backup - or questions on using DCM - lemme know.  i'm learning but its pretty easy to pick up	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">anton</p>
+		<p class="dt">01-05-2009 08:02:24</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Ah, great, that's something for now. <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+I've got the dcm.pl script, I'll start playing with it.<br />
+<br />
+Thanks,<br />
+<br />
+Anton	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">01-05-2009 08:59:37</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yep, config management interface is already there and all you need is dcm.pl to load it with data.  All the other fancy config tools that are referenced I do hope to release shortly.  I've been putting some finishing touches on them and working on making them easier to install.<br />
+<br />
+Keep an eye out as I hope they will be ready shortly<br />
+<br />
+BTW, dont forget that you can store ANY text file as a config archive.   I've only used it for router/switch configs so far but you easily could define a new type and store things like apache configs or sendmail configs etc.  While there are probably lots better ways to archive those types of configs, it is still an option depending on your situation.  Just figured I'd mention this to get people thinking...........	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">anton</p>
+		<p class="dt">01-05-2009 09:36:13</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Great news, I'll definitely stay tuned for new developments/releases.<br />
+<br />
+Thanks, and keep up the good work!<br />
+<br />
+Anton	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">malion</p>
+		<p class="dt">06-04-2012 14:16:11</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Any update on this config management plugin?  Just installed it and it is really nice, would love to see the configuration management especially differences between &quot;startup and running&quot;.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">07-04-2012 21:49:25</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	If you have installed the cfg_archive plugin I just released on the github repo then you have everything you should need.<br />
+<br />
+The GUI has always had the config archive code and config diff system built into it.  You never see it however until there are configurations in the system for a given host.  The cfg_archive plugin is the toolset for gathering configs from cisco and netscreen devices (more to come) and pushing that config into the ONA database.  <br />
+<br />
+Once you have a configuration in the system you should see a config archive box on the display host screen.  You can then navigate into that and do configuration diffs etc.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">malion</p>
+		<p class="dt">08-04-2012 18:07:01</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	<q cite="&amp;quot;Matt&amp;quot;:1q0lkzbn">If you have installed the cfg_archive plugin I just released on the github repo then you have everything you should need.<br />
+<br />
+The GUI has always had the config archive code and config diff system built into it.  You never see it however until there are configurations in the system for a given host.  The cfg_archive plugin is the toolset for gathering configs from cisco and netscreen devices (more to come) and pushing that config into the ONA database.  <br />
+<br />
+Once you have a configuration in the system you should see a config archive box on the display host screen.  You can then navigate into that and do configuration diffs etc.</q><br />
+<br />
+<br />
+Thank you for the reply back I followed what you said first I got an error that dcm.pl is not installed so I installed it and the module now shows that it is enabled however I don't see it any where so that I can use it to download the configs.  Secondly after I downloaded the latest &quot;dcm....&quot; I put it under &quot;/op/ona/bin/&quot;.  I see it there I opened up the &quot;dcm.conf&quot; file and updated the following line: <strong> &quot;url                      =&gt; <!-- m --><a class="postlink" href="http://192.168.1.10/ona/dcm.php">http://192.168.1.10/ona/dcm.php</a><!-- m -->&quot;</b>.<br />
+<br />
+Also all the files under /opt/ona/bin are showing &quot;-&gt; to another directory&quot; but not these two files:<br />
+<br />
+<q>drwxr-xr-x  2 bwadmin bwadmin  4096 2012-04-08 18:57 .<br />
+drwxr-xr-x 10 bwadmin bwadmin  4096 2012-04-08 18:48 ..<br />
+lrwxrwxrwx  1 root    root       54 2012-04-08 18:57 cfg_archive -&gt; /opt/ona/www/local/plugins/cfg_archive/bin/cfg_archive<br />
+lrwxrwxrwx  1 root    root       71 2012-04-08 18:57 cfg_archive_cisco_trapscript -&gt; /opt/ona/www/local/plugins/cfg_archive/bin/cfg_archive_cisco_trapscript<br />
+lrwxrwxrwx  1 root    root       64 2012-04-08 18:57 cfg_archive_procspool -&gt; /opt/ona/www/local/plugins/cfg_archive/bin/cfg_archive_procspool<br />
+lrwxrwxrwx  1 root    root       59 2012-04-08 18:57 cisco_cfg_expect -&gt; /opt/ona/www/local/plugins/cfg_archive/bin/cisco_cfg_expect<br />
+lrwxrwxrwx  1 root    root       57 2012-04-08 18:57 cisco_cfg_snmp -&gt; /opt/ona/www/local/plugins/cfg_archive/bin/cisco_cfg_snmp<br />
+lrwxrwxrwx  1 root    root       29 2012-04-08 18:57 cisco_cmd -&gt; /opt/ona/bin/cisco_cfg_expect<br />
+-rw-r--r--  1 bwadmin bwadmin  2485 2012-04-08 18:36 dcm.conf<br />
+-rwxr-xr-x  1 bwadmin bwadmin 48655 2012-04-08 18:53 dcm.pl<br />
+-rw-r--r--  1 bwadmin bwadmin  1883 2011-05-11 11:16 INSTALL<br />
+lrwxrwxrwx  1 root    root       54 2012-04-08 18:57 juniper_cmd -&gt; /opt/ona/www/local/plugins/cfg_archive/bin/juniper_cmd<br />
+lrwxrwxrwx  1 root    root       54 2012-04-08 18:57 netscreen_cmd -&gt; /opt/ona/www/local/plugins/cfg_archive/bin/juniper_cmd<br />
+</q></q></strong></strong></q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">malion</p>
+		<p class="dt">08-04-2012 20:05:34</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Ok so looks like I have all the scripts in the right places now, just 3 questions:<br />
+<br />
+1- Still getting this error, &quot;1 ERROR =&gt; No module specified!&quot; when I am trying to access &quot;http://ip-address/ona/dcm.php&quot;<br />
+2- I'm still not seeing any box when I click on the host, so not sure how to get the config<br />
+3- I found out where to specify the enable password but where do I specify the user password if that goes in the &quot;getpw.conf&quot; file then what would be the type?<br />
+<br />
+Thank you	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">08-04-2012 21:49:48</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	1. <!-- m --><a class="postlink" href="http://ipaddress/ona/dcm.php">http://ipaddress/ona/dcm.php</a><!-- m --> is not a page that you would point your browser to.  Its showing you the message it should.  That path is used by the dcm.pl script (<!-- m --><a class="postlink" href="https://github.com/opennetadmin/dcm"><a href="https://github.com/opennetadmin/dcm&lt;/a&gt;&lt;!--">https://github.com/opennetadmin/dcm</a><!--</a> m -->).   So first you must get dcm.pl working.  When you do you should be able to type &quot;dcm.pl --list&quot; and it will give you a list of all the modules available to the CLI tool.<br />
+2. The reason you dont see the box is that you have not yet loaded any configs to the ONA database.  If you have a local copy of the file you could use the dcm command 'dcm.pl -r config_add' to add it to a host.  This would be the manual way of doing things and you should use the 'cfg_archive' command to do the actual archiving.  This script would be one that you put into a cron job, or set up to use the SNMP trap script with. There is a lot of detail here on how this script works that I still need to do proper documentation with. I'll try and get something put into the github docs on that one.  The basic flow of the cfg_archive toolset is to contact a host, run a specific command like 'show run' then take the output of that and check it against whats in the database.  If it differs, then it will load a new copy into the database.<br />
+3. You need to set the USERNAME in the cfg_archive.conf file.  It needs to be a user that is on each of your devices.  Then you must configure getpw.conf with whatever user name you use and the password value.  The type in the getpw.conf file will be the username in this case.<br />
+<br />
+I hope that helps get you a little further.  I realize this may not be clear as to what to do.  This particular process is very complex and has a lot of moving parts as well as several different ways to configure its behavior.  As I said, I'll try and write up some better documentation about how to use the system.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">malion</p>
+		<p class="dt">09-04-2012 12:36:58</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Matt than you so much for the reply ok that helped and I got every thing working, just getting an error with the &quot;cfg_archive&quot;, see below:<br />
+<br />
+<q><br />
+Apr 09 13:33:11 [ONA:cfg_archive]: DEBUG =&gt; 10.123.45.153: Using manufacturer type: cisco<br />
+Apr 09 13:33:11 [ONA:cfg_archive]: DEBUG =&gt; 10.123.45.153: 'show version' information is being downloaded...<br />
+Apr 09 13:33:11 [ONA:cfg_archive]: DEBUG =&gt; 10.123.45.153: [/opt/ona/bin/cisco_cmd -c 'show version' -h 192.168.1.10 -u test -s]<br />
+Apr 09 13:33:11 [ONA:cfg_archive]: ERROR =&gt; 10.123.45.153: There was an issue contacting 192.168.1.10.<br />
+</q><br />
+<br />
+Now when I use /opt/ona/bin/cisco_cmd -c 'show version' -h 192.168.1.10 -u test -p &quot;password&quot;, it works.  Looks like cfg_archive is not passing the password value.  I tried to define the password value in the &quot;getpw.conf&quot; as &quot;password&quot;, &quot;userpassword&quot;, &quot;PASSWORD&quot; and also put it in front of the user name after the &quot;,&quot;.</q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">malion</p>
+		<p class="dt">09-04-2012 18:26:01</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	- Ok got that part figured it out too, had to make changes to cfg_archive.conf and cfg_archive.  <br />
+-  Next I wanted to get the &quot;running-config&quot; too and I got that part working too<br />
+- Now my last issue is that rancid was not able to do either is this <strong>(I want to be able to compare the startup-config with the running-config)</b><br />
+<br />
+Any pointers you can give me?</strong>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">09-04-2012 21:45:02</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hey, awesome.. glad you got it figured out.. yep there are a lot of moving parts to get all lined up properly but the thing is pretty sweet once its all set up and working.  Especially when you set up the snmp traps so that it automatically updates itself when you do a write mem or reboot the device.<br />
+<br />
+Anyway, to your last question.  Yes you will want to use 'dcm.pl -r config_diff'.  You can compare any two arbitrary configs using that tool.  It just requires you to specify the database ID for the config archive record, which you can get from the GUI by hovering your mouse over the view config icon (magnifying glass).<br />
+<br />
+Now with that said, I just realized that the code I checked into github is old and out of date and does not actually have the config_diff module as part of it.  I'll try and get that code uploaded so you can use it soon.  Also I have plans to rework the GUI side of things a bit so you can more easily pick any two arbitrary configs to compare.  just hasn't been high on my list since the rare times I need it I just use the CLI tool.  <br />
+<br />
+Anyway, keep going and getting configs in the system.. I'll post updates on github to bring that code current shortly.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">malion</p>
+		<p class="dt">10-04-2012 06:47:55</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thank you for the reply back, yeah I was able to compare then via CLI was trying to see if I can do it via Web or kinda automate the process.  Update you mentioned will it let us compare the start and running configs via web or may be do like an email notification?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">10-04-2012 20:35:26</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	ok so I must have been too tired when I thought I didnt have the latest code on github.  Its there as expected.<br />
+<br />
+So yes my goal is to update the GUI interface to allow you to select two arbitrary configurations in the archive and compare them.  so two show runs from to different devices or a show run/show start from the same device etc.  <br />
+<br />
+The current cfg_archive script will send an email diff of any new updates it processes.  You can of course use the config_diff module to write your own email script if needed.<br />
+<br />
+I currently use this system to archive configurations on cisco IOS devices as well as Cisco UCS systems and juniper netscreen devices.  I also wrote a quick script that I put into cron to do a write mem on all my cisco devices once a day.  This ensures I've always got it saved in startup and it also ensures my config archive is fresh with any changes that may have happened.  I'll probably be adding that write mem script to the github page.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">malion</p>
+		<p class="dt">11-04-2012 08:12:18</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thank you again Matt.  Yeah that is one specific feature that I am very much interested in i.e; being able to compare the startup and running configs.  When I do it via the cli using the ID's it works great <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->.  <br />
+<br />
+Looking forward to the update, would you be ok if write a blog on some on my setup and experience with the software.  I have worked with rancid too and I like OpenNetAdmin much better as compared to that.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">11-04-2012 09:00:29</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hey great.. glad it is working out for you.  Hopefully I'll get to the GUI improvements soon <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+Sure go right ahead and do a blog post.  Send me a link to it when you are done so I can check it out.  Thanks!	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

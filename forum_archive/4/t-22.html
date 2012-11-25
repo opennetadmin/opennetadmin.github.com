@@ -1,0 +1,278 @@
+---
+layout: oldforum_layout
+title: Updating DNS records - bug? - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Updating DNS records - bug? OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Updating DNS records - bug?</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">04-05-2009 10:15:05</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Anton - mind checking this for me.<br />
+<br />
+Go to a host you had created before your upgrade.   Change its name and see if it sticks.<br />
+<br />
+i'm finding that when i go to update an A record for my pre-existing hosts - i make the update - it passes - but then the host never actually gets modified.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">anton</p>
+		<p class="dt">04-05-2009 10:49:37</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yep, I'm getting the same thing.<br />
+<br />
+Edit: to be clear, this applies only to hosts pre-existing to the upgrade like you said. Newly created hosts can be renamed with no problem.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">04-05-2009 12:09:25</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	hmmm.. I think I may know the issue here but need to get some more info from you.<br />
+<br />
+I had made some changes related to editing hosts.. they are around the following scenario.   Lets say you have a host called: host1.sub.example.com.  There are two ways to put this in the system.<br />
+<br />
+host1.sub   example.com<br />
+Or<br />
+host1    sub.example.com<br />
+<br />
+Depending on how you have created your domain structure there may be the two domains.  Now the issue is that it is trying to find the right domain to put the host into since it actually is passed in as &quot;host1.sub.example.com&quot;.. there may be a bit of strangeness lingering around on it.<br />
+<br />
+If you could, give me an example of the domains you have in your system and the hosts that are/aren't working now.   That way I can try and get a close approximation to recreate this issue with.<br />
+<br />
+thanks	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">04-05-2009 13:56:29</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	in my case :<br />
+<br />
+domain : globalinx.com<br />
+<br />
+failhosts :  external.globalinx.com / nyc.7606.1.globalinx.com (any of my other old hosts do the same)<br />
+passhosts : cosmo.globalinx.com (new host just added)	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">anton</p>
+		<p class="dt">04-05-2009 15:26:50</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	For me, most hosts are like &quot;hostname.example.com&quot;, and a few &quot;hostname.sub.example.net&quot;. I've tried a couple (not all), and it doesn't seem to make a difference (in other words, as far as I can tell I am unable to rename any hosts that existed prior to the upgrade to v9.05.02).<br />
+<br />
+Also, if this means anything, you can tell by the color-coding of the FQDN of each host which portion is part of the hostname, and which portion is part of the domain name. They all are consistent, only the first part (before the 1st dot) is the hostname, the rest is domain name.<br />
+<br />
+Does that give you something to do on? Let me know if you need more info.<br />
+<br />
+Anton	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">anton</p>
+		<p class="dt">04-05-2009 15:59:25</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Update: I found 1 old record so far that I can actually rename. There is nothing special or different about that particular one that I recognize, so I can't make much sense of it.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">04-05-2009 20:27:46</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	OK, not real sure why this would be happening off the top of my head.  So far I'm unable to re-create the issue.  If you guys could do the following it would help (hopefully).<br />
+<br />
+1. Using the wonderful new system configuration editor, set the debug level to 6<br />
+2. Edit one of the names but dont hit save yet<br />
+3. tail -f /var/log/ona.log<br />
+4. hit save in the editor and then email me the output.<br />
+<br />
+Clean up any data if needed (I promise I wont be sharing info with anyone else).  It should give me an idea of what it is or isnt doing.  <br />
+<br />
+Lets start there.. I've got other measures we can take but hopefully this will get me the info I need on what is going on.<br />
+<br />
+Thanks.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">05-05-2009 06:26:42</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	i was watching the logs prior - and nothing obvious jumped out - coming atcha	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">anton</p>
+		<p class="dt">05-05-2009 16:41:09</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I've emailed the info also.<br />
+<br />
+By the way, nice going on the System Config editor.    <!-- s8-) --><img src="{SMILIES_PATH}/icon_cool.gif" alt="8-)" title="8-)" /><!-- s8-) -->	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">07-05-2009 13:10:03</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Just cause i'm annoying any updates on this?  (its not holding me up or anything - im just bein nosy <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --> )  - shall a bug report be filed for thoroughness?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">07-05-2009 16:55:40</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	First off.. Always send me reminders and nudges to keep me going.. sometimes I loose track of conversations and things to be done.. definitely opening bug reports helps keep them in my mind (though I can forget about those too).<br />
+<br />
+Second,  the reason you've not heard much from me is that my job is taking precedence.  There has been some &quot;fun&quot; with some cisco routers and, well, its eaten every bit of time I have both in real life and to play with other things.   (ARRRG CISCO AND YOUR CRAPPY SOFTWARE!!)<br />
+<br />
+Third.  The good news is, that I have finally re-created the issue and I'm debugging it now.  Both of your loggs have helped me narrow it down.  I expect to have a fix shortly, real world permitting.<br />
+<br />
+Hope that helps! <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">07-05-2009 17:25:10</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	ok I think I got it!<br />
+<br />
+if you wanna fix right now then here is how:<br />
+<br />
+on or about line 1080 of the file /opt/ona/www/modules/ona/dns_record.inc.php you will need to add the following bold portion.<br />
+<br />
+    // Check the date formatting etc<br />
+    if (isset($options['set_ebegin'])<strong> and $options['set_ebegin'] != $dns['ebegin']</b>) {<br />
+        // format the time that was passed in for the database, leave it as 0 if they pass it as 0<br />
+        $options['set_ebegin'] = ($options['set_ebegin'] == '0' ? 0 : date('Y-m-j G:i:s',strtotime($options['set_ebegin'])) );<br />
+<br />
+It will probably be at least a week before I can do another release due to being way busy at work etc.<br />
+<br />
+The problem was that it was not updating the ebegin date when an edit happened, so it skipped over the actual record update.</strong>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">anton</p>
+		<p class="dt">07-05-2009 19:14:40</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	That seems to have done it! I've tried a couple ones that didn't work before, and a newly created one for good measure, and they're all fine now.<br />
+<br />
+ <!-- s:D --><img src="{SMILIES_PATH}/icon_e_biggrin.gif" alt=":D" title=":-D" /><!-- s:D -->   <!-- s:D --><img src="{SMILIES_PATH}/icon_e_biggrin.gif" alt=":D" title=":-D" /><!-- s:D -->  <!-- s:D --><img src="{SMILIES_PATH}/icon_e_biggrin.gif" alt=":D" title=":-D" /><!-- s:D --> <br />
+<br />
+Thanks very much, especially for doing this while very busy with work etc. (I know how that is!).<br />
+<br />
+Anton	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">07-05-2009 20:33:08</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Sweet!  Glad it worked for you.. <br />
+<br />
+Now its on to.... the next bug...... duh dun dun.......................................... <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">08-05-2009 09:36:54</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	<q cite="&amp;quot;Matt&amp;quot;:30rkqxl8">Second,  the reason you've not heard much from me is that my job is taking precedence.  There has been some &quot;fun&quot; with some cisco routers and, well, its eaten every bit of time I have both in real life and to play with other things.   (ARRRG CISCO AND YOUR CRAPPY SOFTWARE!!)<br />
+</q><br />
+<br />
+haha .. &quot;please to be upgrading your IOS - it *might* fix your problem but in all reality it'll probably just mask it and introduce a number of others!&quot;<br />
+<br />
+i prefer junipers <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+then again i'm working at a cisco shop again after a # of years doing cisco + junipers (as long as its not E-series - e-series junipers are 100x worse than any cisco out there)</q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">08-05-2009 09:41:23</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	on topic tho - that fix does work just fine for me!<br />
+<br />
+dont kill yourself getting another release out !  just get SVN working <!-- s;-) --><img src="{SMILIES_PATH}/icon_e_wink.gif" alt=";-)" title=";-)" /><!-- s;-) --><br />
+<br />
+oh and the wiki isn't editable - so we cant add docs or the like - at least i haven't figured out how to edit it yet!	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">11-05-2009 15:51:56</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I just created a section in the wiki for user contributed documentation.  It will be a place to let users put howtos, documentation, guides, etc.  And for those willing to actually write more &quot;official&quot; documentation, I'll put those pages into the real links that are used when you hit the &quot;?&quot; buttons in the app.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">15-05-2009 21:29:24</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	awesome on the wiki - ive been in dallas this week - once im back - im sure i'll make more noise here!	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

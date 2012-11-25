@@ -1,0 +1,63 @@
+---
+layout: oldforum_layout
+title: Changelog/Release Notes for V10 - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Changelog/Release Notes for V10 OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Changelog/Release Notes for V10</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">dmo</p>
+		<p class="dt">08-06-2010 03:04:10</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi Matt, <br />
+<br />
+Just saw a new release that got published. I'd like to upgrade, but no idea what new features are / stability etc. <br />
+<br />
+Is there any place we can look at the changes? <br />
+<br />
+Thanks, <br />
+<br />
+Daniel	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">09-06-2010 23:25:48</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	yea that would be a good thing if I kept better track of that!..<br />
+<br />
+The best I can offer is a link to the Subversion repository check in log.  I try to do my best at describing what I am doing.  It should give an idea of what I have done recently:<br />
+<br />
+<!-- m --><a class="postlink" href="http://opennetadmin.com/repos/ONA/?op=log&amp;rev=516&amp;sr=516&amp;er=1&amp;sc=0&amp;isdir=1&amp;max=70"><a href="http://opennetadmin.com/repos/ONA/?op=l">http://opennetadmin.com/repos/ONA/?op=l</a> ... r=1&amp;max=70</a><!-- m --><br />
+<br />
+A few things that I can think of off the top:<br />
+* new xml based installer using adodb functions<br />
+* new plugin framework so I can release more plugins<br />
+* many bug fixes.. some that are certainly worth upgrading for<br />
+* new &quot;contexts&quot; support, though not fully completed and tested.  this allows one ONA installation to control separate database contexts or copies.. that way you can track things that overlap, or have multiple development data sets but one install of the ONA code.. not useful for everyone but can be handy in some situations.<br />
+* built in nmap scanning plugin<br />
+* logger that logs to a database table that can be viewed in the GUI<br />
+* fixes for chrome web browser as well as a few other browser fixes<br />
+* disable_guest flag system setting.. that way it forces a login screen, no more default view only mode<br />
+* adding a dns_views framework.. its not complete and is disabled for now though.<br />
+<br />
+hope that helps.. lots of bug fixes for sure so its at least good for that.  I'd say the biggest thing is the new installer for contexts and the plugin framework that will be the door to a bunch of other cool plugins that are soon to be released.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

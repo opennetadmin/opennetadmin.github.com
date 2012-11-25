@@ -1,0 +1,122 @@
+---
+layout: oldforum_layout
+title: nmap_scan_cron fails - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page nmap_scan_cron fails OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>nmap_scan_cron fails</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">kaptk2</p>
+		<p class="dt">09-03-2011 14:53:53</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	When trying to test nmap_scan_cron I type /opt/ona/bin/nmap_scan_cron -l and I get back a message saying Permission denied! what is this all about and how can I fix it?<br />
+<br />
+Thanks	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">10-03-2011 09:01:15</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	This is an issue with the default behavior of DCM and how it authenticates.  There were some recent changes that locked down some security that I need to address.<br />
+<br />
+The solution is this:<br />
+1. create a user named &quot;dcm.pl&quot;, the password can be set to whatever you wish <br />
+2. If you are going to use the update option in nmap_scan then you will want to grant the dcm.pl user &quot;interface_modify&quot; permission<br />
+3. you will want to grant the ona_sql permission as well<br />
+4. optionally you can configure a .htaccess that limits the IP addresses that can use dcm.pl.  This is probably a good idea to improve security of the tool.  There is an example file located in /opt/ona/www/.htaccess.example<br />
+<br />
+I will probably create this user automatically in future releases.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">caleb99</p>
+		<p class="dt">03-06-2011 08:28:07</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	do we create this user in mysql?  could you be more specific here? I'm kind of a linux newbie.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">03-06-2011 17:27:56</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	The dcm.pl user I am speaking of is an ONA user.  You will need to create it through the GUI.<br />
+<br />
+You can click on admin -&gt; manage users and then add the new user there.  the name would be 'dcm.pl'.. then grant the ona_sql and interface_modify permissions that will allow the nmap scan process to function correctly.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">rlev</p>
+		<p class="dt">07-03-2012 12:18:32</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thread, I resurrect thee!<br />
+<br />
+We recently ran into this same issue and I finally came across this thread. Perhaps it would be a good idea to post this info on the wiki page for this plugin.<br />
+<br />
+That said, I think I am having a second issue related to this. It appears that the plugin is now running the scan on the devices already in the DB. However, if I try running the plugin script with the -n x.x.x.x/XX options, it acts like it completes fine but never creates the report in the subnets directory.<br />
+<br />
+Any ideas on that one?<br />
+<br />
+Edit: Actually, now that I have gone back and reverified...this did not resolve the issue. The script now runs without complaining about permission denied, however nothing is being updated. Nothing in the DB, none of the reports for existing subnets in the /opt/ona/www/local/nmap_scans/subnets directory, nothing at all. I also haven't been able to find any logs regarding this script other than the complaining about user info for dcm.pl in the ona.log before applying the above mentioned fix. Does the activity of the actual script get logged anywhere? It doesn't look like the script is point to any log files.<br />
+<br />
+In fact, running a tcpdump on the ONA server while attempting to run the plugin script results in absolutely no traffic whatsoever to any of the subnets that it is supposedly scanning.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tpeters</p>
+		<p class="dt">19-04-2012 08:45:12</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi,<br />
+<br />
+Did this ever get resolved as I have the same issue, nmap runs but no files are created in subnet directory <!-- s:( --><img src="{SMILIES_PATH}/icon_e_sad.gif" alt=":(" title=":-(" /><!-- s:( --><br />
+<br />
+Trev	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">19-04-2012 10:31:59</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Well this could be a few things.. lets start with some basics and see what we find.<br />
+<br />
+First off when running nmap_scan_cron you should test using the '-l' flag to list the subnets that it is going to scan.  If the list is blank then that explains much.<br />
+<br />
+One thing to note.  The default behavior is to only scan subnets that have the 'nmap_scan' custom attribute set to 'Y&quot;.  However, I'm sure many people will run it like I do in my environment.  This is to pass in the '-a' flag which inverts the logic and will scan ALL subnets in the database EXCEPT those that have 'nmap_scan' set to N.  I do it this way because I'd rather blacklist than whitelist.<br />
+<br />
+If you do an 'nmap_scan_cron -l -a' I would expect that you should get a list of subnets back?  If not then there is an issue.  If it does work then simply run 'nmap_scan_cron -a' manually or via a cron job and it hopefully will work.<br />
+<br />
+Thanks	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

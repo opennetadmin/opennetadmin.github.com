@@ -1,0 +1,85 @@
+---
+layout: oldforum_layout
+title: OLD POST Re Backups - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page OLD POST Re Backups OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>OLD POST: Re: Backups</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">01-09-2009 21:45:19</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Here was an old post about doing backups before upgrading.  <br />
+<br />
+<q>Hello                                                                                                             <br />
+<br />
+Great news, we have a new version. i would like to upgrade, i found the instructions<br />
+(<!-- m --><a class="postlink" href="http://www.opennetadmin.com/docs/installation"><a href="http://www.opennetadmin.com/docs/installation&lt;/a&gt;&lt;!--">http://www.opennetadmin.com/docs/installation</a><!--</a> m -->), but i need a full backup, to be sure.<br />
+<br />
+Somebody please write a step-by-step instruction about backup and restore.<br />
+<br />
+only thing is mysqldump, or do i need other magic?<br />
+<br />
+Thanks<br />
+Gergo <br />
+</q><br />
+<br />
+<br />
+<q>                                                                                                                     <br />
+Re: BACKUP<br />
+ At this point I personally use mysqldump to do my backups.  There are of course several ways that one could backup their database but I'll outline a few things that I would suggest.                                                                                                                                            <br />
+<br />
+There are a few basic things you can do.<br />
+<br />
+1. Full database dump of just the table schema and NO data (using root as the example user and ona as the database).  This is not super useful to most people:<br />
+<code>                                                                                                                                                        <br />
+mysqldump --single-transaction --quick --no-data -u root -p ona                                                                                                  <br />
+</code>                                                                                                                                                       <br />
+2. Just extract the data itself:                                                                                                                              <br />
+<code>                                                                                                                                                        <br />
+mysqldump --single-transaction --quick --complete-insert --no-create-info -u root -p ona                                                                         <br />
+</code>                                                                                                                                                       <br />
+3. I want everything! This option is good to make a full and complete backup that can restore 100% back to where you started.  One thing to note however is that if you have upgraded the ONA code using the install script, it could have performed database schema changes that would not remain if you restore the old schema.  Just be aware.  This is probably the safest way to go.                                     <br />
+<code>                                                                                                                                                                                                         <br />
+mysqldump --single-transaction --quick --complete-insert  -u root -p ona                                                                                                                                          <br />
+</code>                                                                                                                                                                                                        <br />
+<br />
+In all these cases you should redirect the output to a file on your hard drive.  Bottom line is that the ONA upgrade process does not handle any backups for you.  It purely gets you from version A to version B as best it can.                                                                                                                                                                                             <br />
+<br />
+You can restore the data as follows:<br />
+<code>                              <br />
+mysql -u root -p ona &lt; backup-file&#46;sql <br />
+</code>                             <br />
+<br />
+If you did a data only backup and there is data (probably corrupt???) in the database already, it must be removed first as the data only backup does not handle any drop data in it.  So you would likely get duplicate data errors if you try and load it over top of existing data.                                                                                                                                         <br />
+<br />
+Hope that helps.<br />
+</q></code></code></code></code></q></q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">dacosta</p>
+		<p class="dt">03-09-2009 09:43:23</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Check out this script. I found it very useful. it will do a daily, weekly and monthly backup of your mysqlDB.<br />
+<br />
+<!-- m --><a class="postlink" href="http://sourceforge.net/projects/automysqlbackup/"><a href="http://sourceforge.net/projects/automysqlbackup/&lt;/a&gt;&lt;!--">http://sourceforge.net/projects/automysqlbackup/</a><!--</a> m -->	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

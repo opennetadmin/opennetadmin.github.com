@@ -1,0 +1,61 @@
+---
+layout: oldforum_layout
+title: Add host with bond - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Add host with bond OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Add host with bond</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">EBAH</p>
+		<p class="dt">18-04-2012 09:24:06</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi all,<br />
+I just started to use ONA, my question is: how can I insert a host with two eth ports (eth0, eth1) with NIC bounding (bond0=eth0+eth1)?<br />
+<br />
+Let's say:<br />
+1) I insert a new host with IP Address = bond0<br />
+2) I want to add the two eth port but they only have MAC not IP ...<br />
+<br />
+Any advice?<br />
+Thank you very much,<br />
+Evan	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">19-04-2012 16:03:09</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	At this point you would just do as you say.  Create a host and add an interface with the IP address and named it bond0 and add the MAC address of bond0 to it.<br />
+<br />
+As it stands now, ONA is more IP centric so since eth0 and eth1 do not have IP addresses, you would not be able to track them.    There is also no current way that would reasonably track that eth0 and eth1 are the physicals associated with bond0.<br />
+<br />
+So I'd say, yes you can track your ip/mac for bond0 but eth0/eth1 would not be tracked unless you wanted to put that in the interface description notes manually.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">EBAH</p>
+		<p class="dt">20-04-2012 08:17:04</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thank you Matt!	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

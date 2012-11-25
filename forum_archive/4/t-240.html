@@ -1,0 +1,71 @@
+---
+layout: oldforum_layout
+title: problem with DCM - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page problem with DCM OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>problem with DCM</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">miodziarz1</p>
+		<p class="dt">23-10-2011 12:10:11</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hello,<br />
+<br />
+I want to use DCM but i get error<br />
+<br />
+dcm.pl -r subnet_add name=SHOWROUTE-10.7.7.0 ip=10.7.7.0 netmask=/24 type=LAN<br />
+cat: /etc/onabase: No such file or directory<br />
+Permission denied!<br />
+<br />
+<br />
+what is the problem	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">23-10-2011 20:56:40</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	first off you will need to set up /etc/onabase.  This file should contain the full path to your ONA install, typically /opt/ona.  This can be done with:<br />
+<br />
+echo /opt/ona &gt; /etc/onabase<br />
+<br />
+It also looks like you are having a permissions issue.  This can be fixed by specifying your username/password in the dcm.conf file or by providing it with -l &lt;username&gt; -p &lt;password&gt;	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">miodziarz1</p>
+		<p class="dt">24-10-2011 02:09:01</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	which username/password should i enter in dcm.conf ?  root? or which one	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">24-10-2011 21:33:28</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Since you are logging into the ONA system you will use a username/password from ONA.  By default the only account other than guest (who doesn't have a password) is the admin user.  The default password is admin for that user.  You can create other users as needed once you are logged into ONA as the admin user.  In the GUI go to Menu -&gt; Admin -&gt; Manage Users.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

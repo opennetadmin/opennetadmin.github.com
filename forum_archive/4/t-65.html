@@ -1,0 +1,82 @@
+---
+layout: oldforum_layout
+title: Adding remote host or CNAME - DNS import - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Adding remote host or CNAME - DNS import OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Adding remote host or CNAME - DNS import</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">sysbot</p>
+		<p class="dt">22-08-2009 12:48:51</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I'm currently working at the University campus and resources are offend share but responsibilities are not. One of the example was the need for this:<br />
+<br />
+ncmir.ucsd.edu.		3600	IN	MX	5 bigiron.ncmir.ucsd.edu.<br />
+ncmir.ucsd.edu.		3600	IN	MX	10 bigiron.ucsd.edu.<br />
+ncmir.ucsd.edu.		3600	IN	MX	50 inbound.ucsd.edu.<br />
+ncmir.ucsd.edu.		3600	IN	MX	666 spaminator.ucsd.edu.<br />
+<br />
+Since i'm responsible for ncmir.ucsd.edu and not ucsd.edu. Where you see the bigiron.ucsd.edu is out of our DNS control and I don't want to add it as an host in ONA database, as I'm not responsible for it. However, when using ONA, I'm unable to add an external MX/CNAME or A ( ncmir.ucsd.edu in MX bigiron.ucsd.edu ) record unless it &quot;exist&quot; which it will never be. What's the work around for this? Is there anyway to force ONA to add the record anyways?<br />
+<br />
+Also included here is my latest version of code for import from DNS to ONA. Basically it perform a AXFR from a certain domain and import it to ONA. It's available as-in, not responsible if you break your things with it, please read the code and comments before running it.<br />
+<br />
+You can run it like this, need two passes to complete the import (host_add and dns_record_add), by default it only display what it will do, you will need to pass this to actually import &quot;--dryrun=0&quot;:<br />
+<br />
+example:<br />
+$ perl dns2ona.pl --zone=example.com --ns=ns1.example --module=host_add<br />
+$ perl dns2ona.pl --zone=example.com --ns=ns1.example --module=dns_record_add	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">24-08-2009 17:30:57</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	First off, thanks for posting the dns2ona.pl script!  I was just about to post it from one of the old emails you sent me but this is much better. <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->  I'm sure many will benefit from this script.<br />
+<br />
+Secondly the issue of DNS records that point to or refer in some way to things outside of your control.  The bottom line is that there is (and probably will never be) a work around for this.  The table design requires a table reference to other existing A records for several  record types (NS, MX, PTR etc).   There is no real way to change this requirement without some serious table changes.<br />
+<br />
+As it stands, you will need to add an A record for each of these hosts to ONA.  While I understand that you don't control the contents of the uscd.edu domain itself it is still useful information to store in your ONA instance.  Since you will not be building DNS configuration for the uscd.edu domain it will not hurt or effect anything in that domain.  Once adding the A record (and IP address with subnet etc) you will be able to build your dns configuration as needed.<br />
+<br />
+For more conversation about this there was a similar bug report opened here: <a>http&#58;//opennetadmin&#46;com/bugs/index&#46;php?do=details&amp;task_id=34&amp;project=3</a><br />
+<br />
+<br />
+There is one workaround however that I can offer.  The reference version of the build_bind tool does not yet support this but the concept of a footer file is something I've done in the past.  Basically you keep a named-domain.com-footer file that contains a manually edited set of records that simply get appended to the named-domain.com zone file that is built from ONA.  I've not had time to get this functionality into the build process but its not all that  hard to implement.  That way for any records not yet supported by ONA (or ones you dont want to manage in the database) can still be merged to the resulting zone file that is extracted from the database.<br />
+<br />
+Hope that helps.</a>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">yshollander</p>
+		<p class="dt">25-08-2009 11:29:55</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I've done exactly that (using a footer, actually a here doc.  Something like:<br />
+<br />
+${ONABIN}/build_bind_domain domain=mydomain.com &gt; ${CFGDIR}/db.mydomain.com<br />
+cat &gt;&gt; ${CFGDIR}/db.selerityfinancial.com &lt;&lt;EOF<br />
+# put any non-ONA-controlled DNS record here...<br />
+foo IN MX 90 mail-relay.mydomain.com<br />
+bar.mydomain.com. IN CNAME server1<br />
+...<br />
+EOF	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

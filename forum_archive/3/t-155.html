@@ -1,0 +1,257 @@
+---
+layout: oldforum_layout
+title: LDAP/Active Directory authentication - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page LDAP/Active Directory authentication OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">Development</a></p>
+</div>
+
+<h1>LDAP/Active Directory authentication</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">davidb</p>
+		<p class="dt">09-05-2010 19:34:31</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I am keen to see LDAP authentication in ONA.<br />
+<br />
+I've looked at the code and found where the authentication functions are included.<br />
+<br />
+Is there any pre-release code I could take a look at?<br />
+<br />
+I was thinking of adding in options for configurable user authentication using sys_config variables(s) to define include files which would include additional function(s) for authenticating. For now, just username/password auth. Cleartext password is required however - current version generates MD5 hash into hidden form field with Javascript and uses that in call to get_authentication in winc/tooltips.inc.php. Will investigate getting it out of form field 'getpass'.<br />
+<br />
+Thanks, David.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">10-05-2010 11:36:27</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I have aways had plans on using multiple auth backends.  Sounds like this will be a good chance to dig into that a bit.  <br />
+<br />
+So far I've only had some initial thoughts and plans that never made it to code.   I had a version a long time ago that did do ldap auth but that code is crusty and not at all related anymore.  <br />
+<br />
+At this point here are some very high level thoughts on the topic:<br />
+<br />
+* I intend to do Authentication only and not Authorization via other backends.  I.E. ONA will take care of permissions etc.. other backends will do basic user/pass comparison and include &quot;group&quot; memebership only.<br />
+* I would like to implement &quot;chaining&quot;.  basically I expect it to work  such that it would use  LDAP and if it got a match great, if not it would continue into the local auth system and auth there if there is a match.  This way you could still define users outside of LDAP that relate to ONA specifically.  At this point I assume it would just be primary auth and internal only (chain of only 2  not multiple like tacacs, mysql, ldap, then local)<br />
+* backend auth will be modular such that other methods could be added easily.    Basically all modules will take user/pass and validate and if possible return an array of group memberships.<br />
+<br />
+<br />
+Thoughts?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">davidb</p>
+		<p class="dt">10-05-2010 19:38:25</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	PAM is the obvious model for functionality for pluggable authentication. NSS for user/group databases.<br />
+<br />
+<q>At this point here are some very high level thoughts on the topic:<br />
+<br />
+* I intend to do Authentication only and not Authorization via other backends. I.E. ONA will take care of permissions etc.. other backends will do basic user/pass comparison and include &quot;group&quot; memebership only.<br />
+</q><br />
+<br />
+Authentication only is a good starting point. I wouldn't even bother with groups from the directory at this stage. Really depends on how many users are going to be handled and how much change there will be ongoing in the user base.<br />
+<br />
+<q>* I would like to implement &quot;chaining&quot;. basically I expect it to work such that it would use LDAP and if it got a match great, if not it would continue into the local auth system and auth there if there is a match. This way you could still define users outside of LDAP that relate to ONA specifically. At this point I assume it would just be primary auth and internal only (chain of only 2 not multiple like tacacs, mysql, ldap, then local)<br />
+</q><br />
+<br />
+You need to be careful - chaining allows an account to effectively have 2 (or more) passwords - the LDAP one and a local one. If part of the rationale for using LDAP is to leverage accounts with forced periodic password reset, etc then an unchanging local password would break that.<br />
+<br />
+It would be good to have the option for LDAP auth to succeed or fail if user exists, and return unknown user otherwise. Unfortunately it gets a bit tricky, depending on how much access you have to the server. For example, with AD is it possible to authenticate with the UserPrincipalName (e.g. user@domain) and password for a simple succeed/fail, without disclosing existence or not of the account. Other LDAP implementations where all accounts live at one point in the tree can be worked around with a template for DN based on username (e.g. uid=%s,ou=Users, dc=...). Unless anonymous access or credentials to do an LDAP bind to search for the user account are available it is not possible to determine existence. Even then, the search required will vary - you'll typically need a search DN and attribute to search on (e.g. uid, samAccountName). If accounts are distributed around the LDAP tree there may be no choice but to do a search before an LDAP bind to check the password.<br />
+<br />
+Group membership in various LDAP implementation also varies. AD has the 'memberof' attribute in the user entry, which can usually be accessed after successful authentication. However the groups referenced are by DN, so each would need to be queried to determine the name (CN attribute typically), and then most of them will not be of interest. Other LDAP directories may have groups in a separate subtree and require a search by member.<br />
+<br />
+<q>* backend auth will be modular such that other methods could be added easily. Basically all modules will take user/pass and validate and if possible return an array of group memberships.<br />
+</q><br />
+<br />
+As above, succeed/fail/unknown would be the ideal but may not be possible, and groups may be tricky to access. Another authentication source to consider would be against a local unix account (pam_unix equivalent) - this can also be a backdoor way to access LDAP, Kerberos or other authentication, depending on how configuration of the server itself.<br />
+<br />
+One model for an initial authentication implementation would be:<br />
+* first test as local user. We can test existence for these, and could flag some accounts as directory authentication only - for example, have a special value in the hashed password database field that would prevent it from having a functional local password. If account is local and password incorrect, then fail at this point.<br />
+* for directory-based users, test multiple backends using username/password supplied.<br />
+<br />
+All of this is predicated on a local user entry existing for other details such as permissions, etc.<br />
+<br />
+Group membership testing could be implemented as a separate function, say with a function call passing user (and password) and a list of groups to then test for membership against the directory. The question is whether to sync local group membership database with the directory, or populate group membership at time of session establishment (while you still have access to the password for directory access if required). No way you want the overhead of looking that up continuously, but there is the risk that you really wanted to remove a user from a group and make that take effect immediately. If syncing, then you need to be careful to delete stale memberships. Lots of corner cases to consider. Simplest in the first instance to use groups as defined locally only.</q></q></q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Nayphee</p>
+		<p class="dt">10-01-2012 17:09:46</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	hi.<br />
+<br />
+I've managed to get LDAP authentication working, which is great.<br />
+However, I only want certain users to be able to have read write access controls in ONA, an other users to be read only.<br />
+<br />
+Is this sort of functionality going to make an appearance in future versions of ONA?<br />
+At the moment, I can't really deploy LDAP in ONA because of the aforementioned issues.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">10-01-2012 23:09:23</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I may not be understanding exactly your goal here but it should be possible to do this.<br />
+<br />
+By default users get a read only view of the data.  Once you set up LDAP you should be able to pull down the users group membership as part of the LDAP query.  So if you are part of the &quot;Netadmin&quot; group within LDAP you will need to create that group within ONA and grant it whatever read/write permissions you wish.  Users not in that group would ultimately get the default read only view.<br />
+<br />
+Once you have logged in you can click the little person icon in the top right of the screen (just left of the logout button). It should show you the groups that it sees you are a part of as well as your permissions.<br />
+<br />
+Hope that helps	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Nayphee</p>
+		<p class="dt">12-01-2012 22:21:57</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Ok, I might need a bit of handholding. I simply want an LDAP group that keeps track of who gets fill access to ONA.<br />
+<br />
+I set authtype in ONA to ldap<br />
+I created a group called &quot;ONA&quot; in and give it full permissions (ticking allt he boxes)<br />
+I created an LDAP group in ldap with the following diff:<br />
+<br />
+dn: ou=Authgroup,dc=example<br />
+objectClass: organizationalUnit<br />
+ou: Authgroup<br />
+description: Generic group organization for LDAP authorisation beyond POSIX names,groups<br />
+<br />
+# ONA, Authgroup<br />
+dn: cn=ONA,ou=Authgroup,dc=example<br />
+objectClass: groupOfNames<br />
+cn: ONA<br />
+description: ONA access group<br />
+member: cn=user,ou=People,dc=example<br />
+<br />
+in essence, I create an Authgroup ou (seperate from People and Group OUs, which hold POSIX user/group info)<br />
+Then I create an ONA cn inside that and add a posix user as a member<br />
+<br />
+Then in auth_ldap.config.php I have the following:-<br />
+<br />
+// Common settings and debugging<br />
+//$conf['auth']['ldap']['debug'] = 'true';<br />
+$conf['auth']['ldap']['version'] = '3';<br />
+$conf['auth']['ldap']['server'] = 'ldap://ldap.example:389';<br />
+<br />
+//OpenLDAP with superuser bind<br />
+$conf['auth']['ldap']['binddn'] = 'cn=Directory Manager,dc=example;<br />
+$conf['auth']['ldap']['bindpw']   = 'password';<br />
+$conf['auth']['ldap']['usertree'] = 'cn=%{user},ou=People,dc=example';<br />
+$conf['auth']['ldap']['grouptree']   = 'ou=Authgroup,dc=example';<br />
+#$conf['auth']['ldap']['groupfilter'] = '(&amp;(objectClass=posixGroup)(|(memberUid=%{dn})(memberUid=%{user})))';<br />
+<br />
+Not sure what's wrong with my config, but this isn't working. Trying to find any of the users doesn't seem to fly. Not sure why exactly.<br />
+I guess I just don't understand how a group in ONA can &quot;see&quot; it's matching group in LDAP, and how this is configured.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Nayphee</p>
+		<p class="dt">16-01-2012 18:47:47</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Is there any way that I can see that LDAP is even working?<br />
+I have the authtype set to ldap and the debug setting on... but nothing in the ona log...	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">16-01-2012 20:22:00</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	If you set debug=6 in the admin -&gt; manage system config menu it should be logging all kinds of stuff to /var/log/ona.log.. the $conf[auth][ldap][debug] just adds more to the debugging that needs to be set to level 6 in the GUI.<br />
+<br />
+Based on the ldiff info you sent I would do a config maybe something like this:<br />
+<br />
+$conf['auth']['ldap']['debug'] = 'true';<br />
+$conf['auth']['ldap']['version'] = '3';<br />
+$conf['auth']['ldap']['server'] = 'ldap://ldap.example.com:389';<br />
+<br />
+$conf['auth']['ldap']['binddn'] = 'cn=Directory Manager,dc=example;<br />
+$conf['auth']['ldap']['bindpw'] = 'password';<br />
+$conf['auth']['ldap']['usertree'] = 'cn=%{user},ou=People,dc=example';<br />
+$conf['auth']['ldap']['grouptree'] = 'ou=Authgroup,dc=example';<br />
+$conf['auth']['ldap']['groupfilter'] = '(&amp;(objectClass=groupOfNames)(|(member=%{dn})(member=%{user})))';<br />
+<br />
+I'm not super familiar with a groupofnames type and how it differs from a typical group.<br />
+<br />
+binddn and bindpw are of course just a user/password that can log in and do lookups<br />
+usertree and userfilter is where your users are listed and any filters you may want to apply<br />
+grouptree and groupfilter is where your groups are listed and any filters needed<br />
+<br />
+you may need to add $conf['auth']['ldap']['mapping']['grps'] = array('member'=&gt;'/cn=(.+?),/i');<br />
+<br />
+You should have some indication in the ona.log file when it is in debug either positively or negatively.  I would still also recommend looking at <!-- m --><a class="postlink" href="http://www.dokuwiki.org/auth:ldap"><a href="http://www.dokuwiki.org/auth:ldap&lt;/a&gt;&lt;!--">http://www.dokuwiki.org/auth:ldap</a><!--</a> m --> if you have not already as it is the foundation of my auth module.  maybe this too would have useful info:<br />
+<!-- m --><a class="postlink" href="http://forum.dokuwiki.org/forum.php?req=search&amp;Query=auth%3Aldap&amp;ResultView=2&amp;InSubject=1&amp;InMessage=1&amp;Sort=2&amp;DateFrom=&amp;DateUntil=&amp;Forum=0"><a href="http://forum.dokuwiki.org/forum.php?req">http://forum.dokuwiki.org/forum.php?req</a> ... l=&amp;Forum=0</a><!-- m -->	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Nayphee</p>
+		<p class="dt">17-01-2012 17:51:28</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thanks.<br />
+<br />
+I think I've managed to sort it out.<br />
+<br />
+In our LDAP we have &quot;People&quot; and &quot;Group&quot; OUs for posix user and posix group information. Our members are registered by uid with objectclass &quot;posixAccount&quot; (standard for unix logins with ldap) in the People OU. Our users are in the LDAP format:<br />
+<br />
+dn: uid=testuser,ou=People,dc=domain,dc=com <br />
+uid: testuser<br />
+objectClass: posixAccount<br />
+<br />
+To match ONA login groups with an LDAP group, the following LDAP group syntax works:<br />
+<br />
+dn: cn=ONAgroup,ou=Group,dc=domain,dc=com<br />
+objectClass: posixGroup<br />
+objectClass: top<br />
+cn: ONAgroup<br />
+gidNumber: {gid of &quot;ONAgroup&quot;}<br />
+memberUid: {uid of ldap entry of member login in &quot;People&quot; ou}<br />
+memberUid: {another uid of member in the group}<br />
+memberUid: testuser<br />
+<br />
+in auth_ldap.config.php, I have not changed much. <br />
+usertree points at ou=People<br />
+grouptree points at ou=Group<br />
+I modified one line to enable ldap from ONA to recognise People uids:<br />
+$conf['auth']['ldap']['usertree'] = 'uid=%{user},ou=People,dc=domain...... etc<br />
+<br />
+The set up can then be tested by logging into ONA with an ldap account (such as &quot;testuser&quot; in the example above), and clicking the small &quot;user&quot; icon next to the &quot;log out door&quot; icon to bring up the &quot;User Info&quot; tab. The Username of your LDAP user is displayed as well as which groups that user belongs to, and the permissions. If the ldap created &quot;ONAgroup&quot; has been set up properly to include this user within your LDAP, &quot;Groups: ONAgroup&quot; should be seen... and if that is seen, so far so good.<br />
+<br />
+You can then actually create the &quot;ONAgroup&quot; within ONA through Menu-&gt; Admin -&gt; Manage Groups, and then grant it all the permissions you want for that group. Spelling of the group will have to match of course.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

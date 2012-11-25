@@ -1,0 +1,72 @@
+---
+layout: oldforum_layout
+title: annoying perl error on every invocation of dcm.pl - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page annoying perl error on every invocation of dcm.pl OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>annoying perl error on every invocation of dcm.pl</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">yshollander</p>
+		<p class="dt">15-07-2009 15:21:10</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	# /opt/ona/bin/dcm.pl -l admin -p admin -r interface_add ip=192.168.1.220 host=jc1-dhcp20.mydomain.com<br />
+Use of uninitialized value in numeric eq (==) at /usr/lib/perl5/vendor_perl/5.8.8/IO/Socket/SSL.pm line 1185.<br />
+...<br />
+[ rest of output ]<br />
+<br />
+I tried explicitly disabling ssl in dcm.pl and dcm.conf, but no dice.<br />
+<br />
+Any ideas?<br />
+<br />
+Thanks<br />
+<br />
+Isaac	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">15-07-2009 16:04:12</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	yep I have gotten this error as well.  I need to release an updated version of dcm.pl that fixes a few things.. In the mean time, anyone that gets this can do the following:<br />
+<br />
+1. remove -w from the first line.<br />
+2. add &quot;use warnings;&quot; just below the use strict; line<br />
+<br />
+<br />
+here is a diff:<br />
+<br />
+Index: dcm.pl<br />
+===================================================================<br />
+--- dcm.pl      (revision 35)<br />
++++ dcm.pl      (working copy)<br />
+@@ -1,4 +1,4 @@<br />
+-#!/usr/bin/perl -w<br />
++#!/usr/bin/perl<br />
+ ##############################################################################<br />
+ ## dcm.pl<br />
+ ## Written by: Brandon Zehm &lt;caspian@dotconf.net&gt;<br />
+@@ -150,6 +150,7 @@<br />
+ ##<br />
+ ##############################################################################<br />
+ use strict;<br />
++use warnings;<br />
+ use IO::Socket;	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

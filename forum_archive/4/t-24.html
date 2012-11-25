@@ -1,0 +1,116 @@
+---
+layout: oldforum_layout
+title: Remove guest access? - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Remove guest access? OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Remove guest access?</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">anton</p>
+		<p class="dt">08-05-2009 10:09:19</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	So I noticed that the default unauthenticated guest access allows anyone read access to most (all?) stuff. This is probably fine if access is available internally to a select group of people, but in larger environments, or when the interface is accessible from the internet, I think the option should be there to remove this kind of guest access.<br />
+<br />
+Is this possible at all? I've looked at users and groups, and the default group (which I assume &quot;guest&quot; is a member of) does not have any of the permissions granted. If it's not currently possible, I'd like to create a feature request for it.<br />
+<br />
+At the moment, we've added another layer of protection (user authentication with Apache) so we could safely allow access to our ONA instance from the internet.<br />
+<br />
+Anton	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">08-05-2009 10:12:59</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	interesting thought.<br />
+<br />
+perhaps actually modify it such that permissions per user can be granted for viewable areas.<br />
+<br />
+maybe just have something like <br />
+<br />
+subnets : read only / full / none<br />
+hosts : read only / full / none <br />
+<br />
+etc per user<br />
+<br />
+it gives a bit more granularity.<br />
+<br />
+feature request <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->  ill leave that one up to you!	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">anton</p>
+		<p class="dt">08-05-2009 10:24:27</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	<q cite="&amp;quot;tmyoungjr&amp;quot;:2or4s0sg">maybe just have something like <br />
+<br />
+subnets : read only / full / none<br />
+hosts : read only / full / none <br />
+<br />
+etc per user</q><br />
+<br />
+That certainly sounds like a Good Thing.  <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --> <br />
+<br />
+<q cite="&amp;quot;tmyoungjr&amp;quot;:2or4s0sg">feature request <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->  ill leave that one up to you!</q><br />
+<br />
+Done deal. <!-- s8-) --><img src="{SMILIES_PATH}/icon_cool.gif" alt="8-)" title="8-)" /><!-- s8-) --></q></q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">08-05-2009 10:35:27</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	perfect - and matt will have time to get to it sometime in 2011 - real jobs ... who needs em!	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">11-05-2009 15:49:09</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I was waiting for this question... <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+I agree that I need to support this.. Up till now I just left it as I had originally used the thing.  The whole user authentication thing is very minimal and could use a serious overhaul.  I need to dig in to this part of the code again and see how easy it will be.. I would expect I could rig something up for now.  <br />
+<br />
+And yes Tim, it is a cruel cruel world we live in with all of this real work to be done! <!-- s;) --><img src="{SMILIES_PATH}/icon_e_wink.gif" alt=";)" title=";-)" /><!-- s;) -->	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">15-05-2009 21:30:54</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	<q cite="&amp;quot;Matt&amp;quot;:2f6bi81j">I was waiting for this question... <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --></q><br />
+<br />
+it seems there are a lot of things you are waiting for someone to point out!   <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+it all goes back to that damn work thing in the real world ... what the heck!</q>	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

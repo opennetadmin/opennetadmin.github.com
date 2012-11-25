@@ -1,0 +1,153 @@
+---
+layout: oldforum_layout
+title: Failed to open config file for writing - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Failed to open config file for writing OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Failed to open config file for writing</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">icesaint05</p>
+		<p class="dt">04-05-2012 00:21:05</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hello. I'm having this error while trying to install ONA<br />
+<br />
+Failed to open config file for writing: '/opt/ona/www/local/config/database_settings.inc.php'.<br />
+<br />
+but when I check the directory there is no such file.<br />
+<br />
+What do I do? Thank you <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">JoeLT</p>
+		<p class="dt">04-05-2012 02:26:38</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I think that config file is created by the installation/configuration screens you see when you first open the web interface.  You need to make sure that the user ID that your web server runs under has write access to the /opt/ona/www/local/config directory.  Did you run the command below from the installation guide?<br />
+<br />
+chown www-data /opt/ona/www/local/config /var/log/ona.log (or whatever your web server user is)<br />
+<br />
+If not, I would execute the above command (adapt it for your chosen install path and web server user ID), and then try running the installation/configuration from the web interface again.<br />
+<br />
+The full install guide is here: <!-- m --><a class="postlink" href="http://opennetadmin.com/docs/installation"><a href="http://opennetadmin.com/docs/installation&lt;/a&gt;&lt;!--">http://opennetadmin.com/docs/installation</a><!--</a> m --><br />
+<br />
+Good luck!	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">icesaint05</p>
+		<p class="dt">06-05-2012 21:31:17</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hello. Thank you for your help. I have successfully installed ONA but I can't seem to login. I have this error on top of the login page:<br />
+<br />
+ERROR =&gt; Unable to find context name 'DEFAULT' in the ona_contexts configuration. Please check /opt/ona/www/local/config/database_settings.inc.php is configured properly. Reverting back to 'DEFAULT' context. <br />
+<br />
+During the installation I created the &quot;database_settings.inc.php&quot; file using the touch command and the file is 'empty'.<br />
+<br />
+What should I do now?<br />
+<br />
+Sorry for the inconvenience. Thank you	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">06-05-2012 22:24:57</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Your database_settings.inc.php file should have something in it currently.. If it is still blank then that is certainly the problem.  It would seem that the installer failed to create it properly..  As mentioned by JoeLT, as long as the directory is writable by your web server user it should be created for you without the need to be 'touched'.<br />
+<br />
+I'm curious, are you using the tar.gz from opennetadmin.com or are you downloading the source from github.com?  There were some recent changes in the github code so I'm curious if I broke something there.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">icesaint05</p>
+		<p class="dt">06-05-2012 23:04:08</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hello. I'm using the tar.gz version <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">icesaint05</p>
+		<p class="dt">06-05-2012 23:19:21</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Also when I use this command:<br />
+<br />
+chown www-data /opt/ona/www/local/config /var/log/ona.log<br />
+<br />
+I type it like this<br />
+<br />
+chown apache:root /opt/ona/www/local/config /var/log/ona.log<br />
+<br />
+is this correct?<br />
+<br />
+Thank you and Sorry I have so many questions.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">icesaint05</p>
+		<p class="dt">07-05-2012 01:34:03</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hello. I have successfully installed ONA Thank you for your help. One problem though I'm logged in as &quot;Guest&quot; and I want to switch to an admin account. I tried:<br />
+<br />
+User: ona_sys<br />
+pass: mypassword<br />
+<br />
+but It says &quot;incorrect password&quot;. I also tried to use 'root' as user with the same password but still the same response.<br />
+<br />
+How can I fix this?<br />
+<br />
+Thank you <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">07-05-2012 07:58:47</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	That password you are trying to use there is the database password for mysql.  That is not the password for ONA itself.  You would login as admin with a password of admin on the GUI.  You can then create other accounts as needed in the administration menu.<br />
+<br />
+<!-- m --><a class="postlink" href="http://opennetadmin.com/docs/getting_started#first_tasks"><a href="http://opennetadmin.com/docs/getting_st">http://opennetadmin.com/docs/getting_st</a> ... irst_tasks</a><!-- m -->	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">icesaint05</p>
+		<p class="dt">07-05-2012 18:35:17</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thank you very much for all your help <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

@@ -1,0 +1,82 @@
+---
+layout: oldforum_layout
+title: ONA automatically creates 172.in-addr.arpa - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page ONA automatically creates 172.in-addr.arpa OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>ONA automatically creates 172.in-addr.arpa</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">cornuwel</p>
+		<p class="dt">25-06-2012 07:50:28</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi,<br />
+<br />
+I just started using ONA and I'm facing my first problem. I have hosts in subnets 172.16.0.0/16, 172.17.0.0/16 and so on, but ONA insists on creating a class A reverse domain named 172.in-addr.arpa<br />
+As stated in RFC1918, the IANA reserved 16 consecutive class B networks (172.16.0.0/16 --&gt; 172.31.0.0/16) for use on private networks. <br />
+<br />
+I manually created 172.16.in-addr.arpa, 172.17.in-addr.arpa and so on... but ONA ignores them and places my records in 172.in-addr.arpa.<br />
+<br />
+Did I miss something or is it a bug in ONA ?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">25-06-2012 15:53:24</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	No I don't think its a bug here.<br />
+<br />
+By default when it tries to auto-create the first PTR zone for an address space it will automatically go to the Class A level.  Its a basic assumption since ONA wouldn't know what the actual usage is.<br />
+<br />
+The reason it puts everything in 172.in-addr.arpa is that your format of the PTR zones is incorrect.  PTR zones actually flip the IP addressing around.  So an IP of 172.16.2.1 would actually be 1.2.16.172.in-addr.arpa.  If you go rename your two PTR zones and swap the two octets to be 16.172.in-addr.arpa and 17.172.in-addr.arpa respectively, it should fix your issue.<br />
+<br />
+On another note, depending on your DNS structure (mainly related to if you need to do zone transfers etc) you can put ALL of your separate subnet allocations into the one zone 172.in-addr.arpa and it will still work.  So it is not a requirement to define each of these separate PTR zones unless you really need to for other reasons.  This would of course cause your reverse lookups to non RFC1918 address space within the 172 area to potentially not resolve but I'm guessing there are very few situations where you are using reverse lookups for addresses in that address space.<br />
+<br />
+Hope that helps clarify things.<br />
+<br />
+Thanks.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">cornuwel</p>
+		<p class="dt">26-06-2012 04:19:27</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Damn! How could I not see this?<br />
+Thank you for debugging my brain, it works <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+Is there a way to force the creation of the PTR records or should I do it by hand ?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">26-06-2012 10:20:02</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Heh, no problem.. PTRs always bugged me for this very reason but I get why they do it.<br />
+<br />
+No real way to force it.  Basically if ONA cant find a PTR zone to put a new entry into then it will prompt with a suggestion at the class A level.  If you know what your PTR zones should be then you might as well just go ahead and add them all up front so you dont need to worry about it.  You can use the dcm.pl CLI tool to help you do this quickly and in bulk.<br />
+<br />
+The PTR records themselves will automatically be created when adding new hosts and A records.  There is a checkbox in the edit form you can click to disable the automatically created PTR record when it is not desired (like when creating multiple A records using the same IP).  For me I always want a PTR record for every IP if I can.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

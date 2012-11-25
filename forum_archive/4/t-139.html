@@ -1,0 +1,105 @@
+---
+layout: oldforum_layout
+title: Slave DNS - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Slave DNS OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Slave DNS</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">synapse</p>
+		<p class="dt">27-11-2009 05:49:35</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	How should I add a slave DNS which is outside my network, and provided by uplink provider? <br />
+<br />
+Now I can not add a slave DNS server, because I have to specify a domain name which exists in my own database. Ok, even if I would try to create a domain name for that server, I will be unable to add the type A record with IP outside of my networks.<br />
+<br />
+It's annoying that ONA thinks that it's cleverer then me. I would expect a checkbox that switches off checking the hostname or IP, to give me a change to add any record I need.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">28-11-2009 22:33:14</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	There are currently a few options.  <br />
+<br />
+1.  Add the domain, networks, ip addresses for the slave DNS server as if you did own it.  This does not hurt a thing and provides detailed tracking of its various elements.  Now, I do realize this is tedious as well as a potential management headache if the external system continually changes.<br />
+2.  Add the slave zone definition into the header portion of the bind config that gets included into the configuration built from ONA.  This way you just manually maintain the zone definition and the zone file itself separately from anything ONA builds.  this is essentially the same thing you would do if ONA was not managing the configuration for you.  There are a TON of bind related configuration options that ONA does not support.  I fully expected those to be manually maintained in a configuration file that gets integrated with the parts ONA is handling.  (my current build bind process may not be fully cooked on making this all a easy thing to manage however.  it is possible however)<br />
+<br />
+<br />
+At the moment ONA is trying to enforce its own basic rules around data storage and what is required to define DNS servers and zones.  That current implementation does not allow for the simple bypassing of these rules.<br />
+<br />
+I expect that it is possible to make a work around.  I'd have to spend some brain cycles on what it would take to bypass these rules without causing potential data issues.   This is similar to a few other situations.  At this point I would like to keep the rules intact and hopefully find a way to do what you need in a configurable way.  So admins etc or certain users could bypass the checks but the general user still needs to follow the basic rules.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">andrewg</p>
+		<p class="dt">29-06-2011 12:55:30</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Is there any progress? Your DNS implementation is badly broken until this is fixed, as the problem also affects CNAME and MX records.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">01-07-2011 17:10:32</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Andrew,<br />
+<br />
+First off, there has been no code changes to allow ONA to bypass the built in rules around how it stores the data.  <br />
+<br />
+I want to make sure that I clearly understand your goal.  Here is what I understand it to be:<br />
+<br />
+There is a domain, we'll call it slavedomain.com that is provided by an external entity.  You want your DNS server that is defined in ONA to be a slave to that domain and do an zone XFR from the external master?<br />
+Basically you need this on your DNS server: <code><br />
+zone &quot;slavedomain&#46;com&quot; in {<br />
+  type slave;<br />
+  file &quot;named-slavedomain&#46;com&quot;;<br />
+  masters { 1&#46;2&#46;3&#46;4; 1&#46;2&#46;3&#46;5 };<br />
+};<br />
+</code><br />
+<br />
+If that is the case then I see where I should be able to make a fairly quick change.  If I allow you to specify a list of master IP addresses when defining the server/zone relationship then you could simply supply the value.  This would also apply to forward zones which are horribly broken in the system currently.<br />
+<br />
+In lue of me making any changes, you should be able to simply add the above zone definition into the file '/etc/named.conf-header' on your DNS server and it will just include it directly in.  That is where you would manually add other server level configurations that ONA does not currently support.<br />
+<br />
+When it comes to records such as CNAME or MX, you will have to either add the data to ONA (which there is nothing wrong with doing since you will be adding mostly the same data to the zone file anyway) or use the zone footer method where you create a file called 'named-{domainname}.footer' on your DNS server that contains whatever DNS resource records you wish.  I realize this is less than ideal as it is masked from being visible/manageable via ONA, but this is likely to not change as it will require far more work than I feel its worth at the moment.   Opinions could change over time however.<br />
+<br />
+Hopefully I've understood your senario properly.<br />
+<br />
+Thanks</code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">andrewg</p>
+		<p class="dt">04-07-2011 03:40:57</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Matt,<br />
+<br />
+It's actually the other way around - I want to have external slave servers for the zone data that I'm managing in ONA. To do this, I need to specify them as NS records within the domain itself. My email service is also managed externally, and I have several CNAMES pointing outside. In order to set these records up within ONA, I need to create fake subnets and domains, and store fake records in them in order to trick ONA into accepting them as valid targets. This method does not scale. I was also hoping to use DLZ, so the footer method does not apply.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

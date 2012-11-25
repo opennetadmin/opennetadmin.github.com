@@ -1,0 +1,67 @@
+---
+layout: oldforum_layout
+title: DHCP options 'next-server' and 'filename' - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page DHCP options 'next-server' and 'filename' OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>DHCP options 'next-server' and 'filename'</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">chrhuhn</p>
+		<p class="dt">11-06-2010 05:06:31</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi folks,<br />
+<br />
+I'm currently trying to move our existing dhcpd.conf to ONA (9.9.15), but I have lots of PXE net-boot boxes that require entries like this:<br />
+<br />
+<code> host hostname {<br />
+   hardware ethernet &#46;&#46;&#46;;<br />
+   fixed-address ip;<br />
+   next-server tftpserver&#46;example&#46;com;<br />
+   filename &quot;pxelinux&#46;0&quot;;<br />
+   option root-path &quot;nfsserver-ip&#58;/directory&quot;;<br />
+   option pxelinux&#46;configfile &quot;pxelinux&#46;cfg/myconfig&quot;;<br />
+   &#46;&#46;&#46;<br />
+}<br />
+</code><br />
+<br />
+Unfortunately I have no idea how to get <em>next-server</em>.<br />
+Maybe <em>filename</em>?<br />
+<br />
+Regards,<br />
+	Christopher</em></em></em></em></em></em></code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">11-06-2010 09:40:00</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Great observation.  Here is my suggestion to getting what you need accomplished.<br />
+<br />
+Wherever you use filename, as you have suggested, you can use the bootfile-name option.  <br />
+<br />
+next-server can be dealt with as follows. first, if your tftp server happens to be your dhcp server then you dont even need to specify it as it defaults to the same IP the DHCP lease came from.  Obviously this is not always the case.  So you can then use the tftp-server-name (option 66) option to specify something else.<br />
+<br />
+One thing to mention of course is that not all DHCP clients are equal.  It is entirely possible that there are some clients that dont like bootfile-name or tftp-server-name options.  I will say however that I have ran with this set up for many years in many large and small environments dealing with a bunch of clients and boot types.  I have not yet ran into a situation where I needed to use filename or next-server options.  PXE itself I know works fine with how ONA does it.<br />
+<br />
+Soo... I'll never say never but you should be fine with bootfile-name and tftp-server-name options.  <br />
+<br />
+Hope that helps.. let me know if it doesnt work for you.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

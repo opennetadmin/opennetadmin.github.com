@@ -1,0 +1,53 @@
+---
+layout: oldforum_layout
+title: Hostname without IP address - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Hostname without IP address OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Hostname without IP address</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">maxberga</p>
+		<p class="dt">06-08-2009 04:29:36</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi,<br />
+<br />
+I'm trying to using ONA for my network but I'd like to insert several hostname without IP address (DHCP client) and with notes.<br />
+This because I'd like to know that in a specific subnet there a hostname with a specific name and notes.<br />
+So, is there a way to bypass the request of the IP address, or is there another way to do this?<br />
+<br />
+thanks<br />
+Massimo	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">06-08-2009 11:15:56</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	ONA is specifically designed for tracking IPs and names.  At this time there is no way to track only a name without an IP.  I would however expect that you do have a hostname and an IP for these devices.  If it is a static DHCP lease then you can certainly add it to ONA.  If the IP is within a defined DHCP pool range however you would be unable to track that in ONA today.  <br />
+<br />
+I am working on getting a DHCPLEASEQUERY component set up such that when you navigate to a subnet in ONA it will display information about the DHCP leases.  This will be a much better improvement but will only be a lookup so you will not have notes associated with it.  <br />
+<br />
+There are other tools I have not fully released yet that do nmap scans and other audit related things that could be made to show this information as well.  Again, no notes however.<br />
+<br />
+I'm working on a new plugin framework so maybe things could be extended that way.  I dont expect this functionality to be part of the core ONA system however.<br />
+<br />
+Hope that answers your questions.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

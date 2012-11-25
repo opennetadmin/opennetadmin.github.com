@@ -1,0 +1,72 @@
+---
+layout: oldforum_layout
+title: Call to undefined function xml_parser_create - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Call to undefined function xml_parser_create OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Call to undefined function xml_parser_create</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">oldmantom</p>
+		<p class="dt">25-01-2012 09:20:58</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hey,<br />
+<br />
+During the web-based installation, after I have submitted the mysql database details, it is returning the following:<br />
+<br />
+Fatal error: Call to undefined function xml_parser_create() in /usr/local/www/ona/www/include/adodb5/adodb-xmlschema03.inc.php on line 1791<br />
+<br />
+Any help would be much appreciated!	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">oldmantom</p>
+		<p class="dt">25-01-2012 09:25:01</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Forgot to include, currently running PHP 5.3.4 on FreeBSD and installed the php5-xml port in-case that was the issue.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">25-01-2012 21:03:40</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	From what I see its likly an issue with a missing php extension or possibly its not enabled in your php.ini etc.  xml_parser_create is part of php itself so it should be there.  I don't have access to a freebsd box handy to play around but I'm sure all that you need is there, we just need to find the right way to get it enabled.<br />
+<br />
+I found several hints at some things to try just by googling  &quot;freebsd php xml_parser_create&quot;.  <br />
+<br />
+I can't offer much more help other than to try some of the testing that they suggest on this page <a>http&#58;//fossplanet&#46;com/f6/%5Bphp%5D-xml-enabled-but-not-working-193105/</a> and other pages like it.<br />
+<br />
+thanks</a>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">oldmantom</p>
+		<p class="dt">27-01-2012 06:31:09</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thanks Matt,<br />
+<br />
+I'll try and do some testing and will let you know how I get on.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

@@ -1,0 +1,194 @@
+---
+layout: oldforum_layout
+title: 2010 ONA Update / Dev Requests - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page 2010 ONA Update / Dev Requests OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">Development</a></p>
+</div>
+
+<h1>2010 ONA Update / Dev Requests</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">dmo</p>
+		<p class="dt">20-01-2010 02:59:44</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi Matt / ONA Team, <br />
+<br />
+Just wanted to do a quick note on the status of ONA at my work. <br />
+<br />
+Right now I'm using ONA strictly as an IPAM, migrating about 1200 Nortel Contivity IPSec devices to our new management range. Right now we've migrated about 350 devices - so in ONA we have 350 IPSec devices and so far 5 customer managed subnets. As this is strictly IPAM / device management, we're using DNS domains as the customer 'networks' - for example, Customer1 = 10.1.1.0/24 - Customer2 = 10.1.2.0/24, etc. It's working good in this regards. <br />
+<br />
+As I've mentioned before, I would like ONA to replace our outdated and cumbersome device management tool as well (Lotus Notes Database). <br />
+<br />
+I've created and maintained a 'spreadsheet' with all of our devices. Right now it's just a managed spreadsheet, and that comes with all the hassles and frustrations you might imagine. I've presented ONA to management, and while they like it, it lacks some things that would let us migrate from our spreadsheet. <br />
+<br />
+I thought this might be relevant - because, as you say on the ONA homepage - &quot;Get rid of that spreadsheet!&quot; <!-- s;) --><img src="{SMILIES_PATH}/icon_e_wink.gif" alt=";)" title=";-)" /><!-- s;) --> <br />
+<br />
+Our spreadsheet is pretty straightforward, with simple device information like: <br />
+<br />
+Device Name | Model | Management IP | Public IP | Install Date | ISP Information | Device OS Version | <br />
+<br />
+Also, for our Lotus Notes DB, our customer order form / requisition document is attached to the DB. <br />
+<br />
+There are 3 basic holdups to migrate our spreadsheet and database to ONA. <br />
+<br />
+1. Public IP address. I've mentioned this before, but it's almost a gamebreaker - the only thing that makes this workable is the 'custom attribute' field. (Which, by the way, I can't seem to resize, a normal IP address won't fit in there, it gets clipped). It would be great to be able to put a public IP or default gateway address on a device, and not care about it being in a domain. <br />
+<br />
+2. Document / file attachment. This, unfortunately, *is* the gamebreaker for the deal. We need to be able to look at the requisition forms and manage them on a per device basis. <br />
+<br />
+3. Password management. Again, can use the custom attribute field, but a guest user can see it. We need a way in ONA to restrict access to the system - I'd be happy with requiring everyone to have an account to even view the ONA database. <br />
+<br />
+Anyway, that's it! Just wanted to give you a heads up on where we are. I'm trying to work a way in getting files attached, but I thought I'd ask here first. <br />
+<br />
+Thanks again for all the good work!<br />
+<br />
+dmo	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">20-01-2010 17:20:41</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	DMO,<br />
+<br />
+First things first for everyone out there.  Its currently a busy time for me at work as well as in my personal life.  This explains the lack of any new updates in the last 4 months.  I've been working a lot but have not had the time to test out the latest release enough to give out to general consumption.  I'm still here and still working on things.. its just at a slow pace.. for now....<br />
+<br />
+<q cite="&amp;quot;dmo&amp;quot;:2y0btfcj">Hi Matt / ONA Team, <br />
+<br />
+Just wanted to do a quick note on the status of ONA at my work. <br />
+<br />
+Right now I'm using ONA strictly as an IPAM, migrating about 1200 Nortel Contivity IPSec devices to our new management range. Right now we've migrated about 350 devices - so in ONA we have 350 IPSec devices and so far 5 customer managed subnets. As this is strictly IPAM / device management, we're using DNS domains as the customer 'networks' - for example, Customer1 = 10.1.1.0/24 - Customer2 = 10.1.2.0/24, etc. It's working good in this regards. <br />
+<br />
+As I've mentioned before, I would like ONA to replace our outdated and cumbersome device management tool as well (Lotus Notes Database). <br />
+<br />
+I've created and maintained a 'spreadsheet' with all of our devices. Right now it's just a managed spreadsheet, and that comes with all the hassles and frustrations you might imagine. I've presented ONA to management, and while they like it, it lacks some things that would let us migrate from our spreadsheet. <br />
+<br />
+I thought this might be relevant - because, as you say on the ONA homepage - &quot;Get rid of that spreadsheet!&quot; <!-- s;) --><img src="{SMILIES_PATH}/icon_e_wink.gif" alt=";)" title=";-)" /><!-- s;) --> <br />
+<br />
+Our spreadsheet is pretty straightforward, with simple device information like: <br />
+<br />
+Device Name | Model | Management IP | Public IP | Install Date | ISP Information | Device OS Version | <br />
+<br />
+</q><br />
+<br />
+So at this level it seems that there are a few fields that you can manage, others that you can not.<br />
+<br />
+I assume you can manage the following with standard built in ONA functionality:<br />
+Device Name<br />
+Model<br />
+Management IP<br />
+Public IP <br />
+<br />
+I assume the remaining fields could be managed with custom attributes?  The custom attributes does need a bit of &quot;general cleanup&quot; to make it work well.  <br />
+<br />
+<br />
+<q cite="&amp;quot;dmo&amp;quot;:2y0btfcj"><br />
+<br />
+Also, for our Lotus Notes DB, our customer order form / requisition document is attached to the DB. <br />
+<br />
+There are 3 basic holdups to migrate our spreadsheet and database to ONA. <br />
+<br />
+1. Public IP address. I've mentioned this before, but it's almost a gamebreaker - the only thing that makes this workable is the 'custom attribute' field. (Which, by the way, I can't seem to resize, a normal IP address won't fit in there, it gets clipped). It would be great to be able to put a public IP or default gateway address on a device, and not care about it being in a domain. <br />
+</q><br />
+<br />
+As I mentioned, I do need to clean up custom attributes a bit to make sure it flows well and things look and work better.  Hopefully that will address the usability issues you have currently with managing the public IP addresses there.  As far as creating IP addresses in the system without being associated with a subnet.. that I still have to work on and plan out if it is possible without major reworking of things.  I do have a few ideas on how to do it.. just need to see if they break down in reality. <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+<q cite="&amp;quot;dmo&amp;quot;:2y0btfcj"><br />
+2. Document / file attachment. This, unfortunately, *is* the gamebreaker for the deal. We need to be able to look at the requisition forms and manage them on a per device basis. <br />
+</q><br />
+<br />
+There are a few ways of handling this that might be possible now using custom attributes, or maybe host actions.  It will depend on your environment.<br />
+<br />
+One way is if you have your document on a file share or a wiki etc.  If it is accessible using URL likes of either http:// or file:// style you can simply add a link to the document that way as a custom attribute or host action.<br />
+<br />
+The other way would be to create a plugin that allows arbitrary file uploads that get stored somewhere either in the database or on local file storage of the ONA server.  Then they are listed for each host.  This one seems reasonable but will take some time to create the whole &quot;file management&quot; paradigm in a proper and secure way. <br />
+<br />
+<q cite="&amp;quot;dmo&amp;quot;:2y0btfcj"><br />
+3. Password management. Again, can use the custom attribute field, but a guest user can see it. We need a way in ONA to restrict access to the system - I'd be happy with requiring everyone to have an account to even view the ONA database. <br />
+</q><br />
+<br />
+As far as the default view access.  The latest version (yet to be released) allows you to disable the guest account and force everyone to log in to the application.  I think that will address that part.  I have initial work started on a plugin for password management based on your initial request (a year or so ago now??).  It needs a bit of updating but is close.  <br />
+<br />
+<q cite="&amp;quot;dmo&amp;quot;:2y0btfcj"><br />
+Anyway, that's it! Just wanted to give you a heads up on where we are. I'm trying to work a way in getting files attached, but I thought I'd ask here first. <br />
+<br />
+Thanks again for all the good work!<br />
+<br />
+dmo</q></q><br />
+<br />
+I think all of what you need is within reach.. I'm just not sure how soon things can be completed for you due to the other distractions going on right now.<br />
+<br />
+Any of you coders out there that want to get more involved in the project just let me know!!  <!-- s:D --><img src="{SMILIES_PATH}/icon_e_biggrin.gif" alt=":D" title=":-D" /><!-- s:D --></q></q></q></q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">dmo</p>
+		<p class="dt">21-01-2010 02:16:00</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi Matt, <br />
+<br />
+Thanks for the quick response, as always. <br />
+<br />
+I know it's a busy time of year - don't get the wrong impression that I'm not greatful (I think we all are) on the work you've put in. In these sort of 'feedback' posts it's easy to focus too much on the negative. Once again, ONA is great - just wanted to give some tips on how it's not working in my own deployment! <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --> <br />
+<br />
+<q>I assume the remaining fields could be managed with custom attributes? The custom attributes does need a bit of &quot;general cleanup&quot; to make it work well.</q><br />
+<br />
+Yes, custom attributes are great, other than the sizing issue. For short fields like &quot;OSVersion | 7.1&quot; they work ok. But a field like &quot;Public IP | 212.175.90.106&quot; gets clipped, meaning we can't see the .106 at the end. <br />
+<br />
+I noticed on the ONA test site that they are resized / scaled much larger. Perhaps I need to do something? <br />
+<br />
+<q>As I mentioned, I do need to clean up custom attributes a bit to make sure it flows well and things look and work better. Hopefully that will address the usability issues you have currently with managing the public IP addresses there. As far as creating IP addresses in the system without being associated with a subnet.. that I still have to work on and plan out if it is possible without major reworking of things. I do have a few ideas on how to do it.. just need to see if they break down in reality. <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+</q><br />
+<br />
+I think if custom attribs worked good for the Public IP, I wouldnt need it in the proper device IP association. One thing that would be great (and I haven't checked) would to be sure that these custom attribs are searchable - so if I search for the public IP of a device, it will give me that device in a search query. <br />
+<br />
+<q><br />
+There are a few ways of handling this that might be possible now using custom attributes, or maybe host actions. It will depend on your environment.<br />
+<br />
+One way is if you have your document on a file share or a wiki etc. If it is accessible using URL likes of either http:// or file:// style you can simply add a link to the document that way as a custom attribute or host action.<br />
+<br />
+The other way would be to create a plugin that allows arbitrary file uploads that get stored somewhere either in the database or on local file storage of the ONA server. Then they are listed for each host. This one seems reasonable but will take some time to create the whole &quot;file management&quot; paradigm in a proper and secure way.<br />
+</q><br />
+<br />
+Interesting, I haven't thought about just linking to a fileshare. I suppose for me that's not a problem, I'm just worried about when a install tech has to input the device info - it's easier if he can just click &quot;upload file&quot; - of course. <br />
+<br />
+Though, we'll probably run into the same custom attribute sizing issue if the URL is large (unless we can use a href HTML or something and make it look pretty?)<br />
+<br />
+In regards to adding it as a host action - wouldn't the file name have to be uniform? (like device1.customer1.net.doc ) since the host actions require the hostname in the link?<br />
+<br />
+<q><br />
+As far as the default view access. The latest version (yet to be released) allows you to disable the guest account and force everyone to log in to the application. I think that will address that part. I have initial work started on a plugin for password management based on your initial request (a year or so ago now??). It needs a bit of updating but is close.<br />
+</q><br />
+<br />
+Great! And the password management sounds wonderful as well. Let me know if you need any help testing these. <br />
+<br />
+<q><br />
+I think all of what you need is within reach.. I'm just not sure how soon things can be completed for you due to the other distractions going on right now.<br />
+<br />
+Any of you coders out there that want to get more involved in the project just let me know!! <!-- s:D --><img src="{SMILIES_PATH}/icon_e_biggrin.gif" alt=":D" title=":-D" /><!-- s:D --><br />
+</q><br />
+<br />
+It's times like these I wish I was a real coder and not just a security guy. <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --> <br />
+<br />
+Thanks again Matt. I'll contact you via chat maybe to discuss a few things.<br />
+<br />
+-- Daniel</q></q></q></q></q>	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

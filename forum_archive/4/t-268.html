@@ -1,0 +1,52 @@
+---
+layout: oldforum_layout
+title: How can I &quot;lock&quot; a range of IPs within a subnet - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page How can I &quot;lock&quot; a range of IPs within a subnet OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>How can I &quot;lock&quot; a range of IPs within a subnet</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">digitalapnea</p>
+		<p class="dt">02-02-2012 20:25:50</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Say I have defined a subnet of 192.168.1.0/24.  <br />
+<br />
+Now say I want to reserve or lock-out the IPs 192.168.1.2 through to 192.168.1.10 such that they <strong><span style="text-decoration:underline;">cannot[/u:22bkyam5]</b> be selected by a user who only has the &quot;host_add&quot; permission when they add a new host.<br />
+<br />
+How can I achieve this?  I've tried using the &quot;Blocks&quot; feature but it still allows a user with only the &quot;host_add&quot; permission to choose an IP from a &quot;Block&quot; when they are adding a new host.  I want these users to be able to choose an IP, but not from selected &quot;reserved&quot; ranges within the subnet.<br />
+<br />
+Any ideas?<br />
+<br />
+Thanks!</span></strong>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">03-02-2012 11:04:39</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	There is currently no feature that would allow this.<br />
+<br />
+There are plans to make the auth system much more robust to allow for things like this but we are a ways out on that.<br />
+<br />
+The only really bad idea I could suggest is to define DHCP pools on the subnet that encompass your ranges.  This would only work if you are NOT using ona to build your DHCP configuration, and it would lock those IP from being used by anyone at all which is pretty useless.<br />
+<br />
+The blocks feature is really more about tracking arbitrary sets of IPS and CIDR ranges by name.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

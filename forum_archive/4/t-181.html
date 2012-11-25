@@ -1,0 +1,80 @@
+---
+layout: oldforum_layout
+title: Activate ldap backend. - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Activate ldap backend. OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Activate ldap backend.</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">apa123</p>
+		<p class="dt">12-03-2011 02:23:39</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hello<br />
+I cant seem to activate the ldap (AD) for login. How do you activate it?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">apa123</p>
+		<p class="dt">12-03-2011 09:56:26</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Solved it, but when i log in, i dont get read/write permisson. Anyone have a idea	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">12-03-2011 12:01:41</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	You must define a group within ONA that matches a group that is in LDAP.  Grant the group whatever permissions you need it to have.  When you log into ona it should pull the group information from LDAP provided you gave it the right filter information for getting group info.<br />
+<br />
+You can click the person icon to the right of the change user button at the top right of the screen.  It wil bring up a window showing you your permissions and group information that it has pulled from LDAP.<br />
+<br />
+You of course will need to use the built in admin user to configure the groups within ONA.  <br />
+<br />
+That should get you going.. let me know if you still have issues.. thanks	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">apa123</p>
+		<p class="dt">12-03-2011 13:31:56</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thx, it works now!<br />
+One more question, is it possible to log what all the user does, both logins and when they add stuff to the	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">12-03-2011 19:55:08</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Great, glad its working.<br />
+<br />
+Yes you can log user activity in a few ways.  By default it is logging to /var/log/ona.log which is defined in the &quot;logfile&quot; variable.  If you go to Menu -&gt; Admin -&gt; Manage System Config you can change its value.<br />
+<br />
+Also if you go to to Menu -&gt; Admin -&gt; Display DB Logs, then click the enable button.  It will open an edit window.  Set the value to 1 which will enable the system to start logging what happens to a local database table.  The same page will display data in that table which you can page through.  One of these days I'll add a search form to it.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

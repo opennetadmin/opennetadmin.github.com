@@ -1,0 +1,101 @@
+---
+layout: oldforum_layout
+title: OLD POST Re DHCP Scopes - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page OLD POST Re DHCP Scopes OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>OLD POST: Re: DHCP Scopes</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">01-09-2009 21:35:04</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	A while back I replaced my forum software but never migrated the posts.  I'm going to post a few that I think are good information in hopes that it can inform others.  Here we go....<br />
+<br />
+<br />
+<q><br />
+<strong>Re: DHCP Scopes </b>                                                                       <br />
+bstory Wrote:                                                                                                     <br />
+-------------------------------------------------------                                                                                                                                                        <br />
+&gt; I have been looking for a good IPAM solution for                                                                                                                                                             <br />
+&gt; my shop for a few months and finally stumbled                                                                                                                                                                <br />
+&gt; across ONA which seems to be a great solution for                                                                                                                                                            <br />
+&gt; us.  One of the things that we noticed as we were                                                                                                                                                            <br />
+&gt; putting in data to explore ONA is that there are                                                                                                                                                             <br />
+&gt; some limitations to DHCP scopes that could be                                                                                                                                                                <br />
+&gt; fleshed out in the future.                                                                                                                                                                                   <br />
+&gt;                                                                                                                                                                                                              <br />
+<br />
+Glad ONA is useful to you!<br />
+<br />
+&gt; The first new feature that we would like to see<br />
+&gt; would be the ability to input exclusions so that<br />
+&gt; you can put in a large scope in one block and then<br />
+&gt; list the exclusions like in Microsoft's DHCP      <br />
+&gt; server.  As a corollary to this, when adding a    <br />
+&gt; host it would be nice to have a check mark that   <br />
+&gt; would let you acknowledge that the host is within <br />
+&gt; A DHCP scope and add an exclusion block into the  <br />
+&gt; documentation for it.                             <br />
+&gt;                                                   <br />
+<br />
+The DHCP support that ONA provides is built around *nix DHCP servers.  Specifically ISC (is there really anything else for *nix? ok yes there is but thats for a later time).<br />
+<br />
+The exclusion you are talking about is mostly a Microsoft convention that the ISC DHCP server does not support in the same way.  I'll refer you to the following post to their mailing list: <a href="http&amp;#58;//marc&amp;#46;info/?l=dhcp-users&amp;m=117004252720199&amp;w=2:1slihss3">[url=http://marc.info/?l=dhcp-users&amp;m=117004252720199&amp;w=2]http://marc.info/?l=dhcp-users&amp;m=117004252720199&amp;w=2</a></a>.   This ultimately means that the configuration I build would have to have several range definitions to work around the potential overlaps.                                                                                                                                                                                <br />
+<br />
+Currently you can define multiple range statements within ONA to build this type of configuration.  Certainly this is more work that clicking a checkbox to exclude an IP during the configuration build process.   This is a fairly involved set of work to implement in the GUI as well as the backend build scripts to provide the appearance of what you are suggesting.                                                  <br />
+<br />
+I would question the use of a large pool of addresses with random hosts that are either &quot;hard coded&quot; (on the pc side) or &quot;static&quot; (MAC based DHCP).  I understand that sometimes hosts may not be always easy to move around on a subnet for various reasons but you should never be building your subnets this way on purpose.  There should always be a well defined section of a subnet that is dynamic and a section that is static/hard coded.  If your environment is using MAC based DHCP assignments then moving them outside of the dynamic pool range would be easy.                                                               <br />
+<br />
+I certainly dont want to dictate how your environment is configured but in my 13+ years of running very large corporate DHCP networks I've found that things get nasty in a big hurry when you try to sprinkle hosts inside of pools.  While it is technically possible, it can get unwieldy.  I'd like to hear more about why your environment would need to run this way and couldnt be normalized into a dynamic pool range/static section of a subnet?                                                                                                                                                                                   <br />
+<br />
+At this point I'll leave you with this.  You can do what you need to do by defining multiple pool ranges via the GUI.  This is supported today and will do what you need.  While I understand this is not as simple as clicking a checkbox it will have to do for now as this feature will be low on my list.  If demand grows for it I will reconsider.   Hope this helps, though it may not be the answer you were looking for.                                                                                                                                                                                                            <br />
+<br />
+&gt; Another thing that we would like to see is the<br />
+&gt; ability to configure hosts within the DHCP scope<br />
+&gt; that have reservations.                         <br />
+<br />
+I'm not sure I understand here?  Isn't this the same thing as you were requesting above?<br />
+<br />
+&gt; <br />
+&gt; All in all this is an awesome product and I thank<br />
+&gt; you for all of your hard work.                   <br />
+&gt;                                                  <br />
+<br />
+Thanks much!<br />
+<br />
+<br />
+</q></strong></q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">lanks</p>
+		<p class="dt">13-03-2012 11:45:55</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I want to second this.  I'll explain a few points that have led us to where we are.  Firstly, we mostly use Cisco routers for DHCP, this sucks.  So, we're moving to MS DHCP where we can.<br />
+<br />
+We have decided to begin assigning static IPs to printers via DHCP as we've found users tend to find a way to change or erase the IP on the printer when we statically assign it, we're hoping that by letting DHCP assign it, we'll have this problem less.  <br />
+<br />
+We also have been given a small number of blocks of addresses by our parent company, these tend to be broken down into very small subnets.  So while it is always our best intention to reserve X number of addresses for devices that need statics, it doesn't always work.  So we end up with a new printer or server at that site and we have to choose an address in the DHCP pool, either by excluding it or making it a static DHCP assignment.<br />
+<br />
+So it would be awesome to be able to represent in ONA static DHCP assignments or exclusions.  Unfortunately in the real world here, we can only plan so far.  Sites dictate what we do, not the other way around <!-- s:( --><img src="{SMILIES_PATH}/icon_e_sad.gif" alt=":(" title=":-(" /><!-- s:( --><br />
+<br />
+Oh, another thing I'd love to be able to see is the ability to represent an address as 'reserved for future use.'  I suppose I could do that now just by giving the IP such a name, but it would be nice if I could do it a little differently.  Just a thought <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

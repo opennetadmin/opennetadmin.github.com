@@ -1,0 +1,52 @@
+---
+layout: oldforum_layout
+title: New Version Released v11.02.08 - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page New Version Released v11.02.08 OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">News</a></p>
+</div>
+
+<h1>New Version Released v11.02.08</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">09-02-2011 19:40:25</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	A new version is FINALLY available.  It has many bug fixes and refinements.  Also it now includes an auth framework that allows for various authentication backends.  I'm including an LDAP authentication backend as part of this release.  More documentation on that later but you can find the config file in www/config/auth_ldap.config.php, then set the system conf variable &quot;authtype&quot; to ldap.<br />
+<br />
+Here is a quick list of updates:<br />
+<br />
+<ol><li><br />
+[*:2s82fh1g]switch from split to explode function since split is depricated	[/*:m:2s82fh1g]<br />
+[*:2s82fh1g]html encoding on text diffs removed.	[/*:m:2s82fh1g]<br />
+[*:2s82fh1g]fixes per Frank. many issues related to ebegin date on dns records.. &quot;should&quot; work now..	[/*:m:2s82fh1g]<br />
+[*:2s82fh1g]and new text_diff function for config archives etc to use	[/*:m:2s82fh1g]<br />
+[*:2s82fh1g]per franks suggestions, adding wildcard toggle to hosts,subnets,dns record lists.. more may come in the future but this is a good start.	[/*:m:2s82fh1g]<br />
+[*:2s82fh1g]fixes for missing data.. also switched to requiring php 5.0 now due to mb string and other things.. hey its time folks!.. also added a check for mysql_connect php module[/*:m:2s82fh1g]<br />
+[*:2s82fh1g]fixes to use internal diff engine instead of xdiff	[/*:m:2s82fh1g]<br />
+[*:2s82fh1g]fixes for config display width and size	[/*:m:2s82fh1g]<br />
+[*:2s82fh1g]fixes for specifying two config archives using a/b id numbers[/*:m:2s82fh1g]<br />
+[*:2s82fh1g]per bug ticket #82. I added the patch info to allow a link to the natted subnet as well	[/*:m:2s82fh1g]<br />
+[*:2s82fh1g]per Klaus.. allow for a dhcp pool of 1 ip..	[/*:m:2s82fh1g]<br />
+[*:2s82fh1g]new module called add_permission. allows plugins to create needed permissions[/*:m:2s82fh1g]<br />
+[*:2s82fh1g]Add a workspace menu option. Allows plugins etc to add menu items based on what display_xxxx workspace page they are on. so, menu items for subnets or hosts etc.. helps to free up space on the various workspaces.[/*:m:2s82fh1g]<br />
+[*:2s82fh1g]added workspace plugin stuff to display_domain. fixed form bug in domain_list for chrome[/*:m:2s82fh1g]<br />
+[*:2s82fh1g]major change to authentication.. now allows auth modules including an ldap auth module. Changes default behavior of DCM.PL.. users must use a user/pass to get in now.. [/*:m:2s82fh1g]<br />
+[*:2s82fh1g]added proxy option for version check module.. could use more testing	[/*:m:2s82fh1g]<br />
+[*:2s82fh1g]expand device type information to display in CLI display output.	[/*:m:2s82fh1g]<br />
+[*:2s82fh1g]add config type id to the view request string, also change from old/new to A/B titles on compare selectors	[/*:m:2s82fh1g]<br />
+[*:2s82fh1g]show host name and request the latest config archive to display on workspace plugin	[/*:m:2s82fh1g]<br />
+[*:2s82fh1g]had to add a comma delimiter to ona_find_device_type function so it can properly find devicetypes by name. format must be &quot;manufacturer, model (role)&quot;. this is how most screens display the format as well[/*:m:2s82fh1g][/list:u:2s82fh1g]</li></ol>	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

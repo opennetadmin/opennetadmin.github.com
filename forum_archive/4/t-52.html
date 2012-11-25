@@ -1,0 +1,97 @@
+---
+layout: oldforum_layout
+title: ERROR -&gt; Only PTR records should use in-addr domains! Why??? - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page ERROR -&gt; Only PTR records should use in-addr domains! Why??? OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>ERROR -&gt; Only PTR records should use in-addr domains! Why???</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">quijada</p>
+		<p class="dt">15-07-2009 04:15:04</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi, I need to add NS records to the reverse zones, in the DNS Server of my organization is done like that.<br />
+<br />
+An example can be:<br />
+<br />
+19.172.in-addr.arpa. NS unimur.um.es<br />
+<br />
+However, everytime I want to add it, ONA says that Only PTR records should use in-addr domains<br />
+<br />
+How can I solve this?<br />
+<br />
+I have just migrated all my old database (for several weeks) to ONA and I think I cannot continue with this trouble <!-- s:-( --><img src="{SMILIES_PATH}/icon_e_sad.gif" alt=":-(" title=":-(" /><!-- s:-( --><br />
+<br />
+Thank you.<br />
+<br />
+P.D.: I have tried this with dcm.pl but I get the same result.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">15-07-2009 07:42:06</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yes an NS record is required for pretty much every zone that is created.  It is not exactly obvious within ONA that the NS records are handled automatically by assigning a DNS server host to a domain.<br />
+<br />
+There are three ways to do this.  Navigate to your unimur.um.es host in ONA and then click on the DNS line of &quot;managed services on this host&quot;.  On the next screen you will assign all of the domains that this server is either a master or secondary for.  When you do this, an NS record will automatically be created for the domain.<br />
+<br />
+The second way is to navigate to the 19.172.in-addr.arpa domain and then click the &quot;assign to server&quot; button in the DNS servers box.<br />
+<br />
+The last way is via DCM using the &quot;domain_server_XXX&quot; commands.<br />
+<br />
+<br />
+Hope that helps.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">quijada</p>
+		<p class="dt">16-07-2009 05:00:39</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi Matt, if you remember, we was talking about this last night. Now, I am at work and I have just tried all ways you told me (even adding an NS server for a reverse zone in-addr... with dcm.pl) but I get the same result, only PTR records bla bla bla...<br />
+<br />
+As I told you last conversation, I have been looking for some IF condition about this issue, founding it easily. This is the change I have made in the file '/opt/ona/www/modules/ona/dns_record.inc.php', at line 173:<br />
+<br />
+if (strpos($domain['fqdn'], &quot;in-addr.arpa&quot;) and $options['type'] != 'PTR' <strong>and $options['type'] != 'NS'</b>) {<br />
+   printmsg(&quot;ERROR =&gt; Only PTR records should use in-addr.arpa domains!&quot;, 3);<br />
+   ...<br />
+   ...<br />
+}<br />
+<br />
+Of course, the new code is the bold portion.<br />
+<br />
+At the moment, this is the solution for me. I think (as you told me) that the next release will patch this.<br />
+<br />
+I hope this helps somebody too.<br />
+<br />
+Thank you for your help, Matt.</strong>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">16-07-2009 07:45:48</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yep, that is pretty much the fix that needed to happen.. I released the new version last night however so you might want to  go ahead and upgrade to it as well since it fixes that and many other things..   Thanks.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

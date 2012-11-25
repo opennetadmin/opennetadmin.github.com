@@ -1,0 +1,81 @@
+---
+layout: oldforum_layout
+title: DNS A Records with 2 IP-Addresses? - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page DNS A Records with 2 IP-Addresses? OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>DNS A Records with 2 IP-Addresses?</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">Ximil</p>
+		<p class="dt">24-01-2012 06:59:00</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hey, my english isn't very well, but let me try to explain my problem. <br />
+<br />
+I'm using 'OpenNetAdmin' for 3 month. I have to put the old data in this new System. <br />
+I want to create an A record with one IP-Adress and two names. Is that possible?<br />
+Can somebody help me?<br />
+<br />
+Greets Ximil	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">24-01-2012 20:01:47</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yes you can do this no problem.  Simply use the add DNS record form and add an A record as you need.  Do keep in mind that you may need to un-check the create PTR button since you can only have one PTR record per IP address. <br />
+<br />
+You can add for instance the following combinations of A records:<br />
+<br />
+name1.example.com  IN  A  1.1.1.1<br />
+name2.example.com  IN  A  1.1.1.1<br />
+name3.example.com  IN  A  2.2.2.2<br />
+name3.example.com  IN  A  3.3.3.3<br />
+<br />
+You can see all the resulting records by clicking on the domain name and viewing the list.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Ximil</p>
+		<p class="dt">25-01-2012 03:26:51</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Ok, got it. Thanks for that. <br />
+Can I export the addresses from this system?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">25-01-2012 07:53:08</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	There are several ways to export data from ONA.<br />
+<br />
+1. Simply write SQL queries to extract data from the database using your favorite tool<br />
+2. use dcm.pl and the ona_sql module which allows you to write SQL queries.  There are a few default saved queries available when you use the 'list' option<br />
+3. other ONA plugins can be written to provide data.  There is a reporting function that can be used to create and display things in the GUI or via CLI.  For instance the nmap scan plugin has a report built into it that can export data.<br />
+4. there are also dns and dhcp configuration build plugins that will extract data and output compatible configuration files for several different types of servers.<br />
+<br />
+There are a few current options here but it all depends on your need.  There are ways to create data extractions that suit just about any need.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

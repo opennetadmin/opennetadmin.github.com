@@ -1,0 +1,46 @@
+---
+layout: oldforum_layout
+title: Associated Subnets Limited to 24? - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Associated Subnets Limited to 24? OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Associated Subnets Limited to 24?</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">rgval</p>
+		<p class="dt">23-03-2010 15:27:59</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I have run into an issue that I don't see on the discussion board. I have a lab where I have a single block of address that are broken out into 48 separate subnets. If I do a search I can see all 48 subnets. However if I select the block (my block is call Firewall Lab) information it only shows me a total of 24 subnets in the Associated Subnets (24) table. Is there a setting I am missing? I went into the ONA Configuration and changed the results number to 100 but it still only shows me 24 subnets in the Associated Subnets table.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">24-03-2010 11:08:50</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I tried to recreate the issue you describe below but I was un able to.  things seem to work for me.<br />
+<br />
+I created a block called test with a start/end of 1.0.1.0/2.0.0.0<br />
+<br />
+Then I added 40 subnets starting at 1.0.1.0 to 1.0.40.0 all /24 subnets. <br />
+<br />
+I then saw all 40 subnets associated when I viewed the block.  I had 4 &quot;next&quot; links at the bottom of the list as I would have expected.   <br />
+<br />
+The associated list should be as simple as including all subnets that would fall within the start/end range of the block.  We'll have to dig in a bit deeper I guess and see if there is some other thing causing it.  Its possible that maybe I've fixed something since the last release but most of my work was not in relation to blocks.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

@@ -1,0 +1,47 @@
+---
+layout: oldforum_layout
+title: Error the XML response that was returned invalid - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Error the XML response that was returned invalid OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Error: the XML response that was returned invalid</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">zxy5207</p>
+		<p class="dt">19-06-2012 09:59:41</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi, matt!<br />
+    It is me again! Pls help me!<br />
+    The error was not appeared in the beginning of the system installed, It was appeared  we have used about 2 weeks after. I don`t know whether i triggerd something, Here is the error:<br />
+When i use IE9 add a new host, the fllowing error will appear, But i try to open that link in firefox, after i click the link, nothing happened.<br />
+I confirmed the PHP-mbstring has installed, when i use the Maxthon and enable the &quot;Maxthon Smart Acceleration&quot;, everything is OK.<br />
+I want to fix this, please help me ,Thank you!<br />
+<img />http&#58;//opennetadmin&#46;com/forum/download/file&#46;php?id=10[/img:34uqhhnb]	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">zxy5207</p>
+		<p class="dt">20-06-2012 09:24:39</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I fix this by the fllowing<br />
+Change Line 102 in xajaxResponse.inc.php<br />
+From: function xajaxResponse($sEncoding=XAJAX_DEFAULT_CHAR_ENCODING, $bOutputEntities=false)<br />
+To: function xajaxResponse($sEncoding=XAJAX_DEFAULT_CHAR_ENCODING, $bOutputEntities=true)	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

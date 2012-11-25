@@ -1,0 +1,79 @@
+---
+layout: oldforum_layout
+title: Primary Master Please assign a Primary Master server! - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Primary Master Please assign a Primary Master server! OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Primary Master Please assign a Primary Master server!</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">tin</p>
+		<p class="dt">07-09-2009 23:18:36</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I've just sat down to start adding some real data (just a small sample) to my ONA install for testing, but I noticed a big red &quot;Primary Master  <!-- s:!: --><img src="{SMILIES_PATH}/icon_exclaim.gif" alt=":!:" title="!" /><!-- s:!: -->  Please assign a Primary Master server!&quot; message on the DNS zone pages for the 2 zones I've added...<br />
+The trouble being that as far as I can tell I've already done this. Both zones have a master set already.<br />
+<br />
+Is there something I'm missing that sets a &quot;primary master&quot; as opposed to just &quot;master&quot;?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tin</p>
+		<p class="dt">07-09-2009 23:21:04</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Someone slap me with a wet fish. I knew this would happen... I just found the thing I had missed  <!-- s:lol: --><img src="{SMILIES_PATH}/icon_lol.gif" alt=":lol:" title=":-D" /><!-- s:lol: -->	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">08-09-2009 21:52:05</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Glad you found it.. just another example of Matt needs to get off his rear and write more documentation.  (I actually did a bit the other day!)<br />
+<br />
+So just for posterity since you asked.. I'll answer for those who might wonder the same thing.<br />
+<br />
+Primary master is part of the SOA record.  This option is required if you are going to be building DNS configurations from the data in ONA.. if you are not going to do that then you dont actually have to fill out this bit of information.  <br />
+<br />
+As to where you make the change? it is in the Edit Domain form.  Simply put in the FQDN of the host that is your primary DNS server for the domain and it will be part of the SOA record.  If you point it at an FQDN that is not in ONA you will also get a warning.  It will still work however but ONA would prefer there to be a valid record in the database to reference.<br />
+<br />
+Hope that helps..  <!-- s:D --><img src="{SMILIES_PATH}/icon_e_biggrin.gif" alt=":D" title=":-D" /><!-- s:D -->	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tin</p>
+		<p class="dt">09-09-2009 00:06:02</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Just an idea... Would it be possible (and/or make sense) to make the warning a link to open the appropriate dialog? Then idiots like me would know exactly where to go looking for it.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">09-09-2009 08:38:06</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Good point.  Done!	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

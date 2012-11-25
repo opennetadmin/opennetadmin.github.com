@@ -1,0 +1,115 @@
+---
+layout: oldforum_layout
+title: Duplicate IP Subnets - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Duplicate IP Subnets OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Duplicate IP Subnets</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">cleonardos</p>
+		<p class="dt">08-10-2009 14:31:24</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	This is an awesome application, however with the increasing use of MPLS and other VPN technologies it's necessary to have<br />
+routing domains that may in fact overlap with each other, but yet are kept seperate with MPLS.<br />
+<br />
+Is there a way of adding say duplicate RFC1918 networks?  Another handy feature would<br />
+be the ability to create NAT relationships between Hosts and Networks by Routing Domain<br />
+and/or Client Autonomous System Etc.<br />
+<br />
+I haven looked at the table schema yet so I don't know if this is something that<br />
+could easily be added.<br />
+<br />
+-Chris	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">08-10-2009 14:50:24</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	As a matter of fact I just checked in some new code that implements &quot;contexts&quot;.  It is intended for this sort of thing and allows you to deal with MPLS networks that overlap etc etc.<br />
+<br />
+It is still very new and does not have much testing involved with it.  I'll describe what it does briefly so you can get an idea of things.<br />
+<br />
+First off.. the table structure and code is such that simply adding a column or a table to track the &quot;context&quot;  you were in is VERY difficult.  Not that it cant be done (I have many sticky notes and diagrams on the topic) but it would take a LOT of work to implement.  I'm open to new ideas on this approach however.<br />
+<br />
+The way I have implemented this method is to simply switch contexts by spinning up a new database instance.  So currently you load up a mysql database called 'ona' for instance.   It would be the default context.  you could then set up another database (probably on the same mysql server) called ona-mpls1 and it would be your mpls1 context.  Since each context is a new database instance, you have totally separate user permissions, IP address uniqueness etc.  <br />
+<br />
+This approach has some goods and bads.  The fact that it uses another database instance is probably a bit more overhead than it would be integrated into one database instance.  It also means you must manage device types, user permissions etc in more than one place.  Again, depending on your situation this could be good or bad.<br />
+<br />
+At any rate, I am much closer than I have ever been to supporting MPLS networks and contexts.  I think there is a bit more work to be done to make things separate out properly but so far its working in my limited testing.  switching contexts is easy at the GUI level and has nice visual queues so the user knows which context they are using.  I still need to deal with managing new contexts and install/upgrade things.<br />
+<br />
+The NAT relationships etc is something I would like to look into more however.. <br />
+<br />
+Hope that helps.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">cleonardos</p>
+		<p class="dt">10-10-2009 07:24:57</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thanks for the response Matt!<br />
+<br />
+Your approach to contexts makes sense, although it may be easier in the long run<br />
+to leave this functionality entirely out of the main code as it may make an otherwise<br />
+difficult transition even more of a nightmare.<br />
+<br />
+Imagine trying to merge data from multiple contexts into a entirely new format...ack!<br />
+I'm going to install OpenNetAdmin and learn it, although it's been a long time since I've<br />
+worked with PHP.  <br />
+<br />
+I'm being dragged kicking and screaming by my job into the world of microsoft, and<br />
+currently learning Microsoft Systems Center Operations Manager..:/  It's a mess, but so is pretty much every other<br />
+Network/Systems management product of any size.  Netcool, BMC, Tivoli, Spectrum, etc.  <br />
+<br />
+These products share a common trait, that they are all pretty much conglomerations of quite a few<br />
+excellent point products merged together, some more successfully than others...<!-- s:P --><img src="{SMILIES_PATH}/icon_razz.gif" alt=":P" title=":-P" /><!-- s:P --><br />
+<br />
+Best Regards,<br />
+<br />
+-Chris	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">grrrreg</p>
+		<p class="dt">17-06-2010 07:51:42</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi,<br />
+<br />
+Couldn't it be simpler with the already provided data schema ? I surely miss a big part of the mechanism, but here my ideas:<br />
+<br />
+During a subnet creation:<br />
+- If the subnet does not collide with an existing one, create it as usual,<br />
+- If it does, ask on which Vlan Campus -&gt; Vlan the user wants to create this subnet.<br />
+<br />
+During an interface creation:<br />
+- If there is one subnet in which the address fits, create it as usual,<br />
+- If there are several subnets in which the interface can be added, list those subnets with their associated vlan. The user selects the one he wants.<br />
+<br />
+With the help of subnet types, you could allow/disallow overlapping subnets of certain kinds (for example, LAN subnets can duplicatable, not WAN ones).<br />
+<br />
+Greg	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

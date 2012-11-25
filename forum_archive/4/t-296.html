@@ -1,0 +1,62 @@
+---
+layout: oldforum_layout
+title: want to do some modify on ONA - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page want to do some modify on ONA OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>want to do some modify on ONA</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">zxy5207</p>
+		<p class="dt">30-05-2012 02:15:56</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Dear Mat,<br />
+      I want to do some modify on ONA as the following:<br />
+1.When i fisrt time to add a host, I do not want give it a DNS name, I want to change the DNS name and DNS domain become a option not required. some host is just a PC, A DNS name is not necessary.<br />
+2.I do not need the host actions module, how can i &quot;//&quot; this module?<br />
+3.I have seen a option &quot;security_level&quot; in the /ona/www/modules/ona/host.inc.php, But i can not find any filed to fill this option. Where can i find this?<br />
+Is this possible?<br />
+<br />
+Yours sincerely<br />
+Michael Zhang	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">30-05-2012 21:11:37</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	1. It is a requirement to give a name to every host.  this is used to identify the host within ONA.  It is not required that the name be a 'real' DNS name but the requirement will remain that all hosts have some sort of name.  You could simply name them pc01, pc02 etc etc<br />
+2. I do have plans to make it easier to disable this module.  I for now you can comment out all the $conf entries in 'www/workspace_plugins/builtin/host_actions/config.inc.php' to disable it.<br />
+3. Security level is leftover code for something that once existed.  It is not implemented currently and does not do anything at the moment.  there are plans to implement a host/subnet level security model but that is a ways out.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">zxy5207</p>
+		<p class="dt">11-06-2012 20:58:00</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	<q cite="&amp;quot;Matt&amp;quot;:wq5v9wq9">1. It is a requirement to give a name to every host.  this is used to identify the host within ONA.  It is not required that the name be a 'real' DNS name but the requirement will remain that all hosts have some sort of name.  You could simply name them pc01, pc02 etc etc<br />
+2. I do have plans to make it easier to disable this module.  I for now you can comment out all the $conf entries in 'www/workspace_plugins/builtin/host_actions/config.inc.php' to disable it.<br />
+3. Security level is leftover code for something that once existed.  It is not implemented currently and does not do anything at the moment.  there are plans to implement a host/subnet level security model but that is a ways out.</q><br />
+<br />
+Thank you very much</q>	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

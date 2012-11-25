@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="AUTHOR" content="matt@opennetadmin.com">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="KEYWORDS" content="ona opennetadmin forum archive">
+    <meta name="description" content="Old OpenNetAdmin forum archive topic page Config Compare, Multiple Devices OpenNetAdmin Forum Archive">
+
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>Config Compare, Multiple Devices - OpenNetAdmin Forum Archive</title>
+<script type="text/javascript" src="../jquery.js"></script> <script type="text/javascript" src="../jquery.tablesorter.js"></script> <script type="text/javascript" src="../forum.js"></script>
+  </head>
+
+  <body onload="load('forum')">
+    <a id="forkme_banner" href="https://github.com/opennetadmin"></a>
+    <a id="fishes" href="http://www.christiananswers.net/gospel/home.html"><img style="opacity: 0.3;border: 0 none;" src="/images/fish.gif" height="15"></a>
+<form id="donatebutton" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <h1 id="project_title">OpenNetAdmin</h1>
+          <h2 id="project_tagline">Track. Automate. Configure.</h2>
+          <center>
+            <a class="header_link" href="/">Home</a>
+            <a class="header_link" href="/features.html">Features</a>
+            <a class="header_link" href="/community.html">Community</a>
+            <a class="header_link" href="/develop.html">Develop</a>
+          </center>
+          <section id="downloads">
+            <a class="tar_download_link" href="https://github.com/opennetadmin/ona/tarball/current">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+       <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">Development</a></p>
+</div>
+
+<h1>Config Compare, Multiple Devices</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">dmo</p>
+		<p class="dt">13-03-2009 07:46:15</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi Matt / ONA Team, <br />
+<br />
+I've been testing out the latest features on the demo - everything looking good. <br />
+<br />
+One suggestion would be to implement some way of comparing configurations within multiple devices. It could then be used as a way of storing configurations and even comparing them. I've been looking for something to do specifically that and having it bundled in ONA would just be too cool. <!-- s;) --><img src="{SMILIES_PATH}/icon_e_wink.gif" alt=";)" title=";-)" /><!-- s;) --> <br />
+<br />
+As we talked about, perhaps the interface for configs could be changed to make this easier. Maybe like a sub page of it's own, with just two fields (one for each device) and then choose the config from the device. The current &quot;side by side&quot; with syntax highlighting is great. <br />
+<br />
+Thanks again! Will check back soon. <br />
+<br />
+Daniel	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">13-03-2009 09:16:53</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	<q cite="&amp;quot;dmo&amp;quot;:19iuivoy">Hi Matt / ONA Team, <br />
+<br />
+I've been testing out the latest features on the demo - everything looking good. <br />
+<br />
+One suggestion would be to implement some way of comparing configurations within multiple devices. It could then be used as a way of storing configurations and even comparing them. I've been looking for something to do specifically that and having it bundled in ONA would just be too cool. <!-- s;) --><img src="{SMILIES_PATH}/icon_e_wink.gif" alt=";)" title=";-)" /><!-- s;) --> <br />
+</q><br />
+<br />
+I do plan on creating a better GUI interface for selecting arbitrary hosts and config entries to compare.  This will probably be implemented using some of the new plugin methods I'm working on.  In the mean time, I can offer a really annoying and crappy way to compare arbitrary configs!<br />
+<br />
+You can use the following URL to generate the page.  You will have to come up with your own values for the various IDs that it uses which can get annoying.  If you hover over some of the delete/edit buttons it should show you the ID of the record in the tool tip.<br />
+<br />
+<code>https&#58;//localhost/ona/?work_space=display_config_text&amp;old_id=210&amp;new_id=212&amp;host_id=266</code><br />
+<br />
+old_id and new_id are the record ids for the configuration entries that you want to compare.  Old and new is relative and only really determines right or left in the list.  The host_id is required but does not have to match what the configuration is associated with.<br />
+<br />
+Also, dont forget about the dcm.pl command line.  It has a config_diff module that can do some of this as well.. However it is more rigid in its design (for now) and will only compare configs of a certain type for the selected host.  I suspect I'll be adjusting its abilities to allow arbitrary configs to be used.<br />
+<br />
+<code>localhost&#58; ~ $ dcm&#46;pl -r config_diff<br />
+<br />
+config_diff-v1&#46;00<br />
+Displays the difference between selected archive entries<br />
+<br />
+  Synopsis&#58; config_display &#91;KEY=VALUE&#93; &#46;&#46;&#46;<br />
+<br />
+  Required&#58;<br />
+    host=ID or NAME&#91;&#46;DOMAIN&#93;    display most recent config for specified host<br />
+    type=TYPE                   type of config to display -<br />
+                                  usually &quot;IOS_VERSION&quot; or &quot;IOS_CONFIG&quot;<br />
+  Optional&#58;<br />
+    ida=ID                      First config ID to compare against idb<br />
+    idb=ID                      Second config ID to compare against ida<br />
+<br />
+  Note&#58;<br />
+    If you don't pass any IDs you will get the two most recent configs<br />
+    related to the host/type you provide&#46;<br />
+</code><br />
+<br />
+<br />
+<q cite="&amp;quot;dmo&amp;quot;:19iuivoy"><br />
+As we talked about, perhaps the interface for configs could be changed to make this easier. Maybe like a sub page of it's own, with just two fields (one for each device) and then choose the config from the device. The current &quot;side by side&quot; with syntax highlighting is great. <br />
+<br />
+Thanks again! Will check back soon. <br />
+<br />
+Daniel</q><br />
+<br />
+This is probably about what it will look like.  I've got a few ideas for it but we'll see how well it all flows. <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --></q></code></code></q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">dmo</p>
+		<p class="dt">16-04-2009 02:50:58</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi Matt, <br />
+<br />
+Sounds pretty complex. I've been searching for ages for something that can compare Nortel Router configs (they are like Cisco configs on evil drugs - 3000+ lines of barely human readable crap).  <br />
+<br />
+Right now I'm using a crude perl/python script to do it. Once you get a frontend up on this one, I'll play with it and see if I can get it to work. <br />
+<br />
+-- Daniel	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">16-04-2009 20:41:17</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Daniel,<br />
+<br />
+I went ahead and opened a ticket (<a href="http&amp;#58;//opennetadmin&amp;#46;com/bugs/index&amp;#46;php?do=details&amp;task_id=51:ol1kue9q">#51</a>) for a more robust configuration archive management interface.  That way hopefully I wont forget about it and be a bit more motivated to clear the task.<br />
+<br />
+For now, if you already have a method for getting the configuration, you can update your perl/python scripts to add it to the ONA archive.  Just call &quot;dcm.pl -r config_add&quot; and feed it the data.. you can use &quot;config=-&quot; to read from stdin.   If you want to get real adventurous, you can just use an http post to push the config directly (all dcm.pl is is a fancy front end to some web get/posts)<br />
+<br />
+More to come on this front.. when I can find some time.......................</a>	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+
+
+
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2598149030041038";
+//728x90_bugsfooter
+google_ad_slot = "1568593938";
+google_ad_width = 728;
+google_ad_height = 90;
+//--></script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+    <!-- FOOTER  -->
+    <div class="outer">
+      <footer class="inner">
+          <center>
+ 
+
+
+          </center>
+      </footer>
+    </div>
+
+          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script
+%3E"));
+          </script>
+
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-361894-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
+
+

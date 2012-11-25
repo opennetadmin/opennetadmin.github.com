@@ -1,0 +1,98 @@
+---
+layout: oldforum_layout
+title: Support for non-singleton Resource Records in CLI - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Support for non-singleton Resource Records in CLI OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Support for non-singleton Resource Records in CLI</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">Frank</p>
+		<p class="dt">23-10-2009 13:54:01</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I admit, I'm a little lost here. As I see it, ONA CLI won't let me define multiple RRs of the same Type for the same owner.<br />
+<br />
+CLI Error Message is:<br />
+/opt/ona/bin/dcm.pl -l admin -p admin -r host_add  host=webluna.lvm.de type=7 ip=10.37.1.51 notes=*nex*<br />
+INFO =&gt; Host ADDED: webluna.lvm.de<br />
+INFO =&gt; Interface ADDED: 10.37.1.51<br />
+INFO =&gt; DNS A record ADDED: webluna.lvm.de -&gt; 10.37.1.51<br />
+/opt/ona/bin/dcm.pl -l admin -p admin -r host_add  host=webluna.lvm.de type=7 ip=10.37.2.51 notes=*nex*<br />
+ERROR =&gt; Another DNS record named webluna.lvm.de is already in use, the primary name for a host should be unique!<br />
+<br />
+The other way round, having multiple Owners for the same RR Data, i.e. same IPadress, different Owners seems not to work in CLI AND Webinterface.<br />
+<br />
+According to DNS specs both should be perfectly ok, or am I missing something here? Is this a bug or a feature?<br />
+<br />
+Regards,<br />
+Frank	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">24-10-2009 11:25:31</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	You should be able to do this.  First off a little basic definition of a few things.<br />
+<br />
+When doing a host_add you are adding a host/device entity.  For example, its a web server.  This server has sever IP addresses associated with it (AKA interfaces).  Once you do a host_add operation it performs several tasks at once.  It adds a host/device and the first interface.  It also assigns a primary DNS name to that host which points at the IP you provided.  Now if you want other IP addresses you need to do interface_add operations.  You can add as many IP addresses to a host as is needed.<br />
+<br />
+What is happening below is that you are telling ONA to add two separate hosts with the same exact name.  When you really want to add a host.. then add interfaces to it...<br />
+<br />
+Now that you have a host with several IP addresses, you can then start to assign further DNS RRs to it of whatever type is required.  <br />
+<br />
+/opt/ona/bin/dcm.pl -l admin -p admin -r host_add host=webluna.lvm.de type=7 ip=10.37.1.51 notes=*nex*<br />
+/opt/ona/bin/dcm.pl -l admin -p admin -r interface_add host=webluna.lvm.de ip=10.37.2.51	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Frank</p>
+		<p class="dt">24-10-2009 12:41:10</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thanks Matt, makes perfect sense.<br />
+Leaves the question regarding different owners of same IP Address (A Record). One could ask: Why do you want to do this? Well, <strong>I</b> do not.But the legacy requires it, unfortunately.<br />
+<br />
+Frank</strong>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">24-10-2009 12:54:20</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	You can also do this as well.. For things like HSRP,CARP,VRRP etc where an IP is actually associated with and shared between multiple hosts.  If you click the little green circle with a + in it that is next to the interface listed on the display host screen you can share the IP with another host.  Or from the CLI use the &quot;interface_share&quot; module.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Frank</p>
+		<p class="dt">24-10-2009 15:09:33</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Cool stuff, perhaps I just should have read the manual   <!-- s;) --><img src="{SMILIES_PATH}/icon_e_wink.gif" alt=";)" title=";-)" /><!-- s;) --> <br />
+<br />
+Thanks very much<br />
+Frank	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

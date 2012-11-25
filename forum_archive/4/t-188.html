@@ -1,0 +1,64 @@
+---
+layout: oldforum_layout
+title: stale device records? - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page stale device records? OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>stale device records?</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">yshollander</p>
+		<p class="dt">10-05-2011 13:27:18</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi,<br />
+<br />
+I'm trying to clean up an unused entry in the locations table (id = 5).  The UI shows no hosts at that location.  However,  ONA still complains that there are still entries in the devices table with location_id = 5.  <br />
+<br />
+There are no corresponding hosts table records for those devices.<br />
+<br />
+SELECT * FROM devices d, hosts h where d.id = h.device_id and d.location_id = 5 <br />
+<br />
+returns no records.<br />
+<br />
+Is it safe to manually remove the records from the devices table so that I can delete the location record as desired?<br />
+<br />
+Thanks<br />
+<br />
+Isaac	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">11-05-2011 15:09:47</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Try doing the following query:<br />
+<br />
+select * from devices where location_id = 5  (though its pretty much what you already did)<br />
+<br />
+In looking at my dev code it looks ok and I'm unable to recreate an issue of being able to delete this data.  It simply says look for this location id in any of the rows of the devices table.  It is possible that the device table has records in it that dont match up to any hosts and are orphaned.  If this is the case, yes, it is safe to delete those device records.   You can further check to see before deleting that there are no host records that use that device id<br />
+<br />
+select * from hosts where device_id = ??<br />
+<br />
+I think your query is trying to join together this information.. but if the record does not exist, then it would not show up... I suggest separating the query out like my examples to see if you can find the data that might be orphaned.<br />
+<br />
+Ultimately yes, delete the devices, then you can delete the location.  OR you could even update the location_id and set it to 0 or some other value for any that are currently 5<br />
+<br />
+update devices set location_id = 0 where location_id = 5	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

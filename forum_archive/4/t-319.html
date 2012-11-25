@@ -1,0 +1,93 @@
+---
+layout: oldforum_layout
+title: Adding device types to database - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Adding device types to database OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Adding device types to database</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">ccie4526</p>
+		<p class="dt">03-07-2012 08:18:48</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Minor rant: The search function on this forum blows. I try to search on the string &quot;adding device types&quot; and I'm told that those are common words and are being ignored. So howtf am I supposed to search for an answer to my challenges?   <!-- s:evil: --><img src="{SMILIES_PATH}/icon_evil.gif" alt=":evil:" title=">:-)" /><!-- s:evil: --> <br />
+<br />
+Ok, so the very few Device Types that exist in the default install obviously need to be changeable, or words to that effect. Unfortunately, I can't seem to find any documentation whatsoever in this regard.<br />
+<br />
+Since I'm not able to add any new device types when I create the host in teh GUI, here's what I tried:<br />
+<code>&#46;&#46;/bin/dcm&#46;pl -r host_modify host=vl004-core&#46;&lt;removed&gt; set_type=&quot;Cisco 7609&quot;<br />
+ERROR =&gt; The device type specified, Cisco 7609, does not exist!<br />
+</code><br />
+<br />
+Ok, when I do the dcm.pl --list, there are no options whatsoever to do anything with device types.  So how do I create additional device types for the equipment I'm adding?</code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">03-07-2012 13:16:41</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Agreed.  This forum software is annoying and I'm starting to get spammed heavily even though I have several measures in place to stop it.  I'm about to just ditch the forum and use the github.com issues system entirely for both bugs and questions.  not ideal but might work.<br />
+<br />
+So, First off the device types are manageable in the GUI only at the moment.  One of these years I'll get around to fixing that issue, should be simple to expose to dcm.pl.  At this point you would access them in the admin section of the menu.  There are several sections that come together to make an assignable device type.<br />
+<br />
+manufacturers, device roles, device models and device types.<br />
+<br />
+First you would create a manufacturer then you you would create a device model.  A model would be something like &quot;Cisco 7609&quot;.  then you would create a device type which is a device model and a role.  Device roles are things like router, switch, firewall, workstation etc etc.  They are fairly arbitrary and subject to how you want to classify things.  I hope that makes sense.<br />
+<br />
+With that said, I had always envisioned something on the order of a device type 'pack' which would just load in common Cisco things or common Juniper things etc etc.  Common gets to be a fun concept however so I've not gone down that road.  Its certainly a bit of up front work but once done, doesn't need too much attention over time.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">ccie4526</p>
+		<p class="dt">03-07-2012 15:54:03</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	<q>At this point you would access them in the admin section of the menu.</q><br />
+<br />
+Aha. This is why I would be so confused then. Although I am logged in as admin, I do not have any &quot;admin section&quot; on the GUI page.  Or at least I'm not seeing it.    Browser is Firefox 13.0.1.</q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">03-07-2012 23:31:11</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hrm.. something is off then.  By default the admin account should have full admin permissions.  If you have logged in as admin/admin then it should have bumped your permissions.  If you click the little person icon at the top left of the screen it will give you a popup window showing your assigned permissions.  It should have admin as one of the privilege levels.<br />
+<br />
+The menu should have an edit, view etc sections.. if it only has 'ona' as a section then its not logged in properly	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">ccie4526</p>
+		<p class="dt">04-07-2012 08:11:17</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	<q>The menu should have an edit, view etc sections.. if it only has 'ona' as a section then its not logged in properly</q><br />
+<br />
+So about now is when I start feeling really stupid.... What I did not realize was that one has to hover the mouse over the word &quot;Menu&quot; in the top left in order to see the various menu options. I just figured that the word &quot;Menu&quot; was just the tab title, and that what was seen in the tab was the menu of things to do.<br />
+<br />
+Attached a screenshot showing what I see. Just wasn't intuitively obvious to me.  <!-- s:oops: --><img src="{SMILIES_PATH}/icon_redface.gif" alt=":oops:" title=":-|" /><!-- s:oops: --></q>	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

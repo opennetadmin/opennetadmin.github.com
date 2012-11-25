@@ -1,0 +1,66 @@
+---
+layout: oldforum_layout
+title: PHP error Can't add DNS record for an interface - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page PHP error Can't add DNS record for an interface OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>PHP error: Can't add DNS record for an interface</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">yshollander</p>
+		<p class="dt">29-06-2009 11:22:21</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I added a host with 2 interfaces, and clicked on the green + icon to try and add a DNS record for the second interface.<br />
+<br />
+Unfortunately, no popup window shows up, and I get the following error in /var/log/httpd/error_log:<br />
+<br />
+[Mon Jun 29 13:18:28 2009] [error] [client 192.168.1.85] PHP Notice:  Undefined <br />
+index:  footer in /opt/ona/www/include/xajax_webwin/webwin.inc.php on line 105, <br />
+referer: <!-- m --><a class="postlink" href="http://athos/ona/">http://athos/ona/</a><!-- m --><br />
+<br />
+Is there a workaround or a patch available for this issue?<br />
+<br />
+Thanks<br />
+<br />
+Isaac	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">06-07-2009 11:52:14</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	i do not currently see the same behavior.  i'll poke a bit further and see if i can't duplicate it.<br />
+<br />
+my popup window doesn't show - but i do get an entry in the workspace bar up top that i can click on to bring the window to the front.  is this possibly what you're seeing?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">09-07-2009 08:55:29</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	As tmyoungjr mentioned, there is a known issue when clicking that option.  It opens the window but remains &quot;minimized&quot; in the top bar.  The option in the green plus menu is there simply because it makes sense from a flow perspective to be there.  It simply opens the same window as any other add dns record button does, it just pre-populates the IP address field with the interface you were on at the time.  <br />
+<br />
+You can just hit the add dns record link at the bottom of the dns record list on ANY screen to get the edit window open.  then you can add any type of record to any host in the system.  <br />
+<br />
+As far as the error about the footer you got?  not sure what that is.  I suspect its harmless (assuming  all else is working on your ONA  instance) and that you might want to adjust the error_reporting values in your php.ini file to something like: error_reporting  =  E_ALL &amp; ~E_NOTICE	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

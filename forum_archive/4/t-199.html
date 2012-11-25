@@ -1,0 +1,238 @@
+---
+layout: oldforum_layout
+title: Ldap User not getting advance Permissions - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Ldap User not getting advance Permissions OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Ldap User not getting advance Permissions</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">smehra</p>
+		<p class="dt">12-06-2011 04:24:39</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Greetings,<br />
+<br />
+I am a new user of open net admin. I like it a lot especially with the plugins. I am able to use the ldap (Active directory) userid and password but inspite of giving admin rites to the user both individually and groupwise to the user. It (user) does not get the advance permissions to edit anything , Also the menu is restricted to ONA.<br />
+<br />
+Here the summary of what i tried<br />
+1) created same user in ONA gave individual rights.<br />
+2) gave it admin group which has all the rights.<br />
+3) Created a new group ldapadmin with all rights and assigned to the user.<br />
+4) manually added entries in permission_allocation table in ona db.<br />
+<br />
+No luck so far. Any help would be highly appreicated <!-- s:-) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":-)" title=":-)" /><!-- s:-) --> Thanks in advance.<br />
+<br />
+ <br />
+<br />
+Following are the logs,<br />
+<br />
+I havechanged domain, IP and username. <br />
+<br />
+<br />
+Jun 12 11:00:12 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; webwin_submit() Window: edit_domain Function: editor Form:<br />
+Jun 12 11:00:12 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; auth() User[user1] does not have the advanced permission<br />
+Jun 12 11:00:12 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; db_insert_record($dbh, sessions, $insert) called<br />
+Jun 12 11:00:12 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; db_update_record($dbh, sessions, $where, $insert) called<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:anonymous@192.168.X.X">anonymous@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; db_get_record($dbh, $where, sessions, ) called<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:anonymous@192.168.X.X">anonymous@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; db_update_record($dbh, sessions, $where, $insert) called<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; webwin_submit() Window: menu_control Function:  Form: FALSE<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; auth() User[user1] does not have the subnet_add permission<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; auth() User[user1] does not have the host_modify permission<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; auth() User[user1] does not have the host_modify permission<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; auth() User[user1] does not have the dns_record_del permission<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; auth() User[user1] does not have the vlan_add permission<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; auth() User[user1] does not have the vlan_add permission<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; auth() User[user1] does not have the subnet_add permission<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; auth() User[user1] does not have the location_add permission<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; auth() User[user1] does not have the host_del permission<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; auth() User[user1] does not have the dns_record_add permission<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; auth() User[user1] does not have the dns_record_add permission<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; auth() User[user1] does not have the advanced permission<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; auth() User[user1] does not have the advanced permission<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; auth() User[user1] does not have the advanced permission<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; db_insert_record($dbh, sessions, $insert) called<br />
+Jun 12 11:00:21 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; db_update_record($dbh, sessions, $where, $insert) called<br />
+Jun 12 11:00:22 ona.example.com <!-- e --><a href="mailto:anonymous@192.168.X.X">anonymous@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; db_get_record($dbh, $where, sessions, ) called<br />
+Jun 12 11:00:22 ona.example.com <!-- e --><a href="mailto:anonymous@192.168.X.X">anonymous@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; db_update_record($dbh, sessions, $where, $insert) called<br />
+Jun 12 11:00:22 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; webwin_submit() Window: edit_domain Function: editor Form:<br />
+Jun 12 11:00:22 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; auth() User[user1] does not have the advanced permission<br />
+Jun 12 11:00:22 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; db_insert_record($dbh, sessions, $insert) called<br />
+Jun 12 11:00:22 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; db_update_record($dbh, sessions, $where, $insert) called<br />
+Jun 12 11:00:42 ona.example.com <!-- e --><a href="mailto:anonymous@192.168.X.X">anonymous@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; db_get_record($dbh, $where, sessions, ) called<br />
+Jun 12 11:00:42 ona.example.com <!-- e --><a href="mailto:anonymous@192.168.X.X">anonymous@192.168.X.X</a><!-- e -->: [DEFAULT] DEBUG =&gt; db_update_record($dbh, sessions, $where, $insert) called<br />
+Jun 12 11:00:42 ona.example.com <!-- e --><a href="mailto:user1@192.168.X.X">user1@192.168.X.X</a><!-- e -->: [DEFAULT] INFO =&gt; [Desktop] user1 has logged out	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">13-06-2011 14:09:48</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Great I'm glad you like it so far!<br />
+<br />
+First off lets take a look at what the system has pulled up for groups/access from LDAP.  To do this, simply log in and then click on the little person icon just to the left of the logout button (top right of the screen)<br />
+<br />
+This will show you the groups and permissions you have currently assigned from your LDAP server.  You then must have a group defined in ONA that is named exactly like whichever group you have listed in this list that you wish to assign rights to.  Once that group is created and set up with permissions you can log back in again and click the user info button again.. it should show you the permissions from the group.<br />
+<br />
+That should get you what you need.<br />
+<br />
+Thanks.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">smehra</p>
+		<p class="dt">19-06-2011 00:39:27</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thanks a Lot for responding Matt.<br />
+<br />
+I have seen the part that you asked me too below are the details<br />
+<br />
+username :: &lt;mydomain username&gt;<br />
+Groups :: &lt;Groups That i belong to in MY Active Directory&gt;<br />
+Permissions :: &lt;Blank&gt;	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">20-06-2011 22:14:53</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Well it sounds like the LDAP is working fine and pulling out your groups.<br />
+<br />
+you simply need to go to admin-&gt;manage groups.. then add a new group.. The group name should match one of the ones in the list of groups pulled from LDAP and is case sensitive.  Then once you have saved that, grant that group the appropriate permissions by clicking the little picture of a Key next to its name.<br />
+<br />
+Now log in again and you should have permissions listed.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">cmorgan</p>
+		<p class="dt">06-12-2011 13:53:42</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I'm really struggling with LDAP authentication in ONA. Firstly I'm unclear as to whether or not there is in fact a plugin or if this functionality was installed with the main ONA installation file.<br />
+<br />
+I found that file auth_ldap.config.php and have edited it as shown below<br />
+<br />
+&gt;&gt;&gt;&gt;&gt;&gt;&gt;<br />
+<br />
+$conf['authtype']    = 'ldap'<br />
+<br />
+// Common settings and debugging<br />
+$conf['auth']['ldap']['debug'] = 'true';<br />
+$conf['auth']['ldap']['version'] = '3';<br />
+$conf['auth']['ldap']['server'] = 'ldap://sx.net';<br />
+<br />
+// Active Directory DN bind as user example<br />
+//$conf['auth']['ldap']['binddn'] = '%{user}@example.local';<br />
+$conf['auth']['ldap']['usertree'] = 'OU=Employees,DC=sx,DC=net';<br />
+$conf['auth']['ldap']['userfilter']  = '(sAMAccountName=%{user})';<br />
+$conf['auth']['ldap']['grouptree'] = 'OU=Groups,DC=sx,DC=net';<br />
+$conf['auth']['ldap']['groupfilter']  = '(&amp;(cn=*)(Member=%{dn})(objectClass=group))';<br />
+//$conf['auth']['ldap']['mapping']['grps'] = array('memberOf'=&gt;'/cn=(.+?),/i');<br />
+//$conf['auth']['ldap']['referrals'] = '0';<br />
+&lt;&lt;&lt;&lt;&lt;&lt;&lt;<br />
+<br />
+I've been trying to followalong with instructions given at <!-- m --><a class="postlink" href="http://www.dokuwiki.org/auth:ldap"><a href="http://www.dokuwiki.org/auth:ldap&lt;/a&gt;&lt;!--">http://www.dokuwiki.org/auth:ldap</a><!--</a> m --> but I'm not certain what's going on after a certain point. More specifically<br />
+<br />
+&gt;&gt;&gt;&gt;&gt;&gt;<br />
+Authentication is done in these steps:<br />
+<br />
+    First see if we need to do an anonymous bind by looking in the usertree for a %{user}:<br />
+        If found: Set usertree as DN.<br />
+        If not: Try to find a DN for the given login doing a search in the usertree with the given userfilter - there have to be exact one result<br />
+    Try to bind with the found DN and the given password - if this succeeds access is granted<br />
+    For getting the groups a user is in, the groupfilter is used to search the grouptree.<br />
+&lt;&lt;&lt;&lt;&lt;&lt;<br />
+<br />
+I'm sure that the php-ldap extension has been installed and is enabled. Nothing's happening here though, and I really would like to get this working. Please help if you can ...any help would be greatly appreciated.<br />
+<br />
+Thank you.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">07-12-2011 09:28:46</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	The authentication is plugin based, in the sense that other authentication plugins can be written as needed.  The latest version of ONA includes the default auth and the LDAP auth modules.<br />
+<br />
+You must first turn on the LDAP module by logging into the GUI as admin and navigating to menu-&gt;admin-&gt;manage system config.  Find the 'authtype' entry and set it to 'ldap'.<br />
+<br />
+Then you must configure the auth_ldap.config.php file for your environment.  You should first copy the example file to the local config directory as follows:<br />
+cp /opt/ona/www/config/auth_ldap.config.php /opt/ona/www/local/config/auth_ldap.config.php<br />
+<br />
+Then edit /opt/ona/www/local/config/auth_ldap.config.php<br />
+<br />
+A few comments about your config settings.<br />
+<br />
+1. setting $conf['authtype'] = 'ldap' in this file will likely not work as it must be set so it knows to even look at your ldap config file.  It should be set through the GUI which updates a database table.  This very well could be the issue as to why its not working for you?  <br />
+2. although there are ways to configur the ldap auth to work without the binddn, it is really the most simple way,  I would strongly suggest you do not comment out that line.  based on the other config settings you show here, it should read '${user}@sx.net'<br />
+3. the mapping groups option is how it determines which groups a user is a part of.  believe you will want that line uncommented as well<br />
+4. Active directory does not work properly with referrals turned on.  For this reason you must uncomment the referrals line and set it to 0.<br />
+<br />
+I &quot;think&quot; you are close.  At this point I'm suspecting that you may not have enabled the ldap auth module in the system config settings dialog which may be the root of your issues?  And lastly they debug output in /var/log/ona.log should be logging SOMETHING about the authtype used (either default or ldap) and would also be logging some level of ldap information.  You might turn on debug and then log in/out of the GUI.  then search for a message like the following:<br />
+<br />
+[DEFAULT] INFO =&gt; [Desktop] USERNAME has logged in via authtype: (something like ldap or default)<br />
+<br />
+<br />
+Hope that helps.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">cmorgan</p>
+		<p class="dt">07-12-2011 14:08:25</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yup ...turning on LDAP through the GUI was the fundamental problem for me. If we end up adopting this tool at my company I'll have to do a write up of how to install and configure everything ...if/when I do that write up I'll post it here so future newbies to ONA won't have it quite so hard as I have.<br />
+<br />
+Thanks for all your help Matt.<br />
+<br />
+Also one tid bit that I thought was very strange I saw this error in the /var/logs/httpd/error_log<br />
+<br />
+&gt;&gt;&gt;&gt;&gt;<br />
+ PHP Parse error:  syntax error, unexpected T_VARIABLE in /opt/ona/www/config/auth_ldap.config.php on line 20<br />
+&lt;&lt;&lt;&lt;&lt;<br />
+<br />
+Basically it refused to work until I got rid of the line &quot;$conf['auth']['ldap']['debug'] = 'true';&quot;	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">07-12-2011 17:21:06</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Awesome, glad you got it working!<br />
+<br />
+And yep.. I'll take any documentation you want to provide.. <br />
+<br />
+The php parse error thing is interesting..I'll test that on my side too.. it should work fine as I recall using it when I developed the code.. maybe I changed something after the fact that broke it again.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

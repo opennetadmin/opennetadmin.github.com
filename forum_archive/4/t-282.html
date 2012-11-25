@@ -1,0 +1,64 @@
+---
+layout: oldforum_layout
+title: LDAP Authentication - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page LDAP Authentication OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>LDAP Authentication</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">lanks</p>
+		<p class="dt">02-04-2012 10:37:50</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I followed the guide that was posted somewhere down the forum to setup LDAP authentication, however, as soon as I switch the authtype to 'ldap' (no quotes) OpenNetAdmin fails to load completely.  Here's my auth_ldap.config.php (with a few things modified for privacy):<br />
+<br />
+// Common settings and debugging<br />
+$conf['auth']['ldap']['debug'] = 'true';<br />
+$conf['auth']['ldap']['version'] = '3';<br />
+$conf['auth']['ldap']['server'] = 'ldap://dc1.domain.com:389';<br />
+<br />
+// Active Directory DN bind as user example<br />
+$conf['auth']['ldap']['binddn'] = '%{user}@domain.com';<br />
+$conf['auth']['ldap']['usertree'] = 'OU=IS Dept,OU=Company Users,DC=domain,DC=com';<br />
+$conf['auth']['ldap']['userfilter']  = '(sAMAccountName=%{user})';<br />
+$conf['auth']['ldap']['grouptree'] = 'OU=IS Dept,OU=Company Users,DC=domain,DC=com';<br />
+$conf['auth']['ldap']['groupfilter']  = '(&amp;(cn=*)(Member=%{dn})(objectClass=group))';<br />
+$conf['auth']['ldap']['mapping']['grps'] = array('memberOf'=&gt;'/cn=(.+?),/i');<br />
+$conf['auth']['ldap']['referrals'] = '0';	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">03-04-2012 16:43:19</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	If ONA does not work at all you may have forgotten to have &quot;&lt;?php&quot; at the top of your auth_ldap.config.php file.  It is required since it is actually php code.  might be the issue?  otherwise It looks pretty good to me.  you might want to do an ldapsearch command from the CLI to test basic connectivity to your LDAP server from your ONA server.  <br />
+<br />
+This one is a hard one to diagnose since there are so many ways an ldap server schema can be set up.  If you are pointing at an AD server then this should be working for you provided your OU structure is correct for your environment.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">lanks</p>
+		<p class="dt">04-04-2012 11:36:45</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Fixed it.  The problem ended up being that I didn't have php5-ldap installed.  Sorry, my Linux skills leave a lot to be desired <!-- s:P --><img src="{SMILIES_PATH}/icon_razz.gif" alt=":P" title=":-P" /><!-- s:P -->	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

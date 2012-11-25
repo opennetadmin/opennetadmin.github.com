@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="AUTHOR" content="matt@opennetadmin.com">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="KEYWORDS" content="ona opennetadmin forum archive">
+    <meta name="description" content="Old OpenNetAdmin forum archive topic page DNS Files in Zone View OpenNetAdmin Forum Archive">
+
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>DNS Files in Zone View - OpenNetAdmin Forum Archive</title>
+<script type="text/javascript" src="../jquery.js"></script> <script type="text/javascript" src="../jquery.tablesorter.js"></script> <script type="text/javascript" src="../forum.js"></script>
+  </head>
+
+  <body onload="load('forum')">
+    <a id="forkme_banner" href="https://github.com/opennetadmin"></a>
+    <a id="fishes" href="http://www.christiananswers.net/gospel/home.html"><img style="opacity: 0.3;border: 0 none;" src="/images/fish.gif" height="15"></a>
+<form id="donatebutton" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <h1 id="project_title">OpenNetAdmin</h1>
+          <h2 id="project_tagline">Track. Automate. Configure.</h2>
+          <center>
+            <a class="header_link" href="/">Home</a>
+            <a class="header_link" href="/features.html">Features</a>
+            <a class="header_link" href="/community.html">Community</a>
+            <a class="header_link" href="/develop.html">Develop</a>
+          </center>
+          <section id="downloads">
+            <a class="tar_download_link" href="https://github.com/opennetadmin/ona/tarball/current">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+       <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>DNS Files in Zone View</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">rstorm</p>
+		<p class="dt">18-05-2009 02:40:35</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi There,<br />
+<br />
+i woulfd like to know how i can get the nice DNS Zone View on the Bottom of the DNS View?<br />
+<br />
+I can see the DNS Zone file in the Demo, but it doesn't work in my installation.<br />
+<br />
+Thank in advance,<br />
+Rene	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">anton</p>
+		<p class="dt">18-05-2009 08:14:32</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I'm seeing the same thing.<br />
+<br />
+For what it's worth, I compared settings in System Config Administration between the demo and my own install - among others, there was an additional setting &quot;build_dns_type&quot; (with a value of &quot;bind&quot;), and the debug level was set to 2. I tried setting these same things on my install, but I'm not able to reproduce the same zone view.<br />
+<br />
+I'm wondering if the demo site is running a development snapshot?<br />
+<br />
+Anton	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">18-05-2009 09:30:52</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	The dns and dhcp configuration build code is not actually released as part of ONA.  Its getting pretty close to completion and there are several who have been testing it out.<br />
+<br />
+My intention is to charge a small one time fee (like 25$ or something???) to download these modules.   Once you buy one you can use it however you need, on as many servers as you need.  No licensing or crap like that, just something to help out the development of things.<br />
+<br />
+Some challenges for me however are:<br />
+* how do I charge people<br />
+* how do I keep track of those who have paid so I dont try and charge them again for it if they want to download it again.<br />
+* in general, all the crap that comes with charging money.<br />
+<br />
+I have ideas on all this but as usual, things take time.  Lemme know what your thoughts are on the subject	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tin</p>
+		<p class="dt">18-05-2009 21:17:04</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Personally I'm disappointed to here that...<br />
+I don't want to sound ungrateful, but I would probably not pay. Simple reason is that I've paid for things like this before, only to discover it's not actually suited to my needs.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">18-05-2009 22:25:37</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	tin,<br />
+<br />
+I would rather not charge for it myself but at this point I've not made one penny from ONA and have a monthly hosting charge to pay for.  (yea I know there are things like sourceforge for free)  I would love to do it as more of a &quot;suggested donation&quot; type of thing, and maybe thats how it will end up.  At this point payed or not, you mostly get what I think is useful.  Will that suite everyones needs?  most likely not.  <br />
+<br />
+I try to take whatever feedback I'm given and incorporate what I can but that will only work to a certain degree.<br />
+<br />
+Maybe something more on the order of a &quot;feature bounty&quot; would be useful?<br />
+<br />
+I'm not looking to make millions (or even thousands).. but to at least break even and hopefully have a little bit of motivation for when the wife asks &quot;now tell me how this time spent is paying off?&quot;  <!-- s;) --><img src="{SMILIES_PATH}/icon_e_wink.gif" alt=";)" title=";-)" /><!-- s;) --><br />
+<br />
+So, I understand there will be those who would prefer not to pay,  I still hope that you would let me know what your needs are to see if they can be met, for free or not.<br />
+<br />
+Thanks.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">19-05-2009 08:54:12</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	personally - a paid donation would be great.<br />
+<br />
+however - i also understand paying for the more complex features if i'd want them.<br />
+<br />
+i think i'd be on the fence.  as we've been over - im the type of user that doesnt need a LOT of functionality right now.  so you'd probably not make much off me.<br />
+<br />
+the other problem you have is offering an open source app that requires payment of some type.  many will balk at that.<br />
+<br />
+i do however realize that making up some of the cost would definitely be beneficial for you (for various reasons hah).	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">19-05-2009 09:34:17</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I'll go ahead and describe in more detail what my thoughts are on this.  Maybe it will help with the discussion so everyone can see what I've been thinking.<br />
+<br />
+First off, the core of ONA will always be free and open sourced under the GPL.  Basically this includes what you get today and much more features and functions that will come as it grows.  This is the functionality that most people are looking for and it covers the broadest group of people.<br />
+<br />
+Now of course there are many people out there that would love to take it to the next step and let ONA manage their DNS and/or DHCP configurations.  There are also many who don't care about doing this.   This is why the DNS/DHCP build script stuff is a separate component to install.  <br />
+<br />
+My thought has always been that charging a small one time fee to help cover my work is reasonable for those that want to get into the more complex areas of what ONA can do.   There are other modules that I have in the works that may also fall into something that could be free or cheap ($5 range).<br />
+<br />
+The fact is, anyone out there can write any of these modules themselves.  They are not really all that complex (ok I have some experience with it) but it can be done.  And in the future I hope that there are many people out there writing and sharing plugins and modules for ONA.   I have no intention of doing any binary or licensed code.  This means that if you pay for the DHCP build script, you will get some php/shell code that you can change and give to anyone you want.  I wont be able to stop that.  If someone posted this code online, I dont have much ability to stop it from getting out to everyone.  Yes I can try to find or write my own software license that says you cant do all that but I have no real way of enforcing it all.<br />
+<br />
+I'm an Open Source fan to the core and I fall into the same category you all have suggested (i.e. I've never payed for any software I download, if I have to pay, I usually find something else that is free if I can).  With that said, I'm now on the other side of the fence struggling with how to make a little bit from all this but still be true to the whole OSS world.  The whole donation thing seems the best way to go to me but there are still lots of things to do on my side for that.<br />
+<br />
+So, in summary.................... <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+* ONA is free (most of it at least (well all of it is at this point))<br />
+* if you want to write your own DNS/DHCP build code, or other functionality then GREAT I encourage it.  I hope that user contributed modules is the norm in the future.<br />
+* I have some code that does do some extra things and I am contemplating asking for a small one time fee (donation) prior to downloading it.  Once you have it, its yours to do whatever with.  <br />
+* I'm not looking to make a fortune.  If I had .5% of the users pay 20$ I'd be pretty happy.<br />
+<br />
+Anyway I think that explains what I'm thinking.  It may be a while before I figure out how I want to do this.  Thats mainly why nothing has happened yet with it.<br />
+<br />
+Thanks for the discussion!	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">rstorm</p>
+		<p class="dt">20-05-2009 08:20:50</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi Matt,<br />
+<br />
+i can understand your thougths and I will send you 20$ right now, if you will send me my 20$ for all the oss work i've done  <!-- s:roll: --><img src="{SMILIES_PATH}/icon_rolleyes.gif" alt=":roll:" title=":-/" /><!-- s:roll: --> <br />
+I've projects on my own and it is not easy, but as you said: If u want to get charged in form of license fee <br />
+first: you won't earn money with that, because if u want money, i want a supported software (of course). <br />
+second: someone other will take of your project or his own and your project is history.(there are many ipam out there)<br />
+<br />
+That sounds sad, but thats how OSS works. You do work, I do work. All you might earn is: Thanks a lot for your great work.<br />
+<br />
+Regards,<br />
+Rene	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tin</p>
+		<p class="dt">20-05-2009 19:14:44</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Suggested donation and feature bounty are a good idea. Especially if you're only looking to cover some hosting costs and the like.<br />
+<br />
+Is there a reason to not use SourceForge though?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">20-05-2009 21:29:20</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yep the donation/bounty ideas seem the most appropriate.   <br />
+<br />
+I didnt go with sourceforge because I was not too impressed with their original offerings.  Things have been changing and they seem a bit better now.  I also have some non ONA related things on the server and I like the control I get with where I'm at.  I certainly knew that I'd be paying my own way on most of it <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+
+
+
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2598149030041038";
+//728x90_bugsfooter
+google_ad_slot = "1568593938";
+google_ad_width = 728;
+google_ad_height = 90;
+//--></script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+    <!-- FOOTER  -->
+    <div class="outer">
+      <footer class="inner">
+          <center>
+ 
+
+
+          </center>
+      </footer>
+    </div>
+
+          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script
+%3E"));
+          </script>
+
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-361894-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
+
+

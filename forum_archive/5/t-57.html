@@ -1,0 +1,84 @@
+---
+layout: oldforum_layout
+title: New version released -v09.07.15 - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page New version released -v09.07.15 OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">News</a></p>
+</div>
+
+<h1>New version released -v09.07.15</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">16-07-2009 09:01:07</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I've recently added an SVN repository so you can check out the latest trunk release.  You can see the latest changelog info via that interface as well.<br />
+<br />
+<a>http&#58;//opennetadmin&#46;com/repos</a><br />
+<br />
+MP: fix for report lists that are empty. Also incremented the install index for new release<br />
+MP: added the access key combo for a space to invoke the SAVE button on edit forms.. usually SHIFT+ALT+SPACE on Firefox. <br />
+MP: formatting issues on cli output. fixed per yshollander's suggestions.<br />
+MP: fixes for location module zip_code name.. also not all location fields are required as suggested by the edit form. playing with space as a save accesskey <br />
+MP: plugin related work to allow plugins to show their own workspace plugin as well as tool menu items easier.<br />
+MP: fixed a lame bug where new table sequences would not initialize properly. added suggest device function <br />
+MP: fix message for no reports to list. <br />
+MP: allow the ona_sql module to return the record data in an array for processes that want to use that information <br />
+MP: fixed the custom attribute search methods for both hosts and subnets. <br />
+MP: the show all ips on subnet window now also includes the last_response field 	<br />
+MP: More reporting related work. Fixes for reports, fixes to some form focus and other minor cleanup <br />
+MP: suggestions for adding an interface to an existing host. <br />
+MP: added a report_run module. This allows you to run reports from the CLI if needed. <br />
+MP: Minor README updates<br />
+MP: auto create ptr is now an option when adding a host as well. <br />
+MP: forgot to bump version numbers on host/subnet code.. also defaulted device type to nothing, this forces the user to pick something <br />
+MP: removed the create a pointer domain message when adding subnets. now you will get an error when a PTR is created without a domain existing. The user must add the domain themselves. who knows if this will be good or not...<br />
+MP: forgot to update version number and addptr option description <br />
+MP: misc cleanup for dhcp_server module <br />
+MP: added option when creating new interfaces, to automatically create a PTR record to the primary host. Also the add dns record gui now allows you to add a PTR record.<br />
+MP: allow dhcp_server modules to use find_subnet function.. allows more flexability for the CLI commands. also a PTR example for dns_record_add <br />
+MP: BUG #57 added a keep adding checkbox to vlan edits <br />
+MP: fixed search results form so it actually clears the forms now and so that it will remember the last search that was done. Also prep new sql upgrade file <br />
+MP: block edits now focus first field, made notes field bigger <br />
+MP: fix on the blocks table.<br />
+MP: fixed quick search so that it would work using MAC addresses that are associated with more than one host.<br />
+MP: Fixed PTR related error when adding domain server association. Also field length issue for TXT records fixed<br />
+MP: fixed bug where new version wouldnt allow you to change dns names on existing hosts. it was an ebegin not updating issue. <br />
+MP: more minor updates per Timm S <br />
+MP: missing drop table statement per Timm <br />
+MP: quick add of a new module for this release</a>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">21-07-2009 06:59:02</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	yay for SVN! wheeee <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+thanks matt for the new release	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">21-07-2009 07:10:17</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	btw gotta love upgrades that go seamlessly!	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

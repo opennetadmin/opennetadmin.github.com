@@ -1,0 +1,58 @@
+---
+layout: oldforum_layout
+title: gateway address/allocated address - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page gateway address/allocated address OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">Development</a></p>
+</div>
+
+<h1>gateway address/allocated address</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">psyber</p>
+		<p class="dt">05-01-2010 13:39:05</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I see you have a bug listed to add this feature (FS#15 - Flag a single IP on a subnet as the gateway address )<br />
+highlander style <br />
+I'd like to dissuade you on that point, many of our networks have multiple gateways and it's becoming more and more common.<br />
+Take for instance VRRP, multiple routers with a virtual gateway, each ip is a valid default route off the network (though if you want the benefit of the redundancy you will choose the virtual gateway address) There may be times when you want to force traffic through a specific router or interface and to do that you would use one of the real IPs.  <br />
+<br />
+Only slightly realated...<br />
+Just being able to mark an IP as &quot;reserved&quot; or &quot;mysteriously in use&quot; without having to give it a unique name would be a big help (and make them easier to find later). We recently switched over from doing the files manually to using ONA and though we did get everything that was in DNS into ONA I still find that we have several hosts that are not registered but are active (my only clues to what they are are the MAC addresses and the data from IPPlan which we were using for allocation tracking). One day I will seek out all those hosts/admins and deal with them on a &quot;personal&quot; level but for now I just want to prevent the IP conflicts. Another possible solution might be an indicator on the available IPs that tells you if it answers pings or an nmap scan.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">07-01-2010 22:28:42</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I understand your position here.  My thought for this feature is that it will simply be a classification of an IP on the network.  It will not be a requirement to tag an interface nor will it be much more than just a note about the IP being the default.<br />
+<br />
+While I agree that there can potentially be many gateways to a subnet, I believe there will always only be one &quot;default&quot; gateway.  Let me know if this does not jive with reality though. <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+Another motivation for this feature was a way to do a one click task to flag the gateway IP and then the DHCP build scripts could use that for the dhcp default gateway option for that subnet instead of having to manually add it as a dhcp option.  If one forgets to manually add it, the subnet will not build.<br />
+<br />
+So, I agree with what you have stated but I plan that the feature would not be required and more of an informational thing for just the default of many gateways<br />
+<br />
+As far as marking an IP as reserved or in use without requiring a name.. you are not the first to suggest this one (I my self have wanted it from time to time).  At this point I dont plan on adding that ability because it will require lots of code to get around inherent things in ONA.  Adding a dummy dns name and the IP does not take too long to add.  Also, while it may take time to do, it is a good thing to track down those hosts and deal with them (yea yea I know.. wishful thinking in many organizations).<br />
+<br />
+When it comes to an indicator that shows available ips based on pings/nmap scans.... that I can do for you.. in fact it is actually built and is part of the next release.  It provides an audit of your network based on nmap pings and compares that to data in ONA so you can keep things accurate and audited.  This tool will also update the &quot;last response&quot; flag for an IP so you can run reports on IPs that are potentially no longer in use.  A simple screenshot is here:<br />
+<br />
+<img />http&#58;//opennetadmin&#46;com/images/nmap_scan&#46;png[/img:3u0op8r3]<br />
+<br />
+Hope that helps? <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

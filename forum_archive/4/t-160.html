@@ -1,0 +1,95 @@
+---
+layout: oldforum_layout
+title: Noob question naming convention - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Noob question naming convention OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Noob question: naming convention</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">drakpz</p>
+		<p class="dt">29-05-2010 00:28:39</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi,<br />
+<br />
+just starting to look at ONA, and looks very promising. One question: is it possible to bind to hostname assignment a sort of naming convention scheme? so that when you choose the subnet, the &quot;role&quot;, and so on, it suggests you with a proposed hostname, avoiding to overlap with existing ones?<br />
+<br />
+thanx!	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">29-05-2010 10:49:16</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Currently this is not a feature that exists.   I think it would be a nice feature but I've not spent any time thinking through the details or how time consuming it would be.<br />
+<br />
+Since there are a large number of use cases and options something like this would need for each persons needs, lets start discussing what everyone thinks would be good.  Then hopefully we can come up with something that works for as many as possible.  I've got some ideas but lets hear what you all have to say on it.<br />
+<br />
+Some thoughts/questions:<br />
+<br />
+* are you trying to just get unique naming per subnet or a full blown naming scheme that is &quot;complex&quot;.  I.E something more than just a number counter of sorts?<br />
+* I assume this is more for the &quot;casual end user&quot; like a helpdesk or something?  Basically a helper for those that don't know the naming standards as well?  Typically things that are more bulk added and repeated could be managed much easier by the dcm.pl tool in a scripted fashion.  this way all business logic is applied programaticaly then applied to ONA.<br />
+<br />
+Good question/suggestion.. keep them coming!	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">drakpz</p>
+		<p class="dt">31-05-2010 01:31:01</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thanx for your answer!<br />
+<br />
+What I'd like to do is to &quot;plug&quot; a helper in the &quot;host add&quot; form, so that you can get for example a popup that asks you for some information and suggest you with the right hostname, according to the naming convention. I know it's very specific, so I assume that one should be able to code the logic and return a custom string. In our case, for example, we would like to compose the name in this way:<br />
+<br />
+1 char - role (S = Server, W = workstation, etc.)<br />
+1 char - OS (W= windows, L= linux, etc)<br />
+4 char - &quot;site&quot; (eg. 9999, 0123, etc)<br />
+2 char - role (eg. AS = app server, DB= database, etc)<br />
+2 char - counter (01 and on). <br />
+<br />
+Probably the easiest way, as you suggest, is using dcm.pl, after looking up a few tables with the counters for each category... <br />
+How do you see the chance of hooking a custom popup in the web gui instead?<br />
+<br />
+Thanx<br />
+ Drakpz	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">09-06-2010 23:34:55</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Sorry I've not gotten back with you in awhile.. <br />
+<br />
+At this point I am thinking of a tool that would not actually live in the host add form itself (due to some structural things that would have to change first) but could live as a helper tool kind of like the IP calculator at the right hand side of the screen.<br />
+<br />
+It could essentially implement a set of rules that would help you build a name and come up with the next iteration of the name.. then it could dump the result into the add host form or add dns record form.<br />
+<br />
+Thats a loose thought at this point.  I will say however that this one is fairly low on the priority list at the moment due to some other things that are in the works (and juggling with my real day job).<br />
+<br />
+I'd say anyone that has more thoughts and opinions on this functionality should please add your comments.  They can be taken into consideration when the time comes to work on this one.<br />
+<br />
+Thanks.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

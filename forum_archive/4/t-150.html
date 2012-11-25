@@ -1,0 +1,70 @@
+---
+layout: oldforum_layout
+title: SuperNet containers - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page SuperNet containers OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>SuperNet containers</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">TroyC</p>
+		<p class="dt">17-02-2010 17:15:05</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Looking at the demo, this feature doesn't appear to be there.<br />
+<br />
+Situation::: multiple data centers and their IP ranges are broken down logically<br />
+<br />
+C = 192.168.<br />
+___  = just a manual indent <br />
+<br />
+<br />
+<br />
+C.0.0/20 == DataCenter1 Production Networks<br />
+___C.0.0/24 DC1 ProdNet1<br />
+___C.1.0/24 DC1 ProdNet2<br />
+___C.2.0/24 DC1 ProdNet3<br />
+etc<br />
+<br />
+C.64.0/20 == Datacenter2 Production Networks<br />
+___C.64.0/24 DC1 ProdNet1<br />
+___C.65.0/26 DC1 ProdNet2<br />
+___C.65.64/26 DC1 ProdNet3<br />
+etc<br />
+<br />
+Would it be possible to have supernet containers?<br />
+<br />
+Thanks,<br />
+TroyC	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">20-02-2010 14:19:53</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	This functionality is there in the form of &quot;blocks&quot;.  You can access it using the add blocks menu option or click on the blocks tab in the search results window.<br />
+<br />
+Basically a block is an arbitrary range of IP addresses that you define and give a name to.  Then the block map allows you to visualize address space.  <br />
+<br />
+I generally define blocks similar to what you mention so I can document the supernets of various locations then I can also document even within subnets smaller ip address ranges that I may want to reserve for various purposes.<br />
+<br />
+Have a look at blocks and see if it will work for what you need.<br />
+<br />
+Thanks	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

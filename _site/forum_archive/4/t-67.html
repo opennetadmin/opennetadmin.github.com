@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="AUTHOR" content="matt@opennetadmin.com">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="KEYWORDS" content="ona opennetadmin forum archive">
+    <meta name="description" content="Old OpenNetAdmin forum archive topic page PHP Notice  Undefined variable OpenNetAdmin Forum Archive">
+
+
+    <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/stylesheet.css">
+
+    <title>PHP Notice  Undefined variable - OpenNetAdmin Forum Archive</title>
+<script type="text/javascript" src="../jquery.js"></script> <script type="text/javascript" src="../jquery.tablesorter.js"></script> <script type="text/javascript" src="../forum.js"></script>
+  </head>
+
+  <body onload="load('forum')">
+    <a id="forkme_banner" href="https://github.com/opennetadmin"></a>
+    <a id="fishes" href="http://www.christiananswers.net/gospel/home.html"><img style="opacity: 0.3;border: 0 none;" src="/images/fish.gif" height="15"></a>
+<form id="donatebutton" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <h1 id="project_title">OpenNetAdmin</h1>
+          <h2 id="project_tagline">Track. Automate. Configure.</h2>
+          <center>
+            <a class="header_link" href="/">Home</a>
+            <a class="header_link" href="/features.html">Features</a>
+            <a class="header_link" href="/community.html">Community</a>
+            <a class="header_link" href="/develop.html">Develop</a>
+          </center>
+          <section id="downloads">
+            <a class="tar_download_link" href="https://github.com/opennetadmin/ona/tarball/current">Download this project as a tar.gz file</a>
+          </section>
+        </header>
+    </div>
+
+       <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>PHP Notice:  Undefined variable:</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">eliufoo</p>
+		<p class="dt">27-08-2009 04:31:54</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi everyone,<br />
+<br />
+I'm very new to the OpenNetAdmin tool and I'm trying it for the first time. I have finished the installation successfully with no errors and managed to access the front web interface. However, I can not log out or login in as root. <br />
+<br />
+i can get to the login page by typing <!-- m --><a class="postlink" href="http://localhost/ona/login.php">http://localhost/ona/login.php</a><!-- m -->, insert admin | admin. After login, i come back on the guest account.<br />
+<br />
+view the error_log file for apache, I'm seeing the following entries when I try to logout.<br />
+<q><br />
+ [Thu Aug 27 03:55:45 2009] [error] [client 192.168.0.1] PHP Notice:  Undefined variable: https in /opt/ona/www/logout.php on line 19, referer: <!-- m --><a class="postlink" href="http://192.168.0.128/ona/">http://192.168.0.128/ona/</a><!-- m --><br />
+[Thu Aug 27 03:55:45 2009] [error] [client 192.168.0.1] PHP Notice:  Undefined index:  user in /opt/ona/www/index.php on line 24, referer: <!-- m --><a class="postlink" href="http://192.168.0.128/ona/logout.php">http://192.168.0.128/ona/logout.php</a><!-- m --><br />
+[Thu Aug 27 03:55:45 2009] [error] [client 192.168.0.1] PHP Notice:  Undefined index:  skip_version_check in /opt/ona/www/include/html_desktop.inc.php on line 26, referer: <!-- m --><a class="postlink" href="http://192.168.0.128/ona/logout.php">http://192.168.0.128/ona/logout.php</a><!-- m --><br />
+[Thu Aug 27 03:55:46 2009] [error] [client 192.168.0.1] PHP Notice:  Undefined index:  content_box in /opt/ona/www/include/html_desktop.inc.php on line 194, referer: <!-- m --><a class="postlink" href="http://192.168.0.128/ona/logout.php">http://192.168.0.128/ona/logout.php</a><!-- m --><br />
+[Thu Aug 27 03:55:46 2009] [error] [client 192.168.0.1] PHP Notice:  Undefined variable: MOTD in /opt/ona/www/include/html_desktop.inc.php on line 366, referer: <!-- m --><a class="postlink" href="http://192.168.0.128/ona/logout.php">http://192.168.0.128/ona/logout.php</a><!-- m --><br />
+[Thu Aug 27 03:55:46 2009] [error] [client 192.168.0.1] PHP Notice:  Undefined variable: work_space in /opt/ona/www/include/html_desktop.inc.php on line 493, referer: <!-- m --><a class="postlink" href="http://192.168.0.128/ona/logout.php">http://192.168.0.128/ona/logout.php</a><!-- m --><br />
+[Thu Aug 27 03:55:46 2009] [error] [client 192.168.0.1] PHP Notice:  Undefined variable: search in /opt/ona/www/include/html_desktop.inc.php on line 505, referer: <!-- m --><a class="postlink" href="http://192.168.0.128/ona/logout.php">http://192.168.0.128/ona/logout.php</a><!-- m --><br />
+[Thu Aug 27 03:55:47 2009] [error] [client 192.168.0.1] PHP Notice:  Undefined index:  work_space in /opt/ona/www/winc/work_space.inc.php on line 164, referer: <!-- m --><a class="postlink" href="http://192.168.0.128/ona/">http://192.168.0.128/ona/</a><!-- m --><br />
+[Thu Aug 27 03:55:47 2009] [error] [client 192.168.0.1] PHP Notice:  Undefined index:  work_space in /opt/ona/www/winc/work_space.inc.php on line 178, referer: <!-- m --><a class="postlink" href="http://192.168.0.128/ona/">http://192.168.0.128/ona/</a><!-- m --><br />
+[Thu Aug 27 03:55:47 2009] [error] [client 192.168.0.1] PHP Notice:  Undefined variable: history in /opt/ona/www/winc/work_space.inc.php on line 179, referer: <!-- m --><a class="postlink" href="http://192.168.0.128/ona/">http://192.168.0.128/ona/</a><!-- m --><br />
+[Thu Aug 27 03:55:47 2009] [error] [client 192.168.0.1] PHP Notice:  Undefined variable: history in /opt/ona/www/winc/work_space.inc.php on line 179, referer: <!-- m --><a class="postlink" href="http://192.168.0.128/ona/">http://192.168.0.128/ona/</a><!-- m --><br />
+[Thu Aug 27 03:55:47 2009] [error] [client 192.168.0.1] PHP Notice:  Undefined variable: year in /opt/ona/www/winc/work_space.inc.php on line 181, referer: <!-- m --><a class="postlink" href="http://192.168.0.128/ona/">http://192.168.0.128/ona/</a><!-- m --><br />
+[Thu Aug 27 03:55:47 2009] [error] [client 192.168.0.1] PHP Notice:  Undefined variable: history in /opt/ona/www/winc/work_space.inc.php on line 182, referer: <!-- m --><a class="postlink" href="http://192.168.0.128/ona/">http://192.168.0.128/ona/</a><!-- m --><br />
+[Thu Aug 27 03:55:47 2009] [error] [client 192.168.0.1] PHP Notice:  Undefined variable: history in /opt/ona/www/winc/work_space.inc.php on line 182, referer: <!-- m --><a class="postlink" href="http://192.168.0.128/ona/">http://192.168.0.128/ona/</a><!-- m --></q><br />
+<br />
+please assist...<br />
+<br />
+thanks,<br />
+elly</q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">27-08-2009 09:00:28</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	By default, the system has an admin and a guest user.  There is no root user (you may have that confused with the mysql administrator user?).<br />
+<br />
+You should be able to log in as 'admin' with a password of 'admin' then you can create new users and change the admin password after that.  (click the person icon next to the username box in the top right to change passwords)<br />
+<br />
+As far as the PHP notice messages in your error_log, these are actually harmless and are not an indication of an issue.    If you would like to stop them from logging (and using HD space) you can add the following to your /opt/ona/www/index.php file: <br />
+<br />
+<code>error_reporting (E_ALL ^ E_NOTICE);</code><br />
+<br />
+I will be adding this to the next release as well..<br />
+<br />
+Hope that helps.. let me know if it doesnt fix the issue.</code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">eliufoo</p>
+		<p class="dt">28-08-2009 05:22:05</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	hi,<br />
+<br />
+Thanks for the quick response. You have just encourage me to use this tool even more.<br />
+<br />
+Ok, on the password side, I'm not confusing it with the mysql account. When I click logout, it returns me back to the same Main screen [logged in as guest]. Hence, i can't change my account to admin and continue with other features.<br />
+<br />
+Could this relate to parameteres configured on the php.ini?<br />
+<br />
+thanks,<br />
+Elly	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">28-08-2009 07:41:18</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yep sounds like you are doing it all right.. <br />
+<br />
+This very well could be an issue with php.ini settings.  The really annoying part is this issue sounds very familiar to me but I cannot remember what causes it.  php.ini seems to be the thing that my gut is saying is causing the issue.<br />
+<br />
+One thing you might try is to bump up the debug value in the sys_config table using a sql statement to something like 5.  Then you can look at /var/log/ona.log and see if there are anymore hints as to what is going on.  I'll try and dig on it a bit more and see whats up.. Sorry I dont have a quick answer on this one.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">eliufoo</p>
+		<p class="dt">28-08-2009 07:51:26</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Not a problem...<br />
+<br />
+Now, what are the steps in increasing the debug to 5?<br />
+<br />
+I believe in we can nail this problem very soon <!-- s:-) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":-)" title=":-)" /><!-- s:-) --> and find a permanent solution.<br />
+<br />
+Additionally, we can share php.ini file and compare the parameters<br />
+<br />
+thanks,<br />
+elly	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">eliufoo</p>
+		<p class="dt">28-08-2009 08:03:10</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	hi,<br />
+<br />
+I made changes on the sys_log to 5 but, i'm not seeing any errors.<br />
+<br />
+When i click logout, this is the message i'm receiving on /var/log/ona.log<br />
+<br />
+<q>Aug 28 5:35:19 localhost.localdomain guest@192.168.0.1: INFO =&gt; Authorization successful for guest</q></q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">28-08-2009 09:09:46</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Ok, I'll start by sending you my php.ini file.. it is not actually a tar file I just added that extension to the name.. my system is an ubuntu box.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">eliufoo</p>
+		<p class="dt">30-08-2009 10:10:31</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi Matt,<br />
+<br />
+Ok. I tried using your php.ini but still ended up with the same results. The application is just refusing to login as admin.<br />
+<br />
+Can we also compare what php modules you have installed!? <br />
+<br />
+Currenlty, these are the ones I have installed<br />
+<br />
+<code>&#91;root@localhost ona&#93;# rpm -qa | grep php<br />
+php-ldap-5&#46;1&#46;6-23&#46;2&#46;el5_3<br />
+php-common-5&#46;1&#46;6-23&#46;2&#46;el5_3<br />
+php-pear-db-1&#46;7&#46;13-2&#46;el5&#46;rf<br />
+php-pdo-5&#46;1&#46;6-23&#46;2&#46;el5_3<br />
+php-pear-1&#46;4&#46;9-4&#46;el5&#46;1<br />
+php-mysql-5&#46;1&#46;6-23&#46;2&#46;el5_3<br />
+php-gd-5&#46;1&#46;6-23&#46;2&#46;el5_3<br />
+php-cli-5&#46;1&#46;6-23&#46;2&#46;el5_3<br />
+php-snmp-5&#46;1&#46;6-23&#46;2&#46;el5_3<br />
+php-5&#46;1&#46;6-23&#46;2&#46;el5_3<br />
+&#91;root@localhost ona&#93;# </code></code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">31-08-2009 09:34:49</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	One command that might be a bit better is 'php -m'.  At the bottom of this post is my output from that.  I am using ubuntu so my list of packages will be different than yours.<br />
+<br />
+One thing I'd like to dig further on is the connection to mysql.  It seems to me it is having trouble connecting to the database somehow.  You will want to look at the file '/opt/ona/www/local/config/database_settings.inc.php' and check that the settings there are what you would expect them to be.  Mine are like this:<br />
+<br />
+<code>            'primary' =&gt; array(<br />
+                'db_type'     =&gt; 'mysqlt',  // using mysqlt for transaction support<br />
+                'db_host'     =&gt; 'localhost',<br />
+                'db_login'    =&gt; 'ona_sys',<br />
+                'db_passwd'   =&gt; '',<br />
+                'db_database' =&gt; 'ona',<br />
+                'db_debug'    =&gt; false,<br />
+</code><br />
+<br />
+You should then try and log into mysql from the cli with something like the following:  mysql -p -u ona_sys ona<br />
+<br />
+<code><br />
+$ php -m<br />
+&#91;PHP Modules&#93;<br />
+bcmath<br />
+bz2<br />
+calendar<br />
+ctype<br />
+curl<br />
+date<br />
+dba<br />
+dom<br />
+exif<br />
+filter<br />
+ftp<br />
+gd<br />
+gettext<br />
+hash<br />
+iconv<br />
+imap<br />
+json<br />
+ldap<br />
+libxml<br />
+mbstring<br />
+mcrypt<br />
+mime_magic<br />
+mysql<br />
+mysqli<br />
+ncurses<br />
+openssl<br />
+pcntl<br />
+pcre<br />
+PDO<br />
+pdo_mysql<br />
+posix<br />
+readline<br />
+Reflection<br />
+session<br />
+shmop<br />
+SimpleXML<br />
+snmp<br />
+soap<br />
+sockets<br />
+SPL<br />
+standard<br />
+svn<br />
+syck<br />
+sysvmsg<br />
+sysvsem<br />
+sysvshm<br />
+tokenizer<br />
+wddx<br />
+xdiff<br />
+xml<br />
+xmlreader<br />
+xmlwriter<br />
+xsl<br />
+zip<br />
+zlib<br />
+<br />
+&#91;Zend Modules&#93;<br />
+<br />
+</code></code></code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">wiedernix</p>
+		<p class="dt">01-09-2009 02:28:16</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hello,<br />
+<br />
+I´m experiencing the same error, login.php is not used - you´re automatically logged in<br />
+as user guest (the same with <!-- m --><a class="postlink" href="http://hostname/ona/login.php">http://hostname/ona/login.php</a><!-- m --> with admin/admin).<br />
+<br />
+I´ve tried both ona-v9.05.02 and v09.07.15 on RHEL 5.3 (64 Bit, Selinux permissive),<br />
+and adjusted my php.ini<br />
+<br />
+bye<br />
+,<br />
+Stefan	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">eliufoo</p>
+		<p class="dt">01-09-2009 12:47:17</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi Matt,<br />
+<br />
+Ok. I checked my database_settings.inc.php file and the user settings. Also did the mysql connection and it worked. The user defined on the database_settings.inc.php can access ona database.<br />
+<br />
+Still not sure where the problem could be. <br />
+<br />
+The operating system I'm using is CentOS 5.x<br />
+<br />
+Output for php -m<br />
+<code><br />
+&#91;root@localhost config&#93;# php -m<br />
+&#91;PHP Modules&#93;<br />
+bz2<br />
+calendar<br />
+ctype<br />
+curl<br />
+date<br />
+dbase<br />
+exif<br />
+ftp<br />
+gd<br />
+gettext<br />
+gmp<br />
+hash<br />
+iconv<br />
+ldap<br />
+libxml<br />
+mime_magic<br />
+mysql<br />
+mysqli<br />
+openssl<br />
+pcntl<br />
+pcre<br />
+PDO<br />
+pdo_mysql<br />
+pdo_sqlite<br />
+posix<br />
+pspell<br />
+Reflection<br />
+session<br />
+shmop<br />
+SimpleXML<br />
+snmp<br />
+sockets<br />
+SPL<br />
+standard<br />
+sysvmsg<br />
+sysvsem<br />
+sysvshm<br />
+tokenizer<br />
+wddx<br />
+xml<br />
+zlib<br />
+<br />
+&#91;Zend Modules&#93;<br />
+<br />
+</code><br />
+<br />
+Any other angels I should investigate?</code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">01-09-2009 21:20:37</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I've been wracking my brain trying to remember what this issue was.. and I know I've seen it before.  Here is a snip from an ancient forum post that is no longer online.  I'd suggest we re-visit the error reporting stuff in your php.ini.  <br />
+<br />
+<q><br />
+Re: undefined index errors  <br />
+<br />
+The &quot;Undefined&quot; messages you are getting in the apache log are actually ok.  They are a result of my sloppy coding on my part and the fact that I usually run my php configuration with the following statement in the php.ini file:                                                                                             <br />
+<br />
+<code><br />
+error_reporting  =  E_ALL &amp; ~E_NOTICE<br />
+</code>                              <br />
+<br />
+The messages you are seeing are just notices etc about how I should be declaring my variables first before using them.  Since PHP is configured to display them it starts to effect the XML that is sent as part of the interface.                                                                                                                                                                                            <br />
+<br />
+There are two things you could do.  Add the &quot;&amp; ~E_NOTICE&quot; to your error_reporting line or you can set &quot;display_errors = Off&quot;<br />
+<br />
+As to what you choose to do is dependent on your environment and what you need but either or both of these settings should be fine for most people.<br />
+<br />
+</q><br />
+<br />
+The reply to that post was:<br />
+<br />
+<q><br />
+Re: undefined index errors                                                              <br />
+Thanks Matt!                                                                                                      <br />
+<br />
+That was the key: reported php errors were garbaging all the xml received by navigator.<br />
+<br />
+error_reporting  =  E_ALL &amp; ~E_NOTICE<br />
+<br />
+Now I can access all menu items and check how the program works.                                   <br />
+</q><br />
+<br />
+I think it is the error messages that are being printed.  This guy was using SuSE.</q></code></q>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">eliufoo</p>
+		<p class="dt">13-09-2009 05:29:31</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi matt,<br />
+<br />
+sorry for the late feedback, had a crazy week..<br />
+<br />
+Now, I have tried adding the line on both ona/www/index.php and then tried on /etc/php.ini. But still ended up with the results. <br />
+<br />
+Starting to believe it could relate distro version.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">13-09-2009 17:49:41</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hmm well this is quite annoying.  Thanks for sticking with me on it.  That way others can benefit!<br />
+<br />
+Ok.. so here is the next thing I'd like to try.<br />
+<br />
+Download the DCM.PL utility.  This is the command line interface for ONA.    I want to see if it behaves as it should.  Start on this page (<!-- m --><a class="postlink" href="http://opennetadmin.com/docs/utils/dcm.pl"><a href="http://opennetadmin.com/docs/utils/dcm.pl&lt;/a&gt;&lt;!--">http://opennetadmin.com/docs/utils/dcm.pl</a><!--</a> m -->) then go download it using the link provided. <br />
+<br />
+Once you have it installed try running the following:<br />
+<br />
+<code>dcm&#46;pl -r subnet_add</code><br />
+<br />
+Then try:<br />
+<br />
+<code>dcm&#46;pl -r subnet_add name=TEST ip=10&#46;1&#46;1&#46;0 netmask=255&#46;255&#46;255&#46;0 type=LAN</code><br />
+<br />
+You should get some feedback on how it is working just from the CLI.  Also watch your apache error_log as well as /var/log/phperror.log or equiv.  Also watch the /var/log/ona.log as well.  Post the content of each of those logs here.  <br />
+<br />
+Thanks!</code></code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">eliufoo</p>
+		<p class="dt">27-09-2009 05:59:31</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi Matt,<br />
+<br />
+Again.. Sorry for the delay and thanks for sticking with me on this issue.<br />
+<br />
+Ok. I did what you requested but didn't get any logs entry on both /var/log/httpd/error.log &amp; /var/log/ona.log. <br />
+<br />
+However, from the CLI, I received these notification.<br />
+<br />
+<code>&#91;root@localhost www&#93;# pwd<br />
+/opt/ona/www<br />
+&#91;root@localhost www&#93;# ls -l dcm&#46;pl<br />
+-rwxrwx--- 1 elly elly 17809 Sep 27 09&#58;25 dcm&#46;pl<br />
+&#91;root@localhost www&#93;#<br />
+<br />
+&#91;root@localhost elly&#93;# &#46;/dcm&#46;pl -r subnet_add<br />
+&#46;/dcm&#46;pl&#58; line 1&#58; !DOCTYPE&#58; No such file or directory<br />
+&#46;/dcm&#46;pl&#58; line 2&#58; syntax error near unexpected token `newline'<br />
+&#46;/dcm&#46;pl&#58; line 2&#58; ` &quot;http&#58;//www&#46;w3&#46;org/TR/xhtml1/DTD/xhtml1-transitional&#46;dtd&quot;&gt;'<br />
+<br />
+&#91;root@localhost elly&#93;# &#46;/dcm&#46;pl -r subnet_add name=TEST ip=10&#46;1&#46;1&#46;0 netmask=255&#46;255&#46;255&#46;0 type=LAN<br />
+&#46;/dcm&#46;pl&#58; line 1&#58; !DOCTYPE&#58; No such file or directory<br />
+&#46;/dcm&#46;pl&#58; line 2&#58; syntax error near unexpected token `newline'<br />
+&#46;/dcm&#46;pl&#58; line 2&#58; ` &quot;http&#58;//www&#46;w3&#46;org/TR/xhtml1/DTD/xhtml1-transitional&#46;dtd&quot;&gt;'</code><br />
+<br />
+I hope this helps.<br />
+<br />
+p.s: i will respond alot faster this time around.</code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">27-09-2009 20:17:45</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	hmm well this is good.. its more to go off of.. I'm researching what it might be..<br />
+<br />
+For now I have tried to recreate the issue by installing CentOS as well.  However, it all worked for me with no issues.  So I'll post the steps I took to get it working in hopes it might help out somehow?<br />
+<br />
+*Started with CentOS 5.2 vmware image that I downloaded from <!-- w --><a class="postlink" href="http://www.thoughtpolice.co.uk/vmware/"><a href="http://www.thoughtpolice.co.uk/vmware/&lt;/a&gt;&lt;!--">www.thoughtpolice.co.uk/vmware/</a><!--</a> w --><br />
+*yum install httpd mysql-server mysql php php-mysql<br />
+*service httpd start<br />
+*service mysqld start<br />
+*tar -C /opt -zxvf ona-v09.09.15.tar.gz<br />
+*ln -s /opt/ona/www /var/www/html/ona<br />
+*Had to turn off selinux from enforce mode.  you can do a &quot;getenforce&quot; and see what the state of selinux is.  Then I used &quot;setenforce permissive&quot;.  You'll probably need to restart apache?<br />
+*chown -R apache /opt/ona/www<br />
+<br />
+That was it.  When I ran the installer I made sure all the prerequisites were &quot;yes&quot;.  It all ran ok for me at that point.<br />
+<br />
+I suspect you did much the same so the problem is probably something else.  I'll see what I can find out about the DOCTYPE error stuff you were getting.    <br />
+<br />
+Also I'm out of town tomorrow so it will be a bit before I can respond.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+
+
+
+<div align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2598149030041038";
+//728x90_bugsfooter
+google_ad_slot = "1568593938";
+google_ad_width = 728;
+google_ad_height = 90;
+//--></script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+
+    <!-- FOOTER  -->
+    <div class="outer">
+      <footer class="inner">
+          <center>
+ 
+
+
+          </center>
+      </footer>
+    </div>
+
+          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script
+%3E"));
+          </script>
+
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-361894-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
+
+

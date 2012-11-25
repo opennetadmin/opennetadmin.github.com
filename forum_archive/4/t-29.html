@@ -1,0 +1,56 @@
+---
+layout: oldforum_layout
+title: Changing domain/subnet appends wrong PTR - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Changing domain/subnet appends wrong PTR OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Changing domain/subnet appends wrong PTR</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">cpgawron</p>
+		<p class="dt">22-05-2009 17:24:54</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I have multiple sub-delegated domain and I've entered each on into ONA. The master is delegated on a different server outside of ONA.<br />
+<br />
+Example.  dns domains delegated in ONA --&gt; example.com (forward) and 1.168.192.in-addr.arpa  and 2.168.192.in-addr.arpa (reverses)<br />
+<br />
+and when I change a hosts ip/subnet the PTR record gets appended wrong.<br />
+<br />
+For example...<br />
+<br />
+host &quot;test.example.com&quot; IP 192.168.1.1 needs changing to 192.168.2.1. I update the IP from the interface field selecting the IP from the different subnet. After updating the PTR is wrong.<br />
+PTR was 1.1.168.192.in-addr.arpa<br />
+now its 1.2.168.192.1.168.192.in-addr.arpa instead of 1.2.168.192.in-addr.arpa<br />
+<br />
+Is this a known issue? Other then going in and changing the domain_id in mysql.... the only way I see is to delete the record entirely and recreate it with the new IP which regenerates the PTR.<br />
+<br />
+~carter	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">22-05-2009 17:29:02</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	This is a bug I've not encountered yet.  I think there are a few similar bugs floating around.  If you dont mind, go open a bug report on this in the ticket system so I dont loose track.  <br />
+<br />
+I'll have a look at it and hopefully have a fix soon.. I suspect this will help fix a few of the other issues that have been encountered around some of the domain processing.<br />
+<br />
+Thanks!	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

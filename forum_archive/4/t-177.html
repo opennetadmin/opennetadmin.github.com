@@ -1,0 +1,49 @@
+---
+layout: oldforum_layout
+title: Merging NMAP info into Subnet Info - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Merging NMAP info into Subnet Info OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Merging NMAP info into Subnet Info</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">boojew</p>
+		<p class="dt">19-02-2011 13:27:33</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Trying this product for the 1st time and I love the basic concept, but I need this for several large routed networks which do not use DHCP and the thought of inputing and maintaining hosts by hand hurts my head. Is there anyway I can merge the nmap IP usage info + the reverse DNS info into the subnet info automatically?<br />
+<br />
+Thanks	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">23-02-2011 17:25:59</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	So there are a couple of ways I would suggest doing this.  <br />
+<br />
+1. is the built in nmap scan tool.  Once you have a subnet defined in the system, you can configure the nmap scan to ping addresses on that subnet.  The resulting report has a comparison of network vs database and then actions that help you to add hosts and or interfaces as needed.  This is still somewhat manual and requires you to click through forms and fill them out etc.  <br />
+2. use the dcm.pl command line interface to script your data loads.  This allows you to quickly load data into the system.  This however requires you to format your data into the syntax that dcm.pl would require for each module. <br />
+<br />
+Both options require an understanding of how your environment is actually configured.  You can't simply just create a new host for each IP address as some of them may be sub interfaces on a single host.  There is really no good programatical way to determine that.<br />
+<br />
+I have some scripts that can help generate subnet creation feeds for dcm.pl based on router configurations.  Though subnets are not as difficult as hosts to manage.<br />
+<br />
+Hope this helps.  There are certainly things that could be done to help people do initial population of data but much of it is very specific to individual implementations.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

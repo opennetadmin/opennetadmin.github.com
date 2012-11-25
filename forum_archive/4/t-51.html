@@ -1,0 +1,82 @@
+---
+layout: oldforum_layout
+title: Host in wrong Domain, if has a subdomain - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Host in wrong Domain, if has a subdomain OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Host in wrong Domain, if has a subdomain</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">rstorm</p>
+		<p class="dt">06-07-2009 06:48:24</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi there,<br />
+<br />
+after inserting a new host to a domain which has a subdomain often the host is linked to the wrong domain.<br />
+<br />
+Somebody has the same feature?<br />
+<br />
+Bye,<br />
+Rene<br />
+<br />
+id domain_id name<br />
+269     17      j99s-pwin01.backup.j99.intern<br />
+273     17      j00s-pwin01.backup<br />
+275     17      j99s-pwin01.backup	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tmyoungjr</p>
+		<p class="dt">06-07-2009 11:53:19</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	so you had :<br />
+<br />
+j99s-pwin01.backup<br />
+<br />
+then you added : <br />
+<br />
+j99.intern<br />
+<br />
+and ended up with :<br />
+<br />
+j99s-pwin01.backup.j99.intern<br />
+<br />
+?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">09-07-2009 09:04:10</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I know of a few possible issues but I'll need to know a bit more detail.  It looks like you have a domain_id of 17 in your examples.  what is the acutal name of this domain?  <br />
+<br />
+If you could give me a few examples of some domains and subdomains that you have as well as the fully qualified names you are trying to add to them it would help.  Also please indicate the &quot;host&quot;  part and the &quot;domain&quot; part of the FQDNs you are adding.  for instance:<br />
+<br />
+host1.sub  domain.com<br />
+or<br />
+host1  sub.domain.com<br />
+or<br />
+host1  domain.com<br />
+<br />
+thanks	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

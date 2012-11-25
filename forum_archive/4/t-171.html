@@ -1,0 +1,108 @@
+---
+layout: oldforum_layout
+title: v10.05.27 install error - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page v10.05.27 install error OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>v10.05.27 install error</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">tipsimagi</p>
+		<p class="dt">12-12-2010 02:47:21</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Total noob here attempting to install for the first time.<br />
+<br />
+On Fedora 12<br />
+* apache 2.2-15-1<br />
+* php 5.3-1<br />
+* adodb installed<br />
+* odbc installed<br />
+* mbstring installed<br />
+<br />
+<br />
+Prerequisite checks<br />
+PHP version &gt; 4.1:	Yes<br />
+Has GMP support:	Yes<br />
+Has mbstring support:	Yes<br />
+/var/www/html/ona/www/local/config dir writable by '':	Yes<br />
+<br />
+<br />
+Connected to 'localhost' as 'root'.<br />
+Dropped existing instance of 'ona_default'.<br />
+Created new database 'ona_default'.<br />
+Selected existing DB: 'ona_default'.<br />
+There was an error processing tables.<br />
+Specified key was too long; max key length is 1000 bytes<br />
+There was a fatal error. Install may be incomplete. Fix the issue and try again<br />
+<br />
+Any help would be greatly appreciated.<br />
+<br />
+Best wishes,<br />
+<br />
+TipsiMagi	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tipsimagi</p>
+		<p class="dt">12-12-2010 19:11:47</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	<code># diff -u ona-table_schema&#46;xml&#46;org ona-table_schema&#46;xml<br />
+--- ona-table_schema&#46;xml&#46;org    2010-12-12 16&#58;53&#58;57&#46;034103002 -0600<br />
++++ ona-table_schema&#46;xml        2010-12-12 16&#58;53&#58;30&#46;867124252 -0600<br />
+@@ -162,8 +162,8 @@<br />
+     &lt;field name=&quot;primary_host_id&quot; type=&quot;I&quot; size=&quot;10&quot;&gt;<br />
+       &lt;NOTNULL/&gt;<br />
+     &lt;/field&gt;<br />
+-    &lt;field name=&quot;asset_tag&quot; type=&quot;C&quot; size=&quot;255&quot;/&gt;<br />
+-    &lt;field name=&quot;serial_number&quot; type=&quot;C&quot; size=&quot;255&quot;/&gt;<br />
++    &lt;field name=&quot;asset_tag&quot; type=&quot;C&quot; size=&quot;166&quot;/&gt;<br />
++    &lt;field name=&quot;serial_number&quot; type=&quot;C&quot; size=&quot;166&quot;/&gt;<br />
+     &lt;index name=&quot;asset_tag&quot;&gt;<br />
+       &lt;UNIQUE/&gt;<br />
+       &lt;col&gt;asset_tag&lt;/col&gt;</code><br />
+<br />
+ok so the following diff fixed the install but now i can't login as anything other than admin.</code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">tipsimagi</p>
+		<p class="dt">12-12-2010 19:14:46</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	sry change the above value from 166 to 165 and it finally works, but still cannot login as anything but guest.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">04-01-2011 16:09:59</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Just curious if you got things working on this.  You were on to the right thing by adjusting the install schema stuff.. I have however done a slightly different change by removing the indexes that were created on that table.  they were not actually supposed to be there.<br />
+<br />
+Anyway, the fix is in subversion now and should be available in the next release.<br />
+<br />
+Let me know if there are still issues on this.<br />
+<br />
+Thanks for the report!	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

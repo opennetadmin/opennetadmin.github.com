@@ -1,0 +1,78 @@
+---
+layout: oldforum_layout
+title: Version check via HTTP proxy server - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Version check via HTTP proxy server OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">Development</a></p>
+</div>
+
+<h1>Version check via HTTP proxy server</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">davidb</p>
+		<p class="dt">18-04-2010 20:30:48</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I've just installed ONA and am working through populating it and convincing people here it can replace the broken spreadsheets they are so in love with.<br />
+<br />
+I had a minor annoyance with the version check failing because of lack of proxy server support. The patch below fixes this (requires PHP5), although doesn't include the logic to test whether a proxy server should be used - it could be in the global config as a parameter.<br />
+<br />
+$ diff main.inc.php main.inc.php-orig <code><br />
+15,16d14<br />
+&lt; 	$opts = array('http' =&gt; array('proxy' =&gt; 'tcp&#58;//wwwproxy&#58;8080', 'request_fulluri' =&gt; true));<br />
+&lt; 	$context = stream_context_create($opts);<br />
+22,23c20,21<br />
+&lt;             //$fsock = @fsockopen(&quot;tcp&#58;//{$onachkserver}&quot;, 80, $errNo, $errString, 2);<br />
+&lt;             //if ($fsock) {<br />
+---<br />
+&gt;             $fsock = @fsockopen(&quot;tcp&#58;//{$onachkserver}&quot;, 80, $errNo, $errString, 2);<br />
+&gt;             if ($fsock) {<br />
+25c23<br />
+&lt;                 $file = @fopen(&quot;http&#58;//{$onachkserver}/check_version&#46;php&quot;, &quot;r&quot;,false,$context);<br />
+---<br />
+&gt;                 $file = @fopen(&quot;http&#58;//{$onachkserver}/check_version&#46;php&quot;, &quot;r&quot;);<br />
+27c25<br />
+&lt;             //}<br />
+---<br />
+&gt;             }<br />
+</code></code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">20-04-2010 17:53:41</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hope you can convince them to use a real tool to manage the network there! <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+I'll have a look at the patch.  certainly improves on the ability of the test and will serve handy for the new plugins to be able to check for their own updates. <br />
+<br />
+Thanks for the patch!	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">davidb</p>
+		<p class="dt">09-05-2010 18:42:36</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thanks Matt.<br />
+<br />
+Making good progress on acceptance of ONA. An excellent set of capabilities for IPAM.<br />
+<br />
+I updated my patch to use sys_config variable 'http_proxy' and posted code in a feature request in bug tracking system.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

@@ -1,0 +1,47 @@
+---
+layout: oldforum_layout
+title: Anycast - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Anycast OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Anycast</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">bvierra</p>
+		<p class="dt">03-01-2011 16:51:50</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hey Guys,<br />
+First off I really like this project! Seems very well through out and works well.<br />
+<br />
+The only thing we need is the ability to have Anycast IP's. We have multiple Racks in multiple DC's worldwide and use Anycast on the servers. We need the ability to add a single IP to multiple servers. Is there anyway to do this that I am missing?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">04-01-2011 16:07:15</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thanks, glad you like it so far.<br />
+<br />
+Currently the only method to do this is to add the anycast IP to a host.. then &quot;share&quot; it with other hosts.  This sharing is typically ment for things like VRRP, HSRP, CARP etc where you are sharing a normal IP between a few hosts.<br />
+<br />
+While you could track your anycast IPs this way, I'm not sure it is the &quot;right&quot; way to do it in ONA.  So far I've not had the need or request to track anycast IPs on any kind of large scale so I've not really thought through the whole problem.  You can get to the &quot;share&quot; feature when you hit the green plus icon next to an IP address on a host.  <br />
+<br />
+Give that a try and see if it meets your needs.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

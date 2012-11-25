@@ -57,7 +57,7 @@ Theme Styles
 body {
   box-sizing: border-box;
   color:#373737;
-  background: #212121;
+  background: #f2f2f2;
   font-size: 16px;
   font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -298,6 +298,22 @@ li.featureitem {
   margin: 0 auto;
 }
 
+#fishes {
+  display: block;
+  position: absolute;
+  top:1px;
+  right: 0px;
+  padding: 180px 20px 80px 10px;
+}
+
+#donatebutton {
+  display: block;
+  position: absolute;
+  top:1px;
+  /*right: 0px;*/
+  padding: 180px 120px 80px 10px;
+}
+
 #forkme_banner {
   display: block;
   position: absolute;
@@ -435,7 +451,7 @@ li.featureitem {
 #main_content_wrap {
   background: #f2f2f2;
   border-top: 1px solid #111;
-  border-bottom: 1px solid #111;
+  /*border-bottom: 1px solid #111;*/
 }
 
 #main_content {
@@ -500,4 +516,139 @@ Small Device Styles
     font-size: 11px;
   }
 
+}
+
+
+.post {
+        background: #f6f6f6;
+        border: 1px solid #aaa;
+        padding: 1px;
+        font-size: 10pt;
+        margin-bottom: 20px;
+}
+
+.post:hover {
+        border-color: #888;
+}
+.post:hover .info {
+        background: #bbb;
+}
+
+.info {
+        background: #ddd;
+        padding: 5px;
+        font-size: 8pt;
+}
+
+.info p {
+        margin: 0px;
+}
+
+.poster {
+        float: left;
+        text-align: right;
+}
+
+
+
+.msg {
+        padding: 5px;
+}
+
+blockquote, q {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 10px 20px 0 30px;
+        background: white;
+        margin-bottom: 0px;
+        display: block;
+        quotes: "" "" "" ""
+}
+
+code {
+        display: block;
+        margin-left: 30px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin: 10px 20px 0 30px;
+        background: white;
+        color: #080;
+}
+
+.breadcrumb {
+        font-size: 10pt;
+        background: #eee;
+        padding: 5px;
+}
+.breadcrumb p {
+        margin: 0px;
+}
+
+.original {
+        font-size: 10pt;
+}
+
+h1 {
+        margin: 20px 0;
+}
+
+q > br:first-child, code > br:first-child {
+        display: none;
+}
+
+
+
+/* tables */
+
+td.t {
+        padding-right: 20px;
+        padding-left: 10px;
+}
+td.tt {
+        padding-right: 20px;
+        padding-left: 10px;
+}
+td.tp {
+        padding-right: 20px;
+        padding-left: 10px;
+}
+td.ta{
+        padding-right: 20px;
+        padding-left: 10px;
+}
+td.dt {
+        font-size: 8pt;
+}
+table thead tr th, table tfoot tr th {
+        border: 1px solid #FFF;
+        font-size: 8pt;
+        padding: 4px;
+                padding-right: 30px;
+                text-align: left;
+}
+table thead tr .header {
+        background-image: url(img/bg.gif);
+        background-repeat: no-repeat;
+        background-position: center right;
+        cursor: pointer;
+}
+table tbody tr.odd td {
+        background-color:#F0F0F6;
+}
+table thead tr .headerSortUp {
+        background-image: url(img/asc.gif);
+}
+table thead tr .headerSortDown {
+        background-image: url(img/desc.gif);
+}
+table thead tr .headerSortDown, table thead tr .headerSortUp {
+        background-color: #8dbdd8;
+}
+
+div.info {
+   height: 15px;
+}
+
+p.dt {
+   float: right;
 }

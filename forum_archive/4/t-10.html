@@ -1,0 +1,73 @@
+---
+layout: oldforum_layout
+title: &quot;Add DNS record for this interface&quot; pop up menu - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page &quot;Add DNS record for this interface&quot; pop up menu OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>&quot;Add DNS record for this interface&quot; pop up menu</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">gwalton</p>
+		<p class="dt">16-04-2009 09:00:43</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hello,<br />
+<br />
+first thing, ONA is pretty awesome.<br />
+<br />
+I'm still figuring things out and getting build-bind actually integrated on the dns servers.<br />
+I've bulk loaded 90% of our hosts (simple clients) and am now trying to figure out how to handle multihomed router/server type hosts<br />
+<br />
+I'm trying to add a DNS record for an interface on a multihomed host by hovering over the green dot to the right of each interface row, then choosing<br />
+&quot;Add DNS record for this interface&quot;. But, nothing happens.<br />
+<br />
+Is it an implemented feature that should actually work?<br />
+<br />
+Also, I remember a posting in the old forum about bind Views,... was it a patch or an unreleased feature? <br />
+I just implemented views on some DNS servers and I tried to look back at the old forum &quot;bind Views&quot; posting	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">16-04-2009 10:30:24</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Glad you like it! <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --><br />
+<br />
+Good to hear the build-bind stuff is working out for you.  I'm guessing there are still a few bugs lurking so definitely let me know if you find any.<br />
+<br />
+So, you should be able to handle most dns situations I've seen when setting up routers.  The problem you are encountering right now is a bug that I am aware of but have not found a fix for.  When you hit the &quot;add DNS&quot; under the green dot, it actually does open the window.  The problem is that it is minimized in the top task bar.  You can click the &quot;Add DNS record&quot; box at the top to open it.  This dialog and the other add dns record link just below the dns record list is actually the same.  The green dot method was only there to pre-populate the IP into the form (not super helpful really).<br />
+<br />
+When it comes to the DNS record add form, it doesnt matter how you get that open, you can fill out the data as needed and it will add the record.  Hopefully that clears things up a bit and maybe I'll find a fix for why the dialog opens minimized.<br />
+<br />
+As far as DNS views are concerned.. it is not supported.   I had posted a question in the old forum to see how important it was to people.  It will prove to be a very difficult thing to add to ONA in its current state.  I've always been able to work around not having the support and am quite frankly dreading trying to implement it.  <!-- s:| --><img src="{SMILIES_PATH}/icon_neutral.gif" alt=":|" title=":-|" /><!-- s:| -->	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">gwalton</p>
+		<p class="dt">16-04-2009 11:13:14</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thanks for the explanation on the &quot;add dns record &quot;deal. If I get an urge to do some troubleshooting (first time with any ajax type code), I'll dig in.<br />
+<br />
+As far as the view  feature, not a problem. In implementing views on my dns servers I ended up just using the views to control recursion, unique zones, etc.. It got very &quot;not simple&quot; when i tried to use include directives in zonefiles and named.conf files to create 2 different versions of a zone.file.<br />
+<br />
+In the end I just went with subdomains, which works great with ONA.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

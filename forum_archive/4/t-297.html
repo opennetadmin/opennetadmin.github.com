@@ -1,0 +1,137 @@
+---
+layout: oldforum_layout
+title: Cisco ASA login question - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Cisco ASA login question OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Cisco ASA login question</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">malion</p>
+		<p class="dt">30-05-2012 11:22:53</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	So this works great on the routers and switches, however I'm having issues with Cisco ASA.  Because it requires first a login and then enable.  Looks like enable command is not going through.  Any one had any luck getting that working?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">30-05-2012 20:57:49</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	If a box requires an enable password then you need to configure your getpw.conf file with an 'IOS_ENABLE' keyword with the enable password itself.  When the cisco_cfg_expect script runs it will use getpw to look up the enable secret password just like it uses the username to look up its password.  <br />
+<br />
+I believe that is all that should be required.  You can test manually by executing the cisco_cfg_expect script directly.  To be honest I've not used the enable part in quite some time now since we use tacacs which automatically sets the priv level to enable level for us.  So, I've not tested it in awhile but it looks like it should work. <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">malion</p>
+		<p class="dt">31-05-2012 06:18:04</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thank you Matt, we use TACACS the same way however when it comes the firewalls TACACS won't put you at enable prompt automatically like routers or switches.  So how do you pass those parameters for ASA's? I tried that but here is what I get:<br />
+<code><br />
+can't read &quot;PROMPT&quot;&#58; no such variable<br />
+    while executing<br />
+&quot;expect {<br />
+                #       &quot;denied&quot;        {<br />
+                #               send &quot;\r&quot;<br />
+                #               expect -re $PROMPT {send &quot;en\r&quot;;continue}<br />
+                #       }<br />
+                        -re &quot;word&#58;&quot;     {continue}<br />
+                        -re $PROMPT     {send &quot;en\r&quot;;expe&#46;&#46;&#46;&quot;<br />
+    (procedure &quot;RUN_ENABLE&quot; line 25)<br />
+    invoked from within<br />
+&quot;RUN_ENABLE&quot;<br />
+    invoked from within<br />
+&quot;expect {<br />
+<br />
+        # Not enabled, send enable password<br />
+        -re $PROMPT {<br />
+                send &quot;en\r&quot;<br />
+                expect &quot;word&#58;&quot;<br />
+                RUN_ENABLE<br />
+        }<br />
+<br />
+        # Already enabled, keep going<br />
+        -re $EP&#46;&#46;&#46;&quot;<br />
+    (file &quot;/opt/ona/bin/cisco_cmd&quot; line 338)<br />
+May 31 07&#58;17&#58;28 &#91;ONA&#58;cfg_archive&#93;&#58; ERROR =&gt; 10&#46;210&#46;210&#46;69&#58; There was an issue co                                                                              ntacting 10&#46;210&#46;210&#46;69&#46;<br />
+</code></code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">31-05-2012 22:16:14</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	well hopefully now that I have the code on github I'll be a little better about applying fixes that have been around for years!.. sheesh.. Yes this was a known issue and I think the fix is all ready to go now in the github archive.  Its just a two line addition.. Try refreshing your code from github and see if it fixes the problem.<br />
+<br />
+Thanks	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">malion</p>
+		<p class="dt">01-06-2012 07:40:26</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Matt you rock, thank you, yes those two lines fixed it.  Just got two minor issues left:<br />
+<br />
+- I think I messed up the link under /opt/bin/cisco_cmd and can't seem to get it fixed I believe it was pointing to /opt/ona/www/local/plugins//cfg_archive/bin/cisco_cfg_expect.  However script is running fine so no big deal<br />
+- Main issue is that when the config gets downloaded it is only just the first screen seems like screen is not scrolling I'm assuming I'll have to change the pager line settings some where?	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">01-06-2012 16:44:20</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	You should be able to execute 'ln -s /opt/ona/www/local/plugins/cfg_archive/bin/cisco_cfg_expect /opt/ona/bin/cisco_cmd' to get it fixed.  It is just an alternate way to use the expect script logic to execute commands on your devices.  It is similar to what some people refer to as 'looking glass'.  I have configured a cron job that runs a 'write mem' on all devices once a day. It uses cisco_cmd to send the write mem command.  This way I always have a saved configuration, and it will kick off an snmp trap to update the ona archive.<br />
+<br />
+On your second issue, this is strange.  The script does a 'term length 0' as its first operation after logging in.  This should ensure you get the entire output with no prompts or other strangeness.  It may be that the ASA does not support 'term length 0' ??  I've not messed with ASAs yet.  I can't imagine why Cisco would change that however.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">malion</p>
+		<p class="dt">03-06-2012 09:14:06</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	<q cite="&amp;quot;Matt&amp;quot;:v0f3q59e">You should be able to execute 'ln -s /opt/ona/www/local/plugins/cfg_archive/bin/cisco_cfg_expect /opt/ona/bin/cisco_cmd' to get it fixed.  It is just an alternate way to use the expect script logic to execute commands on your devices.  It is similar to what some people refer to as 'looking glass'.  I have configured a cron job that runs a 'write mem' on all devices once a day. It uses cisco_cmd to send the write mem command.  This way I always have a saved configuration, and it will kick off an snmp trap to update the ona archive.<br />
+<br />
+On your second issue, this is strange.  The script does a 'term length 0' as its first operation after logging in.  This should ensure you get the entire output with no prompts or other strangeness.  It may be that the ASA does not support 'term length 0' ??  I've not messed with ASAs yet.  I can't imagine why Cisco would change that however.</q><br />
+<br />
+Thank you for the reply back Matt, I thought I tried linking it but it tells me that &quot;file exists&quot;.  It is not big deal and I have disabled the &quot;wr mem&quot; just the requirements for our network.<br />
+<br />
+For the second issue yes for the ASA it is different, it is &quot;terminal pager 0&quot;, so here is what I did to get it working:<br />
+<code><br />
+    send -h &quot;term length 0\r&quot;<br />
+    send -h &quot;term pager 0\r&quot; (I added this line)<br />
+</code><br />
+<br />
+After I added that command in there it works now <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->.  Thank you again.  Now just waiting on the next update to be able to compare startup with running <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) -->.  Just wanted to tell you again that your software is so much better than rancid.  Can't wait to finish writing a blog.  I have linked to your website from my blog though.</code></q>	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

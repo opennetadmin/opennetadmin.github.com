@@ -1,0 +1,64 @@
+---
+layout: oldforum_layout
+title: avalaibility of the puppet facter plugin ? - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page avalaibility of the puppet facter plugin ? OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>avalaibility of the puppet facter plugin ?</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">retrack</p>
+		<p class="dt">29-12-2011 07:45:10</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I am very curious about this puppet facter plugin that is in the works.<br />
+<br />
+Can you give more information or ideally release a beta ?<br />
+<br />
+Regards, great product, keep going	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">29-12-2011 07:48:29</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	It still needs a bit of work to make it ready for public consumption but I can certainly give it to you to play with and see if it is functional.  I've personally gone away from using it in favor of an mcollective based fact plugin.  I realize however not everyone has mcollective set up and running.. I would however highly recommend doing so.<br />
+<br />
+I don't actually have a tarball for it but I'll try and whip one up and then I'll just email it to you.  <br />
+<br />
+Also, just out of curiosity, how would you expect to use this plugin? what features would you want from it?  The way the current plugin works is to create a table in the database and then populate it through various means.  Then the plugin can display and search the facts within ONA.  The issue is that it is storing the data and could get old/stale if things don't go well with the updates.  There are also several possible ways to get the fact data into ONA and each of them have their pros/cons.  One way is to pull the data straight from the puppet masters own local files, another is to have each client update ONA at some regular interval.  <br />
+<br />
+I like the mcollective way because it actually &quot;asks&quot; the host itself for its facts real time and thus has up to date and accurate answers.<br />
+<br />
+Thanks	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">retrack</p>
+		<p class="dt">31-01-2012 08:46:25</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	it seems my answer never went through.<br />
+<br />
+I do not have mcollective configured but why not. <br />
+<br />
+The main usage is to provide basic but accurate information about the hosts but not real time.	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

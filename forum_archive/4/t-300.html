@@ -1,0 +1,57 @@
+---
+layout: oldforum_layout
+title: Change the interface di - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Change the interface di OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Change the interface di</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">zxy5207</p>
+		<p class="dt">11-06-2012 21:32:09</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Hi,matt<br />
+   I want to change the Interface Attributes &quot; Last Response&quot; into &quot;SN&quot;, and i can edit the content as the &quot;description&quot;.<br />
+I have try to edit the &quot;edit_interface.inc.php&quot;, &quot;list_interfaces.inc.php&quot;, &quot;display_interface.inc.php&quot; in &quot;/ona/www/winc/&quot;, And already have changed the &quot;Last Response&quot; into &quot;sn&quot;(varchar(255) utf8_general_ci)  in DB.<br />
+But it is does not work, can you give me some instruct?<br />
+Thank you!	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">11-06-2012 22:03:34</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	I would highly suggest not changing this field to something else.  there are several parts of the system that use it and it wont be as simple as just changing the DB and those few php files.  Plus when a new release comes out you will have to make changes to the files again.<br />
+<br />
+What is this field for?  is it Serial Number?  Another thought would be to use the custom attributes system to define information.  Its not always the best option but it is available to use for custom things.	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">zxy5207</p>
+		<p class="dt">11-06-2012 23:44:35</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	<q cite="&amp;quot;Matt&amp;quot;:2qphurf6">I would highly suggest not changing this field to something else.  there are several parts of the system that use it and it wont be as simple as just changing the DB and those few php files.  Plus when a new release comes out you will have to make changes to the files again.<br />
+<br />
+What is this field for?  is it Serial Number?  Another thought would be to use the custom attributes system to define information.  Its not always the best option but it is available to use for custom things.</q><br />
+I see. I plans to make this field for Serial Number, If it is so difficult, i will try to use custom attributes sysytem, thank you!</q>	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

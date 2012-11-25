@@ -1,0 +1,148 @@
+---
+layout: oldforum_layout
+title: Import existing data - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Import existing data OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Import existing data</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">sdaa</p>
+		<p class="dt">16-03-2009 05:33:39</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Is there a way to import existing data, or using a bulk import of some kind? Would be nice to import existing DNS data for instance.<br />
+<br />
+regards<br />
+Stig	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">16-03-2009 20:26:24</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Yes.<br />
+<br />
+First off I would point you to the <a href="http&amp;#58;//opennetadmin&amp;#46;com/docs/utils/dcm&amp;#46;pl:e9sla8hi">DCM</a> utility.  It is the command line interface to the ONA system and allows you to do all kinds of scripted maintenance to the database.  It is quite easy to take spreadsheets of info and use DCM to load them into the system (with some formatting and basic data validation first).<br />
+<br />
+With that said, there are still many other tasks that could be automated.    I've done some work related to these but they have not been tested in &quot;real&quot; environments for accuracy and their worth as a useful tool.  <br />
+<br />
+I'll go ahead and post a few of them in their &quot;raw&quot; form here and you guys can take them for what they are worth (not much) and do what you will.  We can turn them into more useful and generic tools for all to use.  A few that I have played with are:<br />
+<br />
+tinydns (djbdns)<br />
+bind<br />
+dhcpd (isc)<br />
+cisco 'show ip route'<br />
+nmap<br />
+cisco 'show run'<br />
+<br />
+These tools are in various states of completeness.  I will hopefully be releasing the nmap and 'show run' parsers soon.  They are the most complete and are actually worked into the GUI interface much more.<br />
+<br />
+Anyway, I'll post a few shortly here to get peoples minds going on what can be done.</a>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">16-03-2009 21:19:30</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Ok, here is an easy one.  Since we need to start out by adding subnets to put all of our hosts on, what better place to get a list of subnets than from a router?<br />
+<br />
+Here is a very simple command line tool to take the output of a &quot;show ip route&quot; command from a Cisco IOS device.  I'll first off show the commands etc and then describe some details and caveats.<br />
+<br />
+<ol><li><br />
+[*:73vnee0e]Simple show ip route output as our starting point<br />
+<code><br />
+router#show ip route<br />
+Codes&#58; C - connected, S - static, R - RIP, M - mobile, B - BGP<br />
+       D - EIGRP, EX - EIGRP external, O - OSPF, IA - OSPF inter area<br />
+       N1 - OSPF NSSA external type 1, N2 - OSPF NSSA external type 2<br />
+       E1 - OSPF external type 1, E2 - OSPF external type 2<br />
+       i - IS-IS, su - IS-IS summary, L1 - IS-IS level-1, L2 - IS-IS level-2<br />
+       ia - IS-IS inter area, * - candidate default, U - per-user static route<br />
+       o - ODR, P - periodic downloaded static route<br />
+<br />
+Gateway of last resort is not set<br />
+<br />
+     10&#46;0&#46;0&#46;0/8 is variably subnetted, 4 subnets, 2 masks<br />
+D       10&#46;7&#46;7&#46;2/32 &#91;90/21024000&#93; via 10&#46;1&#46;1&#46;1, 00&#58;14&#58;05, Serial0<br />
+D       10&#46;7&#46;7&#46;0/24 &#91;90/21024000&#93; via 10&#46;1&#46;1&#46;1, 00&#58;14&#58;05, Serial0<br />
+C       10&#46;1&#46;1&#46;0/24 is directly connected, Serial0<br />
+C       10&#46;1&#46;1&#46;1/32 is directly connected, Serial0<br />
+C    192&#46;168&#46;0&#46;0/24 is directly connected, Ethernet0<br />
+</code><br />
+[*:73vnee0e]Save the output of the show command in a text file, lets call it showroute.out[/*:73vnee0e]<br />
+[*:73vnee0e]Execute the following command:<br />
+<code>cat showroute&#46;out |sed -e &quot;s/EX//&quot;|awk '{print $2}'|grep /|egrep -v &quot;\/0|\/32&quot;|sed -e &quot;s/\(&#46;*\)\/\(&#46;*\)/dcm&#46;pl -r subnet_add name=SHOWROUTE-\1 ip=\1 netmask=\/\2 type=LAN/&quot;</code><br />
+[*:73vnee0e]You will get the following output:<br />
+<code><br />
+dcm&#46;pl -r subnet_add name=SHOWROUTE-10&#46;7&#46;7&#46;0 ip=10&#46;7&#46;7&#46;0 netmask=/24 type=LAN<br />
+dcm&#46;pl -r subnet_add name=SHOWROUTE-10&#46;1&#46;1&#46;0 ip=10&#46;1&#46;1&#46;0 netmask=/24 type=LAN<br />
+dcm&#46;pl -r subnet_add name=SHOWROUTE-192&#46;168&#46;0&#46;0 ip=192&#46;168&#46;0&#46;0 netmask=/24 type=LAN<br />
+</code><br />
+[*:73vnee0e]You can either output this to another file and execute it as a shell command or just cut/paste the lines to your shell.  [/*:73vnee0e]<br />
+[/list:u:73vnee0e]<br />
+<br />
+Now, there are a few things to be aware of when doing this process.<br />
+<br />
+<ol><li><br />
+[*:73vnee0e]Be careful of summarized routes.  Your route table may have summarized routes that do not represent the actual subnet that you should be adding to the database.  It is best to process show ip routes from routers that are closest to the subnets you are wanting to add to help reduce the possibility of summarized routes.[/*:73vnee0e]<br />
+[*:73vnee0e]In this example the type of subnet will be designated &quot;LAN&quot;.  You need to set it to something, this is nice and generic.  You will want to make sure these are set to what you want them to be.  This can be done after the fact via that GUI or just make the change before you execute the command to load them[/*:73vnee0e]<br />
+[*:73vnee0e]When you add new Class A subnets you may be prompted with something like &quot;ERROR =&gt; This subnet is the first in the 10.0.0.0 class A range.  You must first create at least the following DNS domain: 10.in-addr.arpa&quot;.  This is a requirement for DNS to have a PTR zone to associate IPs to.  Once you define a few of these you will no longer need to set them for that particular Class A range.  You can do this quickly by issuing the following command as an example: <code>dcm&#46;pl -r domain_add name=10&#46;in-addr&#46;arpa</code><br />
+[*:73vnee0e]You can either leave the default name that is prefixed with SHOWROUTE (to make it easier to know how it was put into the database) or go through and give a meaningful name to each subnet.  If you do change the name, make sure you put quotes around it if it has spaces so the shell does not get confused.  The spaces will, however, be converted to hyphens when loaded.[/*:73vnee0e]<br />
+[*:73vnee0e]Lastly, <em>be sure to examine</em><br />
+[/list:u:73vnee0e]<br />
+<br />
+Well I hope this helps.  Its one of the more simple processes to get started but it is more than nothing.  It should give you a good idea of what could be done.  I'll post a few more in the next few weeks.  Some will be much more robust, maybe <!-- s:) --><img src="{SMILIES_PATH}/icon_e_smile.gif" alt=":)" title=":-)" /><!-- s:) --></em></code></li></ol></code></code></code></li></ol>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">sdaa</p>
+		<p class="dt">19-03-2009 15:10:01</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Thanks a lot for this info. I found out about dcm when reading some more on the site, obvious manuals are not the thing I read initially... <!-- s;) --><img src="{SMILIES_PATH}/icon_e_wink.gif" alt=";)" title=";-)" /><!-- s;) --> <br />
+<br />
+So I have made some imports, especially VLANs from cisco, using RANCID for this. And I have my own script to check reverse-ip to forward, and back to see if dns-data is correct. This info is also easy to import. Been away for a while, but I will see if there is something to post.<br />
+<br />
+I must also congratulate you to a very fine application, this is to my opinion THE application of the year. I have been waiting for this for years, testing different others for DNS/DHCP mgmt. But they have been either to hard to install or not flexible enough. It was when I searched for IPAM at sourceforge that this came up, and after 10 minutes I was totally dedicated to OpenNetAdmin. I stopped using that spreadsheet at once, replacing it with ONA.<br />
+<br />
+So keep on with the good work, I will probably post a few feature requests and bug-reports, but you have really succeeded with this app.<br />
+<br />
+Regards<br />
+Stig	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">20-03-2009 21:25:40</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Glad you found dcm, and don't worry, obvious manuals are not something I write very much either as evidenced by the lack of much documentation on the site.<br />
+<br />
+Sounds like you are well on your way to getting data into the system.  Guess its about time for me to post another tool to get data into ONA.<br />
+<br />
+Thank you very much for the kind words.  I'm glad ONA is something you find useful.  Keep the feature requests and bug reports coming.  Those are the things that keep me motivated to work on things!	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+

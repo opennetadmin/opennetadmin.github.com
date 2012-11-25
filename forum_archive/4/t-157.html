@@ -1,0 +1,87 @@
+---
+layout: oldforum_layout
+title: Round Robin - OpenNetAdmin Forum Archive
+keywords: ona opennetadmin forum archive
+description: Old OpenNetAdmin forum archive topic page Round Robin OpenNetAdmin Forum Archive
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+
+<div class="breadcrumb">
+	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+</div>
+
+<h1>Round Robin</h1>
+
+<div class="post ">
+	<div class="info">
+		<p class="poster">druwoldt</p>
+		<p class="dt">17-05-2010 20:30:35</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Dear Matt,<br />
+<br />
+How do I put in a record that will generate a round robin DNS entry.<br />
+<br />
+So I need 3 IP against an oracle 11g scan domain name.<br />
+<br />
+I tried adding 3 addresses under Associated interfaces (3) for server1<br />
+192.168.0.1<br />
+192.168.0.2<br />
+192.168.0.3<br />
+<br />
+But this only generated 1 record<br />
+server1.&lt;domain name&gt;                       IN  A        192.168.0.1<br />
+<br />
+Any help greatly appreciated<br />
+<br />
+Yours sincerely<br />
+<br />
+David Ruwoldt	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">Matt</p>
+		<p class="dt">18-05-2010 10:17:06</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	First off you do need to have the IP address interfaces associated with a server.  Typically one would have say 3 servers with one IP each on it.  But it is perfectly ok to have one server with the 3 IP addresses on it or other combinations of the above depending on your needs.<br />
+<br />
+Then you simply add an A record using the same name &quot;server1.example.com&quot; with each IP address (check the 'keep adding' box at the bottom of the edit form so you can quickly add them).  So you add 3 A records, all having the same name but different IP addresses that exist on some server(s) in the database.<br />
+<br />
+Hope that makes sense..  Also to further illustrate.. Here are the DCM.PL command line entries you would use to add the DNS records after the interfaces were already in the system.<br />
+<br />
+<br />
+<code><br />
+dcm&#46;pl -r dns_record_add type=A name=server1&#46;example&#46;com ip=192&#46;168&#46;0&#46;1<br />
+dcm&#46;pl -r dns_record_add type=A name=server1&#46;example&#46;com ip=192&#46;168&#46;0&#46;2<br />
+dcm&#46;pl -r dns_record_add type=A name=server1&#46;example&#46;com ip=192&#46;168&#46;0&#46;3<br />
+</code></code>	<!-- END MESSAGE -->
+	</div>
+</div>
+<div class="post ">
+	<div class="info">
+		<p class="poster">druwoldt</p>
+		<p class="dt">24-05-2010 01:37:20</p>
+	</div>
+	<div class="msg">
+	<!-- BEGIN MESSAGE -->
+	Dear Matt,<br />
+<br />
+Got this to work. First time round caused myself problems with orphaned interface records.<br />
+<br />
+After cleaning those up I created the interfaces without PTR records and then created the A records with PTR records and everything works just fine.<br />
+<br />
+Thanks.<br />
+<br />
+Yours sincerely<br />
+<br />
+David Ruwoldt	<!-- END MESSAGE -->
+	</div>
+</div>
+</section></div>
+
