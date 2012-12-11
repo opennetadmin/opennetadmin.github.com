@@ -65,7 +65,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 10px 0;
+  /*margin: 10px 0;*/
   font-weight: 700;
   color:#222222;
   font-family: 'Lucida Grande', 'Calibri', Helvetica, Arial, sans-serif;
@@ -303,7 +303,7 @@ li.featureitem {
   position: absolute;
   top:1px;
   right: 0px;
-  padding: 180px 20px 80px 10px;
+  padding: 150px 20px 80px 10px;
 }
 
 #donatebutton {
@@ -311,7 +311,7 @@ li.featureitem {
   position: absolute;
   top:1px;
   /*right: 0px;*/
-  padding: 180px 120px 80px 10px;
+  padding: 150px 120px 80px 10px;
 }
 
 #forkme_banner {
@@ -337,7 +337,7 @@ li.featureitem {
 }
 
 #header_wrap .inner {
-  padding: 10px 10px 10px 10px;
+  padding: 0px 10px 5px 10px;
 }
 
 #project_title {
@@ -455,7 +455,7 @@ li.featureitem {
 }
 
 #main_content {
-  padding-top: 40px;
+  padding-top: 20px;
 }
 
 #footer_wrap {

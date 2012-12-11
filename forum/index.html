@@ -1,33 +1,47 @@
 ---
-layout: layout
+layout: newforum_layout
 title: OpenNetAdmin
 keywords: ipam ona opennetadmin forum discussion group subscribe discuss
 description: Discussion forum for OpenNetAdmin. You can subscribe to this group via an email subscription as well.
 ---
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-
+<center>
+<div style="width: 85%;padding-top:10px;">
 <iframe id="forum_embed"
   src='https://groups.google.com/forum/embed/?place=forum/ona-users&showsearch=true&showpopout=true&showtabs=false';
   scrolling="yes"
   frameborder="0"
-  height="1200"
-  width="720"
+  height="200"
+  width="100%"
   >
 </iframe>
 <script type="text/javascript">
-//  document.getElementById('forum_embed').src =
-//     'https://groups.google.com/forum/embed/?place=forum/ona-users'
-//     + '&showsearch=true&showpopout=true&showtabs=false';
-     //+ '&parenturl=' + encodeURIComponent(window.location.href);
-
-setTimeout("document.getElementById('forum_embed').style.height = document.getElementById('forum_embed').contentWindow.document.body.scrollHeight + 'px'",30);
-
-//function resizeFrame(f) {
-//f.style.height = f.contentWindow.document.body.scrollHeight + “px”;
-//}
+  document.getElementById('forum_embed').src =
+     'https://groups.google.com/forum/embed/?place=forum/ona-users'
+     + '&showsearch=true&showpopout=true&showtabs=false';
+     + '&parenturl=' + encodeURIComponent(window.location.href);
+</script>
+<script type="text/javascript">
+var winW = 630, winH = 460;
+var hh = 100;
+var nh = 1200;
+if (document.body && document.body.offsetWidth) {
+ winW = document.body.offsetWidth;
+ winH = document.body.offsetHeight;
+}
+if (document.compatMode=='CSS1Compat' &&
+    document.documentElement &&
+    document.documentElement.offsetWidth ) {
+ winW = document.documentElement.offsetWidth;
+ winH = document.documentElement.offsetHeight;
+}
+if (window.innerWidth && window.innerHeight) {
+ winW = window.innerWidth;
+ winH = window.innerHeight;
+}
+  hh = document.getElementById('header_wrap').offsetHeight;
+  nh = winH - hh - 30;
+  setTimeout("document.getElementById('forum_embed').style.height=nh+'px';",5000);
 </script>
 
-      </section>
-    </div>
-
+</div>
+</center>
