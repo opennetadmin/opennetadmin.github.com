@@ -287,6 +287,11 @@ li.featureitem {
   padding: 5px;
 }
 
+#basictable {
+  border: 1px solid #AAAAAA;
+  padding: 5px;
+}
+
 .outer {
   width: 100%;
 }
@@ -303,7 +308,7 @@ li.featureitem {
   position: absolute;
   top:1px;
   right: 0px;
-  padding: 150px 20px 80px 10px;
+  padding: 150px 10px 10px 10px;
 }
 
 #donatebutton {
@@ -311,7 +316,20 @@ li.featureitem {
   position: absolute;
   top:1px;
   /*right: 0px;*/
-  padding: 150px 120px 80px 10px;
+  padding: 150px 10px 10px 10px;
+}
+
+#ipv6_banner {
+  display: block;
+  position: absolute;
+  top:1px;
+  right: 90px;
+  z-index: 11;
+  color: #fff;
+  padding: 80px 70px 80px 10px;
+  margin-top: -9px;
+  background: url('../images/ipv6-badge.png') no-repeat 95% 50%;
+  font-weight: 700;
 }
 
 #forkme_banner {

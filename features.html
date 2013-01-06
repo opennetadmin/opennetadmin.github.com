@@ -13,6 +13,7 @@ description: A list of current and future features of the OpenNetAdmin project
             
             <ul>
                 <li class="featureitem">      Storage of network attributes such as (subnets, IP address, Mac address, DNS names etc)</li>
+                <li class="featureitem">IPv6 addressing for subnets, interfaces and DNS records.</li>
                 <li class="featureitem">     It's not a spreadsheet</li>
                 <li class="featureitem"> <a href="http://github.com/opennetadmin/ona/wiki/plugins">Plugin framework</a> that allows new functionality to be added by 3rd party plugins.</li>
                 <li class="featureitem"> Plugin framework for various authentication backends. Currently available auth backends are LDAP and local.</li>
@@ -40,6 +41,7 @@ li>
      <li class="featureitem"> Manage your own custom list of device manufacturers and models that relate to your environment. Or use pre-defined lists of common devices (more device "packs" to come).</li>
      <li class="featureitem"> Track a "role" for your devices. I.E. a cisco 6500 could have a role of "switch", "router", "router/switch", "corporate core" or any other role you decide to allocate.</li>
      <li class="featureitem"> Track DHCP pool failover groups. You can assign servers to any number of failover group pairings, then assign the appropriate subnets to those failover groups.</li>
+     <li class="featureitem"> <a href="https://github.com/opennetadmin/ona/wiki/bind-dlz">BIND-DLZ support</a>. Allows BIND to perform lookups against your ONA database directly in real-time. </li>
      <li class="featureitem"> Track per device configuration archives with the ability to store many entries and compare them usinga syntax highlighting "diff" comparison. I.E. archive the contents of a "show run" or "show version" command for each router to keep configuration history. Similar to Rancid. Click <a rel="nofollow" title="http://demo.opennetadmin.com/?work_space=display_config_text&amp;host_id=25" href="http://demo.opennetadmin.com/?work_space=display_config_text&amp;host_id=25">here for an example</a></li>
      <li class="featureitem"> Locally stored user and group authentication and authorization. You can define your own groups with pre-determined access rights for common tasks such as adding or deleting hosts.</li>
      <li class="featureitem"> Track "Shared IPs" such as those in use by HSRP, VRRP, CARP and other virtual interfaces that could be associated with multiple hosts at the same time.</li>
@@ -67,7 +69,6 @@ li>
             </ul>
 <h1>Features in progress</h1>
 <ul>
-     <li class="featureitem">IPv6 subnets and interfaces are currently working.  Adding DNS and blocks with block maps are also working.  There is still more testing to be done before full release.  If you are interested in testing IPv6 you can check out our IPv6 development branch.</li>
      <li class="featureitem">Integration with <a rel="nofollow" href="http://puppetlabs.com/">Puppet</a> and MCollective</li>
      <li class="featureitem">Continuing work on DNS and DHCP configuration management</li>
      <li class="featureitem"> Continuing work on text configuration archive and diff comparison. Works with any text configuration.
