@@ -1,0 +1,54 @@
+---
+layout: layout
+title: About
+keywords: about ona opennetadmin ipam 
+description: About page for OpenNetAdmin.
+---
+   <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner" style="max-width: 730px">
+
+<h1>What is OpenNetAdmin</h1>
+
+OpenNetAdmin is a system for tracking IP network attributes in a database. A web interface is provided to administer the data, and there is a fully functional CLI interface for batch management (for those of you who prefer NOT to use a GUI). There are also several backend processes for building DHCP, DNS, router configuration, etc.
+<h1>Introduction</h1>
+
+Both small and large enterprises employ complex network topologies that require regular changes, maintenance and upkeep. Various other tasks such as engineering, reporting,and auditing require specific things from the network. In the event of change to the network one must account for and track what was done, as well as correctly introduce the change itself to the environment. When it comes to environments that have multiple similarly configured locations, the need arises to automate change in a consistent manner. The ability to define and automate repeatable processes becomes critical.
+<h1>Basic Hierarchy</h1>
+
+The proposed system consists of the following components:
+
+<ul>
+    <LI>  A foundational database for storage of network elements. It could be a mysql or oracle system.</LI>
+    <LI>  A database abstraction layer. The suggested method would be a PHP based system, using the adodb framework.</LI>
+    <LI>  Core PHP functions that implement centralized business logic that is shared by the entire system.</LI>
+    <LI>  A module framework that allows the creation of new toolsets that implement a specific set of functionality.</LI>
+    <LI>  A client side, distributable, command line interface to the central core service. Provides ability to automate and batch process.</LI>
+    <LI>  An AJAX enabled web interface that provides the daily interactive maintenance and reporting.</LI>
+    <LI>  A scheduling system to help automate and manage repeatable tasks.</LI>
+</ul>
+
+These are just some of the fundamental elements that make up a system that is capable of tracking change control and processes within small to large organizations.
+<h1>Benefits</h1>
+
+This framework’s most fundamental strength is in the tracking of network elements. This data storage is the foundation for all other tasks and functions. Once the appropriate data has been entered into the system you are then able to start managing an enterprise-wide DNS and DHCP infrastructure or choose to run localized services that are synchronized to the central database.
+
+You will also be able to create templates that allow for the staging and deployment of a common set of configurations for each network element being installed to a location. This allows for the hand-off of repeatable tasks to an operations group. They will then be able to deploy complex sites that have been pre-engineered and defined as a standard by simply executing a few modules. These modules and procedures can be easily tailored for your needs. Whether it is a new remote office or a newly acquired business unit, you can define standard procedures and configurations that can be built with very little effort.
+
+Once a site has been installed, this system also aides in the daily moves, adds and changes. Things such as changing passwords or adding a new VLAN can be automated and pushed to each site. Those configuration changes will then be archived which allows you to view “diffs” of configurations.
+
+An open-source solution such as this excels in the ability to be configured and customized for specific environments. Any modules that are developed can then be shared back to the community and potentially enable functionality for your environment that you would not otherwise have built yourself. It is common to find home grown solutions in large organizations because most off-the-shelf products are either far too complex or fill only a small set of needs and still must be integrated into other systems and processes. Corporations resort to building task-specific tools to get a job done but generally lack an appropriate framework to create a large system that works well.
+<h1>Philosophy</h1>
+
+I find it quite common for applications such as ONA to work primarily in a discovery of inventory mode. They work in such a fashion that you install them and then they discover as much as they can about your environment. Then as time progresses the data is constantly changing as your network changes. These are handy tools and are great for getting set up quickly.
+
+The idea behind ONA is a bit different. It is intended to be a much more authoritative source of information. It should be more manually maintained so that it can be used to drive the configuration of the environment, not the other way around. It will give you a view as to how you want your environment to look and then help you to configure your environment to match. Now, with that said, there is absolutely a place for a discovery and inventory mode. Doing an initial population of data based on your current environment is a great benefit. This is why we do have a handful of scripts to help build “add” statements that the dcm.pl utility can process.
+
+I hope that over time the other open source solutions that are very good at discovering inventory can be utilized to help generate the “add” statements to populate ONA. They would also be a great source for performing audits of the existing environment that can be checked against the data in ONA. This would provide you with your baseline, what should I have view, and the what do I really have view.
+
+As ONA grows, I imagine we will close any gaps between these two situations, but for now, we will let the many inventory discovery tools fill that area and we will focus more on the authoritative information. As usual some people will prefer one method over another and possibly want to use both. I believe as things progress we will settle on a solution that will be able to address both issues and hopefully be somewhat “pluggable” so that you can use any tool you wish to perform the audit function.
+
+
+
+      </section>
+      </div>
+

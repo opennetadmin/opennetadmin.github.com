@@ -35,7 +35,7 @@ footer, header, hgroup, menu, nav, section {
 }
 
 ol, ul {
-  list-style: none;
+  margin-left: 40px;
 }
 
 blockquote, q {
@@ -204,7 +204,7 @@ ul, ol, dl {
 
 ul li {
   /*list-style: inside;*/
-  padding-left: 20px;
+  /*padding-left: 20px;*/
 }
 
 ol li {
