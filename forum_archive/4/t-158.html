@@ -149,7 +149,7 @@ srv_weight:smallint(5) unsigned:NO:::<br />
 srv_port:smallint(5) unsigned:NO:::<br />
 <br />
 From this we can see that the dns table references interfaces using interface_id. So we look for interface_id = 490 on the dns table.<br />
-./dcm.pl -r ona_sql sql=&quot;select * from dns where interface_id=490;”<br />
+./dcm.pl -r ona_sql sql=&quot;select * from dns where interface_id=490;<br />
 id:domain_id:interface_id:dns_id:type:ttl:name:ebegin:notes:mx_preference:txt:srv_pri:srv_weight:srv_port<br />
 1016:5:490:998:PTR:0::2010-05-18 10:32:20::0::0:0:0<br />
 <br />
@@ -157,14 +157,14 @@ So 1016 points to interface 490 which does not exist.<br />
 <br />
 But what does 1016 belong to.<br />
 Under dns_id we can see another dns_id. If we look up this one<br />
-./dcm.pl -r ona_sql sql=&quot;select * from dns where id=998;”<br />
+./dcm.pl -r ona_sql sql=&quot;select * from dns where id=998;<br />
 id:domain_id:interface_id:dns_id:type:ttl:name:ebegin:notes:mx_preference:txt:srv_pri:srv_weight:srv_port<br />
 998:1:481:0:A:0:server1:2010-05-18 10:31:01::0::0:0:0<br />
 <br />
 So we can see that the PTR records belong to server1. As can been seen the dns_id=0 means there are no further links.<br />
 <br />
 So now we search to see if there are any other records for 998<br />
-./dcm.pl -r ona_sql sql=&quot;select * from dns where dns_id=998;”<br />
+./dcm.pl -r ona_sql sql=&quot;select * from dns where dns_id=998;<br />
 id:domain_id:interface_id:dns_id:type:ttl:name:ebegin:notes:mx_preference:txt:srv_pri:srv_weight:srv_port<br />
 999:5:481:998:PTR:0::2010-05-18 09:43:00::0::0:0:0<br />
 1016:5:490:998:PTR:0::2010-05-18 10:32:20::0::0:0:0<br />
@@ -173,7 +173,7 @@ id:domain_id:interface_id:dns_id:type:ttl:name:ebegin:notes:mx_preference:txt:sr
 <br />
 So we can see there are 4 records that hold pointers for 998. If we do checks on the interfaces table we find that 481 exists, 490, 491 and 497 do not exist. This means 1016,1017 and 1024 need to be removed from the dns table. As you can not use dcm.pl to remove records you will need to use mysql client to connect directly to the database.<br />
 <br />
-mysql –u root –p<br />
+mysql -u root -p<br />
 &lt;enter password&gt;<br />
 connect ona<br />
 DELETE FROM dns WHERE id=1016;<br />

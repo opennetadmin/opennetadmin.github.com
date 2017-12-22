@@ -9,7 +9,7 @@ description: Old OpenNetAdmin forum archive topic page force_https=1 OpenNetAdmi
 
 
 <div class="breadcrumb">
-	<p><a href="../index.html">Forums Archive Home</a> &raquo; <a href="index.html">General Discussion</a></p>
+	<p><a href="../index.html">Forums Archive Home</a> <a href="index.html">General Discussion</a></p>
 </div>
 
 <h1>force_https=1</h1>
@@ -27,13 +27,13 @@ I have added the option force_https=1 from  Menu?Admin?Manage system config dial
 <br />
 This webpage is not available.<br />
 <br />
-The webpage at <!-- m --><a class="postlink" href="https://rhserver.corp.cubacel.com/ona"><a href="https://rhserver.corp.cubacel.com/ona&lt;/a&gt;&lt;!--">https://rhserver.corp.cubacel.com/ona</a><!--</a> m --> might be temporarily down or it may have moved permanently to a new web address.<br />
+The webpage at https://rhserver.corp.cubacel.com/ona</a> might be temporarily down or it may have moved permanently to a new web address.<br />
 <br />
 How can i fix this ?<br />
 <br />
 TIA<br />
 <br />
-Líber	<!-- END MESSAGE -->
+Liber	<!-- END MESSAGE -->
 	</div>
 </div>
 <div class="post ">
@@ -49,7 +49,7 @@ I suspect however that you do not have an HTTPS version of your site configured 
 <br />
 The force_https option simply just does a redirect when ONA detects someone using a non https page.  This can all be done at the apache level as well but requires that you have set up apache to serve out https pages.  You should be able to test all that out prior to using the force_https option.<br />
 <br />
-&lt;VirtualHost 10.1.1.1:443&gt;<br />
+<VirtualHost 10.1.1.1:443><br />
 <br />
   # names by which this server may be known<br />
   ServerName server.example.net<br />
@@ -66,7 +66,7 @@ The force_https option simply just does a redirect when ONA detects someone usin
   SSLOptions +StdEnvVars<br />
 ....<br />
 ....<br />
-&lt;/virtualhost&gt;	<!-- END MESSAGE -->
+</virtualhost>	<!-- END MESSAGE -->
 	</div>
 </div>
 <div class="post ">
